@@ -1,0 +1,25 @@
+﻿安全欄名,定義,角色
+Y_dLNSGA,ΔLNSGA = LN(營業費用_t) − LN(營業費用_t-1)（縮尾）,應變數
+dLNREV,ΔLNREV = LN(營收_t) − LN(營收_t-1)（縮尾）,自變數
+D,收入下降虛擬（營收_t < 營收_t-1 = 1）,自變數
+D_x_dREV,D × ΔLNREV（β2：整體成本黏性，預期負）,核心交乘
+Water_Rate,水回收率%（縮尾，主分析水績效）,自變數
+Water_Disc,水揭露虛擬-做法A（有水量紀錄=1）,自變數
+Water_Disc_GRI,水揭露虛擬-做法B（GRI揭露度>0=1）,自變數(穩健)
+WaterRate_D_dREV,Water_Rate × D × ΔLNREV（β3：H1）,三重交乘
+WaterDisc_D_dREV,Water_Disc × D × ΔLNREV（β3：H2）,三重交乘
+WaterDiscGRI_D_dREV,Water_Disc_GRI × D × ΔLNREV（穩健）,三重交乘
+Size,LN(資產總額)（縮尾）,控制
+AI,資產密集度=資產總額/營收（縮尾）,控制
+EI,員工密集度=員工人數/營收（縮尾）,控制
+ROA,資產報酬率 ROA(A)稅後息前（縮尾）,控制
+Lev,財務槓桿=負債比率（縮尾）,控制
+Decrease,連續兩年營收下降虛擬,控制
+Size_D_dREV,Size × D × ΔLNREV,控制交乘
+AI_D_dREV,AI × D × ΔLNREV,控制交乘
+EI_D_dREV,EI × D × ΔLNREV,控制交乘
+ROA_D_dREV,ROA × D × ΔLNREV,控制交乘
+Lev_D_dREV,Lev × D × ΔLNREV,控制交乘
+Decrease_D_dREV,Decrease × D × ΔLNREV,控制交乘
+Industry,SASB主產業（產業固定效果）,固定效果
+Year,西元年份（年份固定效果）,固定效果
