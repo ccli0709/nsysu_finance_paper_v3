@@ -27,6 +27,7 @@ OUTPUT_CSV = "01_merged_tej_data.csv"
 FIN_ZIP = "TEJ20260723012741.zip"      # IFRS 以合併為主財務(單季)-一般產業Ⅳ
 WATER_ZIP = "TEJ20260723014020.zip"    # TESG 環境構面-企業用水量（年度）
 ESG_ZIP = "TEJ20260723104157.zip"      # TESG ESG-變數彙總表（年月）
+TSE_ZIP = "TEJ20260724105926.zip"      # TEJ Company DB-屬性基本資料（TSE/TEJ 產業別，靜態）
 
 # 財務：流量變數（同年四季加總，需四季齊全）
 FIN_FLOW_COLS = ["營業費用", "推銷費用", "管理費用", "研究發展費", "營業收入淨額"]
@@ -45,6 +46,9 @@ WATER_VALUE_COLS = ["回收利用水量", "製程水回收率%", "水回收率%"
 ESG_ANNUAL_COLS = ["E_用水回收率%", "E_取得用水相關國際認證", "E_GRI_用水及廢水管理揭露度"]
 # ESG：公司靜態屬性
 ESG_STATIC_COLS = ["SASB主產業"]
+
+# TSE 產業別（公司靜態，以 [證券代碼] 套用）
+TSE_STATIC_COLS = ["TSE產業_代碼", "TSE產業_名稱", "TEJ產業_名稱", "TEJ子產業_名稱"]
 
 
 # ----------------------------------------------------------------------------
@@ -173,12 +177,29 @@ def build_esg_annual():
 
 
 # ----------------------------------------------------------------------------
+# 4) TEJ Company DB 產業別（公司靜態）
+# ----------------------------------------------------------------------------
+def build_tse_static():
+    tse = read_tej_zip(TSE_ZIP)
+    tse["證券代碼"] = clean_code(tse["證券代碼"])
+    cols = [c for c in TSE_STATIC_COLS if c in tse.columns]
+    for c in cols:
+        tse[c] = tse[c].astype(str).str.strip().replace(
+            {"": np.nan, "nan": np.nan, "None": np.nan})
+    src = tse.dropna(subset=cols, how="all")
+    tse_static = src.groupby("證券代碼")[cols].first()
+    print(f"[TSE產業] 原始 {len(tse):,} 列 → 靜態產業別公司 {len(tse_static):,} 家")
+    return tse_static
+
+
+# ----------------------------------------------------------------------------
 # 合併
 # ----------------------------------------------------------------------------
 def main():
     fin_annual = build_financial_annual()
     water_annual = build_water_annual()
     esg_annual, esg_static = build_esg_annual()
+    tse_static = build_tse_static()
 
     # 財務 ⟗ 水資源（outer join，保留兩邊）
     merged = fin_annual.merge(water_annual, on=["證券代碼", "西元年份"], how="outer")
@@ -187,6 +208,9 @@ def main():
     # 套用公司靜態 SASB主產業
     for c in ESG_STATIC_COLS:
         merged[c] = merged["證券代碼"].map(esg_static[c])
+    # 套用公司靜態 TSE/TEJ 產業別
+    for c in tse_static.columns:
+        merged[c] = merged["證券代碼"].map(tse_static[c])
 
     merged = merged.sort_values(["證券代碼", "西元年份"]).reset_index(drop=True)
     merged.to_csv(OUTPUT_CSV, index=False, encoding="utf-8-sig")
@@ -199,7 +223,8 @@ def main():
     print(f"年份範圍：{int(merged['西元年份'].min())} - {int(merged['西元年份'].max())}")
     print("關鍵欄非空數：")
     for c in ["營業費用", "營業收入淨額", "資產總額", "水回收率%",
-              "製程水回收率%", "回收利用水量", "E_GRI_用水及廢水管理揭露度", "SASB主產業"]:
+              "製程水回收率%", "回收利用水量", "E_GRI_用水及廢水管理揭露度",
+              "SASB主產業", "TSE產業_名稱"]:
         if c in merged.columns:
             print(f"  {c:<22}: {merged[c].notna().sum():,}")
 

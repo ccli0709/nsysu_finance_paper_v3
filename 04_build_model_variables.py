@@ -82,21 +82,37 @@ def main():
                 out[f"{base}_l{k}"] = pd.to_numeric(df[col], errors="coerce")
                 out[f"{base}_D_dREV_l{k}"] = out[f"{base}_l{k}"] * out["D_x_dREV"]
 
-    # ---- 方向五：高/低耗水產業分類（依產業水資料密度中位數切分）----
-    dens = (out.assign(_has=(out["Water_Disc"] == 1).astype(int))
-               .groupby("Industry")["_has"].mean())
-    thr = dens.median()
-    high_ind = set(dens[dens >= thr].index)
-    out["WaterUse"] = np.where(out["Industry"].isin(high_ind), "高耗水", "低耗水")
+    # ---- 方向五：高/低耗水產業分類（依 TEJ Company DB 之 TSE 產業別，精準定義）----
+    # 依水資源相關文獻與台灣製造業實務，界定高耗水（用水密集）產業之 TSE 代碼。
+    out["TSE代碼"] = df["TSE產業_代碼"].astype(str).str.strip()
+    out["TSE產業"] = df["TSE產業_名稱"].astype(str).str.strip()
+    out.loc[out["TSE代碼"].isin(["nan", ""]), "TSE代碼"] = np.nan
+    out.loc[out["TSE產業"].isin(["nan", ""]), "TSE產業"] = np.nan
+
+    HIGH_WATER_TSE = {
+        "M2324": "半導體業", "M2326": "光電業", "M2328": "電子零組件",
+        "M1400": "紡織纖維", "M1900": "造紙工業", "M2000": "鋼鐵工業",
+        "M1721": "化學工業", "M1100": "水泥工業", "M1800": "玻璃陶瓷",
+        "M1200": "食品工業", "M1300": "塑膠工業", "M2100": "橡膠工業",
+        "M9700": "油電燃氣業",
+    }
+    out["WaterUse"] = pd.Series(np.nan, index=out.index, dtype="object")
+    has_tse = out["TSE代碼"].notna()
+    out.loc[has_tse, "WaterUse"] = "低耗水"
+    out.loc[out["TSE代碼"].isin(HIGH_WATER_TSE), "WaterUse"] = "高耗水"
 
     out = out.sort_values(["證券代碼", "西元年份"]).reset_index(drop=True)
     out.to_csv(OUTPUT_CSV, index=False, encoding="utf-8-sig")
 
-    # 產業分組對照輸出（供論文與檢視）
-    dens_df = (dens.reset_index()
-               .rename(columns={"_has": "水資料密度"})
-               .sort_values("水資料密度", ascending=False))
-    dens_df["耗水分組"] = np.where(dens_df["Industry"].isin(high_ind), "高耗水", "低耗水")
+    # 產業分組對照輸出（供論文與檢視）：各 TSE 產業之觀測數與分組
+    dens_df = (out.dropna(subset=["TSE產業"])
+               .groupby(["TSE代碼", "TSE產業"])
+               .agg(觀測數=("證券代碼", "size"),
+                    公司數=("證券代碼", "nunique"),
+                    有水資料=("Water_Rate", lambda s: int(s.notna().sum())))
+               .reset_index())
+    dens_df["耗水分組"] = np.where(dens_df["TSE代碼"].isin(HIGH_WATER_TSE), "高耗水", "低耗水")
+    dens_df = dens_df.sort_values(["耗水分組", "觀測數"], ascending=[True, False])
 
     # 變數對照表
     mapping = [
