@@ -21,5 +21,10 @@ EI_D_dREV,EI × D × ΔLNREV,控制交乘
 ROA_D_dREV,ROA × D × ΔLNREV,控制交乘
 Lev_D_dREV,Lev × D × ΔLNREV,控制交乘
 Decrease_D_dREV,Decrease × D × ΔLNREV,控制交乘
+WaterRate_D_dREV_l1,Water_Rate(t-1) × D × ΔLNREV（遞延一期，方向四）,遞延交乘
+WaterRate_D_dREV_l2,Water_Rate(t-2) × D × ΔLNREV（遞延兩期，方向四）,遞延交乘
+WaterDisc_D_dREV_l1,Water_Disc(t-1) × D × ΔLNREV（遞延一期）,遞延交乘
+WaterDisc_D_dREV_l2,Water_Disc(t-2) × D × ΔLNREV（遞延兩期）,遞延交乘
+WaterUse,耗水分組（高/低耗水產業，方向五）,分組
 Industry,SASB主產業（產業固定效果）,固定效果
 Year,西元年份（年份固定效果）,固定效果

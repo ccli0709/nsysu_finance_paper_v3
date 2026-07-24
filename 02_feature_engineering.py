@@ -115,6 +115,21 @@ def main():
         if c in df.columns:
             df[c + "_w"] = winsorize(df[c])
 
+    # ---- 遞延期水管理變數（方向四：時間落差效應，不新增概念變數，僅平移）----
+    # 將既有水變數平移 t-1、t-2；僅在年份差恰為 k 時有效（避免跨越缺漏年份）。
+    gl = df.groupby("證券代碼")
+
+    def lag_k(col, k):
+        shifted = gl[col].shift(k)
+        yr_shift = gl["西元年份"].shift(k)
+        valid = (df["西元年份"] - yr_shift) == k
+        return shifted.where(valid)
+
+    LAG_TARGETS = ["Water_Rate_w", "製程水回收率%_w", "Water_Disc", "Water_Disc_GRI"]
+    for col in LAG_TARGETS:
+        for k in (1, 2):
+            df[f"{col}_l{k}"] = lag_k(col, k)
+
     df.to_csv(OUTPUT_CSV, index=False, encoding="utf-8-sig")
 
     # 摘要
@@ -127,9 +142,13 @@ def main():
     for c in key:
         print(f"  {c:<16}: {df[c].notna().sum():,}")
     # 迴歸最低要求（三者皆有）
-    core_ok = df[["dLNSGA", "dLNREV", "D"]].notna().all(axis=1).sum()
-    print(f"\n三項核心變數(dLNSGA/dLNREV/D)皆非空：{core_ok:,} 列")
-    print(f"其中 Water_Rate 非空：{df.loc[df[['dLNSGA','dLNREV','D']].notna().all(axis=1), 'Water_Rate'].notna().sum():,} 列")
+    core_mask = df[["dLNSGA", "dLNREV", "D"]].notna().all(axis=1)
+    print(f"\n三項核心變數(dLNSGA/dLNREV/D)皆非空：{core_mask.sum():,} 列")
+    print(f"其中 Water_Rate 非空：{df.loc[core_mask, 'Water_Rate'].notna().sum():,} 列")
+    print("遞延期水變數非空數（核心樣本內）：")
+    for c in ["Water_Rate_w_l1", "Water_Rate_w_l2",
+              "Water_Disc_l1", "Water_Disc_l2"]:
+        print(f"  {c:<18}: {df.loc[core_mask, c].notna().sum():,}")
 
 
 if __name__ == "__main__":

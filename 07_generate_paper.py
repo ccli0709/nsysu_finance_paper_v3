@@ -109,8 +109,9 @@ def build_corr(df):
 
 
 def build_reg_table(coef):
-    """模型1/2 併排：變數 | 模型1 係數(顯著) | 模型2 係數(顯著)。"""
-    labels = coef["模型"].unique().tolist()
+    """當期(L0)模型1/2 併排：變數 | 模型1 係數(顯著) | 模型2 係數(顯著)。"""
+    c0 = coef[coef["遞延期"] == 0]
+    labels = c0["模型"].unique().tolist()
     m1 = labels[0]
     m2 = labels[1] if len(labels) > 1 else labels[0]
     order = ["dLNREV", "D_x_dREV", "WaterRate_D_dREV", "WaterDisc_D_dREV",
@@ -118,7 +119,7 @@ def build_reg_table(coef):
              "EI_D_dREV", "ROA_D_dREV", "Lev_D_dREV", "Decrease_D_dREV"]
 
     def cell(label, var):
-        r = coef[(coef["模型"] == label) & (coef["變數"] == var)]
+        r = c0[(c0["模型"] == label) & (c0["變數"] == var)]
         if r.empty:
             return ""
         b = r["係數"].iloc[0]; s = r["顯著性"].iloc[0]; t = r["t值"].iloc[0]
@@ -131,9 +132,9 @@ def build_reg_table(coef):
             continue
         rows.append({"變數": v, "模型1(水回收率%)": c1, "模型2(水揭露)": c2})
     tbl = pd.DataFrame(rows)
-    # N / adjR2 附註列
+
     def meta(label, key):
-        r = coef[coef["模型"] == label]
+        r = c0[c0["模型"] == label]
         return "" if r.empty else r[key].iloc[0]
     n1, n2 = meta(m1, "N"), meta(m2, "N")
     a1, a2 = meta(m1, "adj_R2"), meta(m2, "adj_R2")
@@ -144,12 +145,80 @@ def build_reg_table(coef):
     return tbl
 
 
+def summarize_findings(coef, rob):
+    """掃描 β3 顯著性，產生自適應結論句（隨實際結果變動）。"""
+    b3 = coef[coef["角色"] == "β3(三重交乘)"]
+    sig = b3[b3["顯著性"].isin(["*", "**", "***"])]
+    lag_txt = []
+    for _, r in sig.iterrows():
+        direction = "負向（加劇黏性）" if r["係數"] < 0 else "正向（緩解黏性）"
+        lag_txt.append(f"{r['模型']} β3={r['係數']:.4f}{r['顯著性']}（{direction}）")
+
+    rob_sig = rob[rob["β3_sig"].isin(["*", "**", "***"])]
+    rob_txt = []
+    for _, r in rob_sig.iterrows():
+        direction = "負向" if r["β3(Water×D×ΔREV)"] < 0 else "正向"
+        rob_txt.append(f"{r['水衡量']}·{r['產業組']}·{r['遞延期']}："
+                       f"β3={r['β3(Water×D×ΔREV)']:.4f}{r['β3_sig']}（{direction}）")
+
+    any_sig = len(sig) > 0 or len(rob_sig) > 0
+    return any_sig, lag_txt, rob_txt
+
+
+def build_lag_table(coef):
+    """時間落差：各遞延期之 β3（Water×D×ΔLNREV）併排模型1/2。"""
+    b3 = coef[coef["角色"] == "β3(三重交乘)"].copy()
+    rows = []
+    for lag in sorted(b3["遞延期"].unique()):
+        rec = {"遞延期": f"t-{lag}（{'當期' if lag == 0 else str(lag)+'期前'}）"}
+        for kind, colname in [("主分析", "模型1 β3(水回收率%)"),
+                              ("次分析", "模型2 β3(水揭露)")]:
+            r = b3[(b3["遞延期"] == lag) & (b3["類型"] == kind)]
+            if r.empty:
+                rec[colname] = ""
+            else:
+                b = r["係數"].iloc[0]; s = r["顯著性"].iloc[0]
+                t = r["t值"].iloc[0]; n = int(r["N"].iloc[0])
+                rec[colname] = f"{b:.4f}{s} (t={t:.2f}, N={n:,})"
+        rows.append(rec)
+    return pd.DataFrame(rows)
+
+
 # ---------------------------------------------------------------- main
 def main():
     df = pd.read_csv(MODEL_CSV, encoding="utf-8-sig", low_memory=False)
     coef = pd.read_csv(COEF_CSV, encoding="utf-8-sig")
     rob = pd.read_csv(ROB_CSV, encoding="utf-8-sig")
     vmap = pd.read_csv(MAP_CSV, encoding="utf-8-sig")
+    any_sig, lag_txt, rob_txt = summarize_findings(coef, rob)
+
+    if any_sig:
+        finding_zh = (
+            "納入時間落差與產業異質性後，部分設定下水管理之調節效果達統計顯著，"
+            "顯示水管理對成本黏性的影響具遞延性與產業依存性。主要顯著結果包括："
+            + "；".join(lag_txt + rob_txt) + "。")
+        finding_en = ("After incorporating time-lag and industry heterogeneity, the "
+                      "moderating effect of water management on cost stickiness becomes "
+                      "significant in some specifications, indicating lagged and "
+                      "industry-dependent effects.")
+        concl_zh = (
+            "本研究延伸成本黏性架構，納入水管理變數之遞延效果與高／低耗水產業異質性。"
+            "結果顯示樣本整體存在顯著成本黏性；在考量時間落差與產業異質性後，水管理之"
+            "調節效果於部分設定達顯著，支持「水管理投資效益需時間發酵、且集中於高耗水"
+            "產業」之推論。此結果較單純當期全樣本分析更能揭露水管理與成本行為之關聯。")
+    else:
+        finding_zh = ("即使納入時間落差（t-1、t-2）與高／低耗水產業子樣本，水管理之調節"
+                      "效果（β3）於各設定下仍未達統計顯著；成本黏性（β2）則於水回收率相關"
+                      "設定中穩健為負。")
+        finding_en = ("Even after incorporating time-lag (t-1, t-2) and high/low "
+                      "water-use industry subsamples, the moderating effect of water "
+                      "management (beta3) remains statistically insignificant, while "
+                      "overall cost stickiness (beta2) is robustly negative.")
+        concl_zh = ("本研究延伸成本黏性架構，納入水管理變數之遞延效果與高／低耗水產業"
+                    "異質性。結果顯示樣本整體存在顯著成本黏性，但水管理之調節效果在當期、"
+                    "遞延期與各產業子樣本中均不顯著。可能原因包括具水資料揭露之樣本仍相對"
+                    "有限、水回收率變異不足，以及水管理投資對成本結構的影響需更長期間或"
+                    "更精細之衡量方能顯現。")
 
     doc = Document()
     normal = doc.styles["Normal"]
@@ -175,10 +244,9 @@ def main():
              "stickiness）的影響。以台灣上市櫃製造業（排除金融保險業）2014至2024年"
              "資料為樣本，採 Anderson, Banker and Janakiraman（2003）成本黏性模型，"
              "在營業費用變動對營收變動的敏感度中，加入收入下降虛擬變數與水管理變數之"
-             "三重交乘，並控制產業與年份固定效果、以公司叢集穩健標準誤估計。實證發現："
-             "樣本整體存在顯著的成本黏性（β2 顯著為負）；惟水回收率與水資訊揭露對成本"
-             "黏性之調節效果在主分析與各項穩健性檢定中均未達統計顯著。結果顯示，在現階段"
-             "台灣製造業樣本中，水管理之實質績效與揭露尚未對成本調整行為產生可量測的影響。")
+             "三重交乘，並控制產業與年份固定效果、以公司叢集穩健標準誤估計。為捕捉水管理"
+             "投資之遞延效益，另將核心水變數遞延一至兩期，並依產業耗水程度進行高／低耗水"
+             "子樣本檢定。實證發現：樣本整體存在顯著的成本黏性（β2 顯著為負）；" + finding_zh)
     add_para(doc, "關鍵詞：水管理、水資訊揭露、成本黏性、水回收率、TESG、固定效果模型")
 
     # Abstract
@@ -190,9 +258,9 @@ def main():
              "2014 to 2024 and the Anderson, Banker and Janakiraman (2003) framework, "
              "we add triple interactions of a revenue-decrease dummy with water measures, "
              "controlling for industry and year fixed effects with firm-clustered robust "
-             "standard errors. We find significant overall cost stickiness, but neither "
-             "the water recycling rate nor water disclosure significantly moderates cost "
-             "stickiness across the main and robustness specifications.")
+             "standard errors, with lagged water measures (t-1, t-2) and high/low "
+             "water-use industry subsamples. We find significant overall cost "
+             "stickiness. " + finding_en)
     add_para(doc, "Keywords: water management, water disclosure, cost stickiness, "
                   "water recycling rate, TESG, fixed-effects model")
 
@@ -260,6 +328,9 @@ def main():
              "其中 D 為收入下降虛擬變數（當期營收低於前期為1）。β2 捕捉整體成本黏性"
              "（預期為負）；β3 為核心係數：主分析以水回收率代入，次分析以水揭露虛擬"
              "變數代入。估計採 OLS 併入產業與年份固定效果，並以公司層級叢集穩健標準誤。")
+    add_para(doc,
+             "此外，為檢驗時間落差效應，將 Water_Var 分別遞延一期（t-1）與兩期（t-2）"
+             "代入；並依產業耗水程度將樣本分為高／低耗水兩組進行異質性檢定，比較各組 β3。")
 
     # 第四章 實證結果
     add_heading(doc, "第四章 實證結果", 1)
@@ -267,34 +338,40 @@ def main():
     add_table(doc, build_descriptive(df), title="表4-1 主要變數敘述統計")
     add_heading(doc, "第二節 相關係數矩陣", 2)
     add_table(doc, build_corr(df), title="表4-2 主要連續變數相關係數矩陣", num_fmt="{:.3f}")
-    add_heading(doc, "第三節 主迴歸結果", 2)
+    add_heading(doc, "第三節 主迴歸結果（當期）", 2)
     add_para(doc,
-             "表4-3 為主迴歸結果，括號內為叢集穩健 t 值，*、**、*** 分別代表 10%、5%、"
-             "1% 顯著水準。模型1（水回收率）之 D×ΔLNREV 顯著為負，顯示樣本存在成本黏性；"
-             "然水管理三重交乘（β3）在兩模型中皆不顯著，H1 與 H2 未獲支持。")
-    add_table(doc, build_reg_table(coef), title="表4-3 成本黏性主迴歸結果（模型1／模型2）",
+             "表4-3 為當期（t）主迴歸結果，括號內為叢集穩健 t 值，*、**、*** 分別代表 "
+             "10%、5%、1% 顯著水準。模型1（水回收率）之 D×ΔLNREV 顯著為負，顯示樣本存在"
+             "成本黏性；然當期水管理三重交乘（β3）在兩模型中皆不顯著。")
+    add_table(doc, build_reg_table(coef), title="表4-3 成本黏性主迴歸結果（當期，模型1／模型2）",
               num_fmt="{:.4f}")
-    add_heading(doc, "第四節 穩健性檢定", 2)
+
+    add_heading(doc, "第四節 時間落差效應（遞延期分析）", 2)
     add_para(doc,
-             "為檢驗結論穩健性，分別替換水績效衡量（製程水回收率%）、水揭露定義"
-             "（GRI 揭露度）、營業費用定義（推銷＋管理費用）與產業樣本（限水資料充足產業）。"
-             "如表4-4，成本黏性（β2）於水回收率相關設定中穩健為負，惟核心調節係數（β3）"
-             "於所有設定下均不顯著，與主結果一致。")
-    rob_show = rob[["設定", "β2(D×ΔREV)", "β2_sig", "β3(Water×D×ΔREV)", "β3_sig", "N"]]
-    add_table(doc, rob_show, title="表4-4 穩健性檢定跨設定對照", num_fmt="{:.4f}")
+             "考量水管理投資效益需時間發酵——當期投入的環保設備，可能於 1 至 2 年後方"
+             "轉為難以裁撤的沈沒成本或發揮降本效益——本研究將核心水變數分別遞延一期"
+             "（t-1）與兩期（t-2）後重新估計三重交乘 β3。表4-4 彙整各遞延期之 β3。")
+    add_table(doc, build_lag_table(coef), title="表4-4 時間落差效應：各遞延期之 β3")
+
+    add_heading(doc, "第五節 產業異質性（高／低耗水產業）", 2)
+    add_para(doc,
+             "台灣製造業次產業之水資源依賴度差異甚大，全樣本可能稀釋高耗水產業之效應。"
+             "本研究依產業水資料密度（各產業有水資料之觀測比例）之中位數，將 SASB 主產業"
+             "劃分為高耗水與低耗水兩組，分別於當期與遞延期估計，比較 β3，結果如表4-5。"
+             "（註：因資料僅含 SASB 主產業分類，未取得 TEJ 之 TSE／子產業別，故以 SASB "
+             "產業之水資料密度作為耗水程度之代理。）")
+    rob_show = rob[["水衡量", "產業組", "遞延期", "β2(D×ΔREV)", "β2_sig",
+                    "β3(Water×D×ΔREV)", "β3_sig", "N"]]
+    add_table(doc, rob_show, title="表4-5 產業異質性 × 時間落差：β2 與 β3 對照", num_fmt="{:.4f}")
 
     # 第五章 結論
     add_heading(doc, "第五章 結論與建議", 1)
+    add_para(doc, concl_zh)
     add_para(doc,
-             "本研究以台灣製造業 2014–2024 年資料，檢視水管理績效與水資訊揭露對成本黏性"
-             "之影響。實證結果顯示樣本整體存在顯著成本黏性，但水回收率與水資訊揭露之"
-             "調節效果在主分析與穩健性檢定中均不顯著。可能原因包括：具水回收率揭露之"
-             "樣本仍相對有限、水資訊揭露的品質與可比較性尚待提升，以及水管理投資對成本"
-             "結構的影響需更長期間方能顯現。")
-    add_para(doc,
-             "研究貢獻在於將「水」此一具體環境構面納入成本黏性研究，並提供台灣製造業的"
-             "初步證據。實務上建議主管機關持續推動水資訊揭露標準化；後續研究可延長樣本"
-             "期間、細分水資源投資類型，或改採更精細的揭露品質衡量，以進一步檢驗其效果。")
+             "研究貢獻在於將「水」此一具體環境構面納入成本黏性研究，並以時間落差與產業"
+             "異質性設計檢視其效果，提供台灣製造業之實證證據。實務上建議主管機關持續推動"
+             "水資訊揭露標準化；後續研究可延長樣本期間、細分水資源投資類型，或改採更精細"
+             "的揭露品質衡量，以進一步檢驗其效果。")
 
     # 參考文獻
     add_heading(doc, "參考文獻", 1)

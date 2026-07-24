@@ -68,8 +68,35 @@ def main():
     for safe in CONTROL_COLS:
         out[f"{safe}_D_dREV"] = out[safe] * out["D_x_dREV"]
 
+    # ---- 方向四：遞延期水管理主效果與三重交乘（t-1、t-2）----
+    LAG_MAP = {
+        "WaterRate": "Water_Rate_w",       # 水回收率%（縮尾）
+        "WaterDisc": "Water_Disc",         # 水揭露做法A
+        "WaterDiscGRI": "Water_Disc_GRI",  # 水揭露做法B
+        "WaterRateProc": "製程水回收率%_w", # 製程水回收率%（縮尾）
+    }
+    for base, src in LAG_MAP.items():
+        for k in (1, 2):
+            col = f"{src}_l{k}"
+            if col in df.columns:
+                out[f"{base}_l{k}"] = pd.to_numeric(df[col], errors="coerce")
+                out[f"{base}_D_dREV_l{k}"] = out[f"{base}_l{k}"] * out["D_x_dREV"]
+
+    # ---- 方向五：高/低耗水產業分類（依產業水資料密度中位數切分）----
+    dens = (out.assign(_has=(out["Water_Disc"] == 1).astype(int))
+               .groupby("Industry")["_has"].mean())
+    thr = dens.median()
+    high_ind = set(dens[dens >= thr].index)
+    out["WaterUse"] = np.where(out["Industry"].isin(high_ind), "高耗水", "低耗水")
+
     out = out.sort_values(["證券代碼", "西元年份"]).reset_index(drop=True)
     out.to_csv(OUTPUT_CSV, index=False, encoding="utf-8-sig")
+
+    # 產業分組對照輸出（供論文與檢視）
+    dens_df = (dens.reset_index()
+               .rename(columns={"_has": "水資料密度"})
+               .sort_values("水資料密度", ascending=False))
+    dens_df["耗水分組"] = np.where(dens_df["Industry"].isin(high_ind), "高耗水", "低耗水")
 
     # 變數對照表
     mapping = [
@@ -95,11 +122,17 @@ def main():
         ("ROA_D_dREV", "ROA × D × ΔLNREV", "控制交乘"),
         ("Lev_D_dREV", "Lev × D × ΔLNREV", "控制交乘"),
         ("Decrease_D_dREV", "Decrease × D × ΔLNREV", "控制交乘"),
+        ("WaterRate_D_dREV_l1", "Water_Rate(t-1) × D × ΔLNREV（遞延一期，方向四）", "遞延交乘"),
+        ("WaterRate_D_dREV_l2", "Water_Rate(t-2) × D × ΔLNREV（遞延兩期，方向四）", "遞延交乘"),
+        ("WaterDisc_D_dREV_l1", "Water_Disc(t-1) × D × ΔLNREV（遞延一期）", "遞延交乘"),
+        ("WaterDisc_D_dREV_l2", "Water_Disc(t-2) × D × ΔLNREV（遞延兩期）", "遞延交乘"),
+        ("WaterUse", "耗水分組（高/低耗水產業，方向五）", "分組"),
         ("Industry", "SASB主產業（產業固定效果）", "固定效果"),
         ("Year", "西元年份（年份固定效果）", "固定效果"),
     ]
     pd.DataFrame(mapping, columns=["安全欄名", "定義", "角色"]).to_csv(
         OUTPUT_MAP, index=False, encoding="utf-8-sig")
+    dens_df.to_csv("04_industry_wateruse.csv", index=False, encoding="utf-8-sig")
 
     # 摘要
     print("===== 建模變數摘要 =====")
@@ -111,6 +144,13 @@ def main():
           f"{(m1_ok & out['WaterRate_D_dREV'].notna()).sum():,}")
     print(f"模型2(次分析 Water_Disc) 可用列：{(m1_ok & out['WaterDisc_D_dREV'].notna()).sum():,}")
     print(f"產業數：{out['Industry'].nunique()}；年份：{out['Year'].min()}-{out['Year'].max()}")
+    print("\n遞延期可用列（核心+控制皆非空）：")
+    for c in ["WaterRate_D_dREV", "WaterRate_D_dREV_l1", "WaterRate_D_dREV_l2",
+              "WaterDisc_D_dREV", "WaterDisc_D_dREV_l1", "WaterDisc_D_dREV_l2"]:
+        if c in out.columns:
+            print(f"  {c:<22}: {(m1_ok & out[c].notna()).sum():,}")
+    print("\n高/低耗水產業分組：")
+    print(dens_df.to_string(index=False))
 
 
 if __name__ == "__main__":

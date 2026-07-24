@@ -27,9 +27,9 @@ description: >
 python 01_merge_tej_data.py          # 合併原始 zip/CSV → 01_merged_tej_data.csv
 python 02_feature_engineering.py     # 變數建構        → 02_features_data.csv
 python 03_sample_selection.py        # 樣本篩選+產業統計→ 03_sample_data.csv, 03_industry_stats.csv
-python 04_build_model_variables.py   # 交乘項+建模變數  → 04_model_data.csv
-python 05_run_regressions.py         # 成本黏性主模型   → 05_regression_results.txt, 05_regression_coef.csv
-python 06_robustness_checks.py       # 穩健性檢定        → 06_robustness_results.txt, 06_robustness_coef.csv, 06_robustness_summary.csv
+python 04_build_model_variables.py   # 交乘項+遞延+分組 → 04_model_data.csv, 04_var_mapping.csv, 04_industry_wateruse.csv
+python 05_run_regressions.py         # 主模型+時間落差   → 05_regression_results.txt, 05_regression_coef.csv
+python 06_robustness_checks.py       # 產業異質性×遞延   → 06_robustness_results.txt, 06_robustness_coef.csv, 06_robustness_summary.csv
 python 07_generate_paper.py          # 生成 Word 論文    → 水管理與成本黏性_論文.docx
 ```
 
@@ -99,6 +99,9 @@ python 07_generate_paper.py          # 生成 Word 論文    → 水管理與成
    - Decrease（連續兩年營收下降）：本期與前期皆 D=1 則為 1，否則 0。
 5. 縮尾 Winsorize：對 ΔLNSGA、ΔLNREV、Water_Rate、AI、EI、ROA、Lev 等連續變數
    做前後 1%（`_w` 欄位），降低極端值影響。
+6. **遞延期水變數（方向四：時間落差）**：不新增概念變數，僅將既有水變數
+   （Water_Rate_w、製程水回收率%_w、Water_Disc、Water_Disc_GRI）平移 t-1、t-2
+   （`_l1`／`_l2`），且僅在年份差恰為 k 時有效，避免跨越缺漏年份。
 
 ### 03 樣本篩選 + 產業統計（03_sample_selection.py）
 - 篩選（參數在檔案上方）：
@@ -115,7 +118,12 @@ python 07_generate_paper.py          # 生成 Word 論文    → 水管理與成
   - `D×ΔLNREV`（捕捉整體成本黏性，係數 β2 預期為負）。
   - `Water_Var×D×ΔLNREV`（三重交乘，核心係數 β3）：
     - 主分析代入 `Water_Rate`；次分析代入 `Water_Disc`。
+  - **遞延交乘（方向四）**：`Water_Var(t-1)×D×ΔLNREV`、`Water_Var(t-2)×D×ΔLNREV`
+    （欄名 `*_D_dREV_l1`／`_l2`），檢驗水管理投資之遞延效益。
   - 各控制變數與 `D×ΔLNREV` 的交乘（Controls×D×ΔLNREV），依 ABJ 慣例納入。
+- **高／低耗水產業分組（方向五）**：因資料僅含 `SASB主產業`（無 TEJ 之 TSE／
+  子產業別），以各產業「水資料密度」（有水資料觀測比例）之中位數切分為
+  `WaterUse`＝高耗水／低耗水，作為耗水程度代理；另輸出 `04_industry_wateruse.csv`。
 - 產業（SASB主產業）與年份轉為虛擬變數群（固定效果）。
 - 欄名含 `%`、空白、`×`、`Δ` 等字元會先安全化（如 `Water_Rate`、`D_x_dREV`），
   並保留原始名對照表，供後續 statsmodels 與論文對表使用。
@@ -128,24 +136,25 @@ python 07_generate_paper.py          # 生成 Word 論文    → 水管理與成
   ΔLNSGA = β0 + β1·ΔLNREV + β2·(D×ΔLNREV) + β3·(Water_Var×D×ΔLNREV)
            + β4·Water_Var + Σ Controls×D×ΔLNREV + Σ Industry + Σ Year + ε
   ```
-- 兩組主結果：
-  - 模型 1（主分析）：Water_Var = `Water_Rate`（水回收率% 或 製程水回收率%）。
+- 兩組主結果，每組再跑**當期 / t-1 / t-2**（方向四）三個遞延期：
+  - 模型 1（主分析）：Water_Var = `Water_Rate`（水回收率%）。
   - 模型 2（次分析）：Water_Var = `Water_Disc`（揭露虛擬變數）。
 - 係數解讀：
   - β2 < 0 且顯著 → 樣本存在成本黏性。
   - β3（H1）：Water_Rate 之 β3 顯著為**負** → 水回收績效**加劇**黏性。
   - β3（H2）：Water_Disc 之 β3 顯著為**正** → 水資訊揭露**緩解**黏性。
-- 結果檔附安全欄名對照表；N 取自實際迴歸樣本（去除任一缺值後）。
+  - 遞延期若在 t-1／t-2 才顯著 → 支持水管理效益需時間發酵。
+- 結果檔附遞延期 β3 對照；N 取自實際迴歸樣本（去除任一缺值後）。
 
 ### 06 穩健性檢定（06_robustness_checks.py）
-- 輸入回到 `03_sample_data.csv`（全製造業樣本），以便切換衡量與擴充樣本。
-- 穩健性維度（每個維度重跑主模型並輸出跨設定對照表 `06_robustness_summary.csv`，
-  含顯著性星號）：
-  1. **水績效衡量替換**：水回收率% ↔ 製程水回收率%。
-  2. **揭露定義替換**：做法 A（有水量紀錄）↔ 做法 B（GRI 揭露度 > 0）。
-  3. **營業費用定義替換**：營業費用欄 ↔ 推銷費用＋管理費用。
-  4. **產業樣本維度**：全製造業 ↔ 限定水資料充足產業。
-- 目的：確認核心係數 β3 的方向與顯著性在不同衡量／樣本下穩健。
+- 輸入改讀 `04_model_data.csv`（已含遞延交乘與 `WaterUse` 分組）。
+- **產業異質性（方向五）× 時間落差（方向四）交叉**：對每個
+  (水衡量 × 產業組 × 遞延期) 組合重跑主模型，輸出 `06_robustness_summary.csv`：
+  1. **水衡量**：水回收率%（連續）、水揭露（虛擬）。
+  2. **產業組**：全樣本 / 高耗水 / 低耗水。
+  3. **遞延期**：t-0（當期）/ t-1 / t-2。
+- 目的：比較高／低耗水產業與各遞延期下 β3 的方向與顯著性，檢驗
+  「效果集中於高耗水產業且具遞延性」之推論。
 
 ### 07 生成 Word 論文（07_generate_paper.py）
 - 參照 `reference_paper/` 之範例論文 PDF 架構：中文摘要 / Abstract / 第一章 緒論 /
