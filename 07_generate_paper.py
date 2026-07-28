@@ -22,14 +22,18 @@ MODEL_CSV = "04_model_data.csv"
 MAP_CSV = "04_var_mapping.csv"
 COEF_CSV = "05_regression_coef.csv"
 ROB_CSV = "06_robustness_summary.csv"
-OUT_DOCX = "水管理與成本黏性_論文.docx"
+OUT_DOCX = "水與廢棄物管理與成本黏性_論文.docx"
 
 CJK_FONT = "新細明體"
 EN_FONT = "Times New Roman"
 
 DESC_VARS = ["Y_dLNSGA", "dLNREV", "D", "Water_Rate", "Water_Disc",
+             "Waste_Intensity", "Waste_Disc", "Waste_Fine",
              "Size", "AI", "EI", "ROA", "Lev", "Decrease"]
-CORR_VARS = ["Y_dLNSGA", "dLNREV", "Water_Rate", "Size", "AI", "EI", "ROA", "Lev"]
+CORR_VARS = ["Y_dLNSGA", "dLNREV", "Water_Rate", "Waste_Intensity",
+             "Size", "AI", "EI", "ROA", "Lev"]
+WATER_MEASURES = ["水回收率%", "水揭露"]
+WASTE_MEASURES = ["廢棄物密集度", "廢棄物揭露", "廢棄物罰鍰"]
 
 
 # ---------------------------------------------------------------- docx helpers
@@ -165,14 +169,13 @@ def summarize_findings(coef, rob):
     return any_sig, lag_txt, rob_txt
 
 
-def build_lag_table(coef):
-    """時間落差：各遞延期之 β3（Water×D×ΔLNREV）併排模型1/2。"""
+def build_lag_table(coef, kind_cols):
+    """時間落差：各遞延期之 β3（X×D×ΔLNREV）。kind_cols=[(類型, 欄名)...]。"""
     b3 = coef[coef["角色"] == "β3(三重交乘)"].copy()
     rows = []
     for lag in sorted(b3["遞延期"].unique()):
         rec = {"遞延期": f"t-{lag}（{'當期' if lag == 0 else str(lag)+'期前'}）"}
-        for kind, colname in [("主分析", "模型1 β3(水回收率%)"),
-                              ("次分析", "模型2 β3(水揭露)")]:
+        for kind, colname in kind_cols:
             r = b3[(b3["遞延期"] == lag) & (b3["類型"] == kind)]
             if r.empty:
                 rec[colname] = ""
@@ -182,6 +185,42 @@ def build_lag_table(coef):
                 rec[colname] = f"{b:.4f}{s} (t={t:.2f}, N={n:,})"
         rows.append(rec)
     return pd.DataFrame(rows)
+
+
+def build_waste_reg_table(coef):
+    """當期(L0)廢棄物三模型併排：模型3密集度／模型4揭露／模型5罰鍰。"""
+    c0 = coef[coef["遞延期"] == 0]
+    kinds = [("廢棄物主分析", "模型3(廢棄物密集度)"),
+             ("廢棄物次分析", "模型4(廢棄物揭露)"),
+             ("廢棄物穩健", "模型5(廢棄物罰鍰)")]
+    order = ["dLNREV", "D_x_dREV", "WasteInt_D_dREV", "WasteDisc_D_dREV",
+             "WasteFine_D_dREV", "Waste_Intensity", "Waste_Disc", "Waste_Fine",
+             "Size_D_dREV", "AI_D_dREV", "EI_D_dREV", "ROA_D_dREV",
+             "Lev_D_dREV", "Decrease_D_dREV"]
+
+    def cell(kind, var):
+        r = c0[(c0["類型"] == kind) & (c0["變數"] == var)]
+        if r.empty:
+            return ""
+        b = r["係數"].iloc[0]; s = r["顯著性"].iloc[0]; t = r["t值"].iloc[0]
+        return f"{b:.4f}{s} ({t:.2f})"
+
+    rows = []
+    for v in order:
+        vals = {kc[1]: cell(kc[0], v) for kc in kinds}
+        if all(x == "" for x in vals.values()):
+            continue
+        rows.append({"變數": v, **vals})
+    tbl = pd.DataFrame(rows)
+
+    def meta(kind, key):
+        r = c0[c0["類型"] == kind]
+        return "" if r.empty else r[key].iloc[0]
+    tbl = pd.concat([tbl, pd.DataFrame([
+        {"變數": "N", **{kc[1]: (f"{int(meta(kc[0],'N')):,}" if meta(kc[0], 'N') != '' else '') for kc in kinds}},
+        {"變數": "adj. R²", **{kc[1]: (f"{meta(kc[0],'adj_R2'):.4f}" if meta(kc[0], 'adj_R2') != '' else '') for kc in kinds}},
+    ])], ignore_index=True)
+    return tbl
 
 
 # ---------------------------------------------------------------- main
@@ -229,11 +268,11 @@ def main():
     # 封面標題
     title = doc.add_paragraph()
     title.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    tr = title.add_run("企業水管理績效與水資訊揭露對成本黏性之影響")
+    tr = title.add_run("企業水管理與廢棄物管理對成本黏性之影響")
     tr.bold = True; tr.font.size = Pt(18); set_cjk(tr)
     sub = doc.add_paragraph()
     sub.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    sr = sub.add_run("——以台灣上市櫃製造業為例")
+    sr = sub.add_run("——以台灣上市櫃製造業之環境績效與資訊揭露為例")
     sr.font.size = Pt(13); set_cjk(sr)
     doc.add_paragraph()
 
@@ -303,6 +342,18 @@ def main():
              "從而降低成本黏性。據此提出：")
     add_para(doc, "H2：相較未揭露者，有揭露水管理資訊的企業其成本黏性較低"
                   "（模型中 β3 預期顯著為正）。", bold=True, first_indent=False)
+    add_heading(doc, "第三節 廢棄物管理與成本黏性（H3–H5）", 2)
+    add_para(doc,
+             "水管理效果在台灣製造業樣本相對有限，故本研究進一步將環境構面擴充至廢棄物"
+             "管理。台灣製造業（尤其半導體、光電、化工）之廢棄物清運與處理高度仰賴長期"
+             "委外合約與專用處理設施，具明顯的費用僵固性；同時環境違規（罰鍰）具強制性"
+             "降本阻力。據此提出三項假設：")
+    add_para(doc, "H3（實質投入）：每百萬營收廢棄物量越高，成本黏性越大"
+                  "（廢棄物處理合約與費用僵固；β3 預期為負）。", bold=True, first_indent=False)
+    add_para(doc, "H4（資訊透明度）：廢棄物管理揭露品質越高，成本黏性越低"
+                  "（監督效果矯正管理者預期；β3 預期為正）。", bold=True, first_indent=False)
+    add_para(doc, "H5（風險衝擊）：事業廢棄物罰鍰次數越多，成本黏性越大"
+                  "（違規之強制性降本阻力；β3 預期為負）。", bold=True, first_indent=False)
 
     # 第三章 研究方法
     add_heading(doc, "第三章 研究方法", 1)
@@ -351,18 +402,36 @@ def main():
              "考量水管理投資效益需時間發酵——當期投入的環保設備，可能於 1 至 2 年後方"
              "轉為難以裁撤的沈沒成本或發揮降本效益——本研究將核心水變數分別遞延一期"
              "（t-1）與兩期（t-2）後重新估計三重交乘 β3。表4-4 彙整各遞延期之 β3。")
-    add_table(doc, build_lag_table(coef), title="表4-4 時間落差效應：各遞延期之 β3")
+    add_table(doc, build_lag_table(coef, [("主分析", "模型1 β3(水回收率%)"),
+                                          ("次分析", "模型2 β3(水揭露)")]),
+              title="表4-4 水管理時間落差效應：各遞延期之 β3")
 
-    add_heading(doc, "第五節 產業異質性（高／低耗水產業）", 2)
+    add_heading(doc, "第五節 廢棄物管理結果（延伸主題）", 2)
     add_para(doc,
-             "台灣製造業次產業之水資源依賴度差異甚大，全樣本可能稀釋高耗水產業之效應。"
-             "本研究依產業水資料密度（各產業有水資料之觀測比例）之中位數，將 SASB 主產業"
-             "劃分為高耗水與低耗水兩組，分別於當期與遞延期估計，比較 β3，結果如表4-5。"
-             "（註：因資料僅含 SASB 主產業分類，未取得 TEJ 之 TSE／子產業別，故以 SASB "
-             "產業之水資料密度作為耗水程度之代理。）")
-    rob_show = rob[["水衡量", "產業組", "遞延期", "β2(D×ΔREV)", "β2_sig",
-                    "β3(Water×D×ΔREV)", "β3_sig", "N"]]
-    add_table(doc, rob_show, title="表4-5 產業異質性 × 時間落差：β2 與 β3 對照", num_fmt="{:.4f}")
+             "表4-5 為廢棄物管理三模型之當期結果：模型3（每百萬營收廢棄物，實質投入）、"
+             "模型4（廢棄物揭露品質）、模型5（事業廢棄物罰鍰，違規風險）。相較水管理，"
+             "廢棄物指標之有效樣本較大（密集度約 3,273、揭露約 13,875 筆）。")
+    add_table(doc, build_waste_reg_table(coef),
+              title="表4-5 廢棄物管理主迴歸結果（當期，模型3／4／5）", num_fmt="{:.4f}")
+    add_table(doc, build_lag_table(coef, [("廢棄物主分析", "模型3 β3(密集度)"),
+                                          ("廢棄物次分析", "模型4 β3(揭露)"),
+                                          ("廢棄物穩健", "模型5 β3(罰鍰)")]),
+              title="表4-6 廢棄物管理時間落差效應：各遞延期之 β3")
+
+    add_heading(doc, "第六節 產業異質性（高／低耗水高污染產業）", 2)
+    add_para(doc,
+             "台灣製造業次產業之環境資源依賴度差異甚大，全樣本可能稀釋高耗水高污染產業"
+             "之效應。本研究依 TEJ Company DB 之 TSE 產業別，將半導體、光電、電子零組件、"
+             "化學、鋼鐵、紡織、造紙、水泥、食品等用水密集／高污染製造業歸為高耗水組，"
+             "其餘為低耗水組，分別於當期與遞延期估計並比較 β3。")
+    rob_water = rob[rob["水衡量"].isin(WATER_MEASURES)][
+        ["水衡量", "產業組", "遞延期", "β2(D×ΔREV)", "β2_sig",
+         "β3(Water×D×ΔREV)", "β3_sig", "N"]]
+    add_table(doc, rob_water, title="表4-7 水管理 × 產業異質性 × 時間落差", num_fmt="{:.4f}")
+    rob_waste = rob[rob["水衡量"].isin(WASTE_MEASURES)][
+        ["水衡量", "產業組", "遞延期", "β2(D×ΔREV)", "β2_sig",
+         "β3(Water×D×ΔREV)", "β3_sig", "N"]]
+    add_table(doc, rob_waste, title="表4-8 廢棄物管理 × 產業異質性 × 時間落差", num_fmt="{:.4f}")
 
     # 第五章 結論
     add_heading(doc, "第五章 結論與建議", 1)

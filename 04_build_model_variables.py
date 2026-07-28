@@ -53,6 +53,10 @@ def main():
     out["Water_Rate"] = pd.to_numeric(df[WATER_RATE_COL], errors="coerce")
     out["Water_Disc"] = pd.to_numeric(df["Water_Disc"], errors="coerce")
     out["Water_Disc_GRI"] = pd.to_numeric(df["Water_Disc_GRI"], errors="coerce")
+    # 廢棄物管理指標（延伸主題）
+    out["Waste_Intensity"] = pd.to_numeric(df["Waste_Intensity_w"], errors="coerce")
+    out["Waste_Disc"] = pd.to_numeric(df["Waste_Disc"], errors="coerce")
+    out["Waste_Fine"] = pd.to_numeric(df["Waste_Fine"], errors="coerce")
 
     # 控制變數（主效果）
     for safe, src in CONTROL_COLS.items():
@@ -63,6 +67,10 @@ def main():
     out["WaterRate_D_dREV"] = out["Water_Rate"] * out["D_x_dREV"]   # β3：水績效×黏性
     out["WaterDisc_D_dREV"] = out["Water_Disc"] * out["D_x_dREV"]   # β3：水揭露×黏性
     out["WaterDiscGRI_D_dREV"] = out["Water_Disc_GRI"] * out["D_x_dREV"]  # 穩健性
+    # 廢棄物三重交乘（β3）
+    out["WasteInt_D_dREV"] = out["Waste_Intensity"] * out["D_x_dREV"]   # 主分析(實質投入)
+    out["WasteDisc_D_dREV"] = out["Waste_Disc"] * out["D_x_dREV"]       # 次分析(揭露品質)
+    out["WasteFine_D_dREV"] = out["Waste_Fine"] * out["D_x_dREV"]       # 穩健(違規風險)
 
     # 控制變數 × (D×ΔLNREV)（ABJ 慣例）
     for safe in CONTROL_COLS:
@@ -74,6 +82,9 @@ def main():
         "WaterDisc": "Water_Disc",         # 水揭露做法A
         "WaterDiscGRI": "Water_Disc_GRI",  # 水揭露做法B
         "WaterRateProc": "製程水回收率%_w", # 製程水回收率%（縮尾）
+        "WasteInt": "Waste_Intensity_w",   # 每百萬營收廢棄物（縮尾）
+        "WasteDisc": "Waste_Disc",         # 廢棄物揭露品質
+        "WasteFine": "Waste_Fine",         # 事業廢棄物罰鍰次數
     }
     for base, src in LAG_MAP.items():
         for k in (1, 2):
@@ -126,6 +137,12 @@ def main():
         ("WaterRate_D_dREV", "Water_Rate × D × ΔLNREV（β3：H1）", "三重交乘"),
         ("WaterDisc_D_dREV", "Water_Disc × D × ΔLNREV（β3：H2）", "三重交乘"),
         ("WaterDiscGRI_D_dREV", "Water_Disc_GRI × D × ΔLNREV（穩健）", "三重交乘"),
+        ("Waste_Intensity", "每百萬營收廢棄物（縮尾，廢棄物主分析）", "自變數"),
+        ("Waste_Disc", "GRI廢棄物管理揭露度（連續，揭露品質）", "自變數"),
+        ("Waste_Fine", "事業廢棄物罰鍰次數（違規風險）", "自變數(穩健)"),
+        ("WasteInt_D_dREV", "Waste_Intensity × D × ΔLNREV（β3：H3）", "三重交乘"),
+        ("WasteDisc_D_dREV", "Waste_Disc × D × ΔLNREV（β3：H4）", "三重交乘"),
+        ("WasteFine_D_dREV", "Waste_Fine × D × ΔLNREV（β3：H5穩健）", "三重交乘"),
         ("Size", "LN(資產總額)（縮尾）", "控制"),
         ("AI", "資產密集度=資產總額/營收（縮尾）", "控制"),
         ("EI", "員工密集度=員工人數/營收（縮尾）", "控制"),

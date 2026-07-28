@@ -9,6 +9,12 @@ Water_Disc_GRI,水揭露虛擬-做法B（GRI揭露度>0=1）,自變數(穩健)
 WaterRate_D_dREV,Water_Rate × D × ΔLNREV（β3：H1）,三重交乘
 WaterDisc_D_dREV,Water_Disc × D × ΔLNREV（β3：H2）,三重交乘
 WaterDiscGRI_D_dREV,Water_Disc_GRI × D × ΔLNREV（穩健）,三重交乘
+Waste_Intensity,每百萬營收廢棄物（縮尾，廢棄物主分析）,自變數
+Waste_Disc,GRI廢棄物管理揭露度（連續，揭露品質）,自變數
+Waste_Fine,事業廢棄物罰鍰次數（違規風險）,自變數(穩健)
+WasteInt_D_dREV,Waste_Intensity × D × ΔLNREV（β3：H3）,三重交乘
+WasteDisc_D_dREV,Waste_Disc × D × ΔLNREV（β3：H4）,三重交乘
+WasteFine_D_dREV,Waste_Fine × D × ΔLNREV（β3：H5穩健）,三重交乘
 Size,LN(資產總額)（縮尾）,控制
 AI,資產密集度=資產總額/營收（縮尾）,控制
 EI,員工密集度=員工人數/營收（縮尾）,控制

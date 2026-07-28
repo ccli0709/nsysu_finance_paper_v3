@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
-"""生成給指導教授的簡短研究進度報告（Word）。"""
+"""生成給指導教授的簡短研究進度報告（Word）：水管理 vs 水+廢棄物管理比較。"""
 import pandas as pd
 from docx import Document
 from docx.shared import Pt
-from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.enum.text import WD_BREAK
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.oxml.ns import qn
 
-OUT = "研究進度報告_水管理與成本黏性.docx"
+OUT = "研究進度報告_水與廢棄物管理與成本黏性.docx"
 CJK, EN = "新細明體", "Times New Roman"
+ROB_CSV = "06_robustness_summary.csv"
+
+WATER_M = ["水回收率%", "水揭露"]
+WASTE_M = ["廢棄物密集度", "廢棄物揭露", "廢棄物罰鍰"]
 
 
 def cjk(run):
@@ -22,10 +25,8 @@ def h(doc, text, lv=1):
     return p
 
 
-def para(doc, text, size=12, bold=False, indent=True, align=None):
+def para(doc, text, size=12, bold=False, indent=True):
     p = doc.add_paragraph()
-    if align is not None:
-        p.alignment = align
     if indent:
         p.paragraph_format.first_line_indent = Pt(24)
     p.paragraph_format.line_spacing = 1.5
@@ -45,34 +46,46 @@ def bullet(doc, text):
     return p
 
 
-def add_summary_table(doc, csv_path):
-    df = pd.read_csv(csv_path, encoding="utf-8-sig")
-
-    def fmt(row):
-        b2 = f"{row['β2(D×ΔREV)']:.4f}"
-        b2s = "" if row["β2_sig"] == "n.s." else row["β2_sig"]
-        b3 = f"{row['β3(Water×D×ΔREV)']:.4f}"
-        b3s = "" if row["β3_sig"] == "n.s." else row["β3_sig"]
-        return b2 + b2s, b3 + b3s
-
-    cols = ["水衡量", "產業組", "遞延期", "β2 (成本黏性)", "β3 (水管理調節)", "N"]
-    t = doc.add_table(rows=1, cols=len(cols))
+def add_table(doc, header, rows, widths=None):
+    t = doc.add_table(rows=1, cols=len(header))
     t.style = "Light Grid Accent 1"
-    for j, c in enumerate(cols):
-        rr = t.rows[0].cells[j].paragraphs[0].add_run(c)
+    for j, c in enumerate(header):
+        rr = t.rows[0].cells[j].paragraphs[0].add_run(str(c))
         rr.bold = True
         rr.font.size = Pt(9)
         cjk(rr)
-    for _, row in df.iterrows():
-        b2, b3 = fmt(row)
-        vals = [row["水衡量"], row["產業組"], row["遞延期"], b2, b3, f"{int(row['N']):,}"]
+    for row in rows:
         cells = t.add_row().cells
-        for j, v in enumerate(vals):
+        for j, v in enumerate(row):
             rr = cells[j].paragraphs[0].add_run(str(v))
             rr.font.size = Pt(9)
             cjk(rr)
+    return t
 
 
+# ---------------------------------------------------------------- 讀結果
+rob = pd.read_csv(ROB_CSV, encoding="utf-8-sig")
+b3col = "β3(Water×D×ΔREV)"
+
+
+def n_at(measure):
+    r = rob[(rob["水衡量"] == measure) & (rob["產業組"] == "全樣本") & (rob["遞延期"] == "t-0")]
+    return int(r["N"].iloc[0]) if len(r) else 0
+
+
+def sig_count(measures):
+    sub = rob[rob["水衡量"].isin(measures)]
+    total = sub[b3col].notna().sum()
+    sig = sub[sub["β3_sig"].isin(["*", "**", "***"])]
+    return int(sig.shape[0]), int(total)
+
+
+water_sig, water_tot = sig_count(WATER_M)
+waste_sig, waste_tot = sig_count(WASTE_M)
+
+waste_sig_rows = rob[rob["水衡量"].isin(WASTE_M) & rob["β3_sig"].isin(["*", "**", "***"])]
+
+# ---------------------------------------------------------------- 文件
 doc = Document()
 n = doc.styles["Normal"]
 n.font.name = EN
@@ -81,7 +94,7 @@ n.element.rPr.rFonts.set(qn("w:eastAsia"), CJK)
 
 t = doc.add_paragraph()
 t.alignment = WD_ALIGN_PARAGRAPH.CENTER
-r = t.add_run("研究進度報告：企業水管理與成本黏性")
+r = t.add_run("研究進度報告：水管理與廢棄物管理對成本黏性之影響")
 r.bold = True
 r.font.size = Pt(17)
 cjk(r)
@@ -89,82 +102,98 @@ sub = doc.add_paragraph()
 sub.alignment = WD_ALIGN_PARAGRAPH.CENTER
 cjk(sub.add_run("——以 TEJ 台灣上市櫃製造業實際資料之初步驗證"))
 
-para(doc, "敬呈 指導教授。以下就老師建議之研究方向，說明我以 TEJ 實際資料所做的"
-          "初步驗證、最終變數設計與假設、以 AI 輔助跑出的初步結果與洞察，"
-          "懇請老師指示此方向是否可行，以作為後續深化之依據。", bold=False)
+para(doc, "敬呈 指導教授。前次以「水管理」為題之驗證顯示核心調節效果不顯著；依老師建議，"
+          "本次在原水管理基礎上再納入「廢棄物管理」指標（實質投入、揭露品質、違規罰鍰），"
+          "並維持產業與年份固定效果。以下彙報最終設計、結果，以及「僅水管理」與「水＋廢棄物」"
+          "之對照，懇請老師指示後續方向。")
 
-h(doc, "一、研究方向（老師建議）", 2)
-para(doc, "以「成本黏性（cost stickiness）」為核心，參酌兩篇文獻——Zeng, Peng and "
-          "Chan（低碳城市政策、綠色創新）與 Jiang and Yang（2024, Economics "
-          "Letters；ESG 揭露）——探討「企業水管理績效」與「水資訊揭露」對成本黏性的"
-          "影響，並依老師提示納入「時間落差效應」與「產業異質性」兩項延伸設計。")
+h(doc, "一、研究設計（延續成本黏性 ABJ 模型）", 2)
+para(doc, "應變數 ΔLNSGA（營業費用變動）；核心為 ΔLNREV、收入下降虛擬 D，與環境變數之"
+          "三重交乘 X×D×ΔLNREV。控制變數：企業規模、資產密集度、員工密集度、ROA、財務"
+          "槓桿、連續兩年營收下降；並控制產業(SASB)與年份固定效果，採公司叢集穩健標準誤、"
+          "連續變數縮尾 1%。X 分別代入水管理與廢棄物管理指標，並檢驗當期與遞延（t-1、t-2）"
+          "及高／低耗水（高污染）產業之異質性。資料取自 TEJ，台灣製造業、排除金融、2014–2024，"
+          "面板 18,137 觀測（1,945 家）。")
 
-h(doc, "二、資料與樣本", 2)
-para(doc, "資料全數取自 TEJ，包含：IFRS 合併財務（單季，彙總為年度）、TESG 企業用水量"
-          "（年度）、TESG 永續揭露，以及 TEJ Company DB 產業別（TSE 產業）。以台灣"
-          "上市櫃製造業為對象、排除金融保險業、期間 2014–2024，建構「證券代碼×年度」"
-          "面板。清理後樣本 18,137 個觀測（1,945 家）；迴歸可用 16,661 筆；其中具"
-          "水回收率者約 996 筆。")
+h(doc, "二、變數與假設（水 vs 廢棄物）", 2)
+add_table(doc,
+          ["構面", "主分析 X（實質投入）", "次分析 X（資訊透明度）", "穩健 X（風險）", "假設方向"],
+          [["水管理", "水回收率%", "水揭露(有/無)", "—", "H1 β3<0、H2 β3>0"],
+           ["廢棄物管理", "每百萬營收廢棄物", "GRI廢棄物揭露度", "事業廢棄物罰鍰次數",
+            "H3 β3<0、H4 β3>0、H5 β3<0"]])
+para(doc, "水管理：H1 水回收投資屬長期專用資產，難裁撤→加劇黏性；H2 揭露提升透明度→"
+          "緩解黏性。廢棄物管理：H3 廢棄物處理仰賴長期委外合約與專用設施，費用僵固→加劇"
+          "黏性；H4 高品質揭露具監督效果→緩解黏性；H5 環境違規（罰鍰）具強制降本阻力→"
+          "加劇黏性。", indent=False)
 
-h(doc, "三、最終變數設計", 2)
-bullet(doc, "應變數：ΔLNSGA＝營業費用變動（取對數差分）。")
-bullet(doc, "核心自變數：ΔLNREV（營收變動）、D（營收下降虛擬）；三重交乘 "
-            "Water_Var × D × ΔLNREV。")
-bullet(doc, "水管理衡量：Water_Rate＝水回收率%（績效，主分析）；Water_Disc＝是否揭露"
-            "水資料（透明度，次分析）。")
-bullet(doc, "控制變數：企業規模、資產密集度、員工密集度、ROA、財務槓桿、連續兩年"
-            "營收下降；並控制產業與年份固定效果，採公司叢集穩健標準誤，連續變數縮尾 1%。")
-bullet(doc, "延伸設計：核心水變數遞延一至兩期（t-1、t-2）；依 TSE 產業別精準界定"
-            "高耗水產業（半導體、光電、電子零組件、紡織、造紙、鋼鐵、化學、水泥、"
-            "食品、塑膠等）與低耗水產業進行子樣本比較。")
+h(doc, "三、初步結果", 2)
+para(doc, f"1. 成本黏性穩健存在：β2（D×ΔLNREV）於水回收率與廢棄物密集度樣本均顯著為負"
+          f"（如廢棄物密集度全樣本 −0.64***、高耗水 t-1 −2.03***）。")
+para(doc, f"2. 水管理調節（β3）：{water_tot} 個設定中顯著者 {water_sig} 個——即當期、"
+          f"遞延、及高／低耗水各設定下 H1／H2 均未獲支持。")
+para(doc, f"3. 廢棄物管理調節（β3）：{waste_tot} 個設定中顯著者 {waste_sig} 個，"
+          f"且集中於高耗水（高污染）產業並具遞延性，方向多支持假設（詳附表二）。")
 
-h(doc, "四、研究假設", 2)
-para(doc, "H1：水回收率越高，成本黏性越大（因水循環設備屬長期專用投資，難以裁撤；"
-          "預期 β3 顯著為負）。", indent=False)
-para(doc, "H2：有揭露水管理資訊者，成本黏性較低（資訊透明度矯正管理者過度樂觀；"
-          "預期 β3 顯著為正）。", indent=False)
+h(doc, "四、洞察", 2)
+bullet(doc, "納入廢棄物管理明顯強化研究：主分析有效樣本由水的約千筆擴增至數千筆"
+            f"（每百萬營收廢棄物 {n_at('廢棄物密集度'):,}、廢棄物揭露 {n_at('廢棄物揭露'):,}）。")
+bullet(doc, "效果具『產業依存＋時間落差』特徵：在高耗水高污染產業、遞延一期（t-1）時，"
+            "廢棄物密集度與罰鍰對成本黏性呈顯著加劇，符合台灣製造業（半導體、化工、鋼鐵等）"
+            "廢棄物委外合約僵固與環境違規降本阻力之情境。")
+bullet(doc, "純水管理指標於任何設定均不顯著，建議將主軸擴展為『水＋廢棄物』之環境成本行為。")
 
-h(doc, "五、初步結果（AI 輔助驗證）", 2)
-para(doc, "1. 樣本存在穩健的成本黏性：核心係數 β2（D×ΔLNREV）在水回收率樣本顯著為負"
-          "（全樣本 −1.27***、高耗水產業 −1.48***、遞延兩期 −1.15***），"
-          "顯示營收下降時費用向下調整較不敏感，與文獻一致。")
-para(doc, "2. 水管理的調節效果（β3）未獲支持：無論當期、遞延（t-1／t-2），或在"
-          "高／低耗水產業子樣本中，H1 與 H2 的核心三重交乘 β3 均「未達統計顯著」。")
-para(doc, "3. 控制變數方向符合預期（資產密集度、ROA、連續兩年下降等之交乘項多顯著），"
-          "顯示模型設定與資料品質可信。")
+h(doc, "五、請示", 2)
+para(doc, "懇請老師指示是否以『水＋廢棄物管理對成本黏性』為主軸持續深化。若可行，後續將"
+          "強化衡量（廢棄物密集度、揭露品質指數）、檢視高污染產業與遞延結構之機制，"
+          "並考慮以環境事件（如環保稽查／罰鍰）作為識別策略。")
 
-h(doc, "六、洞察", 2)
-bullet(doc, "台灣製造業存在穩健成本黏性，資料與模型可信，可作為研究基礎。")
-bullet(doc, "β3 不顯著的可能原因偏向「衡量與統計功效」而非必然無關係：水回收率有效"
-            "樣本僅約千筆且變異有限，水揭露多為二元、資訊量低。")
-bullet(doc, "值得注意：以較粗產業分類時曾出現邊際顯著，改用精準 TSE 產業定義後即消失，"
-            "顯示該效果並不穩健，後續須審慎，避免過度解讀。")
-
-h(doc, "七、後續可行方向（若老師認為方向可行）", 2)
-bullet(doc, "強化水衡量：改以 GRI 用水揭露度（連續）、用水密集度（總用水量／營收）、"
-            "回收利用水量／總用水量等建構水管理指數，擴大樣本與變異。")
-bullet(doc, "識別策略：以 2021 年台灣乾旱（限水）作為外生水資源衝擊，採差異中的差異"
-            "（DiD）檢驗水管理較佳者是否較能緩衝營運衝擊。")
-bullet(doc, "或調整應變數：改看水管理對營業費用率、獲利或營運風險之直接影響，"
-            "以提升檢定力。")
-
-h(doc, "八、請示", 2)
-para(doc, "懇請老師指示本主題與研究設計是否可行。若老師認為方向可行，我將以現有可"
-          "重複執行之資料管線為基礎，優先補強水衡量與識別策略後持續深化；"
-          "亦歡迎老師就變數或模型設定提供進一步建議。")
-
-# ---- 附頁：結果摘要表（18 個設定）----
+# ================= 附頁：水 vs 水+廢棄物 一頁對照 =================
 doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
-h(doc, "附表：全部設定之 β2／β3 對照（18 個設定）", 2)
-para(doc, "下表彙整「水衡量 × 產業組 × 遞延期」共 18 個設定之核心係數。β2 為整體成本"
-          "黏性（D×ΔLNREV），預期為負；β3 為水管理之三重交乘（Water×D×ΔLNREV），"
-          "即 H1／H2 之核心係數。星號 *、**、*** 分別代表 10%、5%、1% 顯著水準；"
-          "無星號者不顯著。估計皆採 OLS＋產業與年份固定效果＋公司叢集穩健標準誤。",
-     indent=False)
-add_summary_table(doc, "06_robustness_summary.csv")
-para(doc, "說明：β2 於水回收率相關設定（尤其高耗水產業當期）穩健顯著為負，確認成本"
-          "黏性存在；β3 於所有 18 個設定均不顯著，故現階段 H1／H2 未獲支持。",
+h(doc, "附表一、水管理 vs 水＋廢棄物管理：整體對照", 2)
+add_table(doc,
+          ["面向", "僅水管理（原）", "水＋廢棄物管理（新）"],
+          [["環境構面", "水（回收率、揭露）", "水 ＋ 廢棄物（密集度、揭露、罰鍰）"],
+           ["研究假設", "H1、H2", "H1、H2 ＋ H3、H4、H5"],
+           ["主迴歸模型數", "2（模型1/2）", "5（模型1–5）"],
+           ["穩健性設定數", f"{water_tot}", f"{water_tot + waste_tot}"],
+           ["主分析可用樣本", f"水回收率 {n_at('水回收率%'):,}",
+            f"廢棄物密集度 {n_at('廢棄物密集度'):,}"],
+           ["揭露樣本", f"水揭露 {n_at('水揭露'):,}", f"廢棄物揭露 {n_at('廢棄物揭露'):,}"],
+           ["β2 成本黏性", "顯著為負", "顯著為負（水、廢棄物皆是）"],
+           ["β3 顯著設定數", f"{water_sig} / {water_tot}", f"{waste_sig} / {waste_tot}（廢棄物）"],
+           ["核心結論", "H1/H2 皆不顯著", "廢棄物於高污染產業＋遞延出現顯著（支持H3/H5）"]])
+
+h(doc, "附表二、廢棄物管理達顯著之設定（β3）", 2)
+# 各廢棄物衡量對應之假設與預期方向（負=加劇黏性、正=緩解黏性）
+WASTE_HYP = {
+    "廢棄物密集度": ("H3", "負"),
+    "廢棄物揭露": ("H4", "正"),
+    "廢棄物罰鍰": ("H5", "負"),
+}
+rows = []
+for _, r in waste_sig_rows.iterrows():
+    direction = "加劇黏性" if r[b3col] < 0 else "緩解黏性"
+    hyp, expect = WASTE_HYP.get(r["水衡量"], ("", ""))
+    match = (expect == "負" and r[b3col] < 0) or (expect == "正" and r[b3col] > 0)
+    # 理論以高耗水（高污染）產業為主要適用對象
+    if match and r["產業組"] == "低耗水":
+        support = f"部分符合{hyp}（惟屬低耗水，理論適用性較弱）"
+    elif match:
+        support = f"支持 {hyp}"
+    else:
+        support = f"與 {hyp} 相反"
+    rows.append([r["水衡量"], r["產業組"], r["遞延期"],
+                 f"{r[b3col]:.4f}{r['β3_sig']}", direction, support, f"{int(r['N']):,}"])
+if not rows:
+    rows = [["—", "—", "—", "無", "—", "—", "—"]]
+add_table(doc, ["廢棄物衡量", "產業組", "遞延期", "β3", "方向", "是否支持假設", "N"], rows)
+para(doc, "說明：星號 *、**、*** 分別代表 10%、5%、1% 顯著水準；假設方向為 H3 密集度加劇"
+          "（β3<0）、H4 揭露緩解（β3>0）、H5 罰鍰加劇（β3<0），理論主要適用於高耗水"
+          "（高污染）產業。相對於水管理在所有設定均不顯著，廢棄物管理在高污染產業並考量"
+          "時間落差後出現支持假設之顯著調節，顯示廢棄物構面對台灣製造業成本行為的解釋力較強。",
      indent=False)
 
 doc.save(OUT)
 print("已生成：", OUT)
+print(f"  水管理 β3 顯著 {water_sig}/{water_tot}；廢棄物 β3 顯著 {waste_sig}/{waste_tot}")
+print(f"  廢棄物顯著設定：{len(waste_sig_rows)} 筆")

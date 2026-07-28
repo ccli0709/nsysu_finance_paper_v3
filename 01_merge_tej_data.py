@@ -28,6 +28,9 @@ FIN_ZIP = "TEJ20260723012741.zip"      # IFRS 以合併為主財務(單季)-一�
 WATER_ZIP = "TEJ20260723014020.zip"    # TESG 環境構面-企業用水量（年度）
 ESG_ZIP = "TEJ20260723104157.zip"      # TESG ESG-變數彙總表（年月）
 TSE_ZIP = "TEJ20260724105926.zip"      # TEJ Company DB-屬性基本資料（TSE/TEJ 產業別，靜態）
+WASTE_ESG_ZIP = "TEJ20260727061428.zip"   # TESG ESG-廢棄物揭露（年月）
+WASTE_QTY_ZIP = "TEJ20260727062055.zip"   # TESG-廢棄物量/密集度/認證（年度）
+WASTE_FINE_ZIP = "TEJ20260727063019.zip"  # TESG-廢棄物罰鍰次數（年度）
 
 # 財務：流量變數（同年四季加總，需四季齊全）
 FIN_FLOW_COLS = ["營業費用", "推銷費用", "管理費用", "研究發展費", "營業收入淨額"]
@@ -50,17 +53,31 @@ ESG_STATIC_COLS = ["SASB主產業"]
 # TSE 產業別（公司靜態，以 [證券代碼] 套用）
 TSE_STATIC_COLS = ["TSE產業_代碼", "TSE產業_名稱", "TEJ產業_名稱", "TEJ子產業_名稱"]
 
+# 廢棄物 ESG 揭露（年月，優先取年末 12）
+WASTE_ESG_COLS = ["E_GRI_廢棄物管理揭露度", "E_每百萬營收廢棄物",
+                  "E_有害廢棄物回收百分比%", "G_報廢產品及電子廢棄物再循環百分比%"]
+# 廢棄物量/密集度（年度，含自由文字欄，需 robust 讀取；僅取數值欄）
+WASTE_QTY_COLS = ["總重量(有害+非有害)(噸)", "廢棄物密集度(公噸/單位)",
+                  "有害廢棄物量(公噸)", "非有害廢棄物量(公噸)"]
+# 廢棄物罰鍰次數（年度）
+WASTE_FINE_COLS = ["一般廢棄物罰鍰次數", "事業廢棄物罰鍰次數", "廢棄物清除處理機構罰鍰次數"]
+
 
 # ----------------------------------------------------------------------------
 # 工具函式
 # ----------------------------------------------------------------------------
-def read_tej_zip(zip_name):
-    """讀取 TEJ zip 內單一 CSV（UTF-16 LE、Tab 分隔），回傳 DataFrame。"""
+def read_tej_zip(zip_name, robust=False):
+    """讀取 TEJ zip 內單一 CSV（UTF-16 LE、Tab 分隔），回傳 DataFrame。
+    robust=True 時以 python 引擎並跳過欄數異常列（適用含自由文字、內嵌 Tab 的檔案）。"""
     path = os.path.join(DATA_DIR, zip_name)
     with zipfile.ZipFile(path) as z:
         csv_name = [n for n in z.namelist() if n.lower().endswith(".csv")][0]
         raw = z.read(csv_name)
-    df = pd.read_csv(io.BytesIO(raw), encoding="utf-16", sep="\t", dtype=str)
+    if robust:
+        df = pd.read_csv(io.BytesIO(raw), encoding="utf-16", sep="\t", dtype=str,
+                         engine="python", on_bad_lines="skip")
+    else:
+        df = pd.read_csv(io.BytesIO(raw), encoding="utf-16", sep="\t", dtype=str)
     df.columns = [c.strip() for c in df.columns]
     return df
 
@@ -193,6 +210,57 @@ def build_tse_static():
 
 
 # ----------------------------------------------------------------------------
+# 5) 廢棄物管理指標（三個資料集）
+# ----------------------------------------------------------------------------
+def build_waste_esg_annual():
+    """廢棄物 ESG 揭露（年月 06/12 → 年度，優先取 12）。"""
+    esg = read_tej_zip(WASTE_ESG_ZIP)
+    esg["證券代碼"] = clean_code(esg["證券代碼"])
+    year, month = yyyymm_to_year_month(esg["年月"])
+    esg["西元年份"], esg["月"] = year, month
+    esg = esg[esg["西元年份"].notna() & esg["月"].notna()].copy()
+    esg["西元年份"] = esg["西元年份"].astype(int)
+    esg["月"] = esg["月"].astype(int)
+    cols = [c for c in WASTE_ESG_COLS if c in esg.columns]
+    for c in cols:
+        esg[c] = to_num(esg[c])
+    idx = esg.groupby(["證券代碼", "西元年份"])["月"].idxmax()
+    out = esg.loc[idx, ["證券代碼", "西元年份"] + cols].reset_index(drop=True)
+    print(f"[廢棄物揭露] 原始 {len(esg):,} 列 → 年度 {len(out):,} 列")
+    return out
+
+
+def build_waste_qty_annual():
+    """廢棄物量/密集度（年度，robust 讀取，僅取數值欄）。"""
+    q = read_tej_zip(WASTE_QTY_ZIP, robust=True)
+    q["證券代碼"] = clean_code(q["證券代碼"])
+    q["西元年份"] = pd.to_numeric(q["年"], errors="coerce").astype("Int64")
+    q = q[q["西元年份"].notna()].copy()
+    q["西元年份"] = q["西元年份"].astype(int)
+    cols = [c for c in WASTE_QTY_COLS if c in q.columns]
+    for c in cols:
+        q[c] = to_num(q[c])
+    out = q.groupby(["證券代碼", "西元年份"])[cols].first().reset_index()
+    print(f"[廢棄物量] 原始 {len(q):,} 列 → 年度 {len(out):,} 列")
+    return out
+
+
+def build_waste_fine_annual():
+    """廢棄物罰鍰次數（年度）。"""
+    f = read_tej_zip(WASTE_FINE_ZIP)
+    f["證券代碼"] = clean_code(f["證券代碼"])
+    f["西元年份"] = pd.to_numeric(f["年"], errors="coerce").astype("Int64")
+    f = f[f["西元年份"].notna()].copy()
+    f["西元年份"] = f["西元年份"].astype(int)
+    cols = [c for c in WASTE_FINE_COLS if c in f.columns]
+    for c in cols:
+        f[c] = to_num(f[c])
+    out = f.groupby(["證券代碼", "西元年份"])[cols].max().reset_index()
+    print(f"[廢棄物罰鍰] 原始 {len(f):,} 列 → 年度 {len(out):,} 列")
+    return out
+
+
+# ----------------------------------------------------------------------------
 # 合併
 # ----------------------------------------------------------------------------
 def main():
@@ -200,11 +268,18 @@ def main():
     water_annual = build_water_annual()
     esg_annual, esg_static = build_esg_annual()
     tse_static = build_tse_static()
+    waste_esg = build_waste_esg_annual()
+    waste_qty = build_waste_qty_annual()
+    waste_fine = build_waste_fine_annual()
 
     # 財務 ⟗ 水資源（outer join，保留兩邊）
     merged = fin_annual.merge(water_annual, on=["證券代碼", "西元年份"], how="outer")
     # ⟕ ESG 年度揭露欄
     merged = merged.merge(esg_annual, on=["證券代碼", "西元年份"], how="left")
+    # ⟕ 廢棄物三個資料集（年度 left join）
+    merged = merged.merge(waste_esg, on=["證券代碼", "西元年份"], how="left")
+    merged = merged.merge(waste_qty, on=["證券代碼", "西元年份"], how="left")
+    merged = merged.merge(waste_fine, on=["證券代碼", "西元年份"], how="left")
     # 套用公司靜態 SASB主產業
     for c in ESG_STATIC_COLS:
         merged[c] = merged["證券代碼"].map(esg_static[c])
@@ -224,7 +299,9 @@ def main():
     print("關鍵欄非空數：")
     for c in ["營業費用", "營業收入淨額", "資產總額", "水回收率%",
               "製程水回收率%", "回收利用水量", "E_GRI_用水及廢水管理揭露度",
-              "SASB主產業", "TSE產業_名稱"]:
+              "SASB主產業", "TSE產業_名稱",
+              "E_每百萬營收廢棄物", "E_GRI_廢棄物管理揭露度", "事業廢棄物罰鍰次數",
+              "廢棄物密集度(公噸/單位)"]:
         if c in merged.columns:
             print(f"  {c:<22}: {merged[c].notna().sum():,}")
 

@@ -28,14 +28,25 @@ OUT_SUMMARY = "06_robustness_summary.csv"
 CONTROL_INT = ["Size_D_dREV", "AI_D_dREV", "EI_D_dREV",
                "ROA_D_dREV", "Lev_D_dREV", "Decrease_D_dREV"]
 
-# 各水衡量在不同遞延期對應的（主效果欄, 三重交乘欄）
+# 各衡量在不同遞延期對應的（主效果欄, 三重交乘欄）
 MEASURES = {
+    # 水管理（原主題）
     "水回收率%": {0: ("Water_Rate", "WaterRate_D_dREV"),
                  1: ("WaterRate_l1", "WaterRate_D_dREV_l1"),
                  2: ("WaterRate_l2", "WaterRate_D_dREV_l2")},
     "水揭露": {0: ("Water_Disc", "WaterDisc_D_dREV"),
               1: ("WaterDisc_l1", "WaterDisc_D_dREV_l1"),
               2: ("WaterDisc_l2", "WaterDisc_D_dREV_l2")},
+    # 廢棄物管理（延伸主題）
+    "廢棄物密集度": {0: ("Waste_Intensity", "WasteInt_D_dREV"),
+                   1: ("WasteInt_l1", "WasteInt_D_dREV_l1"),
+                   2: ("WasteInt_l2", "WasteInt_D_dREV_l2")},
+    "廢棄物揭露": {0: ("Waste_Disc", "WasteDisc_D_dREV"),
+                 1: ("WasteDisc_l1", "WasteDisc_D_dREV_l1"),
+                 2: ("WasteDisc_l2", "WasteDisc_D_dREV_l2")},
+    "廢棄物罰鍰": {0: ("Waste_Fine", "WasteFine_D_dREV"),
+                 1: ("WasteFine_l1", "WasteFine_D_dREV_l1"),
+                 2: ("WasteFine_l2", "WasteFine_D_dREV_l2")},
 }
 GROUPS = ["全樣本", "高耗水", "低耗水"]
 

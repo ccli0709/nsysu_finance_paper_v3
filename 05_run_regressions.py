@@ -37,9 +37,17 @@ def stars(p):
 def interp_b3(kind, b3, p3):
     if p3 >= 0.1:
         return "交乘不顯著"
-    if kind == "主分析":
-        return "水回收績效加劇黏性（支持H1）" if b3 < 0 else "水回收績效緩解黏性（與H1相反）"
-    return "水資訊揭露緩解黏性（支持H2）" if b3 > 0 else "水資訊揭露加劇黏性（與H2相反）"
+    neg = "加劇黏性" if b3 < 0 else "緩解黏性"
+    hyp = {
+        "主分析": ("水回收績效", "H1", "負"),
+        "次分析": ("水資訊揭露", "H2", "正"),
+        "廢棄物主分析": ("廢棄物密集度", "H3", "負"),
+        "廢棄物次分析": ("廢棄物揭露品質", "H4", "正"),
+        "廢棄物穩健": ("廢棄物違規罰鍰", "H5", "負"),
+    }
+    name, h, expect = hyp.get(kind, (kind, "", ""))
+    support = "支持" if ((expect == "負" and b3 < 0) or (expect == "正" and b3 > 0)) else "與假設相反"
+    return f"{name}{neg}（{support}{h}）"
 
 
 def run_model(df, water_main, water_triple, label, kind, lag, txt_lines, coef_rows):
@@ -101,12 +109,23 @@ def main():
     df["證券代碼"] = df["證券代碼"].astype(str)
 
     specs = [
+        # ---- 水管理（原主題）----
         ("模型1 水回收率% L0(當期)", "Water_Rate", "WaterRate_D_dREV", "主分析", 0),
         ("模型1 水回收率% L1(t-1)", "WaterRate_l1", "WaterRate_D_dREV_l1", "主分析", 1),
         ("模型1 水回收率% L2(t-2)", "WaterRate_l2", "WaterRate_D_dREV_l2", "主分析", 2),
         ("模型2 水揭露 L0(當期)", "Water_Disc", "WaterDisc_D_dREV", "次分析", 0),
         ("模型2 水揭露 L1(t-1)", "WaterDisc_l1", "WaterDisc_D_dREV_l1", "次分析", 1),
         ("模型2 水揭露 L2(t-2)", "WaterDisc_l2", "WaterDisc_D_dREV_l2", "次分析", 2),
+        # ---- 廢棄物管理（延伸主題）----
+        ("模型3 廢棄物密集度 L0(當期)", "Waste_Intensity", "WasteInt_D_dREV", "廢棄物主分析", 0),
+        ("模型3 廢棄物密集度 L1(t-1)", "WasteInt_l1", "WasteInt_D_dREV_l1", "廢棄物主分析", 1),
+        ("模型3 廢棄物密集度 L2(t-2)", "WasteInt_l2", "WasteInt_D_dREV_l2", "廢棄物主分析", 2),
+        ("模型4 廢棄物揭露 L0(當期)", "Waste_Disc", "WasteDisc_D_dREV", "廢棄物次分析", 0),
+        ("模型4 廢棄物揭露 L1(t-1)", "WasteDisc_l1", "WasteDisc_D_dREV_l1", "廢棄物次分析", 1),
+        ("模型4 廢棄物揭露 L2(t-2)", "WasteDisc_l2", "WasteDisc_D_dREV_l2", "廢棄物次分析", 2),
+        ("模型5 廢棄物罰鍰 L0(當期)", "Waste_Fine", "WasteFine_D_dREV", "廢棄物穩健", 0),
+        ("模型5 廢棄物罰鍰 L1(t-1)", "WasteFine_l1", "WasteFine_D_dREV_l1", "廢棄物穩健", 1),
+        ("模型5 廢棄物罰鍰 L2(t-2)", "WasteFine_l2", "WasteFine_D_dREV_l2", "廢棄物穩健", 2),
     ]
 
     txt_lines, coef_rows = [], []

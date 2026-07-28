@@ -34,6 +34,7 @@ WINSOR_P = 0.01
 WINSOR_COLS = [
     "dLNSGA", "dLNSGA_alt", "dLNREV",
     "Water_Rate", "水回收率%", "製程水回收率%",
+    "Waste_Intensity", "Waste_Density",
     "Size", "AI", "EI", "ROA", "Lev",
 ]
 
@@ -101,6 +102,16 @@ def main():
     gri = pd.to_numeric(df["E_GRI_用水及廢水管理揭露度"], errors="coerce")
     df["Water_Disc_GRI"] = (gri.fillna(0) > 0).astype(float)  # 做法 B（穩健性）
 
+    # ---- 自變數：廢棄物管理（延伸主題）----
+    # 主分析（實質投入）：每百萬營收廢棄物量 → 廢棄物處理合約/費用之僵固性
+    df["Waste_Intensity"] = pd.to_numeric(df["E_每百萬營收廢棄物"], errors="coerce")
+    # 次分析（資訊透明度）：GRI 廢棄物管理揭露度（連續，揭露品質）
+    df["Waste_Disc"] = pd.to_numeric(df["E_GRI_廢棄物管理揭露度"], errors="coerce")
+    # 穩健/風險衝擊：事業廢棄物罰鍰次數（環境違規事件）
+    df["Waste_Fine"] = pd.to_numeric(df["事業廢棄物罰鍰次數"], errors="coerce")
+    # 補充：廢棄物密集度（公噸/單位，來源資料集2，覆蓋較小）
+    df["Waste_Density"] = pd.to_numeric(df["廢棄物密集度(公噸/單位)"], errors="coerce")
+
     # ---- 控制變數 ----
     assets = pd.to_numeric(df["資產總額"], errors="coerce")
     emp = pd.to_numeric(df["員工人數-母公司"], errors="coerce")
@@ -125,7 +136,8 @@ def main():
         valid = (df["西元年份"] - yr_shift) == k
         return shifted.where(valid)
 
-    LAG_TARGETS = ["Water_Rate_w", "製程水回收率%_w", "Water_Disc", "Water_Disc_GRI"]
+    LAG_TARGETS = ["Water_Rate_w", "製程水回收率%_w", "Water_Disc", "Water_Disc_GRI",
+                   "Waste_Intensity_w", "Waste_Disc", "Waste_Fine"]
     for col in LAG_TARGETS:
         for k in (1, 2):
             df[f"{col}_l{k}"] = lag_k(col, k)
@@ -136,8 +148,9 @@ def main():
     print("===== 變數建構摘要 =====")
     print(f"輸出檔：{OUTPUT_CSV}")
     print(f"總列數：{len(df):,}；公司數：{df['證券代碼'].nunique():,}")
-    key = ["dLNSGA", "dLNREV", "D", "Decrease", "Water_Rate",
-           "Water_Disc", "Water_Disc_GRI", "Size", "AI", "EI", "ROA", "Lev"]
+    key = ["dLNSGA", "dLNREV", "D", "Decrease", "Water_Rate", "Water_Disc",
+           "Waste_Intensity", "Waste_Disc", "Waste_Fine",
+           "Size", "AI", "EI", "ROA", "Lev"]
     print("關鍵變數非空數：")
     for c in key:
         print(f"  {c:<16}: {df[c].notna().sum():,}")
