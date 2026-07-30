@@ -35,6 +35,43 @@ CORR_VARS = ["Y_dLNSGA", "dLNREV", "Water_Rate", "Waste_Intensity",
 WATER_MEASURES = ["水回收率%", "水揭露"]
 WASTE_MEASURES = ["廢棄物密集度", "廢棄物揭露", "廢棄物罰鍰"]
 
+# 主要參考文獻（reference_paper_main）＋基礎文獻
+MAIN_REFS = [
+    "Anderson, M. C., Banker, R. D., & Janakiraman, S. N. (2003). Are selling, "
+    "general, and administrative costs \u201csticky\u201d? Journal of Accounting "
+    "Research, 41(1), 47\u201363.",
+    "Zeng, J., Peng, M., & Chan, K. C. The impact of low-carbon city policy on "
+    "corporate cost stickiness. (以中國 A 股 2008\u20132022 為樣本，採 DiD；機制為"
+    "綠色創新與融資限制——對應本研究環境實質投入之調整成本觀點，H1/H3。)",
+    "Jiang, W., & Yang, W. (2024). ESG disclosure and corporate cost stickiness: "
+    "Evidence from supply-chain relationships. Economics Letters, 238, 111697. "
+    "(ESG 揭露透過降低管理者樂觀預期而緩解供應商成本僵固——對應本研究揭露機制，"
+    "H2/H4。)",
+]
+
+# 次要參考文獻（reference_paper_sub，19 篇國內碩博論文；西元年）
+SUB_REFS = [
+    (2025, "張凱瑜", "成本僵固性與企業風險關聯性之研究——以台灣上市櫃公司為例", "朝陽科技大學會計系碩士論文"),
+    (2025, "王惠洳", "獨立董事連結關係與成本僵固性之關聯", "國立臺中科技大學會計資訊系碩士論文"),
+    (2025, "陳思婷", "移轉訂價操弄與成本僵固性間之關聯性", "天主教輔仁大學會計學系碩士論文"),
+    (2025, "辛珏辰", "ESG活動與成本僵固性——兼論COVID-19的影響", "國立成功大學會計學系碩士論文"),
+    (2025, "張湘泓", "企業併購時商定留用權之勞工權益強化——由ESG觀點出發", "國立臺灣大學法律學系碩士論文"),
+    (2026, "李亞峮", "ESG負面事件與媒體報導對ESG績效與盈餘管理間之關聯的調節效果", "國立臺北大學會計學系碩士論文"),
+    (2026, "劉翠山", "人力資本、ESG績效(S)、ESG重大性揭露與企業市場價值關係之調節型中介模型探討", "銘傳大學會計學系碩士論文"),
+    (2026, "吳東蓄", "ESG績效對代理成本之影響", "靜宜大學會計學系碩士論文"),
+    (2026, "戴郁樺", "ESG投入、金融創新與綠色創新對銀行風險與績效管理之影響", "朝陽科技大學財務金融系碩士論文"),
+    (2026, "楊宜蓁", "ESG及負債比率對企業信用風險之關聯性研究——以台灣上市電子業為例", "國立彰化師範大學財務金融技術學系碩士論文"),
+    (2026, "楊珆佳", "臺灣金控公司ESG、金融健全指標與巴塞爾協定風險性之研究", "靜宜大學會計學系碩士論文"),
+    (2026, "富得運", "ESG風險管理與企業財務績效：新興市場中企業規模之調節效果", "正修科技大學工業工程與管理碩士班碩士論文"),
+    (2026, "毛祚祥", "探討台灣上市櫃觀光餐旅類股企業ESG指標、系統性風險與財務績效之關係", "國立高雄科技大學觀光管理系碩士論文"),
+    (2026, "陳俊佑", "ESG績效與盈餘的價值攸關性之影響", "國防大學管理學院財務管理學系碩士論文"),
+    (2026, "許嘉芸", "企業資源密集度管理對財務績效與ESG效率的影響", "國立陽明交通大學經營管理研究所碩士論文"),
+    (2026, "楊博勝", "ESG資訊之揭露對於企業特有風險之影響：以台灣上市櫃公司為例", "國立陽明交通大學經營管理研究所博士論文"),
+    (2026, "蘇姿云", "ESG對盈餘管理的抑制效果：家族企業的差異分析", "國立成功大學財務金融研究所碩士論文"),
+    (2026, "張岑華", "ESG績效與漂綠對權益資金成本之影響：以台灣為例", "世新大學財務金融學系碩士論文"),
+    (2026, "張筱婕", "漂綠行為對企業ESG之影響：媒體揭露的調節效果", "世新大學財務金融學系碩士論文"),
+]
+
 
 # ---------------------------------------------------------------- docx helpers
 def set_cjk(run):
@@ -354,6 +391,26 @@ def main():
                   "（監督效果矯正管理者預期；β3 預期為正）。", bold=True, first_indent=False)
     add_para(doc, "H5（風險衝擊）：事業廢棄物罰鍰次數越多，成本黏性越大"
                   "（違規之強制性降本阻力；β3 預期為負）。", bold=True, first_indent=False)
+    add_heading(doc, "第四節 國內相關文獻與研究缺口", 2)
+    add_para(doc,
+             "國內成本僵固性研究已累積相當基礎：張凱瑜（2025）檢視成本僵固性與企業"
+             "風險之關聯、王惠洳（2025）探討獨立董事連結關係、陳思婷（2025）分析移轉"
+             "訂價操弄對成本僵固性之影響，均以 Anderson et al.（2003）模型為基礎並以"
+             "台灣上市櫃公司為樣本。與本研究最相關者為辛珏辰（2025）「ESG活動與成本"
+             "僵固性」，其將 ESG 面向納入成本僵固性分析，惟仍以整體 ESG 為衡量，"
+             "尚未針對「水資源」與「廢棄物」等個別環境構面深入。")
+    add_para(doc,
+             "在環境／ESG 與財務後果方面，近兩年（2025–2026）國內碩博論文多聚焦於"
+             "ESG 揭露及績效對資金成本、風險與盈餘之影響：張岑華（2026）探討 ESG 績效"
+             "與漂綠對權益資金成本、楊博勝（2026）檢視 ESG 資訊揭露對企業特有風險、"
+             "吳東蓄（2026）分析 ESG 績效對代理成本、許嘉芸（2026）探討資源密集度管理"
+             "對財務績效與 ESG 效率之影響。這些研究印證環境資訊揭露之透明度／監督機制"
+             "（呼應 H2、H4），但多以資金成本、風險或價值為應變數，鮮少以「成本黏性」"
+             "為切入點，且未區分水與廢棄物構面。")
+    add_para(doc,
+             "綜上，本研究之缺口與貢獻在於：（一）將環境構面細分為「水資源」與"
+             "「廢棄物」兩類實質績效與資訊揭露；（二）以成本黏性為應變數，結合時間"
+             "落差與高／低污染產業異質性，檢驗其對台灣製造業成本調整行為之影響。")
 
     # 第三章 研究方法
     add_heading(doc, "第三章 研究方法", 1)
@@ -370,18 +427,26 @@ def main():
     add_heading(doc, "第三節 實證模型", 2)
     add_para(doc,
              "本研究採 ABJ 成本黏性模型，以營業費用變動對營收變動之敏感度捕捉黏性，"
-             "並加入水管理變數之三重交乘：", first_indent=False)
+             "並加入環境管理變數之三重交乘。以 Env_Var 泛指環境管理變數：", first_indent=False)
     add_para(doc,
-             "ΔLNSGA = β0 + β1·ΔLNREV + β2·(D×ΔLNREV) + β3·(Water_Var×D×ΔLNREV) "
-             "+ β4·Water_Var + Σ Controls×(D×ΔLNREV) + Σ Industry + Σ Year + ε",
+             "ΔLNSGA = β0 + β1·ΔLNREV + β2·(D×ΔLNREV) + β3·(Env_Var×D×ΔLNREV) "
+             "+ β4·Env_Var + Σ Controls×(D×ΔLNREV) + Σ Industry + Σ Year + ε",
              first_indent=False)
     add_para(doc,
              "其中 D 為收入下降虛擬變數（當期營收低於前期為1）。β2 捕捉整體成本黏性"
-             "（預期為負）；β3 為核心係數：主分析以水回收率代入，次分析以水揭露虛擬"
-             "變數代入。估計採 OLS 併入產業與年份固定效果，並以公司層級叢集穩健標準誤。")
+             "（預期為負）；β3 為核心係數。Env_Var 依模型分別代入下列六項環境管理變數：")
     add_para(doc,
-             "此外，為檢驗時間落差效應，將 Water_Var 分別遞延一期（t-1）與兩期（t-2）"
-             "代入；並依產業耗水程度將樣本分為高／低耗水兩組進行異質性檢定，比較各組 β3。")
+             "‧ 水資源——模型1 Water_Rate（水回收率%，H1）、模型2 Water_Disc（水揭露，H2）。",
+             first_indent=False)
+    add_para(doc,
+             "‧ 廢棄物——模型3 Waste_Intensity（每百萬營收廢棄物，H3）、模型4 Waste_Disc"
+             "（GRI廢棄物揭露度，H4）、模型5 Waste_Fine（事業廢棄物罰鍰次數，H5）。",
+             first_indent=False)
+    add_para(doc,
+             "估計採 OLS 併入產業與年份固定效果，並以公司層級叢集穩健標準誤。"
+             "此外，為檢驗時間落差效應，將 Env_Var 分別遞延一期（t-1）與兩期（t-2）"
+             "代入；並依 TSE 產業別將樣本分為高／低耗水（高污染）兩組進行異質性檢定，"
+             "比較各組之 β3。")
 
     # 第四章 實證結果
     add_heading(doc, "第四章 實證結果", 1)
@@ -444,20 +509,22 @@ def main():
 
     # 參考文獻
     add_heading(doc, "參考文獻", 1)
-    for ref in [
-        "Anderson, M. C., Banker, R. D., & Janakiraman, S. N. (2003). Are selling, "
-        "general, and administrative costs \u201csticky\u201d? Journal of Accounting "
-        "Research, 41(1), 47\u201363.",
-        "Jiang, W., & Yang, W. (2024). ESG disclosure and corporate cost stickiness: "
-        "Evidence from supply-chain relationships. Economics Letters, 238, 111697.",
-        "Zeng, J., Peng, M., & Chan, K. C. The impact of low-carbon city policy on "
-        "corporate cost stickiness. (working paper).",
-    ]:
+
+    def add_ref(text):
         p = doc.add_paragraph()
         p.paragraph_format.left_indent = Pt(24)
         p.paragraph_format.first_line_indent = Pt(-24)
         p.paragraph_format.line_spacing = 1.5
-        r = p.add_run(ref); r.font.size = Pt(11); set_cjk(r)
+        r = p.add_run(text); r.font.size = Pt(11); set_cjk(r)
+
+    add_para(doc, "一、主要參考文獻（核心理論與模型來源）", bold=True, first_indent=False)
+    for ref in MAIN_REFS:
+        add_ref(ref)
+    add_para(doc, "二、次要參考文獻（國內相關碩博士論文，依年份新到舊）",
+             bold=True, first_indent=False)
+    for i, (yr, author, title, org) in enumerate(
+            sorted(SUB_REFS, key=lambda x: -x[0]), 1):
+        add_ref(f"[{i}] {author}（{yr}）。{title}。{org}。")
 
     doc.save(OUT_DOCX)
     print(f"已生成論文：{OUT_DOCX}")
