@@ -44,9 +44,12 @@ MEASURES = {
     "廢棄物揭露": {0: ("Waste_Disc", "WasteDisc_D_dREV"),
                  1: ("WasteDisc_l1", "WasteDisc_D_dREV_l1"),
                  2: ("WasteDisc_l2", "WasteDisc_D_dREV_l2")},
-    "廢棄物罰鍰": {0: ("Waste_Fine", "WasteFine_D_dREV"),
-                 1: ("WasteFine_l1", "WasteFine_D_dREV_l1"),
-                 2: ("WasteFine_l2", "WasteFine_D_dREV_l2")},
+    "廢棄物裁罰金額": {0: ("Waste_Fine", "WasteFine_D_dREV"),
+                    1: ("WasteFine_l1", "WasteFine_D_dREV_l1"),
+                    2: ("WasteFine_l2", "WasteFine_D_dREV_l2")},
+    "用水密集度": {0: ("Water_Intensity", "WaterInt_D_dREV"),
+                 1: ("WaterInt_l1", "WaterInt_D_dREV_l1"),
+                 2: ("WaterInt_l2", "WaterInt_D_dREV_l2")},
 }
 GROUPS = ["全樣本", "高耗水", "低耗水"]
 

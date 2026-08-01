@@ -56,7 +56,10 @@ def main():
     # 廢棄物管理指標（延伸主題）
     out["Waste_Intensity"] = pd.to_numeric(df["Waste_Intensity_w"], errors="coerce")
     out["Waste_Disc"] = pd.to_numeric(df["Waste_Disc"], errors="coerce")
-    out["Waste_Fine"] = pd.to_numeric(df["Waste_Fine"], errors="coerce")
+    # H5 改用「廢棄物裁罰金額佔資產」(連續、縮尾)取代罰鍰次數，解決 366 離群與離散問題
+    out["Waste_Fine"] = pd.to_numeric(df["Waste_FineInt_w"], errors="coerce")
+    # 新增：用水密集度（總用水量/營收，縮尾），擴大水構面樣本
+    out["Water_Intensity"] = pd.to_numeric(df["Water_Intensity_w"], errors="coerce")
 
     # 控制變數（主效果）
     for safe, src in CONTROL_COLS.items():
@@ -70,7 +73,8 @@ def main():
     # 廢棄物三重交乘（β3）
     out["WasteInt_D_dREV"] = out["Waste_Intensity"] * out["D_x_dREV"]   # 主分析(實質投入)
     out["WasteDisc_D_dREV"] = out["Waste_Disc"] * out["D_x_dREV"]       # 次分析(揭露品質)
-    out["WasteFine_D_dREV"] = out["Waste_Fine"] * out["D_x_dREV"]       # 穩健(違規風險)
+    out["WasteFine_D_dREV"] = out["Waste_Fine"] * out["D_x_dREV"]       # 穩健(違規裁罰金額)
+    out["WaterInt_D_dREV"] = out["Water_Intensity"] * out["D_x_dREV"]   # 用水密集度
 
     # 控制變數 × (D×ΔLNREV)（ABJ 慣例）
     for safe in CONTROL_COLS:
@@ -84,7 +88,8 @@ def main():
         "WaterRateProc": "製程水回收率%_w", # 製程水回收率%（縮尾）
         "WasteInt": "Waste_Intensity_w",   # 每百萬營收廢棄物（縮尾）
         "WasteDisc": "Waste_Disc",         # 廢棄物揭露品質
-        "WasteFine": "Waste_Fine",         # 事業廢棄物罰鍰次數
+        "WasteFine": "Waste_FineInt_w",    # 廢棄物裁罰金額佔資產（縮尾，取代次數）
+        "WaterInt": "Water_Intensity_w",   # 用水密集度（縮尾）
     }
     for base, src in LAG_MAP.items():
         for k in (1, 2):

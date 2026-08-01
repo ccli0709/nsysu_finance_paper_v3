@@ -34,7 +34,8 @@ WINSOR_P = 0.01
 WINSOR_COLS = [
     "dLNSGA", "dLNSGA_alt", "dLNREV",
     "Water_Rate", "水回收率%", "製程水回收率%",
-    "Waste_Intensity", "Waste_Density",
+    "Waste_Intensity", "Waste_Density", "Waste_Fine",
+    "Waste_FineInt", "Water_Intensity",
     "Size", "AI", "EI", "ROA", "Lev",
 ]
 
@@ -112,6 +113,19 @@ def main():
     # 補充：廢棄物密集度（公噸/單位，來源資料集2，覆蓋較小）
     df["Waste_Density"] = pd.to_numeric(df["廢棄物密集度(公噸/單位)"], errors="coerce")
 
+    # 新增（v5）：廢棄物裁罰金額（連續，取代罰鍰次數以解決極端值與離散問題）
+    assets_ = pd.to_numeric(df["資產總額"], errors="coerce")  # 千元
+    fine_amt = pd.to_numeric(df["廢棄物裁罰金額"], errors="coerce")  # 元
+    in_fine_db = pd.to_numeric(df["事業廢棄物罰鍰次數"], errors="coerce").notna()
+    # 在裁罰資料庫涵蓋範圍內、但無廢棄物裁罰者視為 0
+    fine_amt = fine_amt.where(fine_amt.notna(), other=np.where(in_fine_db, 0.0, np.nan))
+    df["Waste_FineAmt"] = fine_amt
+    # 佔資產比（每百萬元資產之廢棄物裁罰金額；資產千元→元 ×1000）
+    df["Waste_FineInt"] = fine_amt / (assets_ * 1000.0) * 1e6
+    # 用水密集度（總用水量含回收水 / 營收），擴大水構面樣本
+    total_water = pd.to_numeric(df["總用水量(含回收水)"], errors="coerce")
+    df["Water_Intensity"] = total_water / rev.where(rev > 0)
+
     # ---- 控制變數 ----
     assets = pd.to_numeric(df["資產總額"], errors="coerce")
     emp = pd.to_numeric(df["員工人數-母公司"], errors="coerce")
@@ -137,7 +151,8 @@ def main():
         return shifted.where(valid)
 
     LAG_TARGETS = ["Water_Rate_w", "製程水回收率%_w", "Water_Disc", "Water_Disc_GRI",
-                   "Waste_Intensity_w", "Waste_Disc", "Waste_Fine"]
+                   "Waste_Intensity_w", "Waste_Disc", "Waste_Fine_w",
+                   "Waste_FineInt_w", "Water_Intensity_w"]
     for col in LAG_TARGETS:
         for k in (1, 2):
             df[f"{col}_l{k}"] = lag_k(col, k)

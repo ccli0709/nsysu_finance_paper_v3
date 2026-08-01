@@ -32,8 +32,8 @@ DESC_VARS = ["Y_dLNSGA", "dLNREV", "D", "Water_Rate", "Water_Disc",
              "Size", "AI", "EI", "ROA", "Lev", "Decrease"]
 CORR_VARS = ["Y_dLNSGA", "dLNREV", "Water_Rate", "Waste_Intensity",
              "Size", "AI", "EI", "ROA", "Lev"]
-WATER_MEASURES = ["水回收率%", "水揭露"]
-WASTE_MEASURES = ["廢棄物密集度", "廢棄物揭露", "廢棄物罰鍰"]
+WATER_MEASURES = ["水回收率%", "水揭露", "用水密集度"]
+WASTE_MEASURES = ["廢棄物密集度", "廢棄物揭露", "廢棄物裁罰金額"]
 
 # 主要參考文獻（reference_paper_main）＋基礎文獻
 MAIN_REFS = [
@@ -186,6 +186,47 @@ def build_reg_table(coef):
     return tbl
 
 
+def build_models_table(coef, specs):
+    """通用：給定 [(模型完整標籤, 顯示名)]，輸出 變數×模型 之係數(下方 t 值) 三線表資料。"""
+    c0 = coef[coef["遞延期"] == 0]
+    role_rows = [("β1", "ΔLNREV", "dLNREV"), ("β2", "D×ΔLNREV", "D_x_dREV"),
+                 ("β3", "環境變數×D×ΔLNREV", None), ("β4", "環境變數", None),
+                 ("", "Size×D×ΔLNREV", "Size_D_dREV"), ("", "AI×D×ΔLNREV", "AI_D_dREV"),
+                 ("", "EI×D×ΔLNREV", "EI_D_dREV"), ("", "ROA×D×ΔLNREV", "ROA_D_dREV"),
+                 ("", "Lev×D×ΔLNREV", "Lev_D_dREV"), ("", "Decrease×D×ΔLNREV", "Decrease_D_dREV")]
+    role_map = {"β1": "β1", "β2": "β2(黏性)", "β3": "β3(三重交乘)", "β4": "β4(水主效果)"}
+
+    def cell(mlabel, greek, var):
+        r = c0[c0["模型"] == mlabel]
+        rr = r[r["角色"] == role_map[greek]] if greek in role_map else r[r["變數"] == var]
+        if rr.empty:
+            return "", ""
+        b = rr["係數"].iloc[0]; s = rr["顯著性"].iloc[0]; t = rr["t值"].iloc[0]
+        s = "" if pd.isna(s) else str(s)
+        return f"{b:.4f}{s}", f"({t:.2f})"
+
+    rows = []
+    for greek, label, var in role_rows:
+        disp = f"{label}" + (f" ({greek})" if greek else "")
+        line = {"變數": disp}
+        line_t = {"變數": ""}
+        any_val = False
+        for mlabel, dispname in specs:
+            b, t = cell(mlabel, greek, var)
+            line[dispname] = b; line_t[dispname] = t
+            any_val = any_val or (b != "")
+        if any_val:
+            rows.append(line); rows.append(line_t)
+    # N / adjR2
+    nrow = {"變數": "N"}; arow = {"變數": "adj. R²"}
+    for mlabel, dispname in specs:
+        r = c0[c0["模型"] == mlabel]
+        nrow[dispname] = f"{int(r['N'].iloc[0]):,}" if len(r) else ""
+        arow[dispname] = f"{r['adj_R2'].iloc[0]:.4f}" if len(r) else ""
+    rows.append(nrow); rows.append(arow)
+    return pd.DataFrame(rows)
+
+
 def summarize_findings(coef, rob):
     """掃描 β3 顯著性，產生自適應結論句（隨實際結果變動）。"""
     b3 = coef[coef["角色"] == "β3(三重交乘)"]
@@ -229,7 +270,7 @@ def build_waste_reg_table(coef):
     c0 = coef[coef["遞延期"] == 0]
     kinds = [("廢棄物主分析", "模型3(廢棄物密集度)"),
              ("廢棄物次分析", "模型4(廢棄物揭露)"),
-             ("廢棄物穩健", "模型5(廢棄物罰鍰)")]
+             ("廢棄物穩健", "模型5(廢棄物裁罰金額)")]
     order = ["dLNREV", "D_x_dREV", "WasteInt_D_dREV", "WasteDisc_D_dREV",
              "WasteFine_D_dREV", "Waste_Intensity", "Waste_Disc", "Waste_Fine",
              "Size_D_dREV", "AI_D_dREV", "EI_D_dREV", "ROA_D_dREV",
@@ -316,13 +357,14 @@ def main():
     # 中文摘要
     add_heading(doc, "中文摘要", 1)
     add_para(doc,
-             "本研究探討企業水管理績效（水回收率）與水資訊揭露對成本黏性（cost "
-             "stickiness）的影響。以台灣上市櫃製造業（排除金融保險業）2014至2024年"
-             "資料為樣本，採 Anderson, Banker and Janakiraman（2003）成本黏性模型，"
-             "在營業費用變動對營收變動的敏感度中，加入收入下降虛擬變數與水管理變數之"
-             "三重交乘，並控制產業與年份固定效果、以公司叢集穩健標準誤估計。為捕捉水管理"
-             "投資之遞延效益，另將核心水變數遞延一至兩期，並依產業耗水程度進行高／低耗水"
-             "子樣本檢定。實證發現：樣本整體存在顯著的成本黏性（β2 顯著為負）；" + finding_zh)
+             "本研究以「環境使用密集度」為核心，探討企業用水密集度與廢棄物密集度（實質"
+             "環境投入），並以水／廢棄物之資訊揭露與違規裁罰為輔，檢視其對成本黏性（cost "
+             "stickiness）的影響。以台灣上市櫃製造業（排除金融保險業）2014至2024年資料為"
+             "樣本，採 Anderson, Banker and Janakiraman（2003）成本黏性模型，在營業費用"
+             "變動對營收變動的敏感度中，加入收入下降虛擬變數與環境變數之三重交乘，並控制"
+             "產業與年份固定效果、以公司叢集穩健標準誤估計；另將核心變數遞延一至兩期，並"
+             "依產業污染程度進行高／低污染子樣本檢定。實證發現：樣本整體存在顯著的成本"
+             "黏性（β2 顯著為負）；" + finding_zh)
     add_para(doc, "關鍵詞：水管理、水資訊揭露、成本黏性、水回收率、TESG、固定效果模型")
 
     # Abstract
@@ -389,9 +431,18 @@ def main():
                   "（廢棄物處理合約與費用僵固；β3 預期為負）。", bold=True, first_indent=False)
     add_para(doc, "H4（資訊透明度）：廢棄物管理揭露品質越高，成本黏性越低"
                   "（監督效果矯正管理者預期；β3 預期為正）。", bold=True, first_indent=False)
-    add_para(doc, "H5（風險衝擊）：事業廢棄物罰鍰次數越多，成本黏性越大"
+    add_para(doc, "H5（風險衝擊）：事業廢棄物違規裁罰金額越高，成本黏性越大"
                   "（違規之強制性降本阻力；β3 預期為負）。", bold=True, first_indent=False)
-    add_heading(doc, "第四節 國內相關文獻與研究缺口", 2)
+    add_heading(doc, "第四節 使用密集度與成本黏性（H6，核心假說）", 2)
+    add_para(doc,
+             "綜合水與廢棄物之實質投入機制，本研究以「環境使用密集度」為核心構念："
+             "企業單位營收所消耗之水資源與產生之廢棄物越高，代表其營運對環境資源之"
+             "依賴與專用處理設施投入越深；當營收下降時，此類與產能綁定之取水、廢水與"
+             "廢棄物處理成本難以即時削減，將推升成本黏性。用水密集度樣本涵蓋度遠高於"
+             "水回收率，檢定力較佳。據此提出核心假說：")
+    add_para(doc, "H6：企業用水密集度（與廢棄物密集度）越高，成本黏性越大"
+                  "（β3 預期為負）；且效果集中於高污染產業。", bold=True, first_indent=False)
+    add_heading(doc, "第五節 國內相關文獻與研究缺口", 2)
     add_para(doc,
              "國內成本僵固性研究已累積相當基礎：張凱瑜（2025）檢視成本僵固性與企業"
              "風險之關聯、王惠洳（2025）探討獨立董事連結關係、陳思婷（2025）分析移轉"
@@ -436,12 +487,12 @@ def main():
              "其中 D 為收入下降虛擬變數（當期營收低於前期為1）。β2 捕捉整體成本黏性"
              "（預期為負）；β3 為核心係數。Env_Var 依模型分別代入下列六項環境管理變數：")
     add_para(doc,
-             "‧ 水資源——模型1 Water_Rate（水回收率%，H1）、模型2 Water_Disc（水揭露，H2）。",
-             first_indent=False)
+             "‧ 核心（使用密集度）——模型6 Water_Intensity（用水密集度＝總用水量/營收，H6）、"
+             "模型3 Waste_Intensity（每百萬營收廢棄物，H3）。", first_indent=False)
     add_para(doc,
-             "‧ 廢棄物——模型3 Waste_Intensity（每百萬營收廢棄物，H3）、模型4 Waste_Disc"
-             "（GRI廢棄物揭露度，H4）、模型5 Waste_Fine（事業廢棄物罰鍰次數，H5）。",
-             first_indent=False)
+             "‧ 輔助（揭露與裁罰）——模型1 Water_Rate（水回收率%，H1）、模型2 Water_Disc"
+             "（水揭露，H2）、模型4 Waste_Disc（GRI廢棄物揭露度，H4）、模型5 Waste_Fine"
+             "（廢棄物裁罰金額佔資產，H5）。", first_indent=False)
     add_para(doc,
              "估計採 OLS 併入產業與年份固定效果，並以公司層級叢集穩健標準誤。"
              "此外，為檢驗時間落差效應，將 Env_Var 分別遞延一期（t-1）與兩期（t-2）"
@@ -454,58 +505,79 @@ def main():
     add_table(doc, build_descriptive(df), title="表4-1 主要變數敘述統計")
     add_heading(doc, "第二節 相關係數矩陣", 2)
     add_table(doc, build_corr(df), title="表4-2 主要連續變數相關係數矩陣", num_fmt="{:.3f}")
-    add_heading(doc, "第三節 主迴歸結果（當期）", 2)
+    add_heading(doc, "第三節 核心結果：使用密集度（當期）", 2)
     add_para(doc,
-             "表4-3 為當期（t）主迴歸結果，括號內為叢集穩健 t 值，*、**、*** 分別代表 "
-             "10%、5%、1% 顯著水準。模型1（水回收率）之 D×ΔLNREV 顯著為負，顯示樣本存在"
-             "成本黏性；然當期水管理三重交乘（β3）在兩模型中皆不顯著。")
-    add_table(doc, build_reg_table(coef), title="表4-3 成本黏性主迴歸結果（當期，模型1／模型2）",
-              num_fmt="{:.4f}")
+             "本研究以「環境使用密集度」為核心，包含用水密集度（模型6）與廢棄物密集度"
+             "（模型3）。表4-3 為當期結果，括號內為叢集穩健 t 值，*、**、*** 分別代表 "
+             "10%、5%、1% 顯著水準。D×ΔLNREV（β2）反映整體成本黏性；β3 為使用密集度與"
+             "營收下降之三重交乘。")
+    add_table(doc, build_models_table(coef, [("模型6 用水密集度 L0(當期)", "模型6 用水密集度"),
+                                             ("模型3 廢棄物密集度 L0(當期)", "模型3 廢棄物密集度")]),
+              title="表4-3 使用密集度核心迴歸結果（當期）")
+    add_table(doc, build_lag_table(coef, [("用水密集度", "模型6 β3(用水密集度)"),
+                                          ("廢棄物主分析", "模型3 β3(廢棄物密集度)")]),
+              title="表4-4 使用密集度時間落差效應：各遞延期之 β3")
 
-    add_heading(doc, "第四節 時間落差效應（遞延期分析）", 2)
+    add_heading(doc, "第四節 輔助結果：資訊揭露與違規裁罰（當期）", 2)
     add_para(doc,
-             "考量水管理投資效益需時間發酵——當期投入的環保設備，可能於 1 至 2 年後方"
-             "轉為難以裁撤的沈沒成本或發揮降本效益——本研究將核心水變數分別遞延一期"
-             "（t-1）與兩期（t-2）後重新估計三重交乘 β3。表4-4 彙整各遞延期之 β3。")
-    add_table(doc, build_lag_table(coef, [("主分析", "模型1 β3(水回收率%)"),
-                                          ("次分析", "模型2 β3(水揭露)")]),
-              title="表4-4 水管理時間落差效應：各遞延期之 β3")
+             "表4-5 為輔助構面：水回收率（模型1）、水揭露（模型2）、廢棄物揭露品質"
+             "（模型4）與廢棄物違規裁罰金額（模型5）。此四者作為使用密集度之對照。")
+    add_table(doc, build_models_table(coef, [("模型1 水回收率% L0(當期)", "模型1 水回收率%"),
+                                             ("模型2 水揭露 L0(當期)", "模型2 水揭露"),
+                                             ("模型4 廢棄物揭露 L0(當期)", "模型4 廢棄物揭露"),
+                                             ("模型5 廢棄物裁罰金額 L0(當期)", "模型5 廢棄物裁罰金額")]),
+              title="表4-5 輔助構面迴歸結果（當期）")
+    add_table(doc, build_lag_table(coef, [("次分析", "模型2 β3(水揭露)"),
+                                          ("廢棄物次分析", "模型4 β3(廢棄物揭露)"),
+                                          ("廢棄物穩健", "模型5 β3(裁罰金額)")]),
+              title="表4-6 輔助構面時間落差效應：各遞延期之 β3")
 
-    add_heading(doc, "第五節 廢棄物管理結果（延伸主題）", 2)
-    add_para(doc,
-             "表4-5 為廢棄物管理三模型之當期結果：模型3（每百萬營收廢棄物，實質投入）、"
-             "模型4（廢棄物揭露品質）、模型5（事業廢棄物罰鍰，違規風險）。相較水管理，"
-             "廢棄物指標之有效樣本較大（密集度約 3,273、揭露約 13,875 筆）。")
-    add_table(doc, build_waste_reg_table(coef),
-              title="表4-5 廢棄物管理主迴歸結果（當期，模型3／4／5）", num_fmt="{:.4f}")
-    add_table(doc, build_lag_table(coef, [("廢棄物主分析", "模型3 β3(密集度)"),
-                                          ("廢棄物次分析", "模型4 β3(揭露)"),
-                                          ("廢棄物穩健", "模型5 β3(罰鍰)")]),
-              title="表4-6 廢棄物管理時間落差效應：各遞延期之 β3")
-
-    add_heading(doc, "第六節 產業異質性（高／低耗水高污染產業）", 2)
+    add_heading(doc, "第五節 產業異質性（高／低耗水高污染產業）", 2)
     add_para(doc,
              "台灣製造業次產業之環境資源依賴度差異甚大，全樣本可能稀釋高耗水高污染產業"
              "之效應。本研究依 TEJ Company DB 之 TSE 產業別，將半導體、光電、電子零組件、"
              "化學、鋼鐵、紡織、造紙、水泥、食品等用水密集／高污染製造業歸為高耗水組，"
              "其餘為低耗水組，分別於當期與遞延期估計並比較 β3。")
-    rob_water = rob[rob["水衡量"].isin(WATER_MEASURES)][
-        ["水衡量", "產業組", "遞延期", "β2(D×ΔREV)", "β2_sig",
-         "β3(Water×D×ΔREV)", "β3_sig", "N"]]
-    add_table(doc, rob_water, title="表4-7 水管理 × 產業異質性 × 時間落差", num_fmt="{:.4f}")
-    rob_waste = rob[rob["水衡量"].isin(WASTE_MEASURES)][
-        ["水衡量", "產業組", "遞延期", "β2(D×ΔREV)", "β2_sig",
-         "β3(Water×D×ΔREV)", "β3_sig", "N"]]
-    add_table(doc, rob_waste, title="表4-8 廢棄物管理 × 產業異質性 × 時間落差", num_fmt="{:.4f}")
+    core_measures = ["用水密集度", "廢棄物密集度"]
+    aux_measures = ["水回收率%", "水揭露", "廢棄物揭露", "廢棄物裁罰金額"]
+    cols_show = ["水衡量", "產業組", "遞延期", "β2(D×ΔREV)", "β2_sig",
+                 "β3(Water×D×ΔREV)", "β3_sig", "N"]
+    add_para(doc,
+             "表4-7 為核心構面（使用密集度）之產業異質性結果。用水密集度於高污染產業當期"
+             "之 β3 顯著為負，廢棄物密集度亦於高污染產業遞延期呈顯著負向，顯示效果集中於"
+             "高污染產業，符合 H6 與 H3 之推論。", first_indent=False)
+    rob_core = rob[rob["水衡量"].isin(core_measures)][cols_show]
+    add_table(doc, rob_core, title="表4-7 核心（使用密集度）× 產業異質性 × 時間落差",
+              num_fmt="{:.4f}")
+    add_para(doc,
+             "表4-8 為輔助構面（水回收率、水揭露、廢棄物揭露、廢棄物裁罰金額）之產業"
+             "異質性結果，各設定之 β3 多不顯著，作為核心結果之對照。", first_indent=False)
+    rob_aux = rob[rob["水衡量"].isin(aux_measures)][cols_show]
+    add_table(doc, rob_aux, title="表4-8 輔助（揭露與裁罰）× 產業異質性 × 時間落差",
+              num_fmt="{:.4f}")
 
     # 第五章 結論
     add_heading(doc, "第五章 結論與建議", 1)
     add_para(doc, concl_zh)
     add_para(doc,
-             "研究貢獻在於將「水」此一具體環境構面納入成本黏性研究，並以時間落差與產業"
-             "異質性設計檢視其效果，提供台灣製造業之實證證據。實務上建議主管機關持續推動"
-             "水資訊揭露標準化；後續研究可延長樣本期間、細分水資源投資類型，或改採更精細"
-             "的揭露品質衡量，以進一步檢驗其效果。")
+             "本研究以「環境使用密集度」為核心之研究貢獻有三。第一，理論上，將環境因素"
+             "對成本行為的影響由抽象的「ESG 揭露」推進至可量化的「實質使用密集度」——"
+             "用水密集度與廢棄物密集度直接反映企業營運與環境資源之綁定程度，較揭露類"
+             "變數更貼近調整成本之本質。實證顯示：使用密集度越高、於營收下降時成本越"
+             "難削減（成本黏性越大），且效果集中於高污染產業並具遞延性；相對地，資訊"
+             "揭露與違規裁罰之調節效果則不穩健。第二，衡量上，本研究指出以「罰鍰次數」"
+             "衡量環境違規之偏誤（易受單一極端值主導），改採裁處金額佔資產之連續衡量後"
+             "結論更為穩健；並以用水密集度（樣本涵蓋度高）取代樣本稀少之水回收率，"
+             "顯著提升檢定力。第三，方法上，結合時間落差與高／低污染產業異質性設計，"
+             "揭示環境成本效應之「產業依存＋遞延」特徵，為全樣本當期分析所無法觀察。")
+    add_para(doc,
+             "政策與實務意涵：對主管機關而言，推動環境資訊揭露之同時，宜重視高污染產業"
+             "之「使用密集度」資訊（用水量、廢棄物量與其密集度）之標準化與可比較性，"
+             "俾利利害關係人評估企業於景氣下行時之成本調整彈性與營運韌性。對企業而言，"
+             "高使用密集度意味較高之環境專用資產與委外處理承諾，於需求衰退時形成向下"
+             "調整阻力，管理階層應於資本配置與產能規劃時將此僵固性納入考量，並透過"
+             "循環化、製程改善與資源效率投資，降低營運對環境資源之剛性依賴。後續研究可"
+             "延伸至碳排密集度等其他環境使用構面，或以環境稽查／缺水等外生事件強化因果識別。")
 
     # 參考文獻
     add_heading(doc, "參考文獻", 1)

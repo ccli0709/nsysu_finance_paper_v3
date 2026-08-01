@@ -31,6 +31,8 @@ TSE_ZIP = "TEJ20260724105926.zip"      # TEJ Company DB-屬性基本資料（TSE
 WASTE_ESG_ZIP = "TEJ20260727061428.zip"   # TESG ESG-廢棄物揭露（年月）
 WASTE_QTY_ZIP = "TEJ20260727062055.zip"   # TESG-廢棄物量/密集度/認證（年度）
 WASTE_FINE_ZIP = "TEJ20260727063019.zip"  # TESG-廢棄物罰鍰次數（年度）
+# v5 新增：wcsr30a 列管事業污染源裁處資料（明細，含「裁處金額」與污染類別）
+FINE_DETAIL_ZIP = "v5-20260801/TEJ20260801102736.zip"
 
 # 財務：流量變數（同年四季加總，需四季齊全）
 FIN_FLOW_COLS = ["營業費用", "推銷費用", "管理費用", "研究發展費", "營業收入淨額"]
@@ -260,6 +262,21 @@ def build_waste_fine_annual():
     return out
 
 
+def build_waste_fine_amount():
+    """裁處明細（wcsr30a）→ 廢棄物類裁處金額，依 [證券代碼, 裁處年份] 加總。"""
+    d = read_tej_zip(FINE_DETAIL_ZIP, robust=True)
+    d["證券代碼"] = clean_code(d["證券代碼"])
+    d["西元年份"] = pd.to_numeric(d["裁處年份"], errors="coerce").astype("Int64")
+    d = d[d["西元年份"].notna()].copy()
+    d["西元年份"] = d["西元年份"].astype(int)
+    d["_amt"] = to_num(d["裁處金額"])
+    waste = d[d["污染類別"].astype(str).str.contains("廢棄物", na=False)]
+    out = (waste.groupby(["證券代碼", "西元年份"])["_amt"].sum()
+           .reset_index().rename(columns={"_amt": "廢棄物裁罰金額"}))
+    print(f"[裁處金額] 明細 {len(d):,} 案 → 廢棄物類年度 {len(out):,} 列")
+    return out
+
+
 # ----------------------------------------------------------------------------
 # 合併
 # ----------------------------------------------------------------------------
@@ -271,6 +288,7 @@ def main():
     waste_esg = build_waste_esg_annual()
     waste_qty = build_waste_qty_annual()
     waste_fine = build_waste_fine_annual()
+    waste_fine_amt = build_waste_fine_amount()
 
     # 財務 ⟗ 水資源（outer join，保留兩邊）
     merged = fin_annual.merge(water_annual, on=["證券代碼", "西元年份"], how="outer")
@@ -280,6 +298,7 @@ def main():
     merged = merged.merge(waste_esg, on=["證券代碼", "西元年份"], how="left")
     merged = merged.merge(waste_qty, on=["證券代碼", "西元年份"], how="left")
     merged = merged.merge(waste_fine, on=["證券代碼", "西元年份"], how="left")
+    merged = merged.merge(waste_fine_amt, on=["證券代碼", "西元年份"], how="left")
     # 套用公司靜態 SASB主產業
     for c in ESG_STATIC_COLS:
         merged[c] = merged["證券代碼"].map(esg_static[c])
@@ -301,7 +320,7 @@ def main():
               "製程水回收率%", "回收利用水量", "E_GRI_用水及廢水管理揭露度",
               "SASB主產業", "TSE產業_名稱",
               "E_每百萬營收廢棄物", "E_GRI_廢棄物管理揭露度", "事業廢棄物罰鍰次數",
-              "廢棄物密集度(公噸/單位)"]:
+              "廢棄物密集度(公噸/單位)", "廢棄物裁罰金額", "總用水量(含回收水)"]:
         if c in merged.columns:
             print(f"  {c:<22}: {merged[c].notna().sum():,}")
 

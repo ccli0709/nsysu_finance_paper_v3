@@ -43,7 +43,8 @@ def interp_b3(kind, b3, p3):
         "次分析": ("水資訊揭露", "H2", "正"),
         "廢棄物主分析": ("廢棄物密集度", "H3", "負"),
         "廢棄物次分析": ("廢棄物揭露品質", "H4", "正"),
-        "廢棄物穩健": ("廢棄物違規罰鍰", "H5", "負"),
+        "廢棄物穩健": ("廢棄物違規裁罰", "H5", "負"),
+        "用水密集度": ("用水密集度", "H6", "負"),
     }
     name, h, expect = hyp.get(kind, (kind, "", ""))
     support = "支持" if ((expect == "負" and b3 < 0) or (expect == "正" and b3 > 0)) else "與假設相反"
@@ -123,9 +124,13 @@ def main():
         ("模型4 廢棄物揭露 L0(當期)", "Waste_Disc", "WasteDisc_D_dREV", "廢棄物次分析", 0),
         ("模型4 廢棄物揭露 L1(t-1)", "WasteDisc_l1", "WasteDisc_D_dREV_l1", "廢棄物次分析", 1),
         ("模型4 廢棄物揭露 L2(t-2)", "WasteDisc_l2", "WasteDisc_D_dREV_l2", "廢棄物次分析", 2),
-        ("模型5 廢棄物罰鍰 L0(當期)", "Waste_Fine", "WasteFine_D_dREV", "廢棄物穩健", 0),
-        ("模型5 廢棄物罰鍰 L1(t-1)", "WasteFine_l1", "WasteFine_D_dREV_l1", "廢棄物穩健", 1),
-        ("模型5 廢棄物罰鍰 L2(t-2)", "WasteFine_l2", "WasteFine_D_dREV_l2", "廢棄物穩健", 2),
+        ("模型5 廢棄物裁罰金額 L0(當期)", "Waste_Fine", "WasteFine_D_dREV", "廢棄物穩健", 0),
+        ("模型5 廢棄物裁罰金額 L1(t-1)", "WasteFine_l1", "WasteFine_D_dREV_l1", "廢棄物穩健", 1),
+        ("模型5 廢棄物裁罰金額 L2(t-2)", "WasteFine_l2", "WasteFine_D_dREV_l2", "廢棄物穩健", 2),
+        # ---- 用水密集度（升為主模型，使用密集度核心）----
+        ("模型6 用水密集度 L0(當期)", "Water_Intensity", "WaterInt_D_dREV", "用水密集度", 0),
+        ("模型6 用水密集度 L1(t-1)", "WaterInt_l1", "WaterInt_D_dREV_l1", "用水密集度", 1),
+        ("模型6 用水密集度 L2(t-2)", "WaterInt_l2", "WaterInt_D_dREV_l2", "用水密集度", 2),
     ]
 
     txt_lines, coef_rows = [], []
