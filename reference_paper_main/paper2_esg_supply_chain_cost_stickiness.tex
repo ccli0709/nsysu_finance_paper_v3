@@ -1,0 +1,164 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{utf8}
+\usepackage{xeCJK}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{tabularx}
+\usepackage{titlesec}
+
+% 設定連結顏色與字型風格
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!70!black,
+    citecolor=blue!70!black,
+    urlcolor=blue!70!black
+}
+
+\setstretch{1.2}
+
+\title{\textbf{論文中文翻譯與重點摘要：\\客戶企業 ESG 資訊披露與供應商成本粘性：來自供應鏈關係的證據}\\
+\large --- \textit{ESG disclosure and corporate cost stickiness: Evidence from supply-chain relationships} ---}
+\author{\textbf{原始作者}：Wei Jiang, Wenbin Yang (2024, \textit{Economics Letters})\\
+\textbf{導讀與翻譯整理}：國立中山大學財務管理學系研究團隊}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+本文研究供應鏈情境下，主要客戶企業的環境、社會與公司治理（ESG）資訊披露對供應商成本粘性（Cost Stickiness）的溢出效應（Spillover Effect）。發表於國際知名經濟學期刊《\textit{Economics Letters}》（2024 年第 238 卷）。利用 2010 年至 2021 年中國 A 股上市供應商及其主要客戶對（Supplier-Customer Pairs）數據，研究發現：\textbf{客戶企業的 ESG 資訊披露顯著降低（緩和）了供應商的成本粘性}。機制分析表明，客戶 ESG 披露顯著提升了供應鏈透明度，從而\textbf{抑制了供應商管理層對未來需求的過度樂觀預期}，使其在銷售額下降時能更及時地下調銷管費用（SG\&A）。異質性分析進一步顯示，當供應商與客戶之間的\textbf{地理距離較遠}、\textbf{社會距離較遠}或\textbf{屬於不同行業}（即資訊不對稱程度較高）時，客戶 ESG 披露對供應商成本粘性的抑制（優化）效果更為強烈。
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{第一部分：論文核心重點摘要 (Executive Summary \& Key Takeaways)}
+
+\subsection{研究背景與核心問題 (Research Background \& Problem)}
+在永續發展理念下，ESG 已成為全要素投資與企業資訊揭露的核心標準。然而，現有文獻主要聚焦於企業自身的 ESG 揭露對自身資本成本或財務績效的影響，忽視了 \textbf{ESG 資訊在供應鏈上下游之間的傳播與溢出效應}。
+成本粘性（Cost Stickiness）反映了企業管理層在遭遇銷售額下滑時，調整資源冗餘（Resource Slack）與銷管費用的動態決策能力。當供應商管理層盲目樂觀預期未來訂單會反彈時，通常不願及時削減固定成本，造成高成本粘性。本文的核心問題為：\textbf{客戶企業揭露 ESG 資訊，是否會跨越企業邊界，對供應商的成本粘性產生抑製作用？}
+
+\subsection{核心研究假設 (Key Hypothesis)}
+\begin{itemize}[leftmargin=2em]
+    \item \textbf{假設 H1}：客戶企業的 ESG 資訊披露與供應商的成本粘性呈負相關（即客戶 ESG 揭露有助於緩解供應商的成本粘性/成本非對稱性）。
+\end{itemize}
+
+\subsection{實證研究設計與模型 (Empirical Strategy)}
+採用 2010--2021 年中國 A 股上市供應商與客戶配對數據，建立延伸的 ABJ (2003) 成本粘性模型：
+\begin{equation}
+\begin{aligned}
+\Delta \ln SGA_{it} = & \beta_0 + \beta_1 \Delta \ln Rev_{it} + \beta_2 D_{it} \times \Delta \ln Rev_{it} + \beta_3 ESG_{it} \times D_{it} \times \Delta \ln Rev_{it} \\
+& + \beta_4 ESG_{it} \times \Delta \ln Rev_{it} + \beta_5 ESG_{it} \times D_{it} + \beta_6 ESG_{it} \\
+& + \sum \text{Controls} \times D_{it} \times \Delta \ln Rev_{it} + \text{Industry FE} + \text{Year FE} + \varepsilon_{it}
+\end{aligned}
+\end{equation}
+其中，$\Delta \ln SGA_{it}$ 表示供應商銷管費用變化，$\Delta \ln Rev_{it}$ 表示供應商營業收入變化，$D_{it} = 1$ 當 $\Delta \ln Rev_{it} < 0$。$ESG_{it}$ 為客戶企業的 ESG 資訊揭露水平。由於 $\beta_2 < 0$ 表示基準成本粘性，若交叉項係數 \textbf{$\beta_3 > 0$ 且顯著}，則說明客戶 ESG 揭露減弱了成本粘性（即提高了成本在收入下滑時的下行彈性）。
+
+\subsection{核心實證發現總覽 (Summary of Empirical Findings)}
+
+\begin{table}[h]
+\centering
+\caption{論文核心實證結果與機制摘要表}
+\label{tab:paper2_summary}
+\small
+\begin{tabularx}{\textwidth}{lX}
+\toprule
+\textbf{實證項目} & \textbf{核心結論與統計結果} \\
+\midrule
+\textbf{基準迴歸 (Baseline)} & $\beta_3$ 係數顯著為正 ($p < 0.01$)，證明客戶 ESG 資訊揭露顯著降低了供應商的成本粘性，支持假設 H1。 \\
+\textbf{穩健性檢定} & 1. \textbf{Heckman 兩階段模型}：控制客戶是否揭露 ESG 的選擇偏差與內生性；\\
+ & 2. \textbf{控制供應鏈區塊鏈技術}：排除供應鏈數位化科技對成本粘性的混雜干擾；\\
+ & 3. \textbf{安慰劑檢定}：對客戶 ESG 進行隨機打亂重組，證實結果無偶然性。 \\
+\textbf{傳遞機制 (Mechanism)} & \textbf{抑制管理層樂觀預期}：客戶 ESG 揭露提供了高品質的商業未來展望資訊，降低了供應商管理層對營收反彈的盲目樂觀度（減少預測誤差），使供應商能在收入下滑時果斷削減過剩成本。 \\
+\textbf{進一步討論 (Heterogeneity)} & 效果在**地理距離遠**、**社會距離遠**以及**跨行業供應鏈**中更加顯著，說明 ESG 揭露在資訊不對稱高的地方起到了重要的資訊橋樑作用。 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+---
+
+\section{第二部分：論文逐章深度中文翻譯與解析 (Structured Full Translation)}
+
+\subsection{1. 引言 (Introduction)}
+在當前全球經濟轉型背景下，永續發展已成為企業運營的核心原則。ESG（環境、社會與公司治理）資訊揭露已成為衡量企業非財務風險與長遠價值的重要窗口。然而，現有關於 ESG 效應的研究大多侷限於企業內部或資本市場，缺乏從「供應鏈網絡」視野探討 ESG 資訊溢出效應的實證文獻。
+
+成本粘性（Cost Stickiness）是管理會計學的核心概念，指當企業營收下降時，銷管費用（SG\&A）的減少幅度小於營收上升時的增加幅度（Banker et al., 2014）。這種成本調整的不對稱性，很大程度上取決於管理層對未來市場需求的預期與決策行為。當供應商無法精準掌握客戶營運狀況時，往往傾向於保持冗餘產能與人力，導致高成本粘性。
+
+本文探討客戶企業的 ESG 資訊揭露如何影響供應商的成本粘性。利用 2010 至 2021 年中國上市企業數據，實證證明客戶 ESG 揭露能顯著緩解供應商的成本粘性。這為理解 ESG 資訊揭露的經濟後果提供了全新視角。
+
+\subsection{2. 研究假設發展 (Hypothesis Development)}
+根據資訊不對稱理論與資源基礎觀點，客戶企業的 ESG 資訊揭露能從以下層面影響供應商的成本行為：
+
+首先，高水平的 ESG 資訊揭露代表客戶企業具備更加透明的治理結構與永續發展戰略。ESG 報告披露了客戶未來的資本支出、採購需求與社會責任承諾，這大幅增強了供應鏈上下游之間的資訊透明度。
+
+其次，當供應商面臨銷售額下滑時，高成本粘性的主要誘因是管理層對未來訂單回升持過度樂觀預期（Over-optimistic Expectations），從而不願解僱員工或精簡營運設施。客戶透明的 ESG 揭露消除了資訊迷霧，幫助供應商管理層更客觀地評估真實需求，降低無謂的樂觀期待。因此，供應商能夠在營收下滑時更加果斷地調整費用結構，降低成本粘性。
+
+據此，本文提出核心假設：
+\begin{quote}
+\textbf{H1}：客戶企業的 ESG 資訊披露與供應商的成本粘性呈負相關（即客戶 ESG 揭露能顯著抑制供應商的成本粘性）。
+\end{quote}
+
+\subsection{3. 研究方法 (Research Methods)}
+
+\subsubsection{3.1 樣本與資料來源 (Sample and Data)}
+研究樣本涵蓋 2010--2021 年中國 A 股上市供應商與其前五大客戶之配對數據。剔除金融業、ST/*ST 企業及變數缺失值。ESG 數據採用華證（Huazheng）ESG 評級體系，財務數據來自 CSMAR 數據庫。
+
+\subsubsection{3.2 計量模型建構 (Econometric Model)}
+根據 Banker et al. (2014) 及 Dai et al. (2021)，建構如下三重交叉迴歸模型：
+\begin{equation}
+\begin{aligned}
+\Delta \ln SGA_{it} = & \beta_0 + \beta_1 \Delta \ln Rev_{it} + \beta_2 D_{it} \times \Delta \ln Rev_{it} + \beta_3 ESG_{it} \times D_{it} \times \Delta \ln Rev_{it} \\
+& + \beta_4 ESG_{it} \times \Delta \ln Rev_{it} + \beta_5 ESG_{it} \times D_{it} + \beta_6 ESG_{it} \\
+& + \sum \text{Controls} \times D_{it} \times \Delta \ln Rev_{it} + \sum \text{Industry} + \sum \text{Year} + \varepsilon_{it}
+\end{aligned}
+\end{equation}
+其中：
+\begin{itemize}
+    \item $\Delta \ln SGA_{it}$：供應商第 $t$ 年與第 $t-1$ 年銷管費用的對數差值。
+    \item $\Delta \ln Rev_{it}$：供應商第 $t$ 年與第 $t-1$ 年營業收入的對數差值。
+    \item $D_{it}$：虛擬變數，當 $\Delta \ln Rev_{it} < 0$ 時取值為 1，否則為 0。
+    \item $ESG_{it}$：客戶企業的 ESG 評級得分。
+\end{itemize}
+若 $\beta_3 > 0$ 且統計顯著，則表明客戶 ESG 揭露顯著減弱了供應商的成本非對稱性（即降低成本粘性）。
+
+\subsection{4. 實證結果與討論 (Results)}
+
+\subsubsection{4.1 基準迴歸分析 (Baseline Regression)}
+基準迴歸結果顯示，交叉項 $ESG \times D \times \Delta \ln Rev$ 的估計係數 $\beta_3$ 為正且在 1\% 水準下顯著。這表明，客戶企業的 ESG 資訊揭露水平越高，供應商在營收下滑時銷管費用的扣減比例越大，顯著緩解了成本粘性，強烈支持假設 H1。
+
+\subsubsection{4.2 穩健性檢定 (Robustness Tests)}
+\begin{enumerate}[leftmargin=2em]
+    \item \textbf{Heckman 兩階段選擇模型}：考慮客戶是否進行高品質 ESG 揭露可能存在內生性自選擇問題。第一階段建構 ESG 揭露的 Probit 模型，第二階段將計算出的逆米爾斯比率（IMR）納入成本粘性模型，結果依舊保持顯著。
+    \item \textbf{控制供應鏈區塊鏈技術}：區塊鏈技術也能提升供應鏈透明度。在納入供應鏈區塊鏈應用控制變數後，$\beta_3$ 依然顯著為正，說明 ESG 揭露具有獨立的資訊價值。
+    \item \textbf{安慰劑檢定 (Placebo Test)}：隨機替換客戶 ESG 得分進行重複估算，交叉項係數呈正態分佈於 0 兩側，排除了隨機因素影響。
+\end{enumerate}
+
+\subsubsection{4.3 傳遞機制檢定：管理層樂觀預期 (Mechanism Analysis)}
+為驗證「抑制樂觀預期」機制，本文以供應商管理層對未來銷售額的預估偏差（Managerial Optimism/Forecast Error）進行代理。實證結果表明：客戶 ESG 揭露能顯著降低供應商管理層的過度樂觀偏差。當銷售額下降時，管理層不再盲目期待訂單快速復甦，從而加速精簡過剩人力與銷售費用，降低成本粘性。
+
+\subsubsection{4.4 進一步討論：異質性分析 (Further Discussion)}
+論文劃分了三組資訊不對稱情境進行異質性檢定：
+\begin{enumerate}[leftmargin=2em]
+    \item \textbf{地理距離 (Geographical Distance)}：當供應商與客戶地理距離較遠時，私有資訊取得困難，客戶 ESG 揭露對降低成本粘性的作用更為顯著。
+    \item \textbf{社會距離 (Social Distance)}：當兩者社會連繫較弱時，ESG 揭露作為公開誠信訊號的效果更為突出。
+    \item \textbf{行業歸屬 (Industry Overlap)}：當供應商與客戶屬於不同行業（跨行業）時，行業知識隔閡較大，ESG 揭露產生的資訊去模糊化效益更大。
+\end{enumerate}
+
+\subsection{5. 結論與啟示 (Conclusion)}
+本研究證實客戶企業的 ESG 資訊披露對供應商的內部成本管理具有顯著的外部溢出效應：\textbf{客戶 ESG 揭露能顯著緩和供應商的成本粘性}。這一現象的核心機理在於 ESG 揭露提升了供應鏈透明度，矯正了供應商管理層的盲目樂觀預期。
+
+\textbf{實務與政策啟示}：
+\begin{enumerate}[leftmargin=2em]
+    \item \textbf{供應鏈管理層面}：企業應重視供應鏈上游與下游的非財務資訊共享。推動核心客戶企業開展 ESG 揭露，有助於全供應鏈優化成本彈性與風險管理。
+    \item \textbf{監管機構層面}：政策制定者應繼續完善企業 ESG 資訊強制揭露標準，這不僅能吸引永續投資，還能改善實體經濟中供應鏈網絡的資源配置效率。
+\end{enumerate}
+
+\end{document}

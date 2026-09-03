@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX 論文即時預覽與 PDF 輸出 - main.tex</title>
+    <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      svg: { fontCache: 'global' }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: "標楷體", "DFKai-SB", "BiauKai", "Times New Roman", serif; background-color: #f8fafc; }
+        .paper-card { background-color: #ffffff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+        
+        /* 列印與 PDF 專屬排版設定 */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 2.5cm;
+            }
+            body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            header, aside, button, nav, .no-print {
+                display: none !important;
+            }
+            .paper-card {
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+            }
+            .page-break-before {
+                break-before: page !important;
+                page-break-before: always !important;
+            }
+            .page-break-inside-avoid {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+            a {
+                text-decoration: none !important;
+                color: #000000 !important;
+            }
+        }
+
+        /* A4 模擬分頁樣式 */
+        .a4-paged-mode .paper-card {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 25mm !important;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+    <!-- 頂部導覽列 -->
+    <header class="sticky top-0 z-50 bg-slate-900 text-white px-6 py-3 shadow-md flex items-center justify-between no-print">
+        <div class="flex items-center space-x-3">
+            <span class="bg-blue-600 text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">LaTeX & PDF Preview</span>
+            <h1 class="text-base font-semibold">企業水管理與廢棄物管理對成本黏性之影響 (main.tex)</h1>
+        </div>
+        <div class="flex items-center space-x-2 text-sm">
+            <button onclick="window.print()" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 font-bold hover:bg-emerald-500 transition flex items-center space-x-1.5 text-white shadow">
+                <span>🖨️ 另存成 PDF / 列印</span>
+            </button>
+            <button onclick="toggleA4Mode()" id="btn-a4" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 font-medium hover:bg-slate-700 transition">📄 A4 分頁模式</button>
+            <button onclick="switchTab('paper')" id="tab-btn-paper" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white font-medium transition">📖 論文預覽</button>
+            <button onclick="switchTab('source')" id="tab-btn-source" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 font-medium hover:bg-slate-700 transition">📝 LaTeX 碼</button>
+            <button onclick="location.reload()" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 font-medium hover:bg-slate-700 transition">🔄 重新整理</button>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-12 gap-6" id="main-container">
+        <!-- 左側章節快選 -->
+        <aside class="col-span-3 hidden lg:block sticky top-20 h-[calc(100vh-6rem)] overflow-y-auto bg-white p-4 rounded-xl border border-slate-200 shadow-sm text-sm no-print">
+            <div class="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                <span class="font-bold text-blue-900 block text-xs mb-1">📄 本地實體 PDF 檔案</span>
+                <p class="text-xs text-slate-600 mb-2">已編譯產生專案核心 PDF：</p>
+                <code class="text-[11px] bg-white px-1.5 py-0.5 rounded border border-blue-200 block truncate font-mono text-blue-800">main.pdf (3.58 MB)</code>
+            </div>
+
+            <h3 class="font-bold text-slate-900 mb-3 pb-2 border-b border-slate-200">章節快速導覽</h3>
+            <nav class="space-y-1" id="nav-list">
+                <a href="#sec-1" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">摘要 / Abstract</a>
+                <a href="#sec-1" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">第一章 緒論</a>
+                <a href="#sec-2" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">第二章 文獻探討與假說</a>
+                <a href="#sec-3" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">第三章 資料描述與方法</a>
+                <a href="#sec-4" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">第四章 實證結果與討論</a>
+                <a href="#sec-5" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">第五章 結論與建議</a>
+                <a href="#tab:desc_stats" class="block px-2.5 py-1.5 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 4-1 敘述統計</a>
+                <a href="#tab:corr_matrix" class="block px-2.5 py-1.5 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 4-2 相關矩陣</a>
+                <a href="#tab:reg_main" class="block px-2.5 py-1.5 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 4-3 主迴歸結果</a>
+                <a href="#tab:lag_effect" class="block px-2.5 py-1.5 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 4-4 時間落差效應</a>
+                <a href="#tab:hetero_results" class="block px-2.5 py-1.5 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 4-5 產業異質性</a>
+            </nav>
+        </aside>
+
+        <!-- 主要預覽區塊 -->
+        <main class="col-span-12 lg:col-span-9" id="content-main">
+            <!-- 論文渲染檢視 -->
+            <div id="view-paper" class="paper-card bg-white p-8 md:p-12 rounded-xl border border-slate-200 leading-relaxed text-slate-900">
+                <!-- 封面資訊標頭 -->
+                <div class="text-center pb-8 border-b-2 border-slate-900 mb-8 page-break-after">
+                    <h2 class="text-lg font-bold text-slate-700 tracking-wider">國立中山大學財務管理學系碩士論文</h2>
+                    <h1 class="text-3xl font-extrabold text-slate-900 my-4 leading-tight">企業水管理與廢棄物管理對成本黏性之影響</h1>
+                    <h3 class="text-xl font-semibold text-slate-800 mb-2">——以台灣上市櫃製造業之環境績效與資訊揭露為例</h3>
+                    <p class="text-sm italic text-slate-600 mb-4">The Effect of Corporate Water and Waste Management on Cost Stickiness: Evidence from Taiwanese Listed Manufacturing Firms</p>
+                    <div class="text-sm font-medium text-slate-700 space-x-4">
+                        <span>研究生：撰</span>
+                        <span>指導教授：博士</span>
+                        <span>中華民國 115 年 6 月</span>
+                    </div>
+                </div>
+
+                <!-- 論文內文主體 -->
+                <div class="prose max-w-none">
+                    <hr class="my-8 border-gray-300 print:hidden page-break">
+
+<h2 id="sec-1" class="text-2xl font-bold text-gray-900 mt-10 mb-4 pb-2 border-b-2 border-blue-800 ">摘要</h2>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">本研究探討企業水管理與廢棄物管理之環境績效與資訊揭露，對成本黏性（cost stickiness）的影響。以台灣上市櫃製造業（排除金融保險業）2014 至 2024 年資料為樣本，共 18,137 個公司—年觀測值（1,945 家公司）。本研究採 Anderson, Banker and Janakiraman (2003) 成本黏性模型，於營業費用變動對營收變動之敏感度中，加入收入下降虛擬變數與環境變數之三重交乘，並控制產業與年份固定效果、以公司叢集穩健標準誤估計。本研究以「環境使用密集度」（用水密集度與廢棄物密集度）為核心，並以水與廢棄物之資訊揭露與違規裁罰為輔。</p>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">實證結果顯示：樣本整體存在顯著成本黏性；核心之使用密集度中，用水密集度於高污染產業當期對成本黏性呈顯著加劇效果（$\beta_3 \approx -0.0914$, $p < 0.05$，樣本涵蓋度遠高於水回收率），廢棄物密集度亦於高污染產業遞延一期呈顯著加劇效果（$\beta_3 \approx -0.0503$, $p < 0.10$）；相對地，資訊揭露與違規裁罰之調節效果則不穩健。研究支持「企業對環境資源之使用密集度越高、於營收下降時成本越難削減」之推論，且效果集中於高污染產業。</p>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify"><p class="font-bold text-gray-900 mt-4 mb-1">關鍵詞：</p> 成本黏性、水管理、廢棄物管理、環境資訊揭露、固定效果模型</p>
+
+<hr class="my-8 border-gray-300 print:hidden page-break">
+
+<h2 id="sec-2" class="text-2xl font-bold text-gray-900 mt-10 mb-4 pb-2 border-b-2 border-blue-800 page-break-before">Abstract</h2>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">This study examines how corporate water and waste management—both environmental performance and information disclosure—affect cost stickiness. Using Taiwanese listed manufacturing firms (excluding financials) over 2014--2024 (18,137 firm-year observations), we adopt the Anderson, Banker and Janakiraman (2003) framework and add triple interactions of a revenue-decrease dummy with environmental variables, controlling for industry and year fixed effects with firm-clustered robust standard errors.</p>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">We find significant overall cost stickiness. Core resource intensity measures show that water intensity significantly intensifies cost stickiness among high-pollution industries in the current period ($\beta_3 \approx -0.0914$, $p < 0.05$), while waste intensity significantly intensifies cost stickiness under lagged specifications ($\beta_3 \approx -0.0503$, $p < 0.10$). In contrast, disclosure and administrative fine measures show no robust moderating effects. The empirical evidence supports the theoretical argument that higher operational reliance on environmental resources creates downward adjustment rigidities during sales downturns.</p>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify"><p class="font-bold text-gray-900 mt-4 mb-1">Keywords:</p> Cost Stickiness, Water Management, Waste Management, Environmental Disclosure, Fixed-Effects Model</p>
+
+<hr class="my-8 border-gray-300 print:hidden page-break">
+<div class="p-4 bg-gray-50 rounded-lg border border-gray-200 my-6 no-print"><h3 class="font-bold text-lg mb-2">目錄</h3><p class="text-sm text-gray-600">（章節導覽請見左側選單）</p></div>
+<hr class="my-8 border-gray-300 print:hidden page-break">
+
+<h2 id="sec-3" class="text-2xl font-bold text-gray-900 mt-10 mb-4 pb-2 border-b-2 border-blue-800 page-break-before">第一章 緒論</h2>
+
+<h3 id="subsec-1" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">研究背景與動機</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">在氣候變遷、淨零轉型與資源稀缺的多重壓力下，水資源與廢棄物已從企業社會責任的邊陲議題，逐漸成為攸關營運存續的核心風險。台灣為海島型經濟且製造業高度密集，半導體、光電、面板、化工、鋼鐵與紡織等支柱產業普遍具有高取水、高廢水與高廢棄物之特性；2021 年台灣遭逢逾半世紀最嚴重乾旱，中部科學園區一度面臨限水，凸顯水資源供給對高耗水製造業之關鍵性。與此同時，主管機關陸續要求上市櫃公司自 2023 年起分階段編製永續報告書、並加嚴廢棄物清理與環境污染之裁處，使環境資源之取得、循環、處理與法遵成本，實質嵌入企業之營運成本結構。</p>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">企業成本如何隨營收變動而調整，是管理會計長期關注的課題。Anderson, Banker and Janakiraman (2003, 以下簡稱 ABJ) 提出成本僵固性（cost stickiness，或稱成本黏性）概念，指出當營收下降時，營業費用向下調整的幅度小於營收上升時向上調整的幅度，呈現顯著的非對稱性；其根源在於管理者的資源調整決策與調整成本：當面臨需求下滑時，若管理者預期衰退僅屬短暫，或裁撤與重建專用資源之成本高昂，便傾向保留閒置產能與人力，形成成本黏性。</p>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">環境資源的投入具備高投入、長週期、專用性與不可逆之特徵。企業為提升水回收、處理廢水與廢棄物，往往需建置廢水處理廠、水循環系統與專用處理設施，並簽訂長期委外清運與處理合約；這類與產能高度綁定的環境支出，於營收下降時難以即時削減，理論上將加劇成本黏性。另一方面，環境資訊之揭露被視為降低資訊不對稱、矯正管理者過度樂觀預期之機制，可能反向緩解成本黏性。因此，環境因素對成本黏性的影響，同時存在「實質投入加劇」與「資訊透明緩解」兩股方向相反的力量。</p>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">既有將環境因素連結成本行為的研究，多以整體 ESG 評分或揭露為衡量，較少深入「水」與「廢棄物」等個別、可量化之實質環境構面，且常以「揭露有無」或「罰鍰次數」等粗略代理，易受衡量誤差與單一極端值干擾。本研究主張，真正貼近調整成本本質的，是企業對環境資源之「使用密集度」——單位營收所耗用之水量與產生之廢棄物量，直接反映其營運與環境資源之綁定程度及專用處理投入。相對於水回收率等揭露樣本稀少、變異有限之指標，用水密集度（總用水量／營收）之樣本涵蓋度更高，更能提供穩健且具檢定力之證據。</p>
+
+<h3 id="subsec-2" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">研究目的與研究問題</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">本研究之研究目的有四：
+<ol class="list-decimal list-inside space-y-1 my-3 pl-2">
+    <li class="text-gray-800">建立以「環境使用密集度」為核心之成本黏性分析架構，檢視用水密集度與廢棄物密集度是否顯著影響台灣製造業之成本黏性。
+    </li><li class="text-gray-800">以資訊揭露（水揭露、廢棄物揭露品質）與違規裁罰（廢棄物裁罰金額）為輔助構面，比較「實質使用」與「資訊透明度」兩類機制之相對解釋力。
+    </li><li class="text-gray-800">考量環境投入之效益與僵固性需時間發酵，檢驗當期與遞延（$t-1, t-2$）之差異。
+    </li><li class="text-gray-800">考量台灣製造業次產業之環境依賴度差異甚大，比較高污染與低污染產業之異質性，釐清效果集中之情境。
+</li></ol></p>
+
+<h3 id="subsec-3" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">研究貢獻與論文架構</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">本研究之預期貢獻可分三方面。理論上，將環境因素對成本行為之影響，由抽象之整體 ESG 或 CSR 評分，推進至可量化、可比較之「實質使用密集度」，使調整成本理論在環境情境下獲得更貼近本質之檢驗。衡量上，本研究以連續之「用水密集度」與「廢棄物裁罰金額」取代樣本稀少之水回收率與易受極端值主導之罰鍰次數，兼顧樣本涵蓋度與衡量效度。方法上，結合時間落差與高／低污染產業異質性，揭示環境成本效應具「產業依存與遞延顯現」之特徵。</p>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">本論文後續結構安排如下：第二章為文獻探討與研究假說發展；第三章說明研究資料來源、樣本篩選與實證模型設計；第四章展示實證結果與詳細討論；第五章歸納結論、管理意涵與未來研究建議。</p>
+
+<hr class="my-8 border-gray-300 print:hidden page-break">
+
+<h2 id="sec-4" class="text-2xl font-bold text-gray-900 mt-10 mb-4 pb-2 border-b-2 border-blue-800 page-break-before">第二章 文獻探討與研究假說</h2>
+
+<h3 id="subsec-4" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">成本僵固性理論與 ABJ 基礎模型</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">ABJ (2003) 以美國上市公司之銷售、一般及管理費用（SG\&A costs）為對象，發現當銷貨收入每增加 1\% 時，銷管費用平均增加 0.55\%；然而當銷貨收入下降 1\% 時，銷管費用卻僅平均減少 0.35\%。此一非對稱調整現象顛覆了傳統會計學中「變動成本隨作業量等比例變動」之簡化假設。</p>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">ABJ (2003) 提出「意圖性資源配置與調整成本」理論架構。當企業面臨銷貨收入下滑時，管理者面臨兩難：若立即縮減閒置資源，須承受昂貴的向下調整成本（如資遣費、合約違約金、處分資產折價）；且當未來需求回升時，還需再次支付重新購置之向上調整成本。若預期衰退僅屬暫時性且調整成本高昂，管理者會選擇保留閒置資源，導致費用減少幅度小於營收下降幅度，因而產生成本僵固性。</p>
+
+<h3 id="subsec-5" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">環境資源實質使用與成本僵固性（實質投入觀點）</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">Zeng, Peng, and Chan 探討低碳城市政策對企業成本僵固性之衝擊，發現環境政策壓力會促使企業加大綠色創新與專用環保設施投入，在融資限制約束下顯著推升費用之向下調整成本，從而加劇成本僵固性。李依潔（2024）以台灣上市櫃公司為樣本，發現企業在 ESG 環境構面之投入績效越高，其成本僵固性越強。</p>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">本研究主張，企業在「水資源」與「廢棄物」管理上之實質資源投入，具備三個推升向下調整成本之特質：(1) **資產專用性與不可逆性**（水循環系統、純水設施、零排放 ZLD 系統處分價值幾近於零）；(2) **合約剛性與長期承諾**（工業區污水處理與廢棄物清運簽訂長期合約）；(3) **法律強制合規下限**（水污染防治法與廢棄物清理法設有法定合規底線，絕不可因營收衰退而終止處置）。據此提出假說 H1、H3：</p>
+
+<blockquote class="p-4 my-4 bg-blue-50 border-l-4 border-blue-500 text-gray-700 italic rounded-r">
+<strong>假說 H1（水回收率）：</strong> 在其他條件不變下，企業之水資源回收率越高，當銷貨收入下降時，其營業費用之成本黏性越大（$\beta_3 < 0$）。
+</blockquote>
+
+<blockquote class="p-4 my-4 bg-blue-50 border-l-4 border-blue-500 text-gray-700 italic rounded-r">
+<strong>假說 H3（廢棄物密集度）：</strong> 在其他條件不變下，企業每百萬營收之廢棄物產生量越高，當銷貨收入下降時，其營業費用之成本黏性越大（$\beta_3 < 0$）。
+</blockquote>
+
+<h3 id="subsec-6" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">環境資訊揭露品質與成本僵固性（資訊透明度觀點）</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">Jiang and Yang (2024) 在 <em>Economics Letters</em> 發表的最新研究指出，供應鏈網絡中客戶端之 ESG 資訊揭露，能有效降低資訊不對稱，發揮強大的外部監督效果，進而矯正供應商管理者的過度樂觀預期（Managerial Over-optimism），使其在需求下降時能更及時處置閒置資源，顯著緩解成本僵固性。</p>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">高質量之環境資訊揭露（`Water_Disc`, `Waste_Disc`）具備兩大機制：(1) 抑制過度樂觀偏誤與資源囤積；(2) 強化外部利害關係人與董事會監督。據此提出假說 H2、H4：</p>
+
+<blockquote class="p-4 my-4 bg-blue-50 border-l-4 border-blue-500 text-gray-700 italic rounded-r">
+<strong>假說 H2（水資訊揭露）：</strong> 在其他條件不變下，主動揭露水資源管理資訊之企業，當銷貨收入下降時，其營業費用之成本黏性較低（$\beta_3 > 0$）。
+</blockquote>
+
+<blockquote class="p-4 my-4 bg-blue-50 border-l-4 border-blue-500 text-gray-700 italic rounded-r">
+<strong>假說 H4（廢棄物揭露品質）：</strong> 在其他條件不變下，事業廢棄物管理資訊之揭露品質越高，當銷貨收入下降時，其營業費用之成本黏性較低（$\beta_3 > 0$）。
+</blockquote>
+
+<h3 id="subsec-7" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">事業廢棄物違規裁罰與成本僵固性（合規風險觀點）</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">當企業因違反廢棄物清理法而遭受主管機關裁罰（`Waste_Fine`，以裁罰金額佔總資產比率衡量）時，將引發顯著之「強制性法遵與改善支出」。違規裁罰引發改善命令與罰鍰，屬於法律強制規範之支出，具有高度剛性，在營收衰退時形成費用向下縮減之額外障礙。據此提出假說 H5：</p>
+
+<blockquote class="p-4 my-4 bg-blue-50 border-l-4 border-blue-500 text-gray-700 italic rounded-r">
+<strong>假說 H5（廢棄物違規裁罰）：</strong> 在其他條件不變下，企業之事業廢棄物違規裁罰金額佔資產比例越高，當銷貨收入下降時，其營業費用之成本黏性越大（$\beta_3 < 0$）。
+</blockquote>
+
+<h3 id="subsec-8" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">資源使用密集度、時間落差與產業異質性（核心假說）</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">既有文獻採用二元揭露變數或全域型 ESG 評分，易受樣本選擇偏誤干擾。本研究建構「用水密集度」（`Water_Intensity` = 總用水量 / 營收）與「廢棄物密集度」（`Waste_Intensity` = 廢棄物總量 / 營收）作為核心自變數。此外，環境資源之影響受到「時間發酵（$t-1, t-2$）」與「高耗水／高污染產業異質性」之情境調節。據此提出核心假說 H6：</p>
+
+<blockquote class="p-4 my-4 bg-blue-50 border-l-4 border-blue-500 text-gray-700 italic rounded-r">
+<strong>假說 H6（核心假說——資源使用密集度與產業異質性）：</strong> 在其他條件不變下，企業之用水密集度與廢棄物密集度越高，當銷貨收入下降時，其營業費用之成本黏性越大（$\beta_3 < 0$）；且此一加劇效應顯著集中於高耗水／高污染之製造業子樣本中。
+</blockquote>
+
+<h3 id="subsec-9" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">研究假說與理論機制對照表</h3>
+
+<div id="tab:hypotheses_summary" class="my-8 overflow-x-auto bg-white p-4 rounded-xl border border-gray-200 shadow-sm print:shadow-none print:border-none print:my-4 page-break-inside-avoid">
+            <div class="text-sm font-bold text-gray-900 mb-2 text-center">研究假說與理論機制彙總表</div>
+            <table class="min-w-full divide-y divide-gray-300 border-t-2 border-b-2 border-gray-900 my-2">
+                <tr><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">ccp{4.5cm}}
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">假說</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">研究假說內容概要</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">對應變數</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">預期 $\beta_3$</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">主要理論機制路徑</th></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><strong>H1</strong></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水資源回收率越高，成本黏性越大</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Water\_Rate</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$< 0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">實質投入與調整成本路徑</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><strong>H2</strong></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">主動揭露水資源資訊，成本黏性較低</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Water\_Disc</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$> 0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">資訊透明度與監督機制路徑</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><strong>H3</strong></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物產生密集度越高，成本黏性越大</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Waste\_Intensity</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$< 0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">實質投入與調整成本路徑</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><strong>H4</strong></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物揭露品質越高，成本黏性較低</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Waste\_Disc</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$> 0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">資訊透明度與監督機制路徑</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><strong>H5</strong></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物違規裁罰金額越高，成本黏性越大</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Waste\_Fine</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$< 0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">強制合規與底線成本路徑</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><strong>H6</strong></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">用水與廢棄物密集度越高，成本黏性越大；且集中於高污染產業</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Water\_Int / Waste\_Int</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$< 0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">核心使用密集度與產業異質性路徑</td></tr>
+            </table>
+            
+        </div></p>
+
+<hr class="my-8 border-gray-300 print:hidden page-break">
+
+<h2 id="sec-5" class="text-2xl font-bold text-gray-900 mt-10 mb-4 pb-2 border-b-2 border-blue-800 page-break-before">第三章 資料描述與研究方法</h2>
+
+<h3 id="subsec-10" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">資料來源與樣本篩選</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">本研究實證分析資料主要取自台灣經濟新報（TEJ）資料庫，涵蓋：
+<ol class="list-decimal list-inside space-y-1 my-3 pl-2">
+    <li class="text-gray-800"><strong>財務數據：</strong> 取自「TEJ IFRS 以合併為主財務（單季）—一般產業Ⅳ」資料庫。
+    </li><li class="text-gray-800"><strong>環境績效與揭露數據：</strong> 取自「TESG 企業用水量」與「TESG 廢棄物揭露」資料庫。
+    </li><li class="text-gray-800"><strong>環境違規與風險數據：</strong> 取自「TESG 列管事業污染源裁處明細」資料庫。
+    </li><li class="text-gray-800"><strong>產業別分類數據：</strong> 取自「TEJ Company DB 屬性基本資料」之 TSE 產業別。
+</li></ol></p>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">本研究以 2014 至 2024 年台灣上市櫃製造業公司為樣本，排除金融保險業與缺失值後，全樣本資料庫共包含 18,137 個公司—年觀測值（涵蓋 1,945 家獨立上市櫃製造業公司）。所有連續型變數均已進行前後 1\% 的縮尾處理（Winsorization）。</p>
+
+<h3 id="subsec-11" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">實證模型與計量方法</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">本研究基於 ABJ (2003) 成本僵固性實證模型，設定如下：</p>
+
+<div class="my-4 p-3 bg-gray-50 rounded border border-gray-200 text-center print:bg-transparent print:border-none">\[
+\begin{aligned}
+\Delta<span>LNSGA</span>_{i,t} = &\;\beta_0 + \beta_1 \cdot \Delta<span>LNREV</span>_{i,t} + \beta_2 \cdot (D_{i,t} \times \Delta<span>LNREV</span>_{i,t}) \\
+& + \beta_3 \cdot (<span>Env\_Var</span>_{i,t} \times D_{i,t} \times \Delta<span>LNREV</span>_{i,t}) + \beta_4 \cdot <span>Env\_Var</span>_{i,t} \\
+& + \sum_k \gamma_k \cdot [<span>Control</span>_{k,i,t} \times D_{i,t} \times \Delta<span>LNREV</span>_{i,t}] \\
+& + <span>Industry</span>_{j} + <span>Year</span>_{t} + \varepsilon_{i,t}
+\end{aligned}
+\]</div>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">其中，$\Delta<span>LNSGA</span>_{i,t} = \ln(<span>SGA</span>_{i,t}) - \ln(<span>SGA</span>_{i,t-1})$；$\Delta<span>LNREV</span>_{i,t} = \ln(<span>REV</span>_{i,t}) - \ln(<span>REV</span>_{i,t-1})$；$D_{i,t}$ 為收入下降虛擬變數（$<span>REV</span>_{i,t} < <span>REV</span>_{i,t-1}$ 時為 1，否則為 0）。$\beta_2 < 0$ 證實成本黏性存在；$\beta_3$ 為核心調節係數。估計採 OLS 加上 SASB 產業固定效果與年份固定效果，標準誤採公司層級叢集穩健標準誤（Firm-clustered Robust Standard Errors）。</p>
+
+<h3 id="subsec-12" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">變數說明與衡量</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">被解釋變數為營業費用變動率 $\Delta<span>LNSGA</span>$。核心與輔助自變數（`Env_Var`）分別為：
+<ol class="list-decimal list-inside space-y-1 my-3 pl-2">
+    <li class="text-gray-800"><strong>用水密集度 (<span>Water\_Intensity</strong>)：</span> 總用水量（千公噸）/ 營業收入淨額（千元）。樣本數 $N = 8,484$。
+    </li><li class="text-gray-800"><strong>廢棄物密集度 (<span>Waste\_Intensity</strong>)：</span> 每百萬營收之廢棄物產生量（公噸）。樣本數 $N = 3,273$。
+    </li><li class="text-gray-800"><strong>水回收率\% (<span>Water\_Rate</strong>) 與水揭露 (\text{Water\_Disc</span>)：} 水回收率為百分比；水揭露為二元變數。
+    </li><li class="text-gray-800"><strong>廢棄物揭露品質 (<span>Waste\_Disc</strong>)：</span> GRI 廢棄物管理揭露度（連續得分）。
+    </li><li class="text-gray-800"><strong>廢棄物裁罰金額佔資產 (<span>Waste\_Fine</strong>)：</span> 事業廢棄物違規總金額（千元）/ 資產總額。
+</li></ol></p>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">控制變數包含：公司規模 ($<span>Size</span>$)、資產密集度 ($<span>AI</span>$)、員工密集度 ($<span>EI</span>$)、資產報酬率 ($<span>ROA</span>$)、財務槓桿 ($<span>Lev</span>$)、連續兩年營收下降 ($<span>Decrease</span>$)。</p>
+
+<hr class="my-8 border-gray-300 print:hidden page-break">
+
+<h2 id="sec-6" class="text-2xl font-bold text-gray-900 mt-10 mb-4 pb-2 border-b-2 border-blue-800 page-break-before">第四章 實證結果與討論</h2>
+
+<h3 id="subsec-13" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">敘述性統計</h3>
+
+<div id="tab:desc_stats" class="my-8 overflow-x-auto bg-white p-4 rounded-xl border border-gray-200 shadow-sm print:shadow-none print:border-none print:my-4 page-break-inside-avoid">
+            <div class="text-sm font-bold text-gray-900 mb-2 text-center">主要變數敘述統計表</div>
+            <table class="min-w-full divide-y divide-gray-300 border-t-2 border-b-2 border-gray-900 my-2">
+                <tr><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">變數名稱</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">樣本數(N)</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">平均值</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">標準差</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">最小值</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">P25</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">中位數</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">P75</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">最大值</th></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$\Delta<span>LNSGA</span>$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">18,137</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.031</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.194</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.647</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.057</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.030</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.117</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.738</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$\Delta<span>LNREV</span>$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">18,137</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.014</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.323</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-1.234</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.108</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.021</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.138</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1.308</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$D$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">18,137</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.449</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.497</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1.000</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Water\_Intensity</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">9,033</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.099</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.400</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.002</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.009</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.041</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">3.338</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Waste\_Intensity</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">3,591</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.449</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1.148</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.021</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.121</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.275</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">8.139</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Water\_Rate</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1,039</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">35.084</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">31.671</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">9.500</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">23.300</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">54.340</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">99.864</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Waste\_Disc</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">15,123</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.497</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1.236</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">5.000</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Waste\_Fine</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">4,187</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">2.661</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">10.050</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.042</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.925</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">84.693</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Size</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">18,137</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">15.420</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1.464</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">12.015</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">14.414</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">15.248</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">16.239</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">20.646</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>AI</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">18,137</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">3.107</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">6.802</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.332</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1.060</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1.500</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">2.359</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">53.048</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>EI</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">17,105</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.002</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>ROA</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">18,130</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.823</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">3.252</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-22.366</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.020</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1.020</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">2.170</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">14.210</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Lev</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">18,137</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">41.406</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">18.544</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">4.400</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">27.250</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">41.440</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">54.470</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">93.384</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Decrease</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">17,620</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.232</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.422</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.000</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1.000</td></tr>
+            </table>
+            <div class="text-xs text-gray-500 mt-2"><li class="text-gray-800">註：本表樣本取自台灣上市櫃製造業（2014--2024）。所有連續型變數均已進行上下 1\% 之縮尾處理（Winsorization）。</div>
+        </div>
+        </li>
+
+<h3 id="subsec-14" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">相關係數分析</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">[H]
+\centering
+\caption{主要變數 Pearson 相關係數矩陣}</p>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">\footnotesize
+\begin{lccccccccc}
+\toprule
+變數 & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8) & (9) \\
+\midrule
+(1) $\Delta<span>LNSGA</span>$ & 1.000 &  &  &  &  &  &  &  &  \\
+(2) $\Delta<span>LNREV</span>$ & <strong>0.534</strong> & 1.000 &  &  &  &  &  &  &  \\
+(3) <span>Water\_Int</span> & -0.037 & -0.024 & 1.000 &  &  &  &  &  &  \\
+(4) <span>Waste\_Int</span> & 0.035 & 0.061 & 0.074 & 1.000 &  &  &  &  &  \\
+(5) <span>Water\_Rate</span> & -0.040 & -0.008 & <strong>0.446</strong> & <strong>0.270</strong> & 1.000 &  &  &  &  \\
+(6) <span>Size</span> & 0.089 & 0.075 & 0.061 & 0.069 & <strong>0.119</strong> & 1.000 &  &  &  \\
+(7) <span>AI</span> & -0.065 & <strong>-0.159</strong> & 0.040 & 0.070 & -0.021 & -0.032 & 1.000 &  &  \\
+(8) <span>ROA</span> & <strong>0.151</strong> & <strong>0.253</strong> & -0.043 & -0.001 & -0.017 & <strong>0.183</strong> & <strong>-0.196</strong> & 1.000 &  \\
+(9) <span>Lev</span> & 0.037 & 0.057 & -0.021 & 0.104 & -0.084 & <strong>0.309</strong> & -0.091 & -0.103 & 1.000 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+<li class="text-gray-800">註：對角線下方為 Pearson 相關係數；粗體字代表在 5\% 水準下達顯著（$|t| \ge 1.96$）。
+\end{tablenotes}
+</li></p>
+
+<h3 id="subsec-15" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">成本黏性主迴歸結果</h3>
+
+<div id="tab:reg_main" class="my-8 overflow-x-auto bg-white p-4 rounded-xl border border-gray-200 shadow-sm print:shadow-none print:border-none print:my-4 page-break-inside-avoid">
+            <div class="text-sm font-bold text-gray-900 mb-2 text-center">成本黏性主迴歸結果（當期，模型 1 至模型 6）</div>
+            <table class="min-w-full divide-y divide-gray-300 border-t-2 border-b-2 border-gray-900 my-2">
+                <tr><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">變數名稱</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">模型 1</th></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(水回收率\%)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">模型 2</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(水揭露)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">模型 3</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(廢棄物密集度)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">模型 4</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(廢棄物揭露)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">模型 5</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(廢棄物裁罰)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">模型 6</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(用水密集度)</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$\Delta<span>LNREV</span>$ ($\beta_1$)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.3208***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.3448***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.3500***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.3435***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.3935***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.3688***</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(4.21)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(25.96)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(15.62)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(24.75)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(15.65)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(19.34)</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$D \times \Delta<span>LNREV</span>$ ($\beta_2$)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-1.2681***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1473</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.6394***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1685</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0223</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0627</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-2.69)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-1.09)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-3.17)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-1.15)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-0.09)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-0.44)</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$<span>Env\_Var</span> \times D \times \Delta<span>LNREV</span>$ ($\beta_3$)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0004</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0354</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0086</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0043</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0013</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0305</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(0.22)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(0.89)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(0.62)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(0.42)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-1.25)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-1.29)</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$<span>Env\_Var</span>$ ($\beta_4$)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0001</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0052</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0008</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0018</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0003</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0129***</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-0.49)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(1.28)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-0.28)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(1.52)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-1.25)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-3.73)</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$<span>Size</span> \times D \times \Delta<span>LNREV</span>$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0823***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0092</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0353***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0100</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0040</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0032</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(2.84)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(1.02)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(2.80)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(1.01)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(0.26)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(0.36)</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$<span>AI</span> \times D \times \Delta<span>LNREV</span>$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0433***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0052***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0045**</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0054***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0058***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0038**</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-3.79)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-5.65)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-2.48)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-5.28)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-2.97)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-2.36)</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$<span>EI</span> \times D \times \Delta<span>LNREV</span>$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">374.4080</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">12.1236</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">110.1635</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">23.6002</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">24.6135</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-95.0811</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(1.37)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(0.33)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(1.39)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(0.56)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(0.31)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-1.56)</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$<span>ROA</span> \times D \times \Delta<span>LNREV</span>$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0104</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0126***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0165***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0144***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0211***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0150***</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(0.58)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(4.24)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(3.22)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(4.41)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(3.20)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(3.58)</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$<span>Lev</span> \times D \times \Delta<span>LNREV</span>$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0007</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0004</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0013</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0005</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0009</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0009</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-0.31)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(0.83)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(1.35)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(0.95)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(-0.90)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(1.24)</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$<span>Decrease</span> \times D \times \Delta<span>LNREV</span>$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.1595**</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0618***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0465</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0675***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0798**</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0225</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(2.18)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(3.26)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(1.27)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(3.48)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(2.12)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(0.94)</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">觀測值數量 (N)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">996</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">16,661</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">3,273</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">13,875</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">4,097</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">8,484</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">調整後 $R^2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.3442</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.3213</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.3568</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.3249</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.3778</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.3507</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">產業固定效果</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">Yes</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">Yes</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">Yes</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">Yes</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">Yes</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">Yes</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">年份固定效果</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">Yes</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">Yes</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">Yes</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">Yes</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">Yes</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">Yes</td></tr>
+            </table>
+            <div class="text-xs text-gray-500 mt-2"><li class="text-gray-800">註：括號內數字為公司層級叢集穩健 $t$ 值。$* p < 0.10$, $** p < 0.05$, $*** p < 0.01$。所有控制變數均已與 $D \times \Delta<span>LNREV</span>$ 交乘。</div>
+        </div>
+        </li>
+
+<h3 id="subsec-16" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">時間落差效應分析</h3>
+
+<div id="tab:lag_effect" class="my-8 overflow-x-auto bg-white p-4 rounded-xl border border-gray-200 shadow-sm print:shadow-none print:border-none print:my-4 page-break-inside-avoid">
+            <div class="text-sm font-bold text-gray-900 mb-2 text-center">時間落差效應：各遞延期之 $\beta_3$ 三重交乘項對照表</div>
+            <table class="min-w-full divide-y divide-gray-300 border-t-2 border-b-2 border-gray-900 my-2">
+                <tr><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">遞延期</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">模型 6</th></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(用水密集度)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">模型 3</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(廢棄物密集度)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">模型 1</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(水回收率\%)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">模型 2</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(水揭露)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">模型 4</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(廢棄物揭露)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">模型 5</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">(廢棄物裁罰)</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0305</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0086</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0004</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0354</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0043</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0013</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0190</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0013</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0015</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0062</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0016</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0003</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0164</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">--</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0014</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0103</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0039</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0009</td></tr>
+            </table>
+            <div class="text-xs text-gray-500 mt-2"><li class="text-gray-800">註：表中列出不同遞延期（$t-0, t-1, t-2$）下三重交乘項 $\beta_3$ 之迴歸係數與顯著性星號。$* p < 0.10$, $** p < 0.05$, $*** p < 0.01$。</div>
+        </div>
+        </li>
+
+<h3 id="subsec-17" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">產業異質性分析（高/低耗水污染產業）</h3>
+
+<div id="tab:hetero_results" class="my-8 overflow-x-auto bg-white p-4 rounded-xl border border-gray-200 shadow-sm print:shadow-none print:border-none print:my-4 page-break-inside-avoid">
+            <div class="text-sm font-bold text-gray-900 mb-2 text-center">產業異質性（高/低耗水污染產業）$\times$ 時間落差對照表</div>
+            <table class="min-w-full divide-y divide-gray-300 border-t-2 border-b-2 border-gray-900 my-2">
+                <tr><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">環境資源衡量變數</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">產業子樣本</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">遞延期</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">$\beta_2 (D \times \Delta<span>LNREV</span>)$</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">$\beta_3 (<span>Env</span> \times D \times \Delta<span>LNREV</span>)$</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">觀測值(N)</th></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水回收率\%</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-1.2681***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0004</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">996</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水回收率\%</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.6925</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0015</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">863</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水回收率\%</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.7174</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0014</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">731</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水回收率\%</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-1.4791***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0014</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">707</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水回收率\%</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.9405*</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0027</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">619</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水回收率\%</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-1.1518***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0013</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">527</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水回收率\%</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.5442</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0031</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">289</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水回收率\%</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.8746</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0015</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">244</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水回收率\%</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.2827</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0011</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">204</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1473</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0354</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">16,661</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1636</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0062</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">16,661</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1588</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0103</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">16,661</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0634</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0572</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">7,252</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1013</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0248</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">7,252</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1004</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0241</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">7,252</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1966</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0170</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">9,409</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.2068</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0372</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">9,409</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">水揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.2011</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0261</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">9,409</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.6394***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0086</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">3,273</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.4167</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0013</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1,653</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">--</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">--</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.7829**</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0112</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1,389</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-2.0335***</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0503*</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">699</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">--</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">--</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.5707**</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0352*</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1,884</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.4766</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0323</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">954</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">--</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">--</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1685</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0043</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">13,875</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1569</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0016</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">12,437</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1927</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0039</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">10,907</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1764</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0053</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">5,994</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0987</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0023</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">5,354</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.2272</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0041</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">4,682</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1578</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0032</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">7,881</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1887</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0108</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">7,083</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物揭露</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1841</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0031</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">6,225</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物裁罰金額</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0223</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0013</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">4,097</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物裁罰金額</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.2513</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0003</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">4,054</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物裁罰金額</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1215</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0009</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">4,002</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物裁罰金額</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0382</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0007</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">2,093</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物裁罰金額</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0767</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0010</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">2,096</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物裁罰金額</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1789</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0013</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">2,087</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物裁罰金額</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0081</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0021</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">2,004</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物裁罰金額</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.4054</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0031</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1,958</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">廢棄物裁罰金額</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0057</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0043</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">1,915</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">用水密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0627</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0305</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">8,484</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">用水密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1964</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0190</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">7,176</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">用水密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">全樣本</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.3569**</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0164</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">5,874</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">用水密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.1928</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0914**</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">4,099</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">用水密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.2135</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0618</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">3,540</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">用水密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">高耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.2785</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0400</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">2,964</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">用水密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-0$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0411</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0034</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">4,385</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">用水密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-1$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.2503</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">0.0166</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">3,636</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">用水密集度</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">低耗水</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$t-t-2$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.4459**</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">-0.0113</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">2,910</td></tr>
+            </table>
+            <div class="text-xs text-gray-500 mt-2"><li class="text-gray-800">註：高耗水／高污染產業涵蓋半導體、光電、電子零組件、化學、鋼鐵、紡織、造紙、水泥、玻璃陶瓷與食品業。$* p < 0.10$, $** p < 0.05$, $*** p < 0.01$。</div>
+        </div>
+        </li>
+
+<h3 id="subsec-18" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">實證結果討論與衡量修正剖析</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">實證分析展現出三項關鍵結論：
+<ol class="list-decimal list-inside space-y-1 my-3 pl-2">
+    <li class="text-gray-800"><strong>核心發現一：用水密集度顯著加劇高污染產業之成本黏性。</strong> 在高耗水/高污染產業當期（表 <a href="#tab:hetero_results" class="text-blue-600 underline font-medium print:no-underline print:text-black">tab:hetero_results</a>），用水密集度之三重交乘項 $\beta_3 = -0.0914$ ($t = -2.11, p = 0.0346 < 0.05$)，顯著支持 H6。證明在取水與廢水處置需求高之製造業中，單位營收之水資源依賴越深，專用設施之折舊與維運越難在營收下降時即時裁撤。
+    </li><li class="text-gray-800"><strong>核心發現二：廢棄物密集度顯著加劇高污染產業遞延期之成本黏性。</strong> 在高污染產業遞延一期（$t-1$），廢棄物密集度之 $\beta_3 = -0.0503$ ($t = -1.76, p = 0.0781 < 0.10$)，支持 H3 與 H6，反映廢棄物長期處置合約之剛性與時間落差特徵。
+    </li><li class="text-gray-800"><strong>衡量修正剖析：裁罰金額連續標準化去除偽顯著偏誤。</strong> 過去文獻採「罰鍰次數」得出顯著結果，實受單一公司單一年度 366 次極端罰鍰次數扭曲。本研究改採嚴謹之「裁罰金額佔總資產」連續指標後，全樣本與子樣本之 $\beta_3$ 均不顯著，客觀修正了過去衡量不當產生之偏誤。
+</li></ol></p>
+
+<hr class="my-8 border-gray-300 print:hidden page-break">
+
+<h2 id="sec-7" class="text-2xl font-bold text-gray-900 mt-10 mb-4 pb-2 border-b-2 border-blue-800 page-break-before">第五章 結論與建議</h2>
+
+<h3 id="subsec-19" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">研究結論</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">本研究以 2014 至 2024 年台灣上市櫃製造業為樣本，實證檢驗水資源與廢棄物管理對成本黏性之影響：
+<ol class="list-decimal list-inside space-y-1 my-3 pl-2">
+    <li class="text-gray-800">台灣製造業普遍存在顯著之成本黏性（$\beta_2 < 0$）。
+    </li><li class="text-gray-800">用水密集度於高耗水/高污染產業當期呈顯著加劇效果（$\beta_3 = -0.0914, p < 0.05$）；廢棄物密集度於高污染產業遞延一期呈顯著加劇效果（$\beta_3 = -0.0503, p < 0.10$）。
+    </li><li class="text-gray-800">資訊揭露指標（水揭露、廢棄物揭露）之調節效果未達顯著水準，顯示實質資源使用密集度比單純資訊揭露具更強之決定力。
+    </li><li class="text-gray-800">廢棄物裁罰金額在去除極端值後對成本黏性無顯著影響，成功修正過去採罰鍰次數之偏誤。
+</li></ol></p>
+
+<h3 id="subsec-20" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">理論與學術貢獻</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">本研究之貢獻包含：(1) 將環境因素由抽象之 ESG 評分推進至可量化之「資源使用密集度」；(2) 揭示環境成本行為具「高污染產業依存與遞延發酵」特徵；(3) 釐清過去採用「罰鍰次數」受極端值扭曲之偏誤，展現衡量之學術嚴謹度。</p>
+
+<h3 id="subsec-21" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">管理與政策意涵</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">在管理實務上，高環境使用密集度企業應意識到專用處置設施與合約將於景氣下行時形成營運剛性負擔，宜透過製程水循環與資源減量解開對環境資源之剛性依賴。在政策上，建議金管會與環境部強化「用水與廢棄物密集度」之標準化揭露，並鼓勵金融機構將實質使用密集度納入永續融資與營運韌性評估。</p>
+
+<h3 id="subsec-22" class="text-xl font-semibold text-gray-800 mt-6 mb-3 border-l-4 border-blue-600 pl-3">研究限制與未來方向</h3>
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">本研究受限於台灣單一市場與上市櫃製造業樣本。未來可延伸至跨國比較、結合外生衝擊（如 2021 年台灣大旱）採雙重差分法（DiD）強化因果識別，並檢視資本市場是否對環境使用密集度引致之成本黏性給予風險溢價。</p>
+
+<hr class="my-8 border-gray-300 print:hidden page-break">
+
+<h2 id="sec-8" class="text-2xl font-bold text-gray-900 mt-10 mb-4 pb-2 border-b-2 border-blue-800 page-break-before">參考文獻</h2>
+
+<ol class="list-decimal list-inside space-y-1 my-3 pl-2">
+    <li class="text-gray-800">Anderson, M. C., Banker, R. D., \& Janakiraman, S. N. (2003). Are selling, general, and administrative costs ``sticky''? <em>Journal of Accounting Research</em>, 41(1), 47--63.
+    </li><li class="text-gray-800">Zeng, J., Peng, M., \& Chan, K. C. The impact of low-carbon city policy on corporate cost stickiness. Working paper.
+    </li><li class="text-gray-800">Jiang, W., \& Yang, W. (2024). ESG disclosure and corporate cost stickiness: Evidence from supply-chain relationships. <em>Economics Letters</em>, 238, 111697.
+    </li><li class="text-gray-800">李亞峮（2026）。ESG負面事件與媒體報導對ESG績效與盈餘管理間之關聯的調節效果。國立臺北大學會計學系碩士論文。
+    </li><li class="text-gray-800">劉翠山（2026）。人力資本、ESG績效(S)、ESG重大性揭露與企業市場價值關係之調節型中介模型探討。銘傳大學會計學系碩士論文。
+    </li><li class="text-gray-800">吳東蓄（2026）。ESG績效對代理成本之影響。靜宜大學會計學系碩士論文。
+    </li><li class="text-gray-800">戴郁樺（2026）。ESG投入、金融創新與綠色創新對銀行風險與績效管理之影響。朝陽科技大學財務金融系碩士論文。
+    </li><li class="text-gray-800">楊宜蓁（2026）。ESG及負債比率對企業信用風險之關聯性研究——以台灣上市電子業為例。國立彰化師範大學財務金融技術學系碩士論文。
+    </li><li class="text-gray-800">楊珆佳（2026）。臺灣金控公司ESG、金融健全指標與巴塞爾協定風險性之研究。靜宜大學會計學系碩士論文。
+    </li><li class="text-gray-800">富得運（2026）。ESG風險管理與企業財務績效：新興市場中企業規模之調節效果。正修科技大學工業工程與管理碩士班碩士論文。
+    </li><li class="text-gray-800">毛祚祥（2026）。探討台灣上市櫃觀光餐旅類股企業ESG指標、系統性風險與財務績效之關係。國立高雄科技大學觀光管理系碩士論文。
+    </li><li class="text-gray-800">陳俊佑（2026）。ESG績效與盈餘的價值攸關性之影響。國防大學管理學院財務管理學系碩士論文。
+    </li><li class="text-gray-800">許嘉芸（2026）。企業資源密集度管理對財務績效與ESG效率的影響。國立陽明交通大學經營管理研究所碩士論文。
+    </li><li class="text-gray-800">楊博勝（2026）。ESG資訊之揭露對於企業特有風險之影響：以台灣上市櫃公司為例。國立陽明交通大學經營管理研究所博士論文。
+    </li><li class="text-gray-800">蘇姿云（2026）。ESG對盈餘管理的抑制效果：家族企業的差異分析。國立成功大學財務金融研究所碩士論文。
+    </li><li class="text-gray-800">張岑華（2026）。ESG績效與漂綠對權益資金成本之影響：以台灣為例。世新大學財務金融學系碩士論文。
+    </li><li class="text-gray-800">張筱婕（2026）。漂綠行為對企業ESG之影響：媒體揭露的調節效果。世新大學財務金融學系碩士論文。
+    </li><li class="text-gray-800">張凱瑜（2025）。成本僵固性與企業風險關聯性之研究——以台灣上市櫃公司為例。朝陽科技大學會計系碩士論文。
+    </li><li class="text-gray-800">王惠洳（2025）。獨立董事連結關係與成本僵固性之關聯。國立臺中科技大學會計資訊系碩士論文。
+    </li><li class="text-gray-800">陳思婷（2025）。移轉訂價操弄與成本僵固性間之關聯性。天主教輔仁大學會計學系碩士論文。
+    </li><li class="text-gray-800">辛珏辰（2025）。ESG活動與成本僵固性——兼論COVID-19的影響。國立成功大學會計學系碩士論文。
+    </li><li class="text-gray-800">張湘泓（2025）。企業併購時商定留用權之勞工權益強化——由ESG觀點出發。國立臺灣大學法律學系碩士論文。
+    </li><li class="text-gray-800">魏郁芳（2025）。企業內部因素與外部壓力對水資源揭露之關聯性研究：以臺灣上市櫃公司為例。國立臺灣師範大學永續管理與環境教育研究所碩士論文。
+    </li><li class="text-gray-800">鍾文淇（2025）。影響一般廢棄物回收率成效之研究：以直轄市為例。國立臺北大學公共行政暨政策學系碩士論文。
+    </li><li class="text-gray-800">李依潔（2024）。環境構面永續發展指標、企業策略與成本僵固性。中原大學會計學系碩士論文。
+    </li><li class="text-gray-800">陳樸（2024）。台灣上市食品公司水資源永續績效評量方法之研究。國立臺灣大學環境工程學研究所碩士論文。
+    </li><li class="text-gray-800">顏宥盈（2024）。成本僵固性與內外部監督效果之探討。國立臺中科技大學會計資訊系碩士論文。
+    </li><li class="text-gray-800">謝雅筑（2024）。飛行員CEO與成本僵固性。國立成功大學財務金融研究所碩士論文。
+    </li><li class="text-gray-800">張芳瑜（2023）。成本僵固性對企業績效之影響——以總體經濟變數為調節變數。國立中興大學企業管理學系碩士論文。
+    </li><li class="text-gray-800">張宸杰（2023）。內部控制、財務危機對成本僵固性之影響。國立臺中科技大學會計資訊系碩士論文。
+    </li><li class="text-gray-800">劉佳熒（2022）。供應鏈關係對供應商之成本行為的影響。亞洲大學經營管理學系博士論文。
+    </li><li class="text-gray-800">邱圓雅（2020）。內部債與成本僵固性之關聯性。國立臺北商業大學會計財稅碩士班碩士論文。
+    </li><li class="text-gray-800">鄭紹君（2018）。企業社會責任活動與成本僵固性之關聯——以企業社會責任願景調節。國立中央大學會計研究所碩士論文。
+</li></ol>
+
+<hr class="my-8 border-gray-300 print:hidden page-break">
+
+<h2 id="sec-9" class="text-2xl font-bold text-gray-900 mt-10 mb-4 pb-2 border-b-2 border-blue-800 page-break-before">附錄：變數定義對照表</h2>
+
+<div id="tab:var_def" class="my-8 overflow-x-auto bg-white p-4 rounded-xl border border-gray-200 shadow-sm print:shadow-none print:border-none print:my-4 page-break-inside-avoid">
+            <div class="text-sm font-bold text-gray-900 mb-2 text-center">研究變數定義與資料來源對照表</div>
+            <table class="min-w-full divide-y divide-gray-300 border-t-2 border-b-2 border-gray-900 my-2">
+                <tr><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">l}
+
+<p class="mb-4 leading-relaxed text-gray-800 text-justify">變數代碼</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">變數定義與運算公式</th><th class="px-3 py-2 border-b-2 border-gray-900 bg-gray-100 font-semibold text-center text-xs text-gray-800">資料來源</th></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$\Delta<span>LNSGA</span>$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$\ln(<span>SGA</span>_{i,t}) - \ln(<span>SGA</span>_{i,t-1})$，營業費用對數變動率</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">TEJ IFRS 財務資料庫</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$\Delta<span>LNREV</span>$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$\ln(<span>REV</span>_{i,t}) - \ln(<span>REV</span>_{i,t-1})$，營業收入對數變動率</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">TEJ IFRS 財務資料庫</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$D$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">營收下降虛擬變數（$<span>REV</span>_{i,t} < <span>REV</span>_{i,t-1}$ 為 1，否則 0）</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">TEJ IFRS 財務資料庫</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Water\_Intensity</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">總用水量（千公噸）/ 營業收入淨額（千元）</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">TESG 企業用水量</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Waste\_Intensity</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">每百萬營收之廢棄物產生重量（公噸）</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">TESG 廢棄物揭露</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Water\_Rate</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">製程水回收率\%</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">TESG 企業用水量</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Water\_Disc</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">當年有水資料紀錄設為 1，否則 0</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">TESG 企業用水量</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Waste\_Disc</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">GRI 廢棄物管理揭露度評分</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">TESG 廢棄物揭露</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Waste\_Fine</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">事業廢棄物違規裁罰總金額（千元）/ 資產總額</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">TESG 污染源裁處明細</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Size</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">$\ln(<span>資產總額</span>)$</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">TEJ IFRS 財務資料庫</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>AI</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">資產總額 / 營業收入淨額</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">TEJ IFRS 財務資料庫</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>EI</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">員工人數 / 營業收入淨額</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">TEJ IFRS 財務資料庫</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>ROA</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">稅後息前資產報酬率 (\%)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">TEJ IFRS 財務資料庫</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Lev</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">負債總額 / 資產總額 (\%)</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">TEJ IFRS 財務資料庫</td></tr><tr class="hover:bg-gray-50"><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center"><span>Decrease</span></td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">連續兩年營收下降虛擬變數（連兩年下降設為 1，否則 0）</td><td class="px-3 py-1.5 border-b border-gray-200 text-xs text-gray-700 text-center">TEJ IFRS 財務資料庫</td></tr>
+            </table>
+            
+        </div></p>
+                </div>
+            </div>
+
+            <!-- LaTeX 原始碼檢視 -->
+            <div id="view-source" class="hidden bg-slate-900 text-slate-200 p-6 rounded-xl border border-slate-800 overflow-x-auto shadow-inner font-mono text-xs leading-6 no-print">
+                <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-800">
+                    <span class="font-bold text-blue-400">main.tex (LaTeX Source Code)</span>
+                    <span class="text-slate-500">Total lines: 543</span>
+                </div>
+                <pre><code class="language-tex">\documentclass[12pt,a4paper]{article}
+
+% ---------------- 巨集包與環境設定 ----------------
+\usepackage{xeCJK}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{array}
+\usepackage{setspace}
+\usepackage[threeparttable]{threeparttable}
+
+% 版面邊界與行距設定
+\geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+\onehalfspacing
+
+% 字型設定（中文：標楷體，英文：Times New Roman）
+\setCJKmainfont[AutoFakeBold=true,AutoFakeSlant=true]{標楷體} % 相容 DFKai-SB / BiauKai
+\setmainfont{Times New Roman}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=blue,
+    pdftitle={企業水管理與廢棄物管理對成本黏性之影響},
+    pdfauthor={國立中山大學財務管理學系碩士班}
+}
+
+\title{\textbf{\Large 國立中山大學財務管理學系碩士論文}\\
+\vspace{0.5cm}
+\textbf{\huge 企業水管理與廢棄物管理對成本黏性之影響}\\
+\vspace{0.3cm}
+\textbf{\large ——以台灣上市櫃製造業之環境績效與資訊揭露為例}\\
+\vspace{0.3cm}
+\large{The Effect of Corporate Water and Waste Management on Cost Stickiness:\\ Evidence from Taiwanese Listed Manufacturing Firms}}
+
+\author{\textbf{研究生：撰} \quad \textbf{指導教授：博士}}
+\date{\large 中華民國 115 年 6 月}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+% ---------------- 中英文摘要 ----------------
+\section*{摘要}
+\addcontentsline{toc}{section}{摘要}
+
+本研究探討企業水管理與廢棄物管理之環境績效與資訊揭露，對成本黏性（cost stickiness）的影響。以台灣上市櫃製造業（排除金融保險業）2014 至 2024 年資料為樣本，共 18,137 個公司—年觀測值（1,945 家公司）。本研究採 Anderson, Banker and Janakiraman (2003) 成本黏性模型，於營業費用變動對營收變動之敏感度中，加入收入下降虛擬變數與環境變數之三重交乘，並控制產業與年份固定效果、以公司叢集穩健標準誤估計。本研究以「環境使用密集度」（用水密集度與廢棄物密集度）為核心，並以水與廢棄物之資訊揭露與違規裁罰為輔。
+
+實證結果顯示：樣本整體存在顯著成本黏性；核心之使用密集度中，用水密集度於高污染產業當期對成本黏性呈顯著加劇效果（$\beta_3 \approx -0.0914$, $p &lt; 0.05$，樣本涵蓋度遠高於水回收率），廢棄物密集度亦於高污染產業遞延一期呈顯著加劇效果（$\beta_3 \approx -0.0503$, $p &lt; 0.10$）；相對地，資訊揭露與違規裁罰之調節效果則不穩健。研究支持「企業對環境資源之使用密集度越高、於營收下降時成本越難削減」之推論，且效果集中於高污染產業。
+
+\paragraph{\textbf{關鍵詞：}} 成本黏性、水管理、廢棄物管理、環境資訊揭露、固定效果模型
+
+\newpage
+
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+
+This study examines how corporate water and waste management—both environmental performance and information disclosure—affect cost stickiness. Using Taiwanese listed manufacturing firms (excluding financials) over 2014--2024 (18,137 firm-year observations), we adopt the Anderson, Banker and Janakiraman (2003) framework and add triple interactions of a revenue-decrease dummy with environmental variables, controlling for industry and year fixed effects with firm-clustered robust standard errors.
+
+We find significant overall cost stickiness. Core resource intensity measures show that water intensity significantly intensifies cost stickiness among high-pollution industries in the current period ($\beta_3 \approx -0.0914$, $p &lt; 0.05$), while waste intensity significantly intensifies cost stickiness under lagged specifications ($\beta_3 \approx -0.0503$, $p &lt; 0.10$). In contrast, disclosure and administrative fine measures show no robust moderating effects. The empirical evidence supports the theoretical argument that higher operational reliance on environmental resources creates downward adjustment rigidities during sales downturns.
+
+\paragraph{\textbf{Keywords:}} Cost Stickiness, Water Management, Waste Management, Environmental Disclosure, Fixed-Effects Model
+
+\newpage
+\tableofcontents
+\newpage
+
+% ---------------- 第一章 緒論 ----------------
+\section{第一章 緒論}
+
+\subsection{研究背景與動機}
+
+在氣候變遷、淨零轉型與資源稀缺的多重壓力下，水資源與廢棄物已從企業社會責任的邊陲議題，逐漸成為攸關營運存續的核心風險。台灣為海島型經濟且製造業高度密集，半導體、光電、面板、化工、鋼鐵與紡織等支柱產業普遍具有高取水、高廢水與高廢棄物之特性；2021 年台灣遭逢逾半世紀最嚴重乾旱，中部科學園區一度面臨限水，凸顯水資源供給對高耗水製造業之關鍵性。與此同時，主管機關陸續要求上市櫃公司自 2023 年起分階段編製永續報告書、並加嚴廢棄物清理與環境污染之裁處，使環境資源之取得、循環、處理與法遵成本，實質嵌入企業之營運成本結構。
+
+企業成本如何隨營收變動而調整，是管理會計長期關注的課題。Anderson, Banker and Janakiraman (2003, 以下簡稱 ABJ) 提出成本僵固性（cost stickiness，或稱成本黏性）概念，指出當營收下降時，營業費用向下調整的幅度小於營收上升時向上調整的幅度，呈現顯著的非對稱性；其根源在於管理者的資源調整決策與調整成本：當面臨需求下滑時，若管理者預期衰退僅屬短暫，或裁撤與重建專用資源之成本高昂，便傾向保留閒置產能與人力，形成成本黏性。
+
+環境資源的投入具備高投入、長週期、專用性與不可逆之特徵。企業為提升水回收、處理廢水與廢棄物，往往需建置廢水處理廠、水循環系統與專用處理設施，並簽訂長期委外清運與處理合約；這類與產能高度綁定的環境支出，於營收下降時難以即時削減，理論上將加劇成本黏性。另一方面，環境資訊之揭露被視為降低資訊不對稱、矯正管理者過度樂觀預期之機制，可能反向緩解成本黏性。因此，環境因素對成本黏性的影響，同時存在「實質投入加劇」與「資訊透明緩解」兩股方向相反的力量。
+
+既有將環境因素連結成本行為的研究，多以整體 ESG 評分或揭露為衡量，較少深入「水」與「廢棄物」等個別、可量化之實質環境構面，且常以「揭露有無」或「罰鍰次數」等粗略代理，易受衡量誤差與單一極端值干擾。本研究主張，真正貼近調整成本本質的，是企業對環境資源之「使用密集度」——單位營收所耗用之水量與產生之廢棄物量，直接反映其營運與環境資源之綁定程度及專用處理投入。相對於水回收率等揭露樣本稀少、變異有限之指標，用水密集度（總用水量／營收）之樣本涵蓋度更高，更能提供穩健且具檢定力之證據。
+
+\subsection{研究目的與研究問題}
+
+本研究之研究目的有四：
+\begin{enumerate}
+    \item 建立以「環境使用密集度」為核心之成本黏性分析架構，檢視用水密集度與廢棄物密集度是否顯著影響台灣製造業之成本黏性。
+    \item 以資訊揭露（水揭露、廢棄物揭露品質）與違規裁罰（廢棄物裁罰金額）為輔助構面，比較「實質使用」與「資訊透明度」兩類機制之相對解釋力。
+    \item 考量環境投入之效益與僵固性需時間發酵，檢驗當期與遞延（$t-1, t-2$）之差異。
+    \item 考量台灣製造業次產業之環境依賴度差異甚大，比較高污染與低污染產業之異質性，釐清效果集中之情境。
+\end{enumerate}
+
+\subsection{研究貢獻與論文架構}
+
+本研究之預期貢獻可分三方面。理論上，將環境因素對成本行為之影響，由抽象之整體 ESG 或 CSR 評分，推進至可量化、可比較之「實質使用密集度」，使調整成本理論在環境情境下獲得更貼近本質之檢驗。衡量上，本研究以連續之「用水密集度」與「廢棄物裁罰金額」取代樣本稀少之水回收率與易受極端值主導之罰鍰次數，兼顧樣本涵蓋度與衡量效度。方法上，結合時間落差與高／低污染產業異質性，揭示環境成本效應具「產業依存與遞延顯現」之特徵。
+
+本論文後續結構安排如下：第二章為文獻探討與研究假說發展；第三章說明研究資料來源、樣本篩選與實證模型設計；第四章展示實證結果與詳細討論；第五章歸納結論、管理意涵與未來研究建議。
+
+\newpage
+
+% ---------------- 第二章 文獻探討與研究假說 ----------------
+\section{第二章 文獻探討與研究假說}
+
+\subsection{成本僵固性理論與 ABJ 基礎模型}
+
+ABJ (2003) 以美國上市公司之銷售、一般及管理費用（SG\&amp;A costs）為對象，發現當銷貨收入每增加 1\% 時，銷管費用平均增加 0.55\%；然而當銷貨收入下降 1\% 時，銷管費用卻僅平均減少 0.35\%。此一非對稱調整現象顛覆了傳統會計學中「變動成本隨作業量等比例變動」之簡化假設。
+
+ABJ (2003) 提出「意圖性資源配置與調整成本」理論架構。當企業面臨銷貨收入下滑時，管理者面臨兩難：若立即縮減閒置資源，須承受昂貴的向下調整成本（如資遣費、合約違約金、處分資產折價）；且當未來需求回升時，還需再次支付重新購置之向上調整成本。若預期衰退僅屬暫時性且調整成本高昂，管理者會選擇保留閒置資源，導致費用減少幅度小於營收下降幅度，因而產生成本僵固性。
+
+\subsection{環境資源實質使用與成本僵固性（實質投入觀點）}
+
+Zeng, Peng, and Chan 探討低碳城市政策對企業成本僵固性之衝擊，發現環境政策壓力會促使企業加大綠色創新與專用環保設施投入，在融資限制約束下顯著推升費用之向下調整成本，從而加劇成本僵固性。李依潔（2024）以台灣上市櫃公司為樣本，發現企業在 ESG 環境構面之投入績效越高，其成本僵固性越強。
+
+本研究主張，企業在「水資源」與「廢棄物」管理上之實質資源投入，具備三個推升向下調整成本之特質：(1) **資產專用性與不可逆性**（水循環系統、純水設施、零排放 ZLD 系統處分價值幾近於零）；(2) **合約剛性與長期承諾**（工業區污水處理與廢棄物清運簽訂長期合約）；(3) **法律強制合規下限**（水污染防治法與廢棄物清理法設有法定合規底線，絕不可因營收衰退而終止處置）。據此提出假說 H1、H3：
+
+\begin{quote}
+\textbf{假說 H1（水回收率）：} 在其他條件不變下，企業之水資源回收率越高，當銷貨收入下降時，其營業費用之成本黏性越大（$\beta_3 &lt; 0$）。
+\end{quote}
+
+\begin{quote}
+\textbf{假說 H3（廢棄物密集度）：} 在其他條件不變下，企業每百萬營收之廢棄物產生量越高，當銷貨收入下降時，其營業費用之成本黏性越大（$\beta_3 &lt; 0$）。
+\end{quote}
+
+\subsection{環境資訊揭露品質與成本僵固性（資訊透明度觀點）}
+
+Jiang and Yang (2024) 在 \textit{Economics Letters} 發表的最新研究指出，供應鏈網絡中客戶端之 ESG 資訊揭露，能有效降低資訊不對稱，發揮強大的外部監督效果，進而矯正供應商管理者的過度樂觀預期（Managerial Over-optimism），使其在需求下降時能更及時處置閒置資源，顯著緩解成本僵固性。
+
+高質量之環境資訊揭露（`Water_Disc`, `Waste_Disc`）具備兩大機制：(1) 抑制過度樂觀偏誤與資源囤積；(2) 強化外部利害關係人與董事會監督。據此提出假說 H2、H4：
+
+\begin{quote}
+\textbf{假說 H2（水資訊揭露）：} 在其他條件不變下，主動揭露水資源管理資訊之企業，當銷貨收入下降時，其營業費用之成本黏性較低（$\beta_3 &gt; 0$）。
+\end{quote}
+
+\begin{quote}
+\textbf{假說 H4（廢棄物揭露品質）：} 在其他條件不變下，事業廢棄物管理資訊之揭露品質越高，當銷貨收入下降時，其營業費用之成本黏性較低（$\beta_3 &gt; 0$）。
+\end{quote}
+
+\subsection{事業廢棄物違規裁罰與成本僵固性（合規風險觀點）}
+
+當企業因違反廢棄物清理法而遭受主管機關裁罰（`Waste_Fine`，以裁罰金額佔總資產比率衡量）時，將引發顯著之「強制性法遵與改善支出」。違規裁罰引發改善命令與罰鍰，屬於法律強制規範之支出，具有高度剛性，在營收衰退時形成費用向下縮減之額外障礙。據此提出假說 H5：
+
+\begin{quote}
+\textbf{假說 H5（廢棄物違規裁罰）：} 在其他條件不變下，企業之事業廢棄物違規裁罰金額佔資產比例越高，當銷貨收入下降時，其營業費用之成本黏性越大（$\beta_3 &lt; 0$）。
+\end{quote}
+
+\subsection{資源使用密集度、時間落差與產業異質性（核心假說）}
+
+既有文獻採用二元揭露變數或全域型 ESG 評分，易受樣本選擇偏誤干擾。本研究建構「用水密集度」（`Water_Intensity` = 總用水量 / 營收）與「廢棄物密集度」（`Waste_Intensity` = 廢棄物總量 / 營收）作為核心自變數。此外，環境資源之影響受到「時間發酵（$t-1, t-2$）」與「高耗水／高污染產業異質性」之情境調節。據此提出核心假說 H6：
+
+\begin{quote}
+\textbf{假說 H6（核心假說——資源使用密集度與產業異質性）：} 在其他條件不變下，企業之用水密集度與廢棄物密集度越高，當銷貨收入下降時，其營業費用之成本黏性越大（$\beta_3 &lt; 0$）；且此一加劇效應顯著集中於高耗水／高污染之製造業子樣本中。
+\end{quote}
+
+\subsection{研究假說與理論機制對照表}
+
+\begin{table}[H]
+\centering
+\caption{研究假說與理論機制彙總表}
+\label{tab:hypotheses_summary}
+\small
+\begin{tabular}{lp{5.5cm}ccp{4.5cm}}
+\toprule
+假說 &amp; 研究假說內容概要 &amp; 對應變數 &amp; 預期 $\beta_3$ &amp; 主要理論機制路徑 \\
+\midrule
+\textbf{H1} &amp; 水資源回收率越高，成本黏性越大 &amp; \text{Water\_Rate} &amp; $&lt; 0$ &amp; 實質投入與調整成本路徑 \\
+\textbf{H2} &amp; 主動揭露水資源資訊，成本黏性較低 &amp; \text{Water\_Disc} &amp; $&gt; 0$ &amp; 資訊透明度與監督機制路徑 \\
+\textbf{H3} &amp; 廢棄物產生密集度越高，成本黏性越大 &amp; \text{Waste\_Intensity} &amp; $&lt; 0$ &amp; 實質投入與調整成本路徑 \\
+\textbf{H4} &amp; 廢棄物揭露品質越高，成本黏性較低 &amp; \text{Waste\_Disc} &amp; $&gt; 0$ &amp; 資訊透明度與監督機制路徑 \\
+\textbf{H5} &amp; 廢棄物違規裁罰金額越高，成本黏性越大 &amp; \text{Waste\_Fine} &amp; $&lt; 0$ &amp; 強制合規與底線成本路徑 \\
+\textbf{H6} &amp; 用水與廢棄物密集度越高，成本黏性越大；且集中於高污染產業 &amp; \text{Water\_Int / Waste\_Int} &amp; $&lt; 0$ &amp; 核心使用密集度與產業異質性路徑 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+% ---------------- 第三章 資料描述與研究方法 ----------------
+\section{第三章 資料描述與研究方法}
+
+\subsection{資料來源與樣本篩選}
+
+本研究實證分析資料主要取自台灣經濟新報（TEJ）資料庫，涵蓋：
+\begin{enumerate}
+    \item \textbf{財務數據：} 取自「TEJ IFRS 以合併為主財務（單季）—一般產業Ⅳ」資料庫。
+    \item \textbf{環境績效與揭露數據：} 取自「TESG 企業用水量」與「TESG 廢棄物揭露」資料庫。
+    \item \textbf{環境違規與風險數據：} 取自「TESG 列管事業污染源裁處明細」資料庫。
+    \item \textbf{產業別分類數據：} 取自「TEJ Company DB 屬性基本資料」之 TSE 產業別。
+\end{enumerate}
+
+本研究以 2014 至 2024 年台灣上市櫃製造業公司為樣本，排除金融保險業與缺失值後，全樣本資料庫共包含 18,137 個公司—年觀測值（涵蓋 1,945 家獨立上市櫃製造業公司）。所有連續型變數均已進行前後 1\% 的縮尾處理（Winsorization）。
+
+\subsection{實證模型與計量方法}
+
+本研究基於 ABJ (2003) 成本僵固性實證模型，設定如下：
+
+\begin{equation}
+\begin{aligned}
+\Delta\text{LNSGA}_{i,t} = &amp;\;\beta_0 + \beta_1 \cdot \Delta\text{LNREV}_{i,t} + \beta_2 \cdot (D_{i,t} \times \Delta\text{LNREV}_{i,t}) \\
+&amp; + \beta_3 \cdot (\text{Env\_Var}_{i,t} \times D_{i,t} \times \Delta\text{LNREV}_{i,t}) + \beta_4 \cdot \text{Env\_Var}_{i,t} \\
+&amp; + \sum_k \gamma_k \cdot [\text{Control}_{k,i,t} \times D_{i,t} \times \Delta\text{LNREV}_{i,t}] \\
+&amp; + \text{Industry}_{j} + \text{Year}_{t} + \varepsilon_{i,t}
+\end{aligned}
+\end{equation}
+
+其中，$\Delta\text{LNSGA}_{i,t} = \ln(\text{SGA}_{i,t}) - \ln(\text{SGA}_{i,t-1})$；$\Delta\text{LNREV}_{i,t} = \ln(\text{REV}_{i,t}) - \ln(\text{REV}_{i,t-1})$；$D_{i,t}$ 為收入下降虛擬變數（$\text{REV}_{i,t} &lt; \text{REV}_{i,t-1}$ 時為 1，否則為 0）。$\beta_2 &lt; 0$ 證實成本黏性存在；$\beta_3$ 為核心調節係數。估計採 OLS 加上 SASB 產業固定效果與年份固定效果，標準誤採公司層級叢集穩健標準誤（Firm-clustered Robust Standard Errors）。
+
+\subsection{變數說明與衡量}
+
+被解釋變數為營業費用變動率 $\Delta\text{LNSGA}$。核心與輔助自變數（`Env_Var`）分別為：
+\begin{enumerate}
+    \item \textbf{用水密集度 (\text{Water\_Intensity})：} 總用水量（千公噸）/ 營業收入淨額（千元）。樣本數 $N = 8,484$。
+    \item \textbf{廢棄物密集度 (\text{Waste\_Intensity})：} 每百萬營收之廢棄物產生量（公噸）。樣本數 $N = 3,273$。
+    \item \textbf{水回收率\% (\text{Water\_Rate}) 與水揭露 (\text{Water\_Disc})：} 水回收率為百分比；水揭露為二元變數。
+    \item \textbf{廢棄物揭露品質 (\text{Waste\_Disc})：} GRI 廢棄物管理揭露度（連續得分）。
+    \item \textbf{廢棄物裁罰金額佔資產 (\text{Waste\_Fine})：} 事業廢棄物違規總金額（千元）/ 資產總額。
+\end{enumerate}
+
+控制變數包含：公司規模 ($\text{Size}$)、資產密集度 ($\text{AI}$)、員工密集度 ($\text{EI}$)、資產報酬率 ($\text{ROA}$)、財務槓桿 ($\text{Lev}$)、連續兩年營收下降 ($\text{Decrease}$)。
+
+\newpage
+
+% ---------------- 第四章 實證結果與討論 ----------------
+\section{第四章 實證結果與討論}
+
+\subsection{敘述性統計}
+
+\begin{table}[H]
+\centering
+\caption{主要變數敘述統計表}
+\label{tab:desc_stats}
+\small
+\begin{tabular}{lrrrrrrrr}
+\toprule
+變數名稱 &amp; 樣本數(N) &amp; 平均值 &amp; 標準差 &amp; 最小值 &amp; P25 &amp; 中位數 &amp; P75 &amp; 最大值 \\
+\midrule
+$\Delta\text{LNSGA}$ &amp; 18,137 &amp; 0.031 &amp; 0.194 &amp; -0.647 &amp; -0.057 &amp; 0.030 &amp; 0.117 &amp; 0.738 \\
+$\Delta\text{LNREV}$ &amp; 18,137 &amp; 0.014 &amp; 0.323 &amp; -1.234 &amp; -0.108 &amp; 0.021 &amp; 0.138 &amp; 1.308 \\
+$D$ &amp; 18,137 &amp; 0.449 &amp; 0.497 &amp; 0.000 &amp; 0.000 &amp; 0.000 &amp; 1.000 &amp; 1.000 \\
+\text{Water\_Intensity} &amp; 9,033 &amp; 0.099 &amp; 0.400 &amp; 0.000 &amp; 0.002 &amp; 0.009 &amp; 0.041 &amp; 3.338 \\
+\text{Waste\_Intensity} &amp; 3,591 &amp; 0.449 &amp; 1.148 &amp; 0.000 &amp; 0.021 &amp; 0.121 &amp; 0.275 &amp; 8.139 \\
+\text{Water\_Rate} &amp; 1,039 &amp; 35.084 &amp; 31.671 &amp; 0.000 &amp; 9.500 &amp; 23.300 &amp; 54.340 &amp; 99.864 \\
+\text{Waste\_Disc} &amp; 15,123 &amp; 0.497 &amp; 1.236 &amp; 0.000 &amp; 0.000 &amp; 0.000 &amp; 0.000 &amp; 5.000 \\
+\text{Waste\_Fine} &amp; 4,187 &amp; 2.661 &amp; 10.050 &amp; 0.000 &amp; 0.000 &amp; 0.042 &amp; 0.925 &amp; 84.693 \\
+\text{Size} &amp; 18,137 &amp; 15.420 &amp; 1.464 &amp; 12.015 &amp; 14.414 &amp; 15.248 &amp; 16.239 &amp; 20.646 \\
+\text{AI} &amp; 18,137 &amp; 3.107 &amp; 6.802 &amp; 0.332 &amp; 1.060 &amp; 1.500 &amp; 2.359 &amp; 53.048 \\
+\text{EI} &amp; 17,105 &amp; 0.000 &amp; 0.000 &amp; 0.000 &amp; 0.000 &amp; 0.000 &amp; 0.000 &amp; 0.002 \\
+\text{ROA} &amp; 18,130 &amp; 0.823 &amp; 3.252 &amp; -22.366 &amp; -0.020 &amp; 1.020 &amp; 2.170 &amp; 14.210 \\
+\text{Lev} &amp; 18,137 &amp; 41.406 &amp; 18.544 &amp; 4.400 &amp; 27.250 &amp; 41.440 &amp; 54.470 &amp; 93.384 \\
+\text{Decrease} &amp; 17,620 &amp; 0.232 &amp; 0.422 &amp; 0.000 &amp; 0.000 &amp; 0.000 &amp; 0.000 &amp; 1.000 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item 註：本表樣本取自台灣上市櫃製造業（2014--2024）。所有連續型變數均已進行上下 1\% 之縮尾處理（Winsorization）。
+\end{tablenotes}
+\end{table}
+
+\subsection{相關係數分析}
+
+\begin{table}[H]
+\centering
+\caption{主要變數 Pearson 相關係數矩陣}
+\label{tab:corr_matrix}
+\footnotesize
+\begin{lccccccccc}
+\toprule
+變數 &amp; (1) &amp; (2) &amp; (3) &amp; (4) &amp; (5) &amp; (6) &amp; (7) &amp; (8) &amp; (9) \\
+\midrule
+(1) $\Delta\text{LNSGA}$ &amp; 1.000 &amp;  &amp;  &amp;  &amp;  &amp;  &amp;  &amp;  &amp;  \\
+(2) $\Delta\text{LNREV}$ &amp; \textbf{0.534} &amp; 1.000 &amp;  &amp;  &amp;  &amp;  &amp;  &amp;  &amp;  \\
+(3) \text{Water\_Int} &amp; -0.037 &amp; -0.024 &amp; 1.000 &amp;  &amp;  &amp;  &amp;  &amp;  &amp;  \\
+(4) \text{Waste\_Int} &amp; 0.035 &amp; 0.061 &amp; 0.074 &amp; 1.000 &amp;  &amp;  &amp;  &amp;  &amp;  \\
+(5) \text{Water\_Rate} &amp; -0.040 &amp; -0.008 &amp; \textbf{0.446} &amp; \textbf{0.270} &amp; 1.000 &amp;  &amp;  &amp;  &amp;  \\
+(6) \text{Size} &amp; 0.089 &amp; 0.075 &amp; 0.061 &amp; 0.069 &amp; \textbf{0.119} &amp; 1.000 &amp;  &amp;  &amp;  \\
+(7) \text{AI} &amp; -0.065 &amp; \textbf{-0.159} &amp; 0.040 &amp; 0.070 &amp; -0.021 &amp; -0.032 &amp; 1.000 &amp;  &amp;  \\
+(8) \text{ROA} &amp; \textbf{0.151} &amp; \textbf{0.253} &amp; -0.043 &amp; -0.001 &amp; -0.017 &amp; \textbf{0.183} &amp; \textbf{-0.196} &amp; 1.000 &amp;  \\
+(9) \text{Lev} &amp; 0.037 &amp; 0.057 &amp; -0.021 &amp; 0.104 &amp; -0.084 &amp; \textbf{0.309} &amp; -0.091 &amp; -0.103 &amp; 1.000 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item 註：對角線下方為 Pearson 相關係數；粗體字代表在 5\% 水準下達顯著（$|t| \ge 1.96$）。
+\end{tablenotes}
+\end{table}
+
+\subsection{成本黏性主迴歸結果}
+
+\begin{table}[H]
+\centering
+\caption{成本黏性主迴歸結果（當期，模型 1 至模型 6）}
+\label{tab:reg_main}
+\scriptsize
+\begin{tabular}{lcccccc}
+\toprule
+變數名稱 &amp; 模型 1\\(水回收率\%) &amp; 模型 2\\(水揭露) &amp; 模型 3\\(廢棄物密集度) &amp; 模型 4\\(廢棄物揭露) &amp; 模型 5\\(廢棄物裁罰) &amp; 模型 6\\(用水密集度) \\
+\midrule
+$\Delta\text{LNREV}$ ($\beta_1$) &amp; 0.3208*** &amp; 0.3448*** &amp; 0.3500*** &amp; 0.3435*** &amp; 0.3935*** &amp; 0.3688*** \\
+ &amp; (4.21) &amp; (25.96) &amp; (15.62) &amp; (24.75) &amp; (15.65) &amp; (19.34) \\
+$D \times \Delta\text{LNREV}$ ($\beta_2$) &amp; -1.2681*** &amp; -0.1473 &amp; -0.6394*** &amp; -0.1685 &amp; -0.0223 &amp; -0.0627 \\
+ &amp; (-2.69) &amp; (-1.09) &amp; (-3.17) &amp; (-1.15) &amp; (-0.09) &amp; (-0.44) \\
+$\text{Env\_Var} \times D \times \Delta\text{LNREV}$ ($\beta_3$) &amp; 0.0004 &amp; 0.0354 &amp; 0.0086 &amp; 0.0043 &amp; -0.0013 &amp; -0.0305 \\
+ &amp; (0.22) &amp; (0.89) &amp; (0.62) &amp; (0.42) &amp; (-1.25) &amp; (-1.29) \\
+$\text{Env\_Var}$ ($\beta_4$) &amp; -0.0001 &amp; 0.0052 &amp; -0.0008 &amp; 0.0018 &amp; -0.0003 &amp; -0.0129*** \\
+ &amp; (-0.49) &amp; (1.28) &amp; (-0.28) &amp; (1.52) &amp; (-1.25) &amp; (-3.73) \\
+$\text{Size} \times D \times \Delta\text{LNREV}$ &amp; 0.0823*** &amp; 0.0092 &amp; 0.0353*** &amp; 0.0100 &amp; 0.0040 &amp; 0.0032 \\
+ &amp; (2.84) &amp; (1.02) &amp; (2.80) &amp; (1.01) &amp; (0.26) &amp; (0.36) \\
+$\text{AI} \times D \times \Delta\text{LNREV}$ &amp; -0.0433*** &amp; -0.0052*** &amp; -0.0045** &amp; -0.0054*** &amp; -0.0058*** &amp; -0.0038** \\
+ &amp; (-3.79) &amp; (-5.65) &amp; (-2.48) &amp; (-5.28) &amp; (-2.97) &amp; (-2.36) \\
+$\text{EI} \times D \times \Delta\text{LNREV}$ &amp; 374.4080 &amp; 12.1236 &amp; 110.1635 &amp; 23.6002 &amp; 24.6135 &amp; -95.0811 \\
+ &amp; (1.37) &amp; (0.33) &amp; (1.39) &amp; (0.56) &amp; (0.31) &amp; (-1.56) \\
+$\text{ROA} \times D \times \Delta\text{LNREV}$ &amp; 0.0104 &amp; 0.0126*** &amp; 0.0165*** &amp; 0.0144*** &amp; 0.0211*** &amp; 0.0150*** \\
+ &amp; (0.58) &amp; (4.24) &amp; (3.22) &amp; (4.41) &amp; (3.20) &amp; (3.58) \\
+$\text{Lev} \times D \times \Delta\text{LNREV}$ &amp; -0.0007 &amp; 0.0004 &amp; 0.0013 &amp; 0.0005 &amp; -0.0009 &amp; 0.0009 \\
+ &amp; (-0.31) &amp; (0.83) &amp; (1.35) &amp; (0.95) &amp; (-0.90) &amp; (1.24) \\
+$\text{Decrease} \times D \times \Delta\text{LNREV}$ &amp; 0.1595** &amp; 0.0618*** &amp; 0.0465 &amp; 0.0675*** &amp; 0.0798** &amp; 0.0225 \\
+ &amp; (2.18) &amp; (3.26) &amp; (1.27) &amp; (3.48) &amp; (2.12) &amp; (0.94) \\
+\midrule
+觀測值數量 (N) &amp; 996 &amp; 16,661 &amp; 3,273 &amp; 13,875 &amp; 4,097 &amp; 8,484 \\
+調整後 $R^2$ &amp; 0.3442 &amp; 0.3213 &amp; 0.3568 &amp; 0.3249 &amp; 0.3778 &amp; 0.3507 \\
+產業固定效果 &amp; Yes &amp; Yes &amp; Yes &amp; Yes &amp; Yes &amp; Yes \\
+年份固定效果 &amp; Yes &amp; Yes &amp; Yes &amp; Yes &amp; Yes &amp; Yes \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item 註：括號內數字為公司層級叢集穩健 $t$ 值。$* p &lt; 0.10$, $** p &lt; 0.05$, $*** p &lt; 0.01$。所有控制變數均已與 $D \times \Delta\text{LNREV}$ 交乘。
+\end{tablenotes}
+\end{table}
+
+\subsection{時間落差效應分析}
+
+\begin{table}[H]
+\centering
+\caption{時間落差效應：各遞延期之 $\beta_3$ 三重交乘項對照表}
+\label{tab:lag_effect}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+遞延期 &amp; 模型 6\\(用水密集度) &amp; 模型 3\\(廢棄物密集度) &amp; 模型 1\\(水回收率\%) &amp; 模型 2\\(水揭露) &amp; 模型 4\\(廢棄物揭露) &amp; 模型 5\\(廢棄物裁罰) \\
+\midrule
+$t-0$ &amp; -0.0305 &amp; 0.0086 &amp; 0.0004 &amp; 0.0354 &amp; 0.0043 &amp; -0.0013 \\
+$t-1$ &amp; -0.0190 &amp; -0.0013 &amp; 0.0015 &amp; 0.0062 &amp; -0.0016 &amp; -0.0003 \\
+$t-2$ &amp; -0.0164 &amp; -- &amp; 0.0014 &amp; 0.0103 &amp; 0.0039 &amp; -0.0009 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item 註：表中列出不同遞延期（$t-0, t-1, t-2$）下三重交乘項 $\beta_3$ 之迴歸係數與顯著性星號。$* p &lt; 0.10$, $** p &lt; 0.05$, $*** p &lt; 0.01$。
+\end{tablenotes}
+\end{table}
+
+\subsection{產業異質性分析（高/低耗水污染產業）}
+
+\begin{table}[H]
+\centering
+\caption{產業異質性（高/低耗水污染產業）$\times$ 時間落差對照表}
+\label{tab:hetero_results}
+\small
+\begin{tabular}{llcccc}
+\toprule
+環境資源衡量變數 &amp; 產業子樣本 &amp; 遞延期 &amp; $\beta_2 (D \times \Delta\text{LNREV})$ &amp; $\beta_3 (\text{Env} \times D \times \Delta\text{LNREV})$ &amp; 觀測值(N) \\
+\midrule
+水回收率\% &amp; 全樣本 &amp; $t-t-0$ &amp; -1.2681*** &amp; 0.0004 &amp; 996 \\
+水回收率\% &amp; 全樣本 &amp; $t-t-1$ &amp; -0.6925 &amp; 0.0015 &amp; 863 \\
+水回收率\% &amp; 全樣本 &amp; $t-t-2$ &amp; -0.7174 &amp; 0.0014 &amp; 731 \\
+水回收率\% &amp; 高耗水 &amp; $t-t-0$ &amp; -1.4791*** &amp; 0.0014 &amp; 707 \\
+水回收率\% &amp; 高耗水 &amp; $t-t-1$ &amp; -0.9405* &amp; 0.0027 &amp; 619 \\
+水回收率\% &amp; 高耗水 &amp; $t-t-2$ &amp; -1.1518*** &amp; 0.0013 &amp; 527 \\
+水回收率\% &amp; 低耗水 &amp; $t-t-0$ &amp; -0.5442 &amp; -0.0031 &amp; 289 \\
+水回收率\% &amp; 低耗水 &amp; $t-t-1$ &amp; -0.8746 &amp; 0.0015 &amp; 244 \\
+水回收率\% &amp; 低耗水 &amp; $t-t-2$ &amp; -0.2827 &amp; -0.0011 &amp; 204 \\
+水揭露 &amp; 全樣本 &amp; $t-t-0$ &amp; -0.1473 &amp; 0.0354 &amp; 16,661 \\
+水揭露 &amp; 全樣本 &amp; $t-t-1$ &amp; -0.1636 &amp; 0.0062 &amp; 16,661 \\
+水揭露 &amp; 全樣本 &amp; $t-t-2$ &amp; -0.1588 &amp; 0.0103 &amp; 16,661 \\
+水揭露 &amp; 高耗水 &amp; $t-t-0$ &amp; -0.0634 &amp; 0.0572 &amp; 7,252 \\
+水揭露 &amp; 高耗水 &amp; $t-t-1$ &amp; -0.1013 &amp; 0.0248 &amp; 7,252 \\
+水揭露 &amp; 高耗水 &amp; $t-t-2$ &amp; -0.1004 &amp; 0.0241 &amp; 7,252 \\
+水揭露 &amp; 低耗水 &amp; $t-t-0$ &amp; -0.1966 &amp; -0.0170 &amp; 9,409 \\
+水揭露 &amp; 低耗水 &amp; $t-t-1$ &amp; -0.2068 &amp; -0.0372 &amp; 9,409 \\
+水揭露 &amp; 低耗水 &amp; $t-t-2$ &amp; -0.2011 &amp; -0.0261 &amp; 9,409 \\
+廢棄物密集度 &amp; 全樣本 &amp; $t-t-0$ &amp; -0.6394*** &amp; 0.0086 &amp; 3,273 \\
+廢棄物密集度 &amp; 全樣本 &amp; $t-t-1$ &amp; -0.4167 &amp; -0.0013 &amp; 1,653 \\
+廢棄物密集度 &amp; 全樣本 &amp; $t-t-2$ &amp; -- &amp; -- &amp; 0 \\
+廢棄物密集度 &amp; 高耗水 &amp; $t-t-0$ &amp; -0.7829** &amp; -0.0112 &amp; 1,389 \\
+廢棄物密集度 &amp; 高耗水 &amp; $t-t-1$ &amp; -2.0335*** &amp; -0.0503* &amp; 699 \\
+廢棄物密集度 &amp; 高耗水 &amp; $t-t-2$ &amp; -- &amp; -- &amp; 0 \\
+廢棄物密集度 &amp; 低耗水 &amp; $t-t-0$ &amp; -0.5707** &amp; 0.0352* &amp; 1,884 \\
+廢棄物密集度 &amp; 低耗水 &amp; $t-t-1$ &amp; 0.4766 &amp; 0.0323 &amp; 954 \\
+廢棄物密集度 &amp; 低耗水 &amp; $t-t-2$ &amp; -- &amp; -- &amp; 0 \\
+廢棄物揭露 &amp; 全樣本 &amp; $t-t-0$ &amp; -0.1685 &amp; 0.0043 &amp; 13,875 \\
+廢棄物揭露 &amp; 全樣本 &amp; $t-t-1$ &amp; -0.1569 &amp; -0.0016 &amp; 12,437 \\
+廢棄物揭露 &amp; 全樣本 &amp; $t-t-2$ &amp; -0.1927 &amp; 0.0039 &amp; 10,907 \\
+廢棄物揭露 &amp; 高耗水 &amp; $t-t-0$ &amp; -0.1764 &amp; 0.0053 &amp; 5,994 \\
+廢棄物揭露 &amp; 高耗水 &amp; $t-t-1$ &amp; -0.0987 &amp; 0.0023 &amp; 5,354 \\
+廢棄物揭露 &amp; 高耗水 &amp; $t-t-2$ &amp; -0.2272 &amp; -0.0041 &amp; 4,682 \\
+廢棄物揭露 &amp; 低耗水 &amp; $t-t-0$ &amp; -0.1578 &amp; 0.0032 &amp; 7,881 \\
+廢棄物揭露 &amp; 低耗水 &amp; $t-t-1$ &amp; -0.1887 &amp; -0.0108 &amp; 7,083 \\
+廢棄物揭露 &amp; 低耗水 &amp; $t-t-2$ &amp; -0.1841 &amp; 0.0031 &amp; 6,225 \\
+廢棄物裁罰金額 &amp; 全樣本 &amp; $t-t-0$ &amp; -0.0223 &amp; -0.0013 &amp; 4,097 \\
+廢棄物裁罰金額 &amp; 全樣本 &amp; $t-t-1$ &amp; -0.2513 &amp; -0.0003 &amp; 4,054 \\
+廢棄物裁罰金額 &amp; 全樣本 &amp; $t-t-2$ &amp; -0.1215 &amp; -0.0009 &amp; 4,002 \\
+廢棄物裁罰金額 &amp; 高耗水 &amp; $t-t-0$ &amp; -0.0382 &amp; -0.0007 &amp; 2,093 \\
+廢棄物裁罰金額 &amp; 高耗水 &amp; $t-t-1$ &amp; -0.0767 &amp; -0.0010 &amp; 2,096 \\
+廢棄物裁罰金額 &amp; 高耗水 &amp; $t-t-2$ &amp; -0.1789 &amp; -0.0013 &amp; 2,087 \\
+廢棄物裁罰金額 &amp; 低耗水 &amp; $t-t-0$ &amp; -0.0081 &amp; -0.0021 &amp; 2,004 \\
+廢棄物裁罰金額 &amp; 低耗水 &amp; $t-t-1$ &amp; -0.4054 &amp; -0.0031 &amp; 1,958 \\
+廢棄物裁罰金額 &amp; 低耗水 &amp; $t-t-2$ &amp; 0.0057 &amp; -0.0043 &amp; 1,915 \\
+用水密集度 &amp; 全樣本 &amp; $t-t-0$ &amp; -0.0627 &amp; -0.0305 &amp; 8,484 \\
+用水密集度 &amp; 全樣本 &amp; $t-t-1$ &amp; -0.1964 &amp; -0.0190 &amp; 7,176 \\
+用水密集度 &amp; 全樣本 &amp; $t-t-2$ &amp; -0.3569** &amp; -0.0164 &amp; 5,874 \\
+用水密集度 &amp; 高耗水 &amp; $t-t-0$ &amp; -0.1928 &amp; -0.0914** &amp; 4,099 \\
+用水密集度 &amp; 高耗水 &amp; $t-t-1$ &amp; -0.2135 &amp; -0.0618 &amp; 3,540 \\
+用水密集度 &amp; 高耗水 &amp; $t-t-2$ &amp; -0.2785 &amp; -0.0400 &amp; 2,964 \\
+用水密集度 &amp; 低耗水 &amp; $t-t-0$ &amp; -0.0411 &amp; -0.0034 &amp; 4,385 \\
+用水密集度 &amp; 低耗水 &amp; $t-t-1$ &amp; -0.2503 &amp; 0.0166 &amp; 3,636 \\
+用水密集度 &amp; 低耗水 &amp; $t-t-2$ &amp; -0.4459** &amp; -0.0113 &amp; 2,910 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item 註：高耗水／高污染產業涵蓋半導體、光電、電子零組件、化學、鋼鐵、紡織、造紙、水泥、玻璃陶瓷與食品業。$* p &lt; 0.10$, $** p &lt; 0.05$, $*** p &lt; 0.01$。
+\end{tablenotes}
+\end{table}
+
+\subsection{實證結果討論與衡量修正剖析}
+
+實證分析展現出三項關鍵結論：
+\begin{enumerate}
+    \item \textbf{核心發現一：用水密集度顯著加劇高污染產業之成本黏性。} 在高耗水/高污染產業當期（表 \ref{tab:hetero_results}），用水密集度之三重交乘項 $\beta_3 = -0.0914$ ($t = -2.11, p = 0.0346 &lt; 0.05$)，顯著支持 H6。證明在取水與廢水處置需求高之製造業中，單位營收之水資源依賴越深，專用設施之折舊與維運越難在營收下降時即時裁撤。
+    \item \textbf{核心發現二：廢棄物密集度顯著加劇高污染產業遞延期之成本黏性。} 在高污染產業遞延一期（$t-1$），廢棄物密集度之 $\beta_3 = -0.0503$ ($t = -1.76, p = 0.0781 &lt; 0.10$)，支持 H3 與 H6，反映廢棄物長期處置合約之剛性與時間落差特徵。
+    \item \textbf{衡量修正剖析：裁罰金額連續標準化去除偽顯著偏誤。} 過去文獻採「罰鍰次數」得出顯著結果，實受單一公司單一年度 366 次極端罰鍰次數扭曲。本研究改採嚴謹之「裁罰金額佔總資產」連續指標後，全樣本與子樣本之 $\beta_3$ 均不顯著，客觀修正了過去衡量不當產生之偏誤。
+\end{enumerate}
+
+\newpage
+
+% ---------------- 第五章 結論與建議 ----------------
+\section{第五章 結論與建議}
+
+\subsection{研究結論}
+
+本研究以 2014 至 2024 年台灣上市櫃製造業為樣本，實證檢驗水資源與廢棄物管理對成本黏性之影響：
+\begin{enumerate}
+    \item 台灣製造業普遍存在顯著之成本黏性（$\beta_2 &lt; 0$）。
+    \item 用水密集度於高耗水/高污染產業當期呈顯著加劇效果（$\beta_3 = -0.0914, p &lt; 0.05$）；廢棄物密集度於高污染產業遞延一期呈顯著加劇效果（$\beta_3 = -0.0503, p &lt; 0.10$）。
+    \item 資訊揭露指標（水揭露、廢棄物揭露）之調節效果未達顯著水準，顯示實質資源使用密集度比單純資訊揭露具更強之決定力。
+    \item 廢棄物裁罰金額在去除極端值後對成本黏性無顯著影響，成功修正過去採罰鍰次數之偏誤。
+\end{enumerate}
+
+\subsection{理論與學術貢獻}
+
+本研究之貢獻包含：(1) 將環境因素由抽象之 ESG 評分推進至可量化之「資源使用密集度」；(2) 揭示環境成本行為具「高污染產業依存與遞延發酵」特徵；(3) 釐清過去採用「罰鍰次數」受極端值扭曲之偏誤，展現衡量之學術嚴謹度。
+
+\subsection{管理與政策意涵}
+
+在管理實務上，高環境使用密集度企業應意識到專用處置設施與合約將於景氣下行時形成營運剛性負擔，宜透過製程水循環與資源減量解開對環境資源之剛性依賴。在政策上，建議金管會與環境部強化「用水與廢棄物密集度」之標準化揭露，並鼓勵金融機構將實質使用密集度納入永續融資與營運韌性評估。
+
+\subsection{研究限制與未來方向}
+
+本研究受限於台灣單一市場與上市櫃製造業樣本。未來可延伸至跨國比較、結合外生衝擊（如 2021 年台灣大旱）採雙重差分法（DiD）強化因果識別，並檢視資本市場是否對環境使用密集度引致之成本黏性給予風險溢價。
+
+\newpage
+
+% ---------------- 參考文獻 ----------------
+\section*{參考文獻}
+\addcontentsline{toc}{section}{參考文獻}
+
+\begin{enumerate}
+    \item Anderson, M. C., Banker, R. D., \&amp; Janakiraman, S. N. (2003). Are selling, general, and administrative costs ``sticky&#x27;&#x27;? \textit{Journal of Accounting Research}, 41(1), 47--63.
+    \item Zeng, J., Peng, M., \&amp; Chan, K. C. The impact of low-carbon city policy on corporate cost stickiness. Working paper.
+    \item Jiang, W., \&amp; Yang, W. (2024). ESG disclosure and corporate cost stickiness: Evidence from supply-chain relationships. \textit{Economics Letters}, 238, 111697.
+    \item 李亞峮（2026）。ESG負面事件與媒體報導對ESG績效與盈餘管理間之關聯的調節效果。國立臺北大學會計學系碩士論文。
+    \item 劉翠山（2026）。人力資本、ESG績效(S)、ESG重大性揭露與企業市場價值關係之調節型中介模型探討。銘傳大學會計學系碩士論文。
+    \item 吳東蓄（2026）。ESG績效對代理成本之影響。靜宜大學會計學系碩士論文。
+    \item 戴郁樺（2026）。ESG投入、金融創新與綠色創新對銀行風險與績效管理之影響。朝陽科技大學財務金融系碩士論文。
+    \item 楊宜蓁（2026）。ESG及負債比率對企業信用風險之關聯性研究——以台灣上市電子業為例。國立彰化師範大學財務金融技術學系碩士論文。
+    \item 楊珆佳（2026）。臺灣金控公司ESG、金融健全指標與巴塞爾協定風險性之研究。靜宜大學會計學系碩士論文。
+    \item 富得運（2026）。ESG風險管理與企業財務績效：新興市場中企業規模之調節效果。正修科技大學工業工程與管理碩士班碩士論文。
+    \item 毛祚祥（2026）。探討台灣上市櫃觀光餐旅類股企業ESG指標、系統性風險與財務績效之關係。國立高雄科技大學觀光管理系碩士論文。
+    \item 陳俊佑（2026）。ESG績效與盈餘的價值攸關性之影響。國防大學管理學院財務管理學系碩士論文。
+    \item 許嘉芸（2026）。企業資源密集度管理對財務績效與ESG效率的影響。國立陽明交通大學經營管理研究所碩士論文。
+    \item 楊博勝（2026）。ESG資訊之揭露對於企業特有風險之影響：以台灣上市櫃公司為例。國立陽明交通大學經營管理研究所博士論文。
+    \item 蘇姿云（2026）。ESG對盈餘管理的抑制效果：家族企業的差異分析。國立成功大學財務金融研究所碩士論文。
+    \item 張岑華（2026）。ESG績效與漂綠對權益資金成本之影響：以台灣為例。世新大學財務金融學系碩士論文。
+    \item 張筱婕（2026）。漂綠行為對企業ESG之影響：媒體揭露的調節效果。世新大學財務金融學系碩士論文。
+    \item 張凱瑜（2025）。成本僵固性與企業風險關聯性之研究——以台灣上市櫃公司為例。朝陽科技大學會計系碩士論文。
+    \item 王惠洳（2025）。獨立董事連結關係與成本僵固性之關聯。國立臺中科技大學會計資訊系碩士論文。
+    \item 陳思婷（2025）。移轉訂價操弄與成本僵固性間之關聯性。天主教輔仁大學會計學系碩士論文。
+    \item 辛珏辰（2025）。ESG活動與成本僵固性——兼論COVID-19的影響。國立成功大學會計學系碩士論文。
+    \item 張湘泓（2025）。企業併購時商定留用權之勞工權益強化——由ESG觀點出發。國立臺灣大學法律學系碩士論文。
+    \item 魏郁芳（2025）。企業內部因素與外部壓力對水資源揭露之關聯性研究：以臺灣上市櫃公司為例。國立臺灣師範大學永續管理與環境教育研究所碩士論文。
+    \item 鍾文淇（2025）。影響一般廢棄物回收率成效之研究：以直轄市為例。國立臺北大學公共行政暨政策學系碩士論文。
+    \item 李依潔（2024）。環境構面永續發展指標、企業策略與成本僵固性。中原大學會計學系碩士論文。
+    \item 陳樸（2024）。台灣上市食品公司水資源永續績效評量方法之研究。國立臺灣大學環境工程學研究所碩士論文。
+    \item 顏宥盈（2024）。成本僵固性與內外部監督效果之探討。國立臺中科技大學會計資訊系碩士論文。
+    \item 謝雅筑（2024）。飛行員CEO與成本僵固性。國立成功大學財務金融研究所碩士論文。
+    \item 張芳瑜（2023）。成本僵固性對企業績效之影響——以總體經濟變數為調節變數。國立中興大學企業管理學系碩士論文。
+    \item 張宸杰（2023）。內部控制、財務危機對成本僵固性之影響。國立臺中科技大學會計資訊系碩士論文。
+    \item 劉佳熒（2022）。供應鏈關係對供應商之成本行為的影響。亞洲大學經營管理學系博士論文。
+    \item 邱圓雅（2020）。內部債與成本僵固性之關聯性。國立臺北商業大學會計財稅碩士班碩士論文。
+    \item 鄭紹君（2018）。企業社會責任活動與成本僵固性之關聯——以企業社會責任願景調節。國立中央大學會計研究所碩士論文。
+\end{enumerate}
+
+\newpage
+
+% ---------------- 附錄 ----------------
+\section*{附錄：變數定義對照表}
+\addcontentsline{toc}{section}{附錄：變數定義對照表}
+
+\begin{table}[H]
+\centering
+\caption{研究變數定義與資料來源對照表}
+\label{tab:var_def}
+\small
+\begin{tabular}{lp{8.5cm}l}
+\toprule
+變數代碼 &amp; 變數定義與運算公式 &amp; 資料來源 \\
+\midrule
+$\Delta\text{LNSGA}$ &amp; $\ln(\text{SGA}_{i,t}) - \ln(\text{SGA}_{i,t-1})$，營業費用對數變動率 &amp; TEJ IFRS 財務資料庫 \\
+$\Delta\text{LNREV}$ &amp; $\ln(\text{REV}_{i,t}) - \ln(\text{REV}_{i,t-1})$，營業收入對數變動率 &amp; TEJ IFRS 財務資料庫 \\
+$D$ &amp; 營收下降虛擬變數（$\text{REV}_{i,t} &lt; \text{REV}_{i,t-1}$ 為 1，否則 0） &amp; TEJ IFRS 財務資料庫 \\
+\text{Water\_Intensity} &amp; 總用水量（千公噸）/ 營業收入淨額（千元） &amp; TESG 企業用水量 \\
+\text{Waste\_Intensity} &amp; 每百萬營收之廢棄物產生重量（公噸） &amp; TESG 廢棄物揭露 \\
+\text{Water\_Rate} &amp; 製程水回收率\% &amp; TESG 企業用水量 \\
+\text{Water\_Disc} &amp; 當年有水資料紀錄設為 1，否則 0 &amp; TESG 企業用水量 \\
+\text{Waste\_Disc} &amp; GRI 廢棄物管理揭露度評分 &amp; TESG 廢棄物揭露 \\
+\text{Waste\_Fine} &amp; 事業廢棄物違規裁罰總金額（千元）/ 資產總額 &amp; TESG 污染源裁處明細 \\
+\text{Size} &amp; $\ln(\text{資產總額})$ &amp; TEJ IFRS 財務資料庫 \\
+\text{AI} &amp; 資產總額 / 營業收入淨額 &amp; TEJ IFRS 財務資料庫 \\
+\text{EI} &amp; 員工人數 / 營業收入淨額 &amp; TEJ IFRS 財務資料庫 \\
+\text{ROA} &amp; 稅後息前資產報酬率 (\%) &amp; TEJ IFRS 財務資料庫 \\
+\text{Lev} &amp; 負債總額 / 資產總額 (\%) &amp; TEJ IFRS 財務資料庫 \\
+\text{Decrease} &amp; 連續兩年營收下降虛擬變數（連兩年下降設為 1，否則 0） &amp; TEJ IFRS 財務資料庫 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}
+</code></pre>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    function switchTab(tab) {
+        const paperView = document.getElementById('view-paper');
+        const sourceView = document.getElementById('view-source');
+        const paperBtn = document.getElementById('tab-btn-paper');
+        const sourceBtn = document.getElementById('tab-btn-source');
+
+        if (tab === 'paper') {
+            paperView.classList.remove('hidden');
+            sourceView.classList.add('hidden');
+            paperBtn.className = 'px-3 py-1.5 rounded-lg bg-blue-600 text-white font-medium transition';
+            sourceBtn.className = 'px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 font-medium hover:bg-slate-700 transition';
+        } else {
+            paperView.classList.add('hidden');
+            sourceView.classList.remove('hidden');
+            sourceBtn.className = 'px-3 py-1.5 rounded-lg bg-blue-600 text-white font-medium transition';
+            paperBtn.className = 'px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 font-medium hover:bg-slate-700 transition';
+        }
+    }
+
+    let isA4Mode = false;
+    function toggleA4Mode() {
+        const container = document.getElementById('main-container');
+        const btn = document.getElementById('btn-a4');
+        isA4Mode = !isA4Mode;
+        if (isA4Mode) {
+            container.classList.add('a4-paged-mode');
+            btn.className = 'px-3 py-1.5 rounded-lg bg-blue-600 text-white font-medium transition';
+            btn.innerText = '📄 標準寬度模式';
+        } else {
+            container.classList.remove('a4-paged-mode');
+            btn.className = 'px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 font-medium hover:bg-slate-700 transition';
+            btn.innerText = '📄 A4 分頁模式';
+        }
+    }
+    </script>
+</body>
+</html>
