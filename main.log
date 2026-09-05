@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.9.4)  5 SEP 2026 10:28
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.9.4)  6 SEP 2026 07:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -871,7 +871,7 @@ Package xeCJK Warning: Unknown CJK family `標楷體' is being ignored.
 (xeCJK)                define it.
 
 (main.toc [3]
-Overfull \hbox (13.97937pt too wide) in paragraph at lines 28--28
+Overfull \hbox (13.97937pt too wide) in paragraph at lines 29--29
  [][] [][][]\TU/標楷體(0)/m/n/12 用 水 密 集 度 之 當 期 即 時 發 酵 機 制 深 度 剖 析 \TU/TimesNewR
 oman(0)/m/n/12 ($\OML/cmm/m/it/12 ^^L[] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 ^^@\
 OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 0914\OML/cmm/m/it/12 ; p < 
@@ -885,7 +885,7 @@ OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 0914\OML/cmm/m/it/12 ; p <
 \tf@lot=\write5
 \openout5 = `main.lot'.
 
- [5] [6] [7]
+ [5] [6] [7] [8]
 
 Package xeCJK Warning: Unknown CJK family `\CJKttdefault' is being ignored.
 (xeCJK)                
@@ -893,62 +893,62 @@ Package xeCJK Warning: Unknown CJK family `\CJKttdefault' is being ignored.
 (xeCJK)                it.
 
 
-Overfull \hbox (20.6841pt too wide) in paragraph at lines 86--87
+Overfull \hbox (20.6841pt too wide) in paragraph at lines 88--89
 []\TU/標楷體(0)/b/n/12 環 境 資 源 使 用 密 集 度 之 核 心 效 應\TU/標楷體(0)/m/n/12 ：|  企 業 之 實 質 
  |「用 水 密 集 度」 （\TU/lmtt/m/n/12 Water_Intensity\TU/標楷體(0)/m/n/12 ）|
  []
 
-[8] [9] [10] [11] [12] [13] [14] [15]
-Overfull \hbox (25.18001pt too wide) in paragraph at lines 189--201
+[9] [10] [11] [12] [13] [14] [15] [16] [17]
+Overfull \hbox (25.18001pt too wide) in paragraph at lines 203--215
  [][] 
  []
 
-[16] [17] [18]
-Overfull \hbox (143.62744pt too wide) in paragraph at lines 256--264
+[18] [19] [20]
+Overfull \hbox (143.62744pt too wide) in paragraph at lines 270--278
  [][] 
  []
 
-[19] [20] [21]
+[21] [22] [23]
 Overfull \vbox (21.22766pt too high) has occurred while \output is active []
 
 
-[22] [23] [24]
-Overfull \hbox (4.62808pt too wide) in paragraph at lines 412--439
+[24] [25] [26]
+Overfull \hbox (4.62808pt too wide) in paragraph at lines 427--454
  [] 
  []
 
-[25] [26]
+[27] [28]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 449.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 449.
+(hyperref)                removing `math shift' on input line 464.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 449.
+(hyperref)                removing `math shift' on input line 464.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 449.
+(hyperref)                removing `math shift' on input line 464.
 
-[27] [28] [29] [30]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 464.
+
+[29] [30] [31] [32]
 Overfull \vbox (785.16899pt too high) has occurred while \output is active []
 
 
-[31] [32] [33] [34] [35] [36]
+[33] [34] [35] [36] [37] [38]
 
 LaTeX Font Warning: Font shape `TU/標楷體(0)/m/it' undefined
-(Font)              using `TU/標楷體(0)/m/n' instead on input line 655.
+(Font)              using `TU/標楷體(0)/m/n' instead on input line 670.
 
-[37] [38] [39] [40]
-Overfull \hbox (39.47725pt too wide) in paragraph at lines 706--727
+[39] [40] [41] [42]
+Overfull \hbox (39.47725pt too wide) in paragraph at lines 721--742
  [][] 
  []
 
-[41] (main.aux)
+[43] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026/08/21>
@@ -958,15 +958,15 @@ L3 programming layer <2026/08/21>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: F0E2F9FAA08EE50AFCCFC68FE8226465;7672.
+(rerunfilecheck)             Checksum: 68EA9EF232596E78721AB19A0EDDADA7;7950.
  ) 
 Here is how much of TeX's memory you used:
- 17780 strings out of 402987
- 387268 string characters out of 5448318
- 849667 words of memory out of 5000000
- 46279 multiletter control sequences out of 15000+600000
+ 17811 strings out of 402987
+ 389048 string characters out of 5448318
+ 847949 words of memory out of 5000000
+ 46310 multiletter control sequences out of 15000+600000
  638420 words of font info for 124 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  74i,15n,93p,535b,604s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (41 pages).
+Output written on main.pdf (43 pages).
