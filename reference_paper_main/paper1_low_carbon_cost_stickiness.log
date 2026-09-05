@@ -1,0 +1,2806 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.2)  4 SEP 2026 22:56
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex
+(d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-24>
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/base\size11.clo
+File: size11.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count275
+\c@section=\count276
+\c@subsection=\count277
+\c@subsubsection=\count278
+\c@paragraph=\count279
+\c@subparagraph=\count280
+\c@figure=\count281
+\c@table=\count282
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen148
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\utf8.sty
+C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\utf8.sty:19: Undefined control sequence.
+l.19 \UsePackage
+                 {utfcode}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\utf8.sty:19: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.19 \UsePackage {u
+                   tfcode}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\utf8.sty:21: Undefined control sequence.
+l.21 \a@ident
+              {utf8.sty} {3.10 UTF-8 input encoding } {13.06.2000}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\utf8.sty:21: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.21 \a@ident {u
+                tf8.sty} {3.10 UTF-8 input encoding } {13.06.2000}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\utf8.sty:34: Undefined control sequence.
+l.34 \xpa
+          \def \xpa \sc@table \xpa {\sc@table % add the UTF-8 encoding
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\utf8.sty:37: Undefined control sequence.
+l.37 \a@message
+                {scanner for code UTF-8 installed.}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\utf8.sty:37: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 \a@message {s
+                  canner for code UTF-8 installed.}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+)
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:3: LaTeX Error: Unknown option `utf8' for package `utf8'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \usepackage
+               {xeCJK}
+The option `utf8' was not declared in package `utf8', perhaps you
+misspelled its name. Try typing  <return>  to proceed.
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/xelatex/xecjk\xeCJK.sty
+
+LaTeX Warning: You have requested release `2026/06/01' of LaTeX,
+               but only release `2025-11-01' is available.
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
+Package: expl3 2025-12-24 L3 programming layer (loader) 
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count283
+))
+Package: xeCJK 2026/08/21 v3.10.6 Typesetting CJK scripts with XeLaTeX
+
+
+C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/xelatex/xecjk\xeCJK.sty:44: Critical Package xeCJK Error: The xeCJK package requires XeTeX to function.
+(xeCJK)                         
+(xeCJK)                         You must change your typesetting engine to
+(xeCJK)                         "xelatex"
+(xeCJK)                         instead of plain "latex" or "pdflatex" or
+(xeCJK)                         "lualatex".
+(xeCJK)                         Loading xeCJK will abort!
+
+Type <return> to continue.
+ ...                                              
+                                                  
+l.44 ..._critical:nn { xeCJK } { Require-XeTeX } }
+                                                  
+
+LaTeX does not know anything more about this error, sorry.
+
+Try typing <return> to proceed.
+If that doesn't work, type X <return> to quit.
+
+Reading the current file 'xeCJK' will stop.
+
+
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+Package: geometry 2026/03/07 v6.0 Page Geometry
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+))
+\Gm@cnth=\count284
+\Gm@cntv=\count285
+\c@Gm@tempcnt=\count286
+\Gm@bindingoffset=\dimen149
+\Gm@wd@mp=\dimen150
+\Gm@odd@mp=\dimen151
+\Gm@even@mp=\dimen152
+\Gm@layoutwidth=\dimen153
+\Gm@layoutheight=\dimen154
+\Gm@layouthoffset=\dimen155
+\Gm@layoutvoffset=\dimen156
+\Gm@dimlist=\toks18
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+Package: amsmath 2025/07/09 v2.17z AMS math features
+\@mathmargin=\skip51
+
+For additional information on amsmath, use the `?' option.
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+Package: amstext 2024/11/17 v2.01 AMS text
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks19
+\ex@=\dimen157
+)) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen158
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count287
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count288
+\leftroot@=\count289
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count290
+\DOTSCASE@=\count291
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box53
+\strutbox@=\box54
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen159
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count292
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count293
+\dotsspace@=\muskip17
+\c@parentequation=\count294
+\dspbrk@lvl=\count295
+\tag@help=\toks20
+\row@=\count296
+\column@=\count297
+\maxfields@=\count298
+\andhelp@=\toks21
+\eqnshift@=\dimen160
+\alignsep@=\dimen161
+\tagshift@=\dimen162
+\tagwidth@=\dimen163
+\totwidth@=\dimen164
+\lineht@=\dimen165
+\@envbody=\toks22
+\multlinegap=\skip52
+\multlinetaggap=\skip53
+\mathdisplay@stack=\toks23
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen166
+\lightrulewidth=\dimen167
+\cmidrulewidth=\dimen168
+\belowrulesep=\dimen169
+\belowbottomsep=\dimen170
+\aboverulesep=\dimen171
+\abovetopsep=\dimen172
+\cmidrulesep=\dimen173
+\cmidrulekern=\dimen174
+\defaultaddspace=\dimen175
+\@cmidla=\count299
+\@cmidlb=\count300
+\@aboverulesep=\dimen176
+\@belowrulesep=\dimen177
+\@thisruleclass=\count301
+\@lastruleclass=\count302
+\@thisrulewidth=\dimen178
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+Package: nameref 2025-06-21 v2.57 Cross-referencing by name of section
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count303
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count304
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
+)
+\@linkdim=\dimen179
+\Hy@linkcounter=\count305
+\Hy@pagecounter=\count306
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
+File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count307
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
+File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4195.
+Package hyperref Info: Link nesting OFF on input line 4200.
+Package hyperref Info: Hyper index ON on input line 4203.
+Package hyperref Info: Plain pages OFF on input line 4210.
+Package hyperref Info: Backreferencing OFF on input line 4215.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4462.
+\c@Hy@tempcnt=\count308
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4801.
+\XeTeXLinkMargin=\dimen180
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+))
+\Fld@menulength=\count309
+\Field@Width=\dimen181
+\Fld@charsize=\dimen182
+Package hyperref Info: Hyper figures OFF on input line 6078.
+Package hyperref Info: Link nesting OFF on input line 6083.
+Package hyperref Info: Hyper index ON on input line 6086.
+Package hyperref Info: backreferencing OFF on input line 6093.
+Package hyperref Info: Link coloring OFF on input line 6098.
+Package hyperref Info: Link coloring with OCG OFF on input line 6103.
+Package hyperref Info: PDF/A mode OFF on input line 6108.
+\Hy@abspage=\count310
+\c@Item=\count311
+\c@Hfootnote=\count312
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
+\Fld@listcount=\count313
+\c@bookmark@seq@number=\count314
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
+Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
+)
+\Hy@SectionHShift=\skip54
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
+Package: enumitem 2025/02/06 v3.11 Customized lists
+\labelindent=\skip55
+\enit@outerparindent=\dimen183
+\enit@toks=\toks24
+\enit@inbox=\box55
+\enit@count@id=\count315
+\enitdp@description=\count316
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen184
+\captionmargin=\dimen185
+\caption@leftmargin=\dimen186
+\caption@rightmargin=\dimen187
+\caption@width=\dimen188
+\caption@indent=\dimen189
+\caption@parindent=\dimen190
+\caption@hangindent=\dimen191
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count317
+\c@continuedfloat=\count318
+Package caption Info: hyperref package is loaded.
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
+\col@sep=\dimen192
+\ar@mcellbox=\box56
+\extrarowheight=\dimen193
+\NC@list=\toks25
+\extratabsurround=\skip56
+\backup@length=\skip57
+\ar@cellbox=\box57
+)
+\TX@col@width=\dimen194
+\TX@old@table=\dimen195
+\TX@old@col=\dimen196
+\TX@target=\dimen197
+\TX@delta=\dimen198
+\TX@cols=\count319
+\TX@ftn=\toks26
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/titlesec\titlesec.sty
+Package: titlesec 2025/01/04 v2.17 Sectioning titles
+\ttl@box=\box58
+\beforetitleunit=\skip58
+\aftertitleunit=\skip59
+\ttl@plus=\dimen199
+\ttl@minus=\dimen256
+\ttl@toksa=\toks27
+\titlewidth=\dimen257
+\titlewidthlast=\dimen258
+\titlewidthfirst=\dimen259
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 22.
+ (paper1_low_carbon_cost_stickiness.aux)
+\openout1 = `paper1_low_carbon_cost_stickiness.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(71.13188pt, 455.24411pt, 71.13188pt)
+* v-part:(T,H,B)=(71.13188pt, 702.78308pt, 71.13188pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=455.24411pt
+* \textheight=702.78308pt
+* \oddsidemargin=-1.1381pt
+* \evensidemargin=-1.1381pt
+* \topmargin=-38.1381pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=11.0pt
+* \footskip=30.0pt
+* \marginparwidth=50.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package hyperref Info: Link coloring ON on input line 32.
+\@outlinefile=\write3
+\openout3 = `paper1_low_carbon_cost_stickiness.out'.
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count320
+\scratchdimen=\dimen260
+\scratchbox=\box59
+\nofMPsegments=\count321
+\nofMParguments=\count322
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count323
+\MPscratchDim=\dimen261
+\MPnumerator=\count324
+\makeMPintoPDFobject=\count325
+\everyMPtoPDFconversion=\toks29
+)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+ [1
+
+{C:/Users/170134/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 論 (U+8AD6)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 文 (U+6587)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 中 (U+4E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 文 (U+6587)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 翻 (U+7FFB)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 譯 (U+8B6F)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 與 (U+8207)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 重 (U+91CD)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 點 (U+9EDE)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 摘 (U+6458)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 要 (U+8981)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character ： (U+FF1A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 低 (U+4F4E)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 碳 (U+78B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 城 (U+57CE)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 市 (U+5E02)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 政 (U+653F)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 策 (U+7B56)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 對 (U+5C0D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 企 (U+4F01)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 業 (U+696D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 成 (U+6210)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 本 (U+672C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 粘 (U+7C98)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 性 (U+6027)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 之 (U+4E4B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 影 (U+5F71)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 響 (U+97FF)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+LaTeX Font Info:    Trying to load font information for U+msa on input line 35.
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 35.
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 原 (U+539F)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 始 (U+59CB)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 作 (U+4F5C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 者 (U+8005)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character ： (U+FF1A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 導 (U+5C0E)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 讀 (U+8B80)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 與 (U+8207)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 翻 (U+7FFB)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 譯 (U+8B6F)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 整 (U+6574)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 理 (U+7406)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character ： (U+FF1A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 國 (U+570B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 立 (U+7ACB)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 中 (U+4E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 山 (U+5C71)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 大 (U+5927)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 學 (U+5B78)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 財 (U+8CA1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 務 (U+52D9)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 管 (U+7BA1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 理 (U+7406)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 學 (U+5B78)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 系 (U+7CFB)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 研 (U+7814)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 究 (U+7A76)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 團 (U+5718)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:35: LaTeX Error: Unicode character 隊 (U+968A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.35 
+     
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 本 (U+672C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 本
+        文深入探討中國低碳城市試點政策（Low-Carbon City Pilo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 文 (U+6587)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 本文
+           深入探討中國低碳城市試點政策（Low-Carbon City Pilo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 深 (U+6DF1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 本文深
+              入探討中國低碳城市試點政策（Low-Carbon City Pilo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 入 (U+5165)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 本文深入
+                 探討中國低碳城市試點政策（Low-Carbon City Pilo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 探 (U+63A2)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 本文深入探
+                    討中國低碳城市試點政策（Low-Carbon City Pilo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 討 (U+8A0E)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 本文深入探討
+                       中國低碳城市試點政策（Low-Carbon City Pilo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 中 (U+4E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 本文深入探討中
+                          國低碳城市試點政策（Low-Carbon City Pilo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 國 (U+570B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 本文深入探討中國
+                             低碳城市試點政策（Low-Carbon City Pilo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 低 (U+4F4E)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 本文深入探討中國低
+                                碳城市試點政策（Low-Carbon City Pilo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 碳 (U+78B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 本文深入探討中國低碳
+                                   城市試點政策（Low-Carbon City Pilo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 城 (U+57CE)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 本文深入探討中國低碳城
+                                      市試點政策（Low-Carbon City Pilo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 市 (U+5E02)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 本文深入探討中國低碳城市
+                                         試點政策（Low-Carbon City Pilo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 試 (U+8A66)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 本文深入探討中國低碳城市試
+                                            點政策（Low-Carbon City Pilo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 點 (U+9EDE)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 本文深入探討中國低碳城市試點
+                                               政策（Low-Carbon City Pilo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 政 (U+653F)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 本文深入探討中國低碳城市試點政
+                                                  策（Low-Carbon City Pilo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 策 (U+7B56)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...深入探討中國低碳城市試點政策
+                                                  （Low-Carbon City Pilot P...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character （ (U+FF08)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...入探討中國低碳城市試點政策（
+                                                  Low-Carbon City Pilot Poli...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 簡 (U+7C21)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...政策（Low-Carbon City Pilot Policy, 簡
+                                                  稱 LCC 政策）對企業...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 稱 (U+7A31)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...策（Low-Carbon City Pilot Policy, 簡稱
+                                                   LCC 政策）對企業成...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 政 (U+653F)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...w-Carbon City Pilot Policy, 簡稱 LCC 政
+                                                  策）對企業成本粘�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 策 (U+7B56)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...arbon City Pilot Policy, 簡稱 LCC 政策
+                                                  ）對企業成本粘性�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character ） (U+FF09)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...on City Pilot Policy, 簡稱 LCC 政策）
+                                                  對企業成本粘性（Co...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 對 (U+5C0D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...City Pilot Policy, 簡稱 LCC 政策）對
+                                                  企業成本粘性（Corpo...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 企 (U+4F01)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...y Pilot Policy, 簡稱 LCC 政策）對企
+                                                  業成本粘性（Corporat...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 業 (U+696D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...ilot Policy, 簡稱 LCC 政策）對企業
+                                                  成本粘性（Corporate C...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 成 (U+6210)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...t Policy, 簡稱 LCC 政策）對企業成
+                                                  本粘性（Corporate Cost...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 本 (U+672C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...olicy, 簡稱 LCC 政策）對企業成本
+                                                  粘性（Corporate Cost St...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 粘 (U+7C98)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...cy, 簡稱 LCC 政策）對企業成本粘
+                                                  性（Corporate Cost Stick...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 性 (U+6027)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ... 簡稱 LCC 政策）對企業成本粘性
+                                                  （Corporate Cost Stickine...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character （ (U+FF08)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...�稱 LCC 政策）對企業成本粘性（
+                                                  Corporate Cost Stickiness�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character ） (U+FF09)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��本粘性（Corporate Cost Stickiness）
+                                                  之影響機制與經濟�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 之 (U+4E4B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��粘性（Corporate Cost Stickiness）之
+                                                  影響機制與經濟後�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 影 (U+5F71)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��性（Corporate Cost Stickiness）之影
+                                                  響機制與經濟後果�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 響 (U+97FF)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��（Corporate Cost Stickiness）之影響
+                                                  機制與經濟後果。�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 機 (U+6A5F)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��Corporate Cost Stickiness）之影響機
+                                                  制與經濟後果。採�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 制 (U+5236)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...orporate Cost Stickiness）之影響機制
+                                                  與經濟後果。採用 2...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 與 (U+8207)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...orate Cost Stickiness）之影響機制與
+                                                  經濟後果。採用 2008...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 經 (U+7D93)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...te Cost Stickiness）之影響機制與經
+                                                  濟後果。採用 2008 �...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 濟 (U+6FDF)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...Cost Stickiness）之影響機制與經濟
+                                                  後果。採用 2008 年�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 後 (U+5F8C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...t Stickiness）之影響機制與經濟後
+                                                  果。採用 2008 年至 2...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 果 (U+679C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...tickiness）之影響機制與經濟後果
+                                                  。採用 2008 年至 2022...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 。 (U+3002)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...kiness）之影響機制與經濟後果。
+                                                  採用 2008 年至 2022 �...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 採 (U+63A1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...ess）之影響機制與經濟後果。採
+                                                  用 2008 年至 2022 年�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 用 (U+7528)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...）之影響機制與經濟後果。採用
+                                                   2008 年至 2022 年中�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 年 (U+5E74)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...響機制與經濟後果。採用 2008 年
+                                                  至 2022 年中國 A 股�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 至 (U+81F3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...機制與經濟後果。採用 2008 年至
+                                                   2022 年中國 A 股製�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 年 (U+5E74)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...經濟後果。採用 2008 年至 2022 年
+                                                  中國 A 股製造業上�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 中 (U+4E2D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...濟後果。採用 2008 年至 2022 年中
+                                                  國 A 股製造業上市�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 國 (U+570B)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...後果。採用 2008 年至 2022 年中國
+                                                   A 股製造業上市公�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 股 (U+80A1)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...。採用 2008 年至 2022 年中國 A 股
+                                                  製造業上市公司樣�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 製 (U+88FD)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...採用 2008 年至 2022 年中國 A 股製
+                                                  造業上市公司樣本�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 造 (U+9020)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...用 2008 年至 2022 年中國 A 股製造
+                                                  業上市公司樣本，�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 業 (U+696D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ... 2008 年至 2022 年中國 A 股製造業
+                                                  上市公司樣本，結�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 上 (U+4E0A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...08 年至 2022 年中國 A 股製造業上
+                                                  市公司樣本，結合�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 市 (U+5E02)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...年至 2022 年中國 A 股製造業上市
+                                                  公司樣本，結合多�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 公 (U+516C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...至 2022 年中國 A 股製造業上市公
+                                                  司樣本，結合多期�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 司 (U+53F8)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ... 2022 年中國 A 股製造業上市公司
+                                                  樣本，結合多期雙�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 樣 (U+6A23)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...22 年中國 A 股製造業上市公司樣
+                                                  本，結合多期雙重�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 本 (U+672C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...年中國 A 股製造業上市公司樣本
+                                                  ，結合多期雙重差�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character ， (U+FF0C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...中國 A 股製造業上市公司樣本，
+                                                  結合多期雙重差分�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 結 (U+7D50)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...國 A 股製造業上市公司樣本，結
+                                                  合多期雙重差分法�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 合 (U+5408)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ... A 股製造業上市公司樣本，結合
+                                                  多期雙重差分法（St...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 多 (U+591A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...股製造業上市公司樣本，結合多
+                                                  期雙重差分法（Stagg...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 期 (U+671F)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...製造業上市公司樣本，結合多期
+                                                  雙重差分法（Staggere...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 雙 (U+96D9)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...造業上市公司樣本，結合多期雙
+                                                  重差分法（Staggered D...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 重 (U+91CD)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...業上市公司樣本，結合多期雙重
+                                                  差分法（Staggered Diff...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 差 (U+5DEE)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...上市公司樣本，結合多期雙重差
+                                                  分法（Staggered Differe...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 分 (U+5206)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...市公司樣本，結合多期雙重差分
+                                                  法（Staggered Difference...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 法 (U+6CD5)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...公司樣本，結合多期雙重差分法
+                                                  （Staggered Difference-in...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character （ (U+FF08)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...司樣本，結合多期雙重差分法（
+                                                  Staggered Difference-in-Di...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character ） (U+FF09)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...ifference-in-Differences, Staggered DID）
+                                                  ，實證結果表明：\t...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character ， (U+FF0C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...erence-in-Differences, Staggered DID），
+                                                  實證結果表明：\text...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 實 (U+5BE6)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...nce-in-Differences, Staggered DID），實
+                                                  證結果表明：\textbf{...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 證 (U+8B49)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...-in-Differences, Staggered DID），實證
+                                                  結果表明：\textbf{位...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 結 (U+7D50)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...-Differences, Staggered DID），實證結
+                                                  果表明：\textbf{位於...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 果 (U+679C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...fferences, Staggered DID），實證結果
+                                                  表明：\textbf{位於低...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 表 (U+8868)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...rences, Staggered DID），實證結果表
+                                                  明：\textbf{位於低碳...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 明 (U+660E)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...ces, Staggered DID），實證結果表明
+                                                  ：\textbf{位於低碳城...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character ： (U+FF1A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ..., Staggered DID），實證結果表明：
+                                                  \textbf{位於低碳城市...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 位 (U+4F4D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 於 (U+65BC)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 低 (U+4F4E)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 碳 (U+78B3)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 城 (U+57CE)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 市 (U+5E02)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 試 (U+8A66)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 點 (U+9EDE)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 範 (U+7BC4)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 圍 (U+570D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 內 (U+5167)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 的 (U+7684)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 企 (U+4F01)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 業 (U+696D)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character ， (U+FF0C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 其 (U+5176)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 成 (U+6210)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 本 (U+672C)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 粘 (U+7C98)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 性 (U+6027)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 顯 (U+986F)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 著 (U+8457)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 上 (U+4E0A)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 升 (U+5347)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��的企業，其成本粘性顯著上升}
+                                                  。該結論在經過熵�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 。 (U+3002)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��企業，其成本粘性顯著上升}。
+                                                  該結論在經過熵平�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 該 (U+8A72)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��業，其成本粘性顯著上升}。該
+                                                  結論在經過熵平衡�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 結 (U+7D50)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��，其成本粘性顯著上升}。該結
+                                                  論在經過熵平衡法�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 論 (U+8AD6)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��其成本粘性顯著上升}。該結論
+                                                  在經過熵平衡法（En...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 在 (U+5728)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��成本粘性顯著上升}。該結論在
+                                                  經過熵平衡法（Entro...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 經 (U+7D93)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��本粘性顯著上升}。該結論在經
+                                                  過熵平衡法（Entropy ...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 過 (U+904E)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��粘性顯著上升}。該結論在經過
+                                                  熵平衡法（Entropy Bal...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 熵 (U+71B5)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��性顯著上升}。該結論在經過熵
+                                                  平衡法（Entropy Balanc...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 平 (U+5E73)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��顯著上升}。該結論在經過熵平
+                                                  衡法（Entropy Balancing...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 衡 (U+8861)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��著上升}。該結論在經過熵平衡
+                                                  法（Entropy Balancing）...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 法 (U+6CD5)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��上升}。該結論在經過熵平衡法
+                                                  （Entropy Balancing）、...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character （ (U+FF08)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...��升}。該結論在經過熵平衡法（
+                                                  Entropy Balancing）、平...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character ） (U+FF09)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...�經過熵平衡法（Entropy Balancing）
+                                                  、平行趨勢測試、�...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37: LaTeX Error: Unicode character 、 (U+3001)
+               not set up for use with LaTeX.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 ...�過熵平衡法（Entropy Balancing）、
+                                                  平行趨勢測試、安�...
+(That makes 100 errors; please try again.) 
+Here is how much of TeX's memory you used:
+ 12541 strings out of 467871
+ 196554 string characters out of 5417893
+ 612561 words of memory out of 5000000
+ 41289 multiletter control sequences out of 15000+600000
+ 634234 words of font info for 64 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 75i,6n,79p,1365b,471s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+d:/Repositories/nsysu_finance_paper_v3/reference_paper_main/paper1_low_carbon_cost_stickiness.tex:37:  ==> Fatal error occurred, no output PDF file produced!

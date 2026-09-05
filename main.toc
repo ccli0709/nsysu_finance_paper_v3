@@ -1,0 +1,40 @@
+\contentsline {section}{\numberline {1}第一章 緒論}{6}{section.1}%
+\contentsline {subsection}{\numberline {1.1}研究背景與動機：AI 算力軍備競賽與極限水耗}{6}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}成本僵固性理論與環境資源密集度}{7}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}研究動機與研究問題意識}{8}{subsection.1.3}%
+\contentsline {subsubsection}{\numberline {1.3.1}研究動機與科學園區營運痛點}{8}{subsubsection.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.2}研究問題意識}{8}{subsubsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.4}研究貢獻}{9}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}論文結構安排}{10}{subsection.1.5}%
+\contentsline {section}{\numberline {2}第二章 文獻探討與研究假說}{11}{section.2}%
+\contentsline {subsection}{\numberline {2.1}傳統成本僵固性理論脈絡：三大經典學派}{11}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}環境政策壓力與資源調整成本：Zeng, Peng, and Chan (2024) 視角}{12}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}供應鏈透明度與資訊溢出：Jiang and Yang (2024) 視角}{13}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}台灣在地特性與制度脈絡：事業廢棄物電子聯單、GPS 軌跡監控與法遵合約剛性}{13}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}環境資源使用密集度與研究假說推導}{15}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.1}假說 H1a 推導：用水密集度對成本黏性之加劇效果}{15}{subsubsection.2.5.1}%
+\contentsline {subsubsection}{\numberline {2.5.2}假說 H1b 推導：事業廢棄物密集度對成本黏性之加劇與時間遞延發酵效果}{16}{subsubsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.6}研究假說與理論機制彙總表}{17}{subsection.2.6}%
+\contentsline {section}{\numberline {3}第三章 資料描述與研究方法}{18}{section.3}%
+\contentsline {subsection}{\numberline {3.1}資料來源與樣本篩選流程}{18}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}產業分類與高耗水/高污染產業劃分標準}{19}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}計量實證模型設計}{20}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}變數說明與衡量對照}{22}{subsection.3.4}%
+\contentsline {section}{\numberline {4}第四章 實證結果與深入解析}{23}{section.4}%
+\contentsline {subsection}{\numberline {4.1}敘述性統計分析}{23}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}相關係數矩陣與診斷}{25}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}成本黏性主迴歸結果與詳細解析}{26}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}時間落差效應深層機制解析 (當期 $t$ vs. 遞延期 $t-1, t-2$)}{27}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}用水密集度之當期即時發酵機制深度剖析 ($\beta _3 = -0.0914, p < 0.05$)}{28}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}廢棄物密集度之遞延一期發酵機制深度剖析 ($\beta _3 = -0.0503, p < 0.01$)}{28}{subsubsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.5}產業異質性深入分析（高耗水/高污染 vs. 低耗水/低污染）}{31}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}實證對比剖析：實質投入 vs. 形式揭露與裁罰標準化}{32}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}經濟與戰略意涵綜合解析}{33}{subsection.4.7}%
+\contentsline {section}{\numberline {5}第五章 結論與建議}{34}{section.5}%
+\contentsline {subsection}{\numberline {5.1}研究結論}{34}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}理論與學術貢獻}{34}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}管理實務建議：算力擴張 vs. 水耗剛性財務風險評估}{35}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}政策制定與監管意涵：金管會揭露標準與園區配額審查}{35}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}研究限制與未來研究方向}{36}{subsection.5.5}%
+\contentsline {section}{參考文獻}{37}{Item.30}%
+\contentsline {section}{附錄：變數定義與資料來源對照表}{41}{Item.70}%

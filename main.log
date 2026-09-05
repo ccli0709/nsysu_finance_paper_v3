@@ -1,10 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.9.2)  3 SEP 2026 00:04
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.12) (preloaded format=xelatex 2026.9.4)  5 SEP 2026 10:28
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
-**d:/Repositories/nsysu_finance_paper_v3/main.tex
-(d:/Repositories/nsysu_finance_paper_v3/main.tex
+**./main.tex
+(main.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
 (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -12,239 +11,589 @@ Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
 (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
 File: size12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count275
-\c@section=\count276
-\c@subsection=\count277
-\c@subsubsection=\count278
-\c@paragraph=\count279
-\c@subparagraph=\count280
-\c@figure=\count281
-\c@table=\count282
+\c@part=\count271
+\c@section=\count272
+\c@subsection=\count273
+\c@subsubsection=\count274
+\c@paragraph=\count275
+\c@subparagraph=\count276
+\c@figure=\count277
+\c@table=\count278
 \abovecaptionskip=\skip49
 \belowcaptionskip=\skip50
 \bibindent=\dimen148
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/xelatex/xecjk\xeCJK.sty
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/arabtex\utf8.sty
+! Undefined control sequence.
+l.19 \UsePackage
+                 {utfcode}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.19 \UsePackage {u
+                   tfcode}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Undefined control sequence.
+l.21 \a@ident
+              {utf8.sty} {3.10 UTF-8 input encoding } {13.06.2000}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.21 \a@ident {u
+                tf8.sty} {3.10 UTF-8 input encoding } {13.06.2000}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Invalid UTF-8 byte or sequence at line 30 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 30 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 31 replaced by U+FFFD.
+! Undefined control sequence.
+l.34 \xpa
+          \def \xpa \sc@table \xpa {\sc@table % add the UTF-8 encoding
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.37 \a@message
+                {scanner for code UTF-8 installed.}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.37 \a@message {s
+                  canner for code UTF-8 installed.}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+)
+
+! LaTeX Error: Unknown option `utf8' for package `utf8'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 \usepackage
+               {xeCJK}
+The option `utf8' was not declared in package `utf8', perhaps you
+misspelled its name. Try typing  <return>  to proceed.
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/xelatex/xecjk\xeCJK.sty
 
 LaTeX Warning: You have requested release `2026/06/01' of LaTeX,
                but only release `2025-11-01' is available.
 
 (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
 Package: expl3 2025-12-24 L3 programming layer (loader) 
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
-File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count283
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-xe
+tex.def
+File: l3backend-xetex.def 2025-10-09 L3 backend support: XeTeX
+\g__graphics_track_int=\count279
+\g__pdfannot_backend_int=\count280
+\g__pdfannot_backend_link_int=\count281
 ))
 Package: xeCJK 2026/08/21 v3.10.6 Typesetting CJK scripts with XeLaTeX
 
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/ctex\ctexhook.sty
 
-C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/xelatex/xecjk\xeCJK.sty:44: Critical Package xeCJK Error: The xeCJK package requires XeTeX to function.
-(xeCJK)                         
-(xeCJK)                         You must change your typesetting engine to
-(xeCJK)                         "xelatex"
-(xeCJK)                         instead of plain "latex" or "pdflatex" or
-(xeCJK)                         "lualatex".
-(xeCJK)                         Loading xeCJK will abort!
+LaTeX Warning: You have requested release `2026/06/01' of LaTeX,
+               but only release `2025-11-01' is available.
 
-Type <return> to continue.
- ...                                              
-                                                  
-l.44 ..._critical:nn { xeCJK } { Require-XeTeX } }
-                                                  
+Package: ctexhook 2026/08/11 v2.6.5 Document and package hooks (CTEX)
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/ctex\ctexpatch.sty
 
-LaTeX does not know anything more about this error, sorry.
+LaTeX Warning: You have requested release `2026/06/01' of LaTeX,
+               but only release `2025-11-01' is available.
 
-Try typing <return> to proceed.
-If that doesn't work, type X <return> to quit.
+Package: ctexpatch 2026/08/11 v2.6.5 Patching commands (CTEX)
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xtemplate\x
+template.sty
+Package: xtemplate 2025-10-09 L3 Experimental prototype document functions
+)
+\l__xeCJK_tmp_int=\count282
+\l__xeCJK_tmp_box=\box53
+\l__xeCJK_tmp_dim=\dimen149
+\l__xeCJK_tmp_skip=\skip51
+\g__xeCJK_space_factor_int=\count283
+\l__xeCJK_begin_int=\count284
+\l__xeCJK_end_int=\count285
+\c__xeCJK_CJK_class_int=\XeTeXcharclass1
+\c__xeCJK_FullLeft_class_int=\XeTeXcharclass2
+\c__xeCJK_FullRight_class_int=\XeTeXcharclass3
+\c__xeCJK_HalfLeft_class_int=\XeTeXcharclass4
+\c__xeCJK_HalfRight_class_int=\XeTeXcharclass5
+\c__xeCJK_NormalSpace_class_int=\XeTeXcharclass6
+\c__xeCJK_CM_class_int=\XeTeXcharclass7
+\c__xeCJK_HangulJamo_class_int=\XeTeXcharclass8
+\c__xeCJK_HangulJamoL_class_int=\XeTeXcharclass9
+\c__xeCJK_HangulJamoV_class_int=\XeTeXcharclass10
+\c__xeCJK_HangulJamoT_class_int=\XeTeXcharclass11
+\c__xeCJK_CJStarter_class_int=\XeTeXcharclass12
+\c__xeCJK_PoZheHao_class_int=\XeTeXcharclass13
+\l__xeCJK_interword_dim=\dimen150
+\l__xeCJK_last_skip=\skip52
+\c__xeCJK_none_node=\count286
+\g__xeCJK_node_int=\count287
+\c__xeCJK_CJK_node_dim=\dimen151
+\c__xeCJK_CJK-space_node_dim=\dimen152
+\c__xeCJK_default_node_dim=\dimen153
+\c__xeCJK_CJK-widow_node_dim=\dimen154
+\c__xeCJK_normalspace_node_dim=\dimen155
+\c__xeCJK_default-space_node_skip=\skip53
+\c__xeCJK_math_node_dim=\dimen156
+\c__xeCJK_math-space_node_dim=\dimen157
+\c__xeCJK_math-space-frozen_node_dim=\dimen158
+\g__xeCJK_boundary_capture_depth_int=\count288
+\g__xeCJK_boundary_suspend_depth_int=\count289
+\g__xeCJK_boundary_capture_1_box=\box54
+\g__xeCJK_boundary_capture_2_box=\box55
+\g__xeCJK_boundary_capture_3_box=\box56
+\l__xeCJK_boundary_post_box=\box57
+\l__xeCJK_boundary_math_skip=\skip54
+\l__xeCJK_boundary_math_actual_skip=\skip55
+\l__xeCJK_boundary_math_ecglue_skip=\skip56
+\l__xeCJK_boundary_math_delta_skip=\skip57
+\l__xeCJK_boundary_math_space_dim=\dimen159
+\l__xeCJK_boundary_math_ecglue_dim=\dimen160
+\l__xeCJK_boundary_math_stretch_dim=\dimen161
+\l__xeCJK_boundary_math_shrink_dim=\dimen162
+\g__xeCJK_boundary_probe_type_int=\count290
+\l__xeCJK_boundary_probe_box=\box58
+\l__xeCJK_ccglue_skip=\skip58
+\l__xeCJK_ecglue_skip=\skip59
+\g__xeCJK_par_guard_dim=\dimen163
+\l__xeCJK_punct_kern_skip=\skip60
+\l__xeCJK_indent_box=\box59
+\l__xeCJK_last_penalty_int=\count291
+\l__xeCJK_last_bound_dim=\dimen164
+\l__xeCJK_last_kern_dim=\dimen165
+\l__xeCJK_widow_penalty_int=\count292
 
-Reading the current file 'xeCJK' will stop.
+LaTeX template Info: Declaring template type 'xeCJK/punctuation' taking 0
+(template)           argument(s) on line 4902.
 
+\l__xeCJK_fixed_punct_width_dim=\dimen166
+\l__xeCJK_mixed_punct_width_dim=\dimen167
+\l__xeCJK_middle_punct_width_dim=\dimen168
+\l__xeCJK_fixed_margin_width_dim=\dimen169
+\l__xeCJK_mixed_margin_width_dim=\dimen170
+\l__xeCJK_middle_margin_width_dim=\dimen171
+\l__xeCJK_bound_punct_width_dim=\dimen172
+\l__xeCJK_bound_margin_width_dim=\dimen173
+\l__xeCJK_margin_minimum_dim=\dimen174
+\l__xeCJK_kerning_total_width_dim=\dimen175
+\l__xeCJK_same_align_margin_dim=\dimen176
+\l__xeCJK_different_align_margin_dim=\dimen177
+\l__xeCJK_kerning_margin_width_dim=\dimen178
+\l__xeCJK_kerning_margin_minimum_dim=\dimen179
+\l__xeCJK_bound_dim=\dimen180
+\l__xeCJK_reverse_bound_dim=\dimen181
+\l__xeCJK_margin_dim=\dimen182
+\l__xeCJK_minimum_bound_dim=\dimen183
+\l__xeCJK_kerning_margin_dim=\dimen184
+\g__xeCJK_family_int=\count293
+\l__xeCJK_fam_int=\count294
+\g__xeCJK_fam_allocation_int=\count295
+\l__xeCJK_verb_case_int=\count296
+\l__xeCJK_verb_exspace_skip=\skip61
 
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/fontspec\fontspec.sty
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xparse\xpar
+se.sty
+Package: xparse 2025-10-09 L3 Experimental document command parser
+)
+Package: fontspec 2025/09/29 v2.9g Font selection for XeLaTeX and LuaLaTeX
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/fontspec\fontspec-xete
+x.sty
+Package: fontspec-xetex 2025/09/29 v2.9g Font selection for XeLaTeX and LuaLaTe
+X
+\l__fontspec_script_int=\count297
+\l__fontspec_language_int=\count298
+\l__fontspec_strnum_int=\count299
+\l__fontspec_tmp_int=\count300
+\l__fontspec_tmpa_int=\count301
+\l__fontspec_tmpb_int=\count302
+\l__fontspec_tmpc_int=\count303
+\l__fontspec_em_int=\count304
+\l__fontspec_emdef_int=\count305
+\l__fontspec_strong_int=\count306
+\l__fontspec_strongdef_int=\count307
+\l__fontspec_tmpa_dim=\dimen185
+\l__fontspec_tmpb_dim=\dimen186
+\l__fontspec_tmpc_dim=\dimen187
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/fontspec\fontspec.cfg)
+))
+\l__xeCJK_default_char_int=\count308
+ (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/xelatex/xecjk\xeCJK.cfg
+File: xeCJK.cfg 2026/08/21 v3.10.6 Configuration file for xeCJK package
+)) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.s
+ty
+Package: geometry 2026/03/07 v6.0 Page Geometry
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+))
+\Gm@cnth=\count309
+\Gm@cntv=\count310
+\c@Gm@tempcnt=\count311
+\Gm@bindingoffset=\dimen188
+\Gm@wd@mp=\dimen189
+\Gm@odd@mp=\dimen190
+\Gm@even@mp=\dimen191
+\Gm@layoutwidth=\dimen192
+\Gm@layoutheight=\dimen193
+\Gm@layouthoffset=\dimen194
+\Gm@layoutvoffset=\dimen195
+\Gm@dimlist=\toks18
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
 ) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2025/07/09 v2.17z AMS math features
-\@mathmargin=\skip51
+\@mathmargin=\skip62
 
 For additional information on amsmath, use the `?' option.
 (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
 Package: amstext 2024/11/17 v2.01 AMS text
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks17
-\ex@=\dimen149
-)) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
+\@emptytoks=\toks19
+\ex@=\dimen196
+))
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen150
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
+\pmbraise@=\dimen197
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count284
+\inf@bad=\count312
 LaTeX Info: Redefining \frac on input line 233.
-\uproot@=\count285
-\leftroot@=\count286
+\uproot@=\count313
+\leftroot@=\count314
 LaTeX Info: Redefining \overline on input line 398.
 LaTeX Info: Redefining \colon on input line 409.
-\classnum@=\count287
-\DOTSCASE@=\count288
+\classnum@=\count315
+\DOTSCASE@=\count316
 LaTeX Info: Redefining \ldots on input line 495.
 LaTeX Info: Redefining \dots on input line 498.
 LaTeX Info: Redefining \cdots on input line 619.
-\Mathstrutbox@=\box53
-\strutbox@=\box54
+\Mathstrutbox@=\box60
+\strutbox@=\box61
 LaTeX Info: Redefining \big on input line 721.
 LaTeX Info: Redefining \Big on input line 722.
 LaTeX Info: Redefining \bigg on input line 723.
 LaTeX Info: Redefining \Bigg on input line 724.
-\big@size=\dimen151
+\big@size=\dimen198
 LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
-\macc@depth=\count289
+\macc@depth=\count317
 LaTeX Info: Redefining \bmod on input line 904.
 LaTeX Info: Redefining \pmod on input line 909.
 LaTeX Info: Redefining \smash on input line 939.
 LaTeX Info: Redefining \relbar on input line 969.
 LaTeX Info: Redefining \Relbar on input line 970.
-\c@MaxMatrixCols=\count290
+\c@MaxMatrixCols=\count318
 \dotsspace@=\muskip17
-\c@parentequation=\count291
-\dspbrk@lvl=\count292
-\tag@help=\toks18
-\row@=\count293
-\column@=\count294
-\maxfields@=\count295
-\andhelp@=\toks19
-\eqnshift@=\dimen152
-\alignsep@=\dimen153
-\tagshift@=\dimen154
-\tagwidth@=\dimen155
-\totwidth@=\dimen156
-\lineht@=\dimen157
-\@envbody=\toks20
-\multlinegap=\skip52
-\multlinetaggap=\skip53
-\mathdisplay@stack=\toks21
+\c@parentequation=\count319
+\dspbrk@lvl=\count320
+\tag@help=\toks20
+\row@=\count321
+\column@=\count322
+\maxfields@=\count323
+\andhelp@=\toks21
+\eqnshift@=\dimen199
+\alignsep@=\dimen256
+\tagshift@=\dimen257
+\tagwidth@=\dimen258
+\totwidth@=\dimen259
+\lineht@=\dimen260
+\@envbody=\toks22
+\multlinegap=\skip63
+\multlinetaggap=\skip64
+\mathdisplay@stack=\toks23
 LaTeX Info: Redefining \[ on input line 2950.
 LaTeX Info: Redefining \] on input line 2951.
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
+))
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen158
-\lightrulewidth=\dimen159
-\cmidrulewidth=\dimen160
-\belowrulesep=\dimen161
-\belowbottomsep=\dimen162
-\aboverulesep=\dimen163
-\abovetopsep=\dimen164
-\cmidrulesep=\dimen165
-\cmidrulekern=\dimen166
-\defaultaddspace=\dimen167
-\@cmidla=\count296
-\@cmidlb=\count297
-\@aboverulesep=\dimen168
-\@belowrulesep=\dimen169
-\@thisruleclass=\count298
-\@lastruleclass=\count299
-\@thisrulewidth=\dimen170
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty
-Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
-\multirow@colwidth=\skip54
-\multirow@cntb=\count300
-\multirow@dima=\skip55
-\bigstrutjot=\dimen171
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
-Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
-Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
-\KV@toks@=\toks22
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
-Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
-Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
-File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+\heavyrulewidth=\dimen261
+\lightrulewidth=\dimen262
+\cmidrulewidth=\dimen263
+\belowrulesep=\dimen264
+\belowbottomsep=\dimen265
+\aboverulesep=\dimen266
+\abovetopsep=\dimen267
+\cmidrulesep=\dimen268
+\cmidrulekern=\dimen269
+\defaultaddspace=\dimen270
+\@cmidla=\count324
+\@cmidlb=\count325
+\@aboverulesep=\dimen271
+\@belowrulesep=\dimen272
+\@thisruleclass=\count326
+\@lastruleclass=\count327
+\@thisrulewidth=\dimen273
 )
-Package graphics Info: Driver file: pdftex.def on input line 106.
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
-File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
-))
-\Gin@req@height=\dimen172
-\Gin@req@width=\dimen173
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
-Package: geometry 2026/03/07 v6.0 Page Geometry
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
-Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
-Package: iftex 2024/12/12 v1.0g TeX engine tests
-))
-\Gm@cnth=\count301
-\Gm@cntv=\count302
-\c@Gm@tempcnt=\count303
-\Gm@bindingoffset=\dimen174
-\Gm@wd@mp=\dimen175
-\Gm@odd@mp=\dimen176
-\Gm@even@mp=\dimen177
-\Gm@layoutwidth=\dimen178
-\Gm@layoutheight=\dimen179
-\Gm@layouthoffset=\dimen180
-\Gm@layoutvoffset=\dimen181
-\Gm@dimlist=\toks23
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/threeparttable\threepa
+rttable.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box62
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty
+Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
+\col@sep=\dimen274
+\ar@mcellbox=\box63
+\extrarowheight=\dimen275
+\NC@list=\toks24
+\extratabsurround=\skip65
+\backup@length=\skip66
+\ar@cellbox=\box64
+)
+\TX@col@width=\dimen276
+\TX@old@table=\dimen277
+\TX@old@col=\dimen278
+\TX@target=\dimen279
+\TX@delta=\dimen280
+\TX@cols=\count328
+\TX@ftn=\toks25
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/tools\longtable.sty
+Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
+\LTleft=\skip67
+\LTright=\skip68
+\LTpre=\skip69
+\LTpost=\skip70
+\LTchunksize=\count329
+\LTcapwidth=\dimen281
+\LT@head=\box65
+\LT@firsthead=\box66
+\LT@foot=\box67
+\LT@lastfoot=\box68
+\LT@gbox=\box69
+\LT@cols=\count330
+\LT@rows=\count331
+\c@LT@tables=\count332
+\c@LT@chunks=\count333
+\LT@p@ftn=\toks26
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count334
+\float@exts=\toks27
+\float@box=\box70
+\@float@everytoks=\toks28
+\@floatcapt=\box71
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen282
+\captionmargin=\dimen283
+\caption@leftmargin=\dimen284
+\caption@rightmargin=\dimen285
+\caption@width=\dimen286
+\caption@indent=\dimen287
+\caption@parindent=\dimen288
+\caption@hangindent=\dimen289
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count335
+\c@continuedfloat=\count336
+Package caption Info: float package is loaded.
+Package caption Info: longtable package is loaded.
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/caption\ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)
+Package caption Info: threeparttable package is loaded.
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/caption\subcaption.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count337
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count338
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
+Package: enumitem 2025/02/06 v3.11 Customized lists
+\labelindent=\skip71
+\enit@outerparindent=\dimen290
+\enit@toks=\toks29
+\enit@inbox=\box72
+\enit@count@id=\count339
+\enitdp@description=\count340
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: xetex.def on input line 274.
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\xetex.def
+File: xetex.def 2025/11/01 v5.0p Graphics/color driver for xetex
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/titlesec\titlesec.sty
+Package: titlesec 2025/01/04 v2.17 Sectioning titles
+\ttl@box=\box73
+\beforetitleunit=\skip72
+\aftertitleunit=\skip73
+\ttl@plus=\dimen291
+\ttl@minus=\dimen292
+\ttl@toksa=\toks30
+\titlewidth=\dimen293
+\titlewidthlast=\dimen294
+\titlewidthfirst=\dimen295
+) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.st
+y
 Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.st
+y
 Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefin
+ekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.
+sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
 Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
-Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.sty
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmd
+s.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.
+sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
+Package pdftexcmds Info: \pdfdraftmode not found.
+))
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2025-06-21 v2.57 Cross-referencing by name of section
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\getti
+tlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.st
+y
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count304
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
-Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count305
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.sty
-Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
+\c@section@level=\count341
 )
-\@linkdim=\dimen182
-\Hy@linkcounter=\count306
-\Hy@pagecounter=\count307
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count342
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.
+sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
+)
+\@linkdim=\dimen296
+\Hy@linkcounter=\count343
+\Hy@pagecounter=\count344
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
 File: pd1enc.def 2025-07-12 v7.01o Hyperref: PDFDocEncoding definition (HO)
-Now handling font encoding PD1 ...
-... no UTF-8 mapping file for font encoding PD1
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+)
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count308
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
+\Hy@SavedSpaceFactor=\count345
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
 File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
-Now handling font encoding PU ...
-... no UTF-8 mapping file for font encoding PU
 )
 Package hyperref Info: Hyper figures OFF on input line 4195.
 Package hyperref Info: Link nesting OFF on input line 4200.
@@ -253,21 +602,26 @@ Package hyperref Info: Plain pages OFF on input line 4210.
 Package hyperref Info: Backreferencing OFF on input line 4215.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4462.
-\c@Hy@tempcnt=\count309
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\c@Hy@tempcnt=\count346
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4801.
-\XeTeXLinkMargin=\dimen183
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+\XeTeXLinkMargin=\dimen297
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
-Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcal
+c.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
 ))
-\Fld@menulength=\count310
-\Field@Width=\dimen184
-\Fld@charsize=\dimen185
+\Fld@menulength=\count347
+\Field@Width=\dimen298
+\Fld@charsize=\dimen299
 Package hyperref Info: Hyper figures OFF on input line 6078.
 Package hyperref Info: Link nesting OFF on input line 6083.
 Package hyperref Info: Hyper index ON on input line 6086.
@@ -275,208 +629,200 @@ Package hyperref Info: backreferencing OFF on input line 6093.
 Package hyperref Info: Link coloring OFF on input line 6098.
 Package hyperref Info: Link coloring with OCG OFF on input line 6103.
 Package hyperref Info: PDF/A mode OFF on input line 6108.
-\Hy@abspage=\count311
-\c@Item=\count312
-\c@Hfootnote=\count313
+\Hy@abspage=\count348
+\c@Item=\count349
+\c@Hfootnote=\count350
 )
-Package hyperref Info: Driver (autodetected): hpdftex.
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
-File: hpdftex.def 2025-07-12 v7.01o Hyperref driver for pdfTeX
-\Fld@listcount=\count314
-\c@bookmark@seq@number=\count315
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
+Package hyperref Info: Driver (autodetected): hxetex.
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hxetex.def
+File: hxetex.def 2025-07-12 v7.01o Hyperref driver for XeTeX
+\pdfm@box=\box74
+\c@Hy@AnnotLevel=\count351
+\HyField@AnnotCount=\count352
+\Fld@listcount=\count353
+\c@bookmark@seq@number=\count354
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfi
+lecheck.sty
 Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\unique
+counter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 )
-Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+84.
 )
-\Hy@SectionHShift=\skip56
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
-Package: caption 2023/08/05 v3.6o Customizing captions (AR)
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty
-Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
-\caption@tempdima=\dimen186
-\captionmargin=\dimen187
-\caption@leftmargin=\dimen188
-\caption@rightmargin=\dimen189
-\caption@width=\dimen190
-\caption@indent=\dimen191
-\caption@parindent=\dimen192
-\caption@hangindent=\dimen193
-Package caption Info: Standard document class detected.
+\Hy@SectionHShift=\skip74
 )
-\c@caption@flags=\count316
-\c@continuedfloat=\count317
-Package caption Info: hyperref package is loaded.
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count318
-\float@exts=\toks24
-\float@box=\box55
-\@float@everytoks=\toks25
-\@floatcapt=\box56
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
-Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
-\col@sep=\dimen194
-\ar@mcellbox=\box57
-\extrarowheight=\dimen195
-\NC@list=\toks26
-\extratabsurround=\skip57
-\backup@length=\skip58
-\ar@cellbox=\box58
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/setspace\setspace.sty
-Package: setspace 2022/12/04 v6.7b set line spacing
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/threeparttable\threeparttable.sty
-Package: threeparttable 2003/06/13  v 3.0
-\@tempboxb=\box59
+
+Package fontspec Info: 
+(fontspec)             Could not resolve font "標楷體/I" (it probably doesn't
+(fontspec)             exist).
 
 
-C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/threeparttable\threeparttable.sty:340: LaTeX Error: Unknown option `threeparttable' for package `threeparttable'.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.340 
-      
-The option `threeparttable' was not declared in package `threeparttable', perhaps you
-misspelled its name. Try typing  <return>  to proceed.
-
-)
-d:/Repositories/nsysu_finance_paper_v3/main.tex:22: Undefined control sequence.
-l.22 \setCJKmainfont
-                    [AutoFakeBold=true,AutoFakeSlant=true]{標楷體} % 相�...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
+Package fontspec Info: 
+(fontspec)             Could not resolve font "標楷體/BI" (it probably doesn't
+(fontspec)             exist).
 
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:22: LaTeX Error: Missing \begin{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.22 \setCJKmainfont[
-                     AutoFakeBold=true,AutoFakeSlant=true]{標楷體} % 相�...
-You're in trouble here.  Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+Package fontspec Info: 
+(fontspec)             Could not resolve font "標楷體/I" (it probably doesn't
+(fontspec)             exist).
 
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:22: LaTeX Error: Unicode character 標 (U+6A19)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.22 ...[AutoFakeBold=true,AutoFakeSlant=true]{標
-                                                  楷體} % 相容 DFKai-SB ...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:22: LaTeX Error: Unicode character 楷 (U+6977)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.22 ...toFakeBold=true,AutoFakeSlant=true]{標楷
-                                                  體} % 相容 DFKai-SB / B...
-You may provide a definition with
-\DeclareUnicodeCharacter 
+Package fontspec Info: 
+(fontspec)             Font family '標楷體(0)' created for font '標楷體' with
+(fontspec)             options [Script={CJK},AutoFakeBold={4}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->"標楷體/OT:script=hani;language=dflt;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->"標楷體/OT:script=hani;language=dflt;embolden=4;"
 
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:22: LaTeX Error: Unicode character 體 (U+9AD4)
-               not set up for use with LaTeX.
+Package fontspec Info: 
+(fontspec)             Font family 'TimesNewRoman(0)' created for font 'Times
+(fontspec)             New Roman' with options [Ligatures=TeX].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.: <->"Times New
+(fontspec)             Roman/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: <->"Times New
+(fontspec)             Roman/OT:script=latn;language=dflt;+smcp;mapping=tex-tex
+t;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.: <->"Times New
+(fontspec)             Roman/B/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: <->"Times
+(fontspec)             New
+(fontspec)             Roman/B/OT:script=latn;language=dflt;+smcp;mapping=tex-t
+ext;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.: <->"Times New
+(fontspec)             Roman/I/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
+(fontspec)             <->"Times New
+(fontspec)             Roman/I/OT:script=latn;language=dflt;+smcp;mapping=tex-t
+ext;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.: <->"Times New
+(fontspec)             Roman/BI/OT:script=latn;language=dflt;mapping=tex-text;"
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.22 ...akeBold=true,AutoFakeSlant=true]{標楷體
-                                                  } % 相容 DFKai-SB / BiauKai
-You may provide a definition with
-\DeclareUnicodeCharacter 
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
+(fontspec)             <->"Times New
+(fontspec)             Roman/BI/OT:script=latn;language=dflt;+smcp;mapping=tex-
+text;"
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:23: Undefined control sequence.
-l.23 \setmainfont
-                 {Times New Roman}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-Package hyperref Info: Option `colorlinks' set `true' on input line 32.
-(main.aux)
+Package hyperref Info: Option `colorlinks' set `true' on input line 30.
+ (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count319
-\scratchdimen=\dimen196
-\scratchbox=\box60
-\nofMPsegments=\count320
-\nofMParguments=\count321
-\everyMPshowfont=\toks27
-\MPscratchCnt=\count322
-\MPscratchDim=\dimen197
-\MPnumerator=\count323
-\makeMPintoPDFobject=\count324
-\everyMPtoPDFconversion=\toks28
-) (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
-Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/grfext\grfext.sty
-Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
-)
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
-Package grfext Info: Graphics extension search list:
-(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 504.
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
-))
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 42.
+LaTeX Font Info:    ... okay on input line 42.
+
+Package fontspec Info: 
+(fontspec)             Adjusting the maths setup (use [no-math] to avoid
+(fontspec)             this).
+
+\symlegacymaths=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 42.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 42.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 42.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 42.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 42.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 42.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 42.
+LaTeX Font Info:    Redeclaring math accent \check on input line 42.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 42.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 42.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 42.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 42.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 42.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 42.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 42.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 42.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 42.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 42.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 42.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 42.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 42.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 42.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 42.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 42.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `normal' on input line 42.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> TU/TimesNewRoman(0)/m/n on input line 4
+2.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `bold' on input line 42.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/m/n on input line 
+42.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/m/n on 
+input line 42.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> TU/TimesNewRoman(0)/m/it on input line
+ 42.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/b/n on input line 
+42.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 42.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 42.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/b/n on 
+input line 42.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> TU/TimesNewRoman(0)/b/it on input lin
+e 42.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 42.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 42.
+
 *geometry* driver: auto-detecting
-*geometry* detected driver: pdftex
+*geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
-* driver: pdftex
+* driver: xetex
 * paper: a4paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(71.13188pt, 455.24411pt, 71.13188pt)
-* v-part:(T,H,B)=(71.13188pt, 702.78308pt, 71.13188pt)
+* h-part:(L,W,R)=(91.04872pt, 415.41043pt, 91.04872pt)
+* v-part:(T,H,B)=(79.6678pt, 685.71124pt, 79.6678pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
-* \textwidth=455.24411pt
-* \textheight=702.78308pt
-* \oddsidemargin=-1.1381pt
-* \evensidemargin=-1.1381pt
-* \topmargin=-38.1381pt
+* \textwidth=415.41043pt
+* \textheight=685.71124pt
+* \oddsidemargin=18.77873pt
+* \evensidemargin=18.77873pt
+* \topmargin=-29.60219pt
 * \headheight=12.0pt
 * \headsep=25.0pt
 * \topskip=12.0pt
@@ -494,2755 +840,133 @@ File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics\color.sty
-Package: color 2025/01/14 v1.3e Standard LaTeX Color (DPC)
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
-File: color.cfg 2016/01/02 v1.6 sample color configuration
-)
-Package color Info: Driver file: pdftex.def on input line 149.
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx))
-Package hyperref Info: Link coloring ON on input line 45.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: hyperref package is loaded.
+Package caption Info: End \AtBeginDocument code.
+Package hyperref Info: Link coloring ON on input line 42.
+(main.out) (main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
-Package caption Info: Begin \AtBeginDocument code.
-Package caption Info: float package is loaded.
-Package caption Info: threeparttable package is loaded.
-Package caption Info: End \AtBeginDocument code.
  [1
 
-{C:/Users/170134/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 45.
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 國 (U+570B)
-               not set up for use with LaTeX.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 立 (U+7ACB)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 中 (U+4E2D)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 山 (U+5C71)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 大 (U+5927)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 學 (U+5B78)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 財 (U+8CA1)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 務 (U+52D9)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 管 (U+7BA1)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 理 (U+7406)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 學 (U+5B78)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 系 (U+7CFB)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 碩 (U+78A9)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 士 (U+58EB)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 論 (U+8AD6)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 文 (U+6587)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 企 (U+4F01)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 業 (U+696D)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 水 (U+6C34)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 管 (U+7BA1)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 理 (U+7406)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 與 (U+8207)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 廢 (U+5EE2)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 棄 (U+68C4)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 物 (U+7269)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 管 (U+7BA1)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 理 (U+7406)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 對 (U+5C0D)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 成 (U+6210)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 本 (U+672C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 黏 (U+9ECF)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 性 (U+6027)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 之 (U+4E4B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 影 (U+5F71)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 響 (U+97FF)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 以 (U+4EE5)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 台 (U+53F0)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 灣 (U+7063)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 上 (U+4E0A)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 市 (U+5E02)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 櫃 (U+6AC3)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 製 (U+88FD)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 造 (U+9020)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 業 (U+696D)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 之 (U+4E4B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 環 (U+74B0)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 境 (U+5883)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 績 (U+7E3E)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 效 (U+6548)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 與 (U+8207)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 資 (U+8CC7)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 訊 (U+8A0A)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 揭 (U+63ED)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 露 (U+9732)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 為 (U+70BA)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 例 (U+4F8B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-LaTeX Font Info:    Trying to load font information for U+msa on input line 48.
 (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 48.
- (C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
+LaTeX Font Info:    Trying to load font information for U+msb on input line 45.
+
+
+(C:\Users\170134\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 研 (U+7814)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 究 (U+7A76)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 生 (U+751F)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character ： (U+FF1A)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 撰 (U+64B0)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 指 (U+6307)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 導 (U+5C0E)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 教 (U+6559)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 授 (U+6388)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character ： (U+FF1A)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 博 (U+535A)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 士 (U+58EB)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 中 (U+4E2D)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 華 (U+83EF)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 民 (U+6C11)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 國 (U+570B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 年 (U+5E74)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:48: LaTeX Error: Unicode character 月 (U+6708)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 \thispagestyle
-                   {empty}
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
 [2]
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:52: LaTeX Error: Unicode character 摘 (U+6458)
-               not set up for use with LaTeX.
+Package xeCJK Warning: Unknown CJK family `標楷體' is being ignored.
+(xeCJK)                
+(xeCJK)                Try to use `\setCJKfamilyfont{標楷體}[<...>]{<...>}' to
+(xeCJK)                define it.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.52 \section*{摘要}
-                      
-You may provide a definition with
-\DeclareUnicodeCharacter 
+(main.toc [3]
+Overfull \hbox (13.97937pt too wide) in paragraph at lines 28--28
+ [][] [][][]\TU/標楷體(0)/m/n/12 用 水 密 集 度 之 當 期 即 時 發 酵 機 制 深 度 剖 析 \TU/TimesNewR
+oman(0)/m/n/12 ($\OML/cmm/m/it/12 ^^L[] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 ^^@\
+OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 0914\OML/cmm/m/it/12 ; p < 
+ []
 
+)
+\tf@toc=\write4
+\openout4 = `main.toc'.
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:52: LaTeX Error: Unicode character 要 (U+8981)
-               not set up for use with LaTeX.
+ [4] (main.lot)
+\tf@lot=\write5
+\openout5 = `main.lot'.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.52 \section*{摘要}
-                      
-You may provide a definition with
-\DeclareUnicodeCharacter 
+ [5] [6] [7]
 
+Package xeCJK Warning: Unknown CJK family `\CJKttdefault' is being ignored.
+(xeCJK)                
+(xeCJK)                Try to use `\setCJKmonofont[<...>]{<...>}' to define
+(xeCJK)                it.
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 本 (U+672C)
-               not set up for use with LaTeX.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 本
-        研究探討企業水管理與廢棄物管理之環境績效與資�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
+Overfull \hbox (20.6841pt too wide) in paragraph at lines 86--87
+[]\TU/標楷體(0)/b/n/12 環 境 資 源 使 用 密 集 度 之 核 心 效 應\TU/標楷體(0)/m/n/12 ：|  企 業 之 實 質 
+ |「用 水 密 集 度」 （\TU/lmtt/m/n/12 Water_Intensity\TU/標楷體(0)/m/n/12 ）|
+ []
 
+[8] [9] [10] [11] [12] [13] [14] [15]
+Overfull \hbox (25.18001pt too wide) in paragraph at lines 189--201
+ [][] 
+ []
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 研 (U+7814)
-               not set up for use with LaTeX.
+[16] [17] [18]
+Overfull \hbox (143.62744pt too wide) in paragraph at lines 256--264
+ [][] 
+ []
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 本研
-           究探討企業水管理與廢棄物管理之環境績效與資�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
+[19] [20] [21]
+Overfull \vbox (21.22766pt too high) has occurred while \output is active []
 
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 究 (U+7A76)
-               not set up for use with LaTeX.
+[22] [23] [24]
+Overfull \hbox (4.62808pt too wide) in paragraph at lines 412--439
+ [] 
+ []
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 本研究
-              探討企業水管理與廢棄物管理之環境績效與資�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
+[25] [26]
 
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 449.
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 探 (U+63A2)
-               not set up for use with LaTeX.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 本研究探
-                 討企業水管理與廢棄物管理之環境績效與資�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 449.
 
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 討 (U+8A0E)
-               not set up for use with LaTeX.
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 449.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 本研究探討
-                    企業水管理與廢棄物管理之環境績效與資�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
 
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 449.
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 企 (U+4F01)
-               not set up for use with LaTeX.
+[27] [28] [29] [30]
+Overfull \vbox (785.16899pt too high) has occurred while \output is active []
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 本研究探討企
-                       業水管理與廢棄物管理之環境績效與資�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
 
+[31] [32] [33] [34] [35] [36]
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 業 (U+696D)
-               not set up for use with LaTeX.
+LaTeX Font Warning: Font shape `TU/標楷體(0)/m/it' undefined
+(Font)              using `TU/標楷體(0)/m/n' instead on input line 655.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 本研究探討企業
-                          水管理與廢棄物管理之環境績效與資�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
+[37] [38] [39] [40]
+Overfull \hbox (39.47725pt too wide) in paragraph at lines 706--727
+ [][] 
+ []
 
+[41] (main.aux)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2026/08/21>
+ ***********
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 水 (U+6C34)
-               not set up for use with LaTeX.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 本研究探討企業水
-                             管理與廢棄物管理之環境績效與資�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 管 (U+7BA1)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 本研究探討企業水管
-                                理與廢棄物管理之環境績效與資�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 理 (U+7406)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 本研究探討企業水管理
-                                   與廢棄物管理之環境績效與資�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 與 (U+8207)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 本研究探討企業水管理與
-                                      廢棄物管理之環境績效與資�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 廢 (U+5EE2)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 本研究探討企業水管理與廢
-                                         棄物管理之環境績效與資�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 棄 (U+68C4)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 本研究探討企業水管理與廢棄
-                                            物管理之環境績效與資�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 物 (U+7269)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 本研究探討企業水管理與廢棄物
-                                               管理之環境績效與資�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 管 (U+7BA1)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 本研究探討企業水管理與廢棄物管
-                                                  理之環境績效與資�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 理 (U+7406)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...究探討企業水管理與廢棄物管理
-                                                  之環境績效與資訊�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 之 (U+4E4B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...探討企業水管理與廢棄物管理之
-                                                  環境績效與資訊揭�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 環 (U+74B0)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...討企業水管理與廢棄物管理之環
-                                                  境績效與資訊揭露�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 境 (U+5883)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...企業水管理與廢棄物管理之環境
-                                                  績效與資訊揭露，�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 績 (U+7E3E)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...業水管理與廢棄物管理之環境績
-                                                  效與資訊揭露，對�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 效 (U+6548)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...水管理與廢棄物管理之環境績效
-                                                  與資訊揭露，對成�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 與 (U+8207)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...管理與廢棄物管理之環境績效與
-                                                  資訊揭露，對成本�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 資 (U+8CC7)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...理與廢棄物管理之環境績效與資
-                                                  訊揭露，對成本黏�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 訊 (U+8A0A)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...與廢棄物管理之環境績效與資訊
-                                                  揭露，對成本黏性�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 揭 (U+63ED)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...廢棄物管理之環境績效與資訊揭
-                                                  露，對成本黏性（co...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 露 (U+9732)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...棄物管理之環境績效與資訊揭露
-                                                  ，對成本黏性（cost ...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character ， (U+FF0C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...物管理之環境績效與資訊揭露，
-                                                  對成本黏性（cost sti...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 對 (U+5C0D)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...管理之環境績效與資訊揭露，對
-                                                  成本黏性（cost sticki...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 成 (U+6210)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...理之環境績效與資訊揭露，對成
-                                                  本黏性（cost stickines...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 本 (U+672C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...之環境績效與資訊揭露，對成本
-                                                  黏性（cost stickiness�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 黏 (U+9ECF)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...環境績效與資訊揭露，對成本黏
-                                                  性（cost stickiness）�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 性 (U+6027)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...境績效與資訊揭露，對成本黏性
-                                                  （cost stickiness）的�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character （ (U+FF08)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...績效與資訊揭露，對成本黏性（
-                                                  cost stickiness）的影�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character ） (U+FF09)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...露，對成本黏性（cost stickiness）
-                                                  的影響。以台灣上�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 的 (U+7684)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...，對成本黏性（cost stickiness）的
-                                                  影響。以台灣上市�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 影 (U+5F71)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...對成本黏性（cost stickiness）的影
-                                                  響。以台灣上市櫃�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 響 (U+97FF)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...成本黏性（cost stickiness）的影響
-                                                  。以台灣上市櫃製�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 。 (U+3002)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...本黏性（cost stickiness）的影響。
-                                                  以台灣上市櫃製造�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 以 (U+4EE5)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...黏性（cost stickiness）的影響。以
-                                                  台灣上市櫃製造業�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 台 (U+53F0)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...性（cost stickiness）的影響。以台
-                                                  灣上市櫃製造業（�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 灣 (U+7063)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...（cost stickiness）的影響。以台灣
-                                                  上市櫃製造業（排�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 上 (U+4E0A)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...cost stickiness）的影響。以台灣上
-                                                  市櫃製造業（排除�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 市 (U+5E02)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...t stickiness）的影響。以台灣上市
-                                                  櫃製造業（排除金�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 櫃 (U+6AC3)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...tickiness）的影響。以台灣上市櫃
-                                                  製造業（排除金融�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 製 (U+88FD)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...kiness）的影響。以台灣上市櫃製
-                                                  造業（排除金融保�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 造 (U+9020)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...ess）的影響。以台灣上市櫃製造
-                                                  業（排除金融保險�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 業 (U+696D)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...）的影響。以台灣上市櫃製造業
-                                                  （排除金融保險業�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character （ (U+FF08)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...的影響。以台灣上市櫃製造業（
-                                                  排除金融保險業）20...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 排 (U+6392)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...影響。以台灣上市櫃製造業（排
-                                                  除金融保險業）2014 ...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 除 (U+9664)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...響。以台灣上市櫃製造業（排除
-                                                  金融保險業）2014 至...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 金 (U+91D1)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...。以台灣上市櫃製造業（排除金
-                                                  融保險業）2014 至 20...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 融 (U+878D)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...以台灣上市櫃製造業（排除金融
-                                                  保險業）2014 至 2024 ...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 保 (U+4FDD)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...台灣上市櫃製造業（排除金融保
-                                                  險業）2014 至 2024 年...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 險 (U+96AA)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...灣上市櫃製造業（排除金融保險
-                                                  業）2014 至 2024 年資...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 業 (U+696D)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...上市櫃製造業（排除金融保險業
-                                                  ）2014 至 2024 年資料...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character ） (U+FF09)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...市櫃製造業（排除金融保險業）
-                                                  2014 至 2024 年資料為...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 至 (U+81F3)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...�造業（排除金融保險業）2014 至
-                                                   2024 年資料為樣本�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 年 (U+5E74)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...�排除金融保險業）2014 至 2024 年
-                                                  資料為樣本，共 18,1...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 資 (U+8CC7)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...�除金融保險業）2014 至 2024 年資
-                                                  料為樣本，共 18,137 ...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 料 (U+6599)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...�金融保險業）2014 至 2024 年資料
-                                                  為樣本，共 18,137 個...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 為 (U+70BA)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...�融保險業）2014 至 2024 年資料為
-                                                  樣本，共 18,137 個公...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 樣 (U+6A23)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...�保險業）2014 至 2024 年資料為樣
-                                                  本，共 18,137 個公司...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 本 (U+672C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...�險業）2014 至 2024 年資料為樣本
-                                                  ，共 18,137 個公司—...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character ， (U+FF0C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...�業）2014 至 2024 年資料為樣本，
-                                                  共 18,137 個公司—年...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 共 (U+5171)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...�）2014 至 2024 年資料為樣本，共
-                                                   18,137 個公司—年觀...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 個 (U+500B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...� 2024 年資料為樣本，共 18,137 個
-                                                  公司—年觀測值（1,...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 公 (U+516C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...024 年資料為樣本，共 18,137 個公
-                                                  司—年觀測值（1,945...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 司 (U+53F8)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ... 年資料為樣本，共 18,137 個公司
-                                                  —年觀測值（1,945 �...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 年 (U+5E74)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...�料為樣本，共 18,137 個公司—年
-                                                  觀測值（1,945 家公�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 觀 (U+89C0)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...�為樣本，共 18,137 個公司—年觀
-                                                  測值（1,945 家公司�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 測 (U+6E2C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...�樣本，共 18,137 個公司—年觀測
-                                                  值（1,945 家公司）�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 值 (U+503C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...�本，共 18,137 個公司—年觀測值
-                                                  （1,945 家公司）。�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character （ (U+FF08)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...�，共 18,137 個公司—年觀測值（
-                                                  1,945 家公司）。本�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 家 (U+5BB6)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...8,137 個公司—年觀測值（1,945 家
-                                                  公司）。本研究採 A...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 公 (U+516C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...37 個公司—年觀測值（1,945 家公
-                                                  司）。本研究採 Ande...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 司 (U+53F8)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...個公司—年觀測值（1,945 家公司
-                                                  ）。本研究採 Anderso...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character ） (U+FF09)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...公司—年觀測值（1,945 家公司）
-                                                  。本研究採 Anderson, ...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 。 (U+3002)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...司—年觀測值（1,945 家公司）。
-                                                  本研究採 Anderson, Ban...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 本 (U+672C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...—年觀測值（1,945 家公司）。本
-                                                  研究採 Anderson, Banker...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 研 (U+7814)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...年觀測值（1,945 家公司）。本研
-                                                  究採 Anderson, Banker an...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 究 (U+7A76)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...觀測值（1,945 家公司）。本研究
-                                                  採 Anderson, Banker and J...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 採 (U+63A1)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...測值（1,945 家公司）。本研究採
-                                                   Anderson, Banker and Jana...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 成 (U+6210)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...nderson, Banker and Janakiraman (2003) 成
-                                                  本黏性模型，於營�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 本 (U+672C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...rson, Banker and Janakiraman (2003) 成本
-                                                  黏性模型，於營業�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 黏 (U+9ECF)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...n, Banker and Janakiraman (2003) 成本黏
-                                                  性模型，於營業費�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 性 (U+6027)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...Banker and Janakiraman (2003) 成本黏性
-                                                  模型，於營業費用�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 模 (U+6A21)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...ker and Janakiraman (2003) 成本黏性模
-                                                  型，於營業費用變�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 型 (U+578B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ... and Janakiraman (2003) 成本黏性模型
-                                                  ，於營業費用變動�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character ， (U+FF0C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...d Janakiraman (2003) 成本黏性模型，
-                                                  於營業費用變動對�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 於 (U+65BC)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...anakiraman (2003) 成本黏性模型，於
-                                                  營業費用變動對營�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 營 (U+71DF)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...kiraman (2003) 成本黏性模型，於營
-                                                  業費用變動對營收�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 業 (U+696D)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...aman (2003) 成本黏性模型，於營業
-                                                  費用變動對營收變�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 費 (U+8CBB)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...n (2003) 成本黏性模型，於營業費
-                                                  用變動對營收變動�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 用 (U+7528)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...2003) 成本黏性模型，於營業費用
-                                                  變動對營收變動之�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 變 (U+8B8A)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...3) 成本黏性模型，於營業費用變
-                                                  動對營收變動之敏�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 動 (U+52D5)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...成本黏性模型，於營業費用變動
-                                                  對營收變動之敏感�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 對 (U+5C0D)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...本黏性模型，於營業費用變動對
-                                                  營收變動之敏感度�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 營 (U+71DF)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...黏性模型，於營業費用變動對營
-                                                  收變動之敏感度中�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 收 (U+6536)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...性模型，於營業費用變動對營收
-                                                  變動之敏感度中，�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 變 (U+8B8A)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...模型，於營業費用變動對營收變
-                                                  動之敏感度中，加�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 動 (U+52D5)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...型，於營業費用變動對營收變動
-                                                  之敏感度中，加入�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 之 (U+4E4B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...，於營業費用變動對營收變動之
-                                                  敏感度中，加入收�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 敏 (U+654F)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...於營業費用變動對營收變動之敏
-                                                  感度中，加入收入�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 感 (U+611F)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...營業費用變動對營收變動之敏感
-                                                  度中，加入收入下�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 度 (U+5EA6)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...業費用變動對營收變動之敏感度
-                                                  中，加入收入下降�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 中 (U+4E2D)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...費用變動對營收變動之敏感度中
-                                                  ，加入收入下降虛�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character ， (U+FF0C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...用變動對營收變動之敏感度中，
-                                                  加入收入下降虛擬�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 加 (U+52A0)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...變動對營收變動之敏感度中，加
-                                                  入收入下降虛擬變�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 入 (U+5165)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...動對營收變動之敏感度中，加入
-                                                  收入下降虛擬變數�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 收 (U+6536)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...對營收變動之敏感度中，加入收
-                                                  入下降虛擬變數與�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 入 (U+5165)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...營收變動之敏感度中，加入收入
-                                                  下降虛擬變數與環�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 下 (U+4E0B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...收變動之敏感度中，加入收入下
-                                                  降虛擬變數與環境�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 降 (U+964D)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...變動之敏感度中，加入收入下降
-                                                  虛擬變數與環境變�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 虛 (U+865B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...動之敏感度中，加入收入下降虛
-                                                  擬變數與環境變數�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 擬 (U+64EC)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...之敏感度中，加入收入下降虛擬
-                                                  變數與環境變數之�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 變 (U+8B8A)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...敏感度中，加入收入下降虛擬變
-                                                  數與環境變數之三�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 數 (U+6578)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...感度中，加入收入下降虛擬變數
-                                                  與環境變數之三重�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 與 (U+8207)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...度中，加入收入下降虛擬變數與
-                                                  環境變數之三重交�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 環 (U+74B0)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...中，加入收入下降虛擬變數與環
-                                                  境變數之三重交乘�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 境 (U+5883)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...，加入收入下降虛擬變數與環境
-                                                  變數之三重交乘，�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 變 (U+8B8A)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...加入收入下降虛擬變數與環境變
-                                                  數之三重交乘，並�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 數 (U+6578)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...入收入下降虛擬變數與環境變數
-                                                  之三重交乘，並控�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 之 (U+4E4B)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...收入下降虛擬變數與環境變數之
-                                                  三重交乘，並控制�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 三 (U+4E09)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...入下降虛擬變數與環境變數之三
-                                                  重交乘，並控制產�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 重 (U+91CD)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...下降虛擬變數與環境變數之三重
-                                                  交乘，並控制產業�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 交 (U+4EA4)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...降虛擬變數與環境變數之三重交
-                                                  乘，並控制產業與�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 乘 (U+4E58)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...虛擬變數與環境變數之三重交乘
-                                                  ，並控制產業與年�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character ， (U+FF0C)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...擬變數與環境變數之三重交乘，
-                                                  並控制產業與年份�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 並 (U+4E26)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...變數與環境變數之三重交乘，並
-                                                  控制產業與年份固�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 控 (U+63A7)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...數與環境變數之三重交乘，並控
-                                                  制產業與年份固定�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 制 (U+5236)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...與環境變數之三重交乘，並控制
-                                                  產業與年份固定效�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 產 (U+7522)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...環境變數之三重交乘，並控制產
-                                                  業與年份固定效果�...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55: LaTeX Error: Unicode character 業 (U+696D)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.55 ...境變數之三重交乘，並控制產業
-                                                  與年份固定效果、�...
-(That makes 100 errors; please try again.) 
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: F0E2F9FAA08EE50AFCCFC68FE8226465;7672.
+ ) 
 Here is how much of TeX's memory you used:
- 12029 strings out of 467871
- 190443 string characters out of 5417893
- 597989 words of memory out of 5000000
- 40766 multiletter control sequences out of 15000+600000
- 632444 words of font info for 58 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 75i,6n,79p,768b,471s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 17780 strings out of 402987
+ 387268 string characters out of 5448318
+ 849667 words of memory out of 5000000
+ 46279 multiletter control sequences out of 15000+600000
+ 638420 words of font info for 124 fonts, out of 8000000 for 9000
+ 1348 hyphenation exceptions out of 8191
+ 74i,15n,93p,535b,604s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-d:/Repositories/nsysu_finance_paper_v3/main.tex:55:  ==> Fatal error occurred, no output PDF file produced!
+Output written on main.pdf (41 pages).
