@@ -20,11 +20,11 @@ from docx.shared import Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 
-MODEL_CSV = "04_model_data.csv"
-MAP_CSV = "04_var_mapping.csv"
-COEF_CSV = "05_regression_coef.csv"
-ROB_CSV = "06_robustness_summary.csv"
-OUT_DOCX = "水與廢棄物管理與成本黏性_論文.docx"
+MODEL_CSV = "data/processed/04_model_data.csv"
+MAP_CSV = "data/processed/04_var_mapping.csv"
+COEF_CSV = "results/05_regression_coef.csv"
+ROB_CSV = "results/06_robustness_summary.csv"
+OUT_DOCX = "build/水與廢棄物管理與成本黏性_論文.docx"
 
 CJK_FONT = "新細明體"
 EN_FONT = "Times New Roman"

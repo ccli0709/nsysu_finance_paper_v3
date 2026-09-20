@@ -15,10 +15,10 @@ import sys
 import subprocess
 import preview_server
 
-TEX_FILE = "main.tex"
-HTML_FILE = "preview_output.html"
-PDF_FILE = "main.pdf"
-DOCX_FILE = "main.docx"
+TEX_FILE = "build/main.tex"
+HTML_FILE = "build/preview_output.html"
+PDF_FILE = "build/main.pdf"
+DOCX_FILE = "build/main.docx"
 
 def compile_pdf(html_abs=None, pdf_abs=None):
     if not html_abs:

@@ -21,10 +21,10 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
-MODEL_CSV = "04_model_data.csv"
-COEF_CSV = "05_regression_coef.csv"
-ROB_CSV = "06_robustness_summary.csv"
-OUT = "水與廢棄物管理與成本黏性_論文_中山格式.docx"
+MODEL_CSV = "data/processed/04_model_data.csv"
+COEF_CSV = "results/05_regression_coef.csv"
+ROB_CSV = "results/06_robustness_summary.csv"
+OUT = "build/水與廢棄物管理與成本黏性_論文_中山格式.docx"
 CJK, EN = "標楷體", "Times New Roman"
 
 # 主迴歸五模型（L0）欄位順序與標題

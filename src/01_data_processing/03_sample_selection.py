@@ -17,9 +17,9 @@
 import numpy as np
 import pandas as pd
 
-INPUT_CSV = "02_features_data.csv"
-OUTPUT_SAMPLE = "03_sample_data.csv"
-OUTPUT_STATS = "03_industry_stats.csv"
+INPUT_CSV = "data/processed/02_features_data.csv"
+OUTPUT_SAMPLE = "data/processed/03_sample_data.csv"
+OUTPUT_STATS = "data/processed/03_industry_stats.csv"
 
 # 篩選參數
 START_YEAR = 2014

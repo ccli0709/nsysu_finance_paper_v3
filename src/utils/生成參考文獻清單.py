@@ -6,8 +6,8 @@ from docx.shared import Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 
-FOLDER = "台灣碩博士論文題目清單"
-OUT = "參考文獻候選清單_水與廢棄物成本黏性.docx"
+FOLDER = "docs/literature/台灣碩博士論文題目清單"
+OUT = "docs/literature/參考文獻候選清單_水與廢棄物成本黏性.docx"
 CJK, EN = "新細明體", "Times New Roman"
 
 # ---------------- 讀取 ----------------

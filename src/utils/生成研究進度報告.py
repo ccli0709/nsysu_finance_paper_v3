@@ -6,9 +6,9 @@ from docx.shared import Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.oxml.ns import qn
 
-OUT = "研究進度報告_水與廢棄物管理與成本黏性.docx"
+OUT = "docs/drafts/研究進度報告_水與廢棄物管理與成本黏性.docx"
 CJK, EN = "新細明體", "Times New Roman"
-ROB_CSV = "06_robustness_summary.csv"
+ROB_CSV = "results/06_robustness_summary.csv"
 
 WATER_M = ["水回收率%", "水揭露"]
 WASTE_M = ["廢棄物密集度", "廢棄物揭露", "廢棄物罰鍰"]

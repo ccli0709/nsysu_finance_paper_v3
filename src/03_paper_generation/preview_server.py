@@ -18,9 +18,9 @@ import urllib.parse
 from http.server import SimpleHTTPRequestHandler, HTTPServer
 import webbrowser
 
-TEX_FILE = "main.tex"
-HTML_FILE = "preview_output.html"
-PDF_FILE = "main.pdf"
+TEX_FILE = "build/main.tex"
+HTML_FILE = "build/preview_output.html"
+PDF_FILE = "build/main.pdf"
 PORT = 8000
 
 def parse_latex_to_html(tex_content):

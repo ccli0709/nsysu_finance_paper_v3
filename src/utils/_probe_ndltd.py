@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pandas as pd, glob, os
-folder = "台灣碩博士論文題目清單"
+folder = "docs/literature/台灣碩博士論文題目清單"
 for f in ["fb260621_ESG-114-01_05.csv", "113ndltd.csv"]:
     p = os.path.join(folder, f)
     for enc in ["utf-8-sig", "utf-16", "cp950", "big5"]:

@@ -18,9 +18,9 @@
 import numpy as np
 import pandas as pd
 
-INPUT_CSV = "03_sample_data.csv"
-OUTPUT_CSV = "04_model_data.csv"
-OUTPUT_MAP = "04_var_mapping.csv"
+INPUT_CSV = "data/processed/03_sample_data.csv"
+OUTPUT_CSV = "data/processed/04_model_data.csv"
+OUTPUT_MAP = "data/processed/04_var_mapping.csv"
 
 # 模型欄位（優先取縮尾 _w 版本）
 Y_COL = "dLNSGA_w"          # 應變數 ΔLNSGA

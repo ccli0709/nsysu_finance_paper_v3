@@ -18,8 +18,8 @@
 import numpy as np
 import pandas as pd
 
-INPUT_CSV = "01_merged_tej_data.csv"
-OUTPUT_CSV = "02_features_data.csv"
+INPUT_CSV = "data/processed/01_merged_tej_data.csv"
+OUTPUT_CSV = "data/processed/02_features_data.csv"
 
 # 營業費用衡量：主分析用「營業費用」欄；穩健性另建「推銷費用+管理費用」
 SGA_MAIN_COL = "營業費用"

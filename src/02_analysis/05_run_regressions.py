@@ -22,9 +22,9 @@ import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 
-INPUT_CSV = "04_model_data.csv"
-OUT_TXT = "05_regression_results.txt"
-OUT_COEF = "05_regression_coef.csv"
+INPUT_CSV = "data/processed/04_model_data.csv"
+OUT_TXT = "results/05_regression_results.txt"
+OUT_COEF = "results/05_regression_coef.csv"
 
 CONTROL_INT = ["Size_D_dREV", "AI_D_dREV", "EI_D_dREV",
                "ROA_D_dREV", "Lev_D_dREV", "Decrease_D_dREV"]

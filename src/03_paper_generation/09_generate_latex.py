@@ -10,10 +10,10 @@ import os
 import numpy as np
 import pandas as pd
 
-MODEL_CSV = "04_model_data.csv"
-COEF_CSV = "05_regression_coef.csv"
-ROB_CSV = "06_robustness_summary.csv"
-OUT_TEX = "main.tex"
+MODEL_CSV = "data/processed/04_model_data.csv"
+COEF_CSV = "results/05_regression_coef.csv"
+ROB_CSV = "results/06_robustness_summary.csv"
+OUT_TEX = "build/main.tex"
 
 # 載入資料
 df = pd.read_csv(MODEL_CSV, encoding="utf-8-sig", low_memory=False)

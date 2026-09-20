@@ -7,8 +7,8 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
-DOC = "水與廢棄物管理與成本黏性_論文_中山格式.docx"
-MODEL_CSV = "04_model_data.csv"
+DOC = "build/水與廢棄物管理與成本黏性_論文_中山格式.docx"
+MODEL_CSV = "data/processed/04_model_data.csv"
 CJK, EN = "標楷體", "Times New Roman"
 
 STATS = ["Mean", "SD", "Min", "P25", "Median", "P75", "Max"]

@@ -20,10 +20,10 @@ import numpy as np
 import pandas as pd
 import statsmodels.api as sm
 
-INPUT_CSV = "04_model_data.csv"
-OUT_TXT = "06_robustness_results.txt"
-OUT_COEF = "06_robustness_coef.csv"
-OUT_SUMMARY = "06_robustness_summary.csv"
+INPUT_CSV = "data/processed/04_model_data.csv"
+OUT_TXT = "results/06_robustness_results.txt"
+OUT_COEF = "results/06_robustness_coef.csv"
+OUT_SUMMARY = "results/06_robustness_summary.csv"
 
 CONTROL_INT = ["Size_D_dREV", "AI_D_dREV", "EI_D_dREV",
                "ROA_D_dREV", "Lev_D_dREV", "Decrease_D_dREV"]

@@ -21,8 +21,8 @@ import numpy as np
 # ----------------------------------------------------------------------------
 # 設定：原始資料集檔名與欄位（資料更新時在此登記）
 # ----------------------------------------------------------------------------
-DATA_DIR = "tej_data"
-OUTPUT_CSV = "01_merged_tej_data.csv"
+DATA_DIR = "data/raw/tej_data"
+OUTPUT_CSV = "data/processed/01_merged_tej_data.csv"
 
 FIN_ZIP = "TEJ20260723012741.zip"      # IFRS 以合併為主財務(單季)-一般產業Ⅳ
 WATER_ZIP = "TEJ20260723014020.zip"    # TESG 環境構面-企業用水量（年度）
