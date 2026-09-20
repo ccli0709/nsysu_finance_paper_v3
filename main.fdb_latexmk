@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1788651626.00639 "d:/Repositories/nsysu_finance_paper_v3/main.tex" "main.pdf" "main" 1788651630.27792 2
+["pdflatex"] 1788706797.14538 "d:/Repositories/nsysu_finance_paper_v3/main.tex" "main.pdf" "main" 1788706800.43108 2
   "C:/Users/170134/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1788534186 81043 787296dcccf959cefd61d1a07b638763 ""
   "C:/Users/170134/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1788363012 13333970 350120413b56819348b6875c31c8495f ""
   "C:/Users/170134/AppData/Local/Programs/MiKTeX/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1233951848 1004 54797486969f23fa377b128694d548df ""
@@ -76,11 +76,11 @@
   "C:/Users/170134/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/170134/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "C:/Users/170134/AppData/Local/Programs/MiKTeX/tex/xelatex/xecjk/xeCJK.sty" 1787406263 281282 0f4903c79918f55872e9be5cd1ec9173 ""
-  "d:/Repositories/nsysu_finance_paper_v3/main.tex" 1788651607 75509 90c06111f3990a9ceb20c33235519953 ""
-  "main.aux" 1788651627 138 dfd98a311dd1033c83c001c747190af7 "pdflatex"
-  "main.lot" 1788651627 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "main.tex" 1788651607 75509 90c06111f3990a9ceb20c33235519953 ""
-  "main.toc" 1788651627 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "d:/Repositories/nsysu_finance_paper_v3/main.tex" 1788706782 77996 db278be790031791851998fdd0e7dd95 ""
+  "main.aux" 1788706798 138 dfd98a311dd1033c83c001c747190af7 "pdflatex"
+  "main.lot" 1788706798 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main.tex" 1788706782 77996 db278be790031791851998fdd0e7dd95 ""
+  "main.toc" 1788706798 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "main.aux"
   "main.log"

@@ -882,5 +882,13 @@ $D$ & 營收下降虛擬變數（$\text{REV}_{i,t} < \text{REV}_{i,t-1}$ 為 1�
         f.write(full_tex)
     print(f"成功生成包含 AI 算力水耗與台灣水廢連動之大規模 LaTeX 主檔案：{OUT_TEX}")
 
+    # 自動編譯為 PDF 與 Word
+    try:
+        import compile_main
+        compile_main.compile_all()
+    except Exception as e:
+        print(f"警告：自動編譯 PDF/Word 時發生例外：{e}")
+
 if __name__ == "__main__":
     generate_full_latex()
+

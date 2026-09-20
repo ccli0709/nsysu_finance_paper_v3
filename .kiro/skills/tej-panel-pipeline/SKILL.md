@@ -49,6 +49,8 @@ python 06_robustness_checks.py       # 產業異質性×遞延   → 06_robustne
 python 07_generate_paper.py          # 生成 Word 論文    → 水與廢棄物管理與成本黏性_論文.docx
 python 08_generate_thesis_template.py # 生成中山格式論文  → 水與廢棄物管理與成本黏性_論文_中山格式.docx
 python append_desc_table.py          # 於中山格式文末附加樣版格式「表4-3 敘述統計」
+python 09_generate_latex.py          # 生成 LaTeX 論文   → main.tex (並自動觸發編譯 main.pdf 與 main.docx)
+python compile_main.py               # 獨立編譯工具       → 手動隨時編譯 main.tex 為 main.pdf 與 main.docx
 ```
 
 需額外套件：`statsmodels`（OLS + 產業/年份固定效果 + 叢集穩健標準誤）、
