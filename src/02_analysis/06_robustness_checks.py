@@ -25,29 +25,29 @@ OUT_TXT = "results/06_robustness_results.txt"
 OUT_COEF = "results/06_robustness_coef.csv"
 OUT_SUMMARY = "results/06_robustness_summary.csv"
 
-CONTROL_INT = ["Size_D_dREV", "AI_D_dREV", "EI_D_dREV",
-               "ROA_D_dREV", "Lev_D_dREV", "Decrease_D_dREV"]
+CONTROL_INT = ["SIZE_D_dREV", "AI_D_dREV", "EI_D_dREV",
+               "ROA_D_dREV", "LEV_D_dREV", "SUCC_DEC_D_dREV"]
 
 # 各衡量在不同遞延期對應的（主效果欄, 三重交乘欄）
 MEASURES = {
     # 水管理（原主題）
-    "水回收率%": {0: ("Water_Rate", "WaterRate_D_dREV"),
-                 1: ("WaterRate_l1", "WaterRate_D_dREV_l1"),
-                 2: ("WaterRate_l2", "WaterRate_D_dREV_l2")},
-    "水揭露": {0: ("Water_Disc", "WaterDisc_D_dREV"),
-              1: ("WaterDisc_l1", "WaterDisc_D_dREV_l1"),
-              2: ("WaterDisc_l2", "WaterDisc_D_dREV_l2")},
+    "水回收率%": {0: ("WATER_RATE", "WATER_RATE_D_dREV"),
+                 1: ("WATER_RATE_l1", "WATER_RATE_D_dREV_l1"),
+                 2: ("WATER_RATE_l2", "WATER_RATE_D_dREV_l2")},
+    "水揭露": {0: ("WATER_DISC", "WATER_DISC_D_dREV"),
+              1: ("WATER_DISC_l1", "WATER_DISC_D_dREV_l1"),
+              2: ("WATER_DISC_l2", "WATER_DISC_D_dREV_l2")},
     # 廢棄物管理（延伸主題）
-    "廢棄物密集度": {0: ("Waste_Intensity", "WasteInt_D_dREV"),
+    "廢棄物密集度": {0: ("WASTE_INTENSITY", "WasteInt_D_dREV"),
                    1: ("WasteInt_l1", "WasteInt_D_dREV_l1"),
                    2: ("WasteInt_l2", "WasteInt_D_dREV_l2")},
-    "廢棄物揭露": {0: ("Waste_Disc", "WasteDisc_D_dREV"),
+    "廢棄物揭露": {0: ("WASTE_DISC", "WasteDisc_D_dREV"),
                  1: ("WasteDisc_l1", "WasteDisc_D_dREV_l1"),
                  2: ("WasteDisc_l2", "WasteDisc_D_dREV_l2")},
-    "廢棄物裁罰金額": {0: ("Waste_Fine", "WasteFine_D_dREV"),
+    "廢棄物裁罰金額": {0: ("WASTE_FINE", "WasteFine_D_dREV"),
                     1: ("WasteFine_l1", "WasteFine_D_dREV_l1"),
                     2: ("WasteFine_l2", "WasteFine_D_dREV_l2")},
-    "用水密集度": {0: ("Water_Intensity", "WaterInt_D_dREV"),
+    "用水密集度": {0: ("WATER_INTENSITY", "WaterInt_D_dREV"),
                  1: ("WaterInt_l1", "WaterInt_D_dREV_l1"),
                  2: ("WaterInt_l2", "WaterInt_D_dREV_l2")},
 }
@@ -66,7 +66,7 @@ def run_spec(df, measure, group, lag, txt, coef, summary):
     elif group == "低耗水":
         d = d[d["WaterUse"] == "低耗水"]
 
-    reg_vars = ["dLNREV", "D_x_dREV", water_triple, water_main] + CONTROL_INT
+    reg_vars = ["dLNREV", "DEC_x_dREV", water_triple, water_main] + CONTROL_INT
     d = d.dropna(subset=reg_vars + ["Y_dLNSGA", "Industry", "西元年份", "證券代碼"])
     d = d[d["Industry"].astype(str).str.strip() != ""]
     spec_name = f"{measure}｜{group}｜t-{lag}"
@@ -89,12 +89,12 @@ def run_spec(df, measure, group, lag, txt, coef, summary):
 
     res = sm.OLS(y, X).fit(cov_type="cluster", cov_kwds={"groups": groups})
     n, k = int(res.nobs), d["證券代碼"].nunique()
-    b2, p2 = res.params["D_x_dREV"], res.pvalues["D_x_dREV"]
+    b2, p2 = res.params["DEC_x_dREV"], res.pvalues["DEC_x_dREV"]
     b3, p3 = res.params[water_triple], res.pvalues[water_triple]
 
     txt.append("=" * 72)
     txt.append(f"[{spec_name}]  N={n:,} 公司={k:,} adjR2={res.rsquared_adj:.4f}")
-    for v in ["dLNREV", "D_x_dREV", water_triple, water_main]:
+    for v in ["dLNREV", "DEC_x_dREV", water_triple, water_main]:
         b, se, t, p = res.params[v], res.bse[v], res.tvalues[v], res.pvalues[v]
         txt.append(f"  {v:<22}{b:>12.4f}{se:>11.4f}{t:>8.2f}{p:>9.4f} {stars(p)}")
         coef.append({"設定": spec_name, "變數": v, "係數": b, "穩健SE": se,

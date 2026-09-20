@@ -12,12 +12,12 @@ MODEL_CSV = "data/processed/04_model_data.csv"
 CJK, EN = "標楷體", "Times New Roman"
 
 STATS = ["Mean", "SD", "Min", "P25", "Median", "P75", "Max"]
-DESC = [("Y_dLNSGA", "ΔLNSGA"), ("dLNREV", "ΔLNREV"), ("D", "D"),
-        ("Water_Intensity", "用水密集度"), ("Waste_Intensity", "廢棄物密集度"),
-        ("Water_Rate", "水回收率%"), ("Waste_Disc", "廢棄物揭露度"),
-        ("Waste_Fine", "廢棄物裁罰金額"),
-        ("Size", "Size"), ("AI", "AI"), ("EI", "EI"), ("ROA", "ROA"),
-        ("Lev", "Lev"), ("Decrease", "Decrease")]
+DESC = [("Y_dLNSGA", "ΔLNSGA"), ("dLNREV", "ΔLNREV"), ("DEC", "DEC"),
+        ("WATER_INTENSITY", "用水密集度"), ("WASTE_INTENSITY", "廢棄物密集度"),
+        ("WATER_RATE", "水回收率%"), ("WASTE_DISC", "廢棄物揭露度"),
+        ("WASTE_FINE", "廢棄物裁罰金額"),
+        ("SIZE", "SIZE"), ("AI", "AI"), ("EI", "EI"), ("ROA", "ROA"),
+        ("LEV", "LEV"), ("SUCC_DEC", "SUCC_DEC")]
 
 
 def font(run, size=12, bold=False):

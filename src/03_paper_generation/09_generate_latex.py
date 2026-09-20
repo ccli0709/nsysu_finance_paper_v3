@@ -45,32 +45,32 @@ def tex_escape(text):
 
 # 變數說明定義
 DESC_VARS = [
-    ("Y_dLNSGA", r"$\Delta\text{LNSGA}$", "營業費用對數變動率"),
-    ("dLNREV", r"$\Delta\text{LNREV}$", "營業收入對數變動率"),
-    ("D", "$D$", "收入下降虛擬變數"),
-    ("Water_Intensity", r"\text{Water\_Intensity}", "用水密集度（千公噸/千元營收）"),
-    ("Waste_Intensity", r"\text{Waste\_Intensity}", "廢棄物密集度（公噸/百萬營收）"),
-    ("Water_Rate", r"\text{Water\_Rate}", r"水回收率\%"),
-    ("Waste_Disc", r"\text{Waste\_Disc}", "GRI廢棄物揭露度"),
-    ("Waste_Fine", r"\text{Waste\_Fine}", "廢棄物裁罰金額/資產"),
-    ("Size", r"\text{Size}", "公司規模 LN(資產總額)"),
-    ("AI", r"\text{AI}", "資產密集度 (資產總額/營收)"),
-    ("EI", r"\text{EI}", "員工密集度 (員工人數/營收)"),
-    ("ROA", r"\text{ROA}", r"資產報酬率 (\%)"),
-    ("Lev", r"\text{Lev}", r"負債比率 (\%)"),
-    ("Decrease", r"\text{Decrease}", "連續兩年營收下降虛擬變數")
+    ("Y_dLNSGA", r"$\Delta LNSGA$", "營業費用對數變動率"),
+    ("dLNREV", r"$\Delta LNREV$", "營業收入對數變動率"),
+    ("DEC", "$DEC$", "收入下降虛擬變數"),
+    ("WATER_INTENSITY", r"WATER\_INTENSITY", "用水密集度（千公噸/千元營收）"),
+    ("WASTE_INTENSITY", r"WASTE\_INTENSITY", "廢棄物密集度（公噸/百萬營收）"),
+    ("WATER_RATE", r"WATER\_RATE", r"水回收率\%"),
+    ("WASTE_DISC", r"WASTE\_DISC", "GRI廢棄物揭露度"),
+    ("WASTE_FINE", r"WASTE\_FINE", "廢棄物裁罰金額/資產"),
+    ("SIZE", r"SIZE", "公司規模 LN(資產總額)"),
+    ("AI", r"AI", "資產密集度 (資產總額/營收)"),
+    ("EI", r"EI", "員工密集度 (員工人數/營收)"),
+    ("ROA", r"ROA", r"資產報酬率 (\%)"),
+    ("LEV", r"LEV", r"負債比率 (\%)"),
+    ("SUCC_DEC", r"SUCC\_DEC", "連續兩年營收下降虛擬變數")
 ]
 
 CORR_VARS = [
-    ("Y_dLNSGA", r"$\Delta\text{LNSGA}$"),
-    ("dLNREV", r"$\Delta\text{LNREV}$"),
-    ("Water_Intensity", r"\text{Water\_Int}"),
-    ("Waste_Intensity", r"\text{Waste\_Int}"),
-    ("Water_Rate", r"\text{Water\_Rate}"),
-    ("Size", r"\text{Size}"),
-    ("AI", r"\text{AI}"),
-    ("ROA", r"\text{ROA}"),
-    ("Lev", r"\text{Lev}")
+    ("Y_dLNSGA", r"$\Delta LNSGA$"),
+    ("dLNREV", r"$\Delta LNREV$"),
+    ("WATER_INTENSITY", r"WATER\_INTENSITY"),
+    ("WASTE_INTENSITY", r"WASTE\_INTENSITY"),
+    ("WATER_RATE", r"WATER\_RATE"),
+    ("SIZE", r"SIZE"),
+    ("AI", r"AI"),
+    ("ROA", r"ROA"),
+    ("LEV", r"LEV")
 ]
 
 L0_MODELS = [
@@ -83,46 +83,49 @@ L0_MODELS = [
 ]
 
 ROLE_ROWS = [
-    (r"$\beta_1$", r"$\Delta\text{LNREV}$", "dLNREV"),
-    (r"$\beta_2$", r"$D \times \Delta\text{LNREV}$", "D_x_dREV"),
-    (r"$\beta_3$", r"$\text{Env\_Var} \times D \times \Delta\text{LNREV}$", None),
-    (r"$\beta_4$", r"$\text{Env\_Var}$", None),
-    ("", r"$\text{Size} \times D \times \Delta\text{LNREV}$", "Size_D_dREV"),
-    ("", r"$\text{AI} \times D \times \Delta\text{LNREV}$", "AI_D_dREV"),
-    ("", r"$\text{EI} \times D \times \Delta\text{LNREV}$", "EI_D_dREV"),
-    ("", r"$\text{ROA} \times D \times \Delta\text{LNREV}$", "ROA_D_dREV"),
-    ("", r"$\text{Lev} \times D \times \Delta\text{LNREV}$", "Lev_D_dREV"),
-    ("", r"$\text{Decrease} \times D \times \Delta\text{LNREV}$", "Decrease_D_dREV"),
+    (r"$\beta_1$", r"$\Delta LNREV$", "dLNREV"),
+    (r"$\beta_2$", r"$DEC_{i,t} \times \Delta LNREV_{i,t}$", "DEC_x_dREV"),
+    (r"$\beta_3$", r"$Env\_Var_{i,t} \times DEC_{i,t} \times \Delta LNREV_{i,t}$", None),
+    (r"$\beta_4$", r"$Env\_Var_{i,t}$", None),
+    ("", r"$SIZE_{i,t} \times DEC_{i,t} \times \Delta LNREV_{i,t}$", "SIZE_D_dREV"),
+    ("", r"$AI_{i,t} \times DEC_{i,t} \times \Delta LNREV_{i,t}$", "AI_D_dREV"),
+    ("", r"$EI_{i,t} \times DEC_{i,t} \times \Delta LNREV_{i,t}$", "EI_D_dREV"),
+    ("", r"$ROA_{i,t} \times DEC_{i,t} \times \Delta LNREV_{i,t}$", "ROA_D_dREV"),
+    ("", r"$LEV_{i,t} \times DEC_{i,t} \times \Delta LNREV_{i,t}$", "LEV_D_dREV"),
+    ("", r"$SUCC\_DEC_{i,t} \times DEC_{i,t} \times \Delta LNREV_{i,t}$", "SUCC_DEC_D_dREV"),
 ]
 
 def build_desc_table_tex():
     lines = [
         r"\begin{table}[H]",
         r"\centering",
-        r"\caption{主要變數敘述性統計表}",
+        r"\caption{敘述性統計分析}",
         r"\label{tab:desc_stats}",
         r"\begin{threeparttable}",
         r"\small",
-        r"\begin{tabular}{lcccccc}",
+        r"\begin{tabular}{lrrrrrrrr}",
         r"\toprule",
-        r"變數名稱 & N & 平均值 & 標準差 & 中位數 & P25 & P75 \\",
+        r"變數 & 樣本數 & 最小值 & 第一四分位 & 平均數 & 中位數 & 第三四分位 & 最大值 & 標準差 \\",
         r"\midrule"
     ]
     for col, tex_name, desc in DESC_VARS:
         if col in df.columns:
             s = df[col].dropna()
             n_val = len(s)
-            mean_val = s.mean()
-            std_val = s.std()
-            med_val = s.median()
+            min_val = s.min()
             p25_val = s.quantile(0.25)
+            mean_val = s.mean()
+            med_val = s.median()
             p75_val = s.quantile(0.75)
-            lines.append(f"{tex_name} & {n_val:,} & {mean_val:.4f} & {std_val:.4f} & {med_val:.4f} & {p25_val:.4f} & {p75_val:.4f} \\\\")
+            max_val = s.max()
+            std_val = s.std()
+            
+            lines.append(f"{tex_name} & {n_val:,} & {min_val:.3f} & {p25_val:.3f} & {mean_val:.3f} & {med_val:.3f} & {p75_val:.3f} & {max_val:.3f} & {std_val:.3f} \\\\")
+    
     lines.append(r"\bottomrule")
     lines.append(r"\end{tabular}")
-    lines.append(r"\begin{tablenotes}")
-    lines.append(r"\small")
-    lines.append(r"\item 註：所有連續變數均已進行前後 1\% 之縮尾處理（Winsorization）。樣本期間為 2014 年至 2024 年台灣上市櫃製造業公司。")
+    lines.append(r"\begin{tablenotes}\footnotesize")
+    lines.append(r"\item 註：變數定義請詳見表1。")
     lines.append(r"\end{tablenotes}")
     lines.append(r"\end{threeparttable}")
     lines.append(r"\end{table}")
@@ -447,7 +450,7 @@ ABJ (2003) 指出，成本黏性之核心機制源於經理人在面對營收衰
 
 \begin{enumerate}[leftmargin=*]
     \item \textbf{向下調整成本學派（Downward Adjustment Costs School, ABJ 2003）}：此學派主張成本黏性源於管理階層在營收衰退時進行資源處分所面臨的交易成本與重置成本。當銷貨收入下滑時，若要裁撤過向資源（Uncommitted Resources），企業必須支付解僱員工資遣費、法律訴訟費、處分專用設備之資本損失，以及未來景氣復甦時重新招聘與訓練新員工的重置成本（Re-entry Costs）。若調整成本大於保留資源之代價，經理人將意圖性選擇保留過向資源，引發費用向下黏性。
-    \item \textbf{經理人預期與樂觀度學派（Managerial Expectations School, Banker et al. 2014）}：Banker, Byzalov, Ciftci, and Mashruwala (2014) 引入心理學與預期理論，證實經理人對未來銷售前景的看法會顯著調節成本行為。當經理人過度樂觀或經歷前期營收連續成長時，他們傾向於認為當期的營收下滑僅為暫時性波動，因而延遲削減資源；反之，若前期營收已連續下滑（如連續兩年營收下降 \texttt{Decrease}），經理人確信衰退為結構性時，成本黏性將顯著降低。
+    \item \textbf{經理人預期與樂觀度學派（Managerial Expectations School, Banker et al. 2014）}：Banker, Byzalov, Ciftci, and Mashruwala (2014) 引入心理學與預期理論，證實經理人對未來銷售前景的看法會顯著調節成本行為。當經理人過度樂觀或經歷前期營收連續成長時，他們傾向於認為當期的營收下滑僅為暫時性波動，因而延遲削減資源；反之，若前期營收已連續下滑（如連續兩年營收下降 \texttt{SUCC_DEC}），經理人確信衰退為結構性時，成本黏性將顯著降低。
     \item \textbf{代理問題與帝國建造學派（Agency Problem \& Empire Building School, Chen et al. 2012）}：Chen, Lu, and Sougiannis (2012) 結合公司治理視角，指出代理問題嚴重的企業中，自利的經理人為了維持個人所控制的資源規模、追求個人聲譽或避免裁員帶來的衝突，在營收衰退時極不願削減費用與裁員，從而顯著推升了費用黏性。良好的公司治理（如高獨立董事比例、高機構法人持股）則能有效抑制此類代理動機。
 \end{enumerate}
 
@@ -514,12 +517,12 @@ Zeng, Peng, and Chan (2024) 之最新研究進一步提出「環境政策調整�
 \toprule
 假說編號 & 假說內容簡述 & 核心變數 & 預期符號與機制 \\
 \midrule
-\textbf{假說 H1a} & 用水密集度越高，成本黏性越大；當期即發酵 & \text{Water\_Intensity} & $\beta_3 < 0$ (資產專用性與連續運維剛性) \\
-\textbf{假說 H1b} & 廢棄物密集度越高，成本黏性越大；遞延一期發酵 & \text{Waste\_Intensity} & $\beta_3 < 0$ (合約剛性與 GPS 法遵鎖定) \\
-\textbf{補充檢驗 1} & 水回收率提高，增加水設施投資 & \text{Water\_Rate} & $\beta_3 < 0$ (實質節水技術投入) \\
+\textbf{假說 H1a} & 用水密集度越高，成本黏性越大；當期即發酵 & WATER\_INTENSITY & $\beta_3 < 0$ (資產專用性與連續運維剛性) \\
+\textbf{假說 H1b} & 廢棄物密集度越高，成本黏性越大；遞延一期發酵 & WASTE\_INTENSITY & $\beta_3 < 0$ (合約剛性與 GPS 法遵鎖定) \\
+\textbf{補充檢驗 1} & 水回收率提高，增加水設施投資 & WATER\_RATE & $\beta_3 < 0$ (實質節水技術投入) \\
 \textbf{補充檢驗 2} & 水揭露降低資訊不對稱，緩和黏性 & \text{Water\_Disc} & $\beta_3 > 0$ (形式揭露與透明度監督) \\
-\textbf{補充檢驗 3} & GRI 廢棄物揭露品質提升，強化外部監督 & \text{Waste\_Disc} & $\beta_3 > 0$ (形式揭露與透明度監督) \\
-\textbf{補充檢驗 4} & 廢棄物違規裁罰金額引發強制性事後法遵改善 & \text{Waste\_Fine} & $\beta_3 < 0$ (法律強制合規與底線成本) \\
+\textbf{補充檢驗 3} & GRI 廢棄物揭露品質提升，強化外部監督 & WASTE\_DISC & $\beta_3 > 0$ (形式揭露與透明度監督) \\
+\textbf{補充檢驗 4} & 廢棄物違規裁罰金額引發強制性事後法遵改善 & WASTE\_FINE & $\beta_3 < 0$ (法律強制合規與底線成本) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -534,7 +537,7 @@ Zeng, Peng, and Chan (2024) 之最新研究進一步提出「環境政策調整�
 本研究之財務資料取自台灣經濟新報（Taiwan Economic Journal, TEJ）IFRS 財務資料庫；環境資源與 ESG 揭露資料則取自 TEJ 之 TESG 永續發展資料庫（包含企業用水量、廢棄物揭露及列管事業污染源裁處明細）。研究樣本期間涵蓋 2014 年至 2024 年共 11 個年度之台灣上市櫃製造業公司。
 
 在資料處理與加總規則層面：
-1. **單季轉年度規則**：對於銷管費用（\texttt{SG\&A}）與營業收入（\texttt{REV}），本研究依據會計年度進行累加（Summation），由四個單季數據加總為年度總額；對於資產總額（\texttt{Size}）、負債總額（\texttt{Lev}）及員工人數（\texttt{EI}），則取第 4 季底（期末）數據代表年度水準。
+1. **單季轉年度規則**：對於銷管費用（\texttt{SG\&A}）與營業收入（\texttt{REV}），本研究依據會計年度進行累加（Summation），由四個單季數據加總為年度總額；對於資產總額（\texttt{SIZE}）、負債總額（\texttt{LEV}）及員工人數（\texttt{EI}），則取第 4 季底（期末）數據代表年度水準。
 2. **TEJ 會計科目代碼對照**：營業收入採 TEJ 代碼 \texttt{R001}、銷費及管理費用採代碼 \texttt{R002}、資產總額採代碼 \texttt{A001}、負債總額採代碼 \texttt{L001}、員工人數採代碼 \texttt{E001}。
 
 實證樣本之篩選流程與步驟如下：
@@ -610,7 +613,7 @@ Zeng, Peng, and Chan (2024) 之最新研究進一步提出「環境政策調整�
 \end{aligned}
 \end{equation}
 
-模型 (\ref{eq:env_model}) 中之核心觀察指標為三重交乘項係數 $\beta_3$。若 $\beta_3 < 0$ 且達統計顯著，代表環境資源密集度顯著加劇了成本僵固性。所有迴歸估計均包含公司層級與年份層級之雙向固定效果（Two-way Fixed Effects），並採用公司層級叢集穩健標準誤（Clustered Standard Errors at Firm Level）進行推論。
+模型 (\ref{eq:env_model}) 中之核心觀察指標為三重交乘項係數 $\beta_3$。若 $\beta_3 < 0$ 且達統計顯著，代表環境資源密集度顯著加劇了成本僵固性。所有迴歸估計均包含公司層級與年份層級之雙向固定效果（Two-way Fixed Effects），並採用公司層級叢集穩健標準誤（Clustered Standard Errors at Firm LEVel）進行推論。
 
 \subsection{變數說明與衡量對照}
 
@@ -623,21 +626,21 @@ Zeng, Peng, and Chan (2024) 之最新研究進一步提出「環境政策調整�
 \toprule
 變數名稱 & 變數定義與算式說明 & 預期符號 ($\beta_3$) \\
 \midrule
-$\Delta\text{LNSGA}$ & $\ln(\text{SGA}_{i,t}) - \ln(\text{SGA}_{i,t-1})$，銷管費用對數變動率 & 被說明變數 \\
-$\Delta\text{LNREV}$ & $\ln(\text{REV}_{i,t}) - \ln(\text{REV}_{i,t-1})$，營業收入對數變動率 & $\beta_1 > 0$ \\
-$D$ & 營收下降虛擬變數（$\text{REV}_{i,t} < \text{REV}_{i,t-1}$ 為 1，否則 0） & $\beta_2 < 0$ \\
-\text{Water\_Intensity} & 總用水量（千公噸）/ 營業收入淨額（千元），核心自變數 H1a & $- (\beta_3 < 0)$ \\
-\text{Waste\_Intensity} & 每百萬營收之事業廢棄物產生重量（公噸），核心自變數 H1b & $- (\beta_3 < 0)$ \\
-\text{Water\_Rate} & 製程水回收率\%（補充：實質節水技術） & $- (\beta_3 < 0)$ \\
+$\Delta LNSGA$ & $\ln(\text{SGA}_{i,t}) - \ln(\text{SGA}_{i,t-1})$，銷管費用對數變動率 & 被說明變數 \\
+$\Delta LNREV$ & $\ln(\text{REV}_{i,t}) - \ln(\text{REV}_{i,t-1})$，營業收入對數變動率 & $\beta_1 > 0$ \\
+$DEC$ & 營收下降虛擬變數（$\text{REV}_{i,t} < \text{REV}_{i,t-1}$ 為 1，否則 0） & $\beta_2 < 0$ \\
+WATER\_INTENSITY & 總用水量（千公噸）/ 營業收入淨額（千元），核心自變數 H1a & $- (\beta_3 < 0)$ \\
+WASTE\_INTENSITY & 每百萬營收之事業廢棄物產生重量（公噸），核心自變數 H1b & $- (\beta_3 < 0)$ \\
+WATER\_RATE & 製程水回收率\%（補充：實質節水技術） & $- (\beta_3 < 0)$ \\
 \text{Water\_Disc} & 當年有水資料紀錄設為 1，否則 0（補充：形式揭露） & $+ (\beta_3 > 0)$ \\
-\text{Waste\_Disc} & GRI 廢棄物管理揭露品質連續得分（補充：形式揭露） & $+ (\beta_3 > 0)$ \\
-\text{Waste\_Fine} & 事業廢棄物違規裁罰總金額（千元）/ 資產總額 & $- (\beta_3 < 0)$ \\
-\text{Size} & $\ln(\text{資產總額})$ & 控制變數 \\
-\text{AI} & 資產總額 / 營業收入淨額 (資產密集度) & 控制變數 ($\beta < 0$) \\
-\text{EI} & 員工人數 / 營業收入淨額 (員工密集度) & 控制變數 ($\beta < 0$) \\
-\text{ROA} & 稅後息前資產報酬率 (\%) & 控制變數 \\
-\text{Lev} & 負債總額 / 資產總額 (\%) & 控制變數 \\
-\text{Decrease} & 連續兩年營收下降虛擬變數（連兩年下降設為 1，否則 0） & 控制變數 ($\beta > 0$) \\
+WASTE\_DISC & GRI 廢棄物管理揭露品質連續得分（補充：形式揭露） & $+ (\beta_3 > 0)$ \\
+WASTE\_FINE & 事業廢棄物違規裁罰總金額（千元）/ 資產總額 & $- (\beta_3 < 0)$ \\
+SIZE & $\ln(\text{資產總額})$ & 控制變數 \\
+AI & 資產總額 / 營業收入淨額 (資產密集度) & 控制變數 ($\beta < 0$) \\
+EI & 員工人數 / 營業收入淨額 (員工密集度) & 控制變數 ($\beta < 0$) \\
+ROA & 稅後息前資產報酬率 (\%) & 控制變數 \\
+LEV & 負債總額 / 資產總額 (\%) & 控制變數 \\
+SUCC\_DEC & 連續兩年營收下降虛擬變數（連兩年下降設為 1，否則 0） & 控制變數 ($\beta > 0$) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -653,13 +656,13 @@ __DESC_TABLE__
 
 表 \ref{tab:desc_stats} 彙整了本研究主要變數之敘述性統計結果，包含觀測值個數、平均數、標準差、中位數、第 25 百分數（P25）及第 75 百分數（P75）。
 
-在被說明變數方面，營業費用對數變動率（$\Delta\text{LNSGA}$）之平均值為 0.0215，標準差為 0.1482，顯示台灣上市櫃製造業在整體樣本期間內銷管費用呈現溫和成長趨勢，但不同企業與年份間存在顯著差異。銷貨收入對數變動率（$\Delta\text{LNREV}$）之平均值為 0.0284，標準差為 0.1835。營收下降虛擬變數（$D$）之平均值為 0.3842，意味著在全部公司—年觀測值中，有約 38.42\% 之情況面臨營收較前一年度下滑之情境，此一充足的營收下降樣本為檢定 ABJ (2003) 成本僵固性模型提供了優良的實證基礎。
+在被說明變數方面，營業費用對數變動率（$\Delta LNSGA$）之平均值為 0.0215，標準差為 0.1482，顯示台灣上市櫃製造業在整體樣本期間內銷管費用呈現溫和成長趨勢，但不同企業與年份間存在顯著差異。銷貨收入對數變動率（$\Delta LNREV$）之平均值為 0.0284，標準差為 0.1835。營收下降虛擬變數（$DEC$）之平均值為 0.3842，意味著在全部公司—年觀測值中，有約 38.42\% 之情況面臨營收較前一年度下滑之情境，此一充足的營收下降樣本為檢定 ABJ (2003) 成本僵固性模型提供了優良的實證基礎。
 
 在核心環境資源密集度自變數方面，用水密集度（\texttt{Water\_Intensity}）之平均數為 0.0421（千公噸/千元營收），標準差為 0.1185，且呈現右偏分佈（P75 為 0.0520）。這反映出台灣製造業內部水資源使用的高度集中性：少數高耗水產業（如半導體晶圓代工、面板、石化化學、造紙與染整）之用水量遠高於一般輕工業。事業廢棄物密集度（\texttt{Waste\_Intensity}）之平均數為 0.3850（公噸/百萬元營收），標準差為 1.2450，同樣呈現顯著的產業異質性與右偏分配。此一特徵驗證了本研究區分高污染與低污染產業進行異質性分析之極度必要性。
 
 在補充檢驗變數方面，製程水回收率（\texttt{Water\_Rate}）平均值為 48.65\%，標準差為 28.40\%，顯示台灣高耗水企業在節水與循環利用上已有一定投入，但產業間差距懸殊。水資源揭露（\texttt{Water\_Disc}）平均值為 0.4120，GRI 廢棄物揭露品質得分（\texttt{Waste\_Disc}）平均值為 3.2500（滿分 5 分）。廢棄物違規裁罰金額佔資產比率（\texttt{Waste\_Fine}）平均值為 0.0012（千分之一），標準差為 0.0048。
 
-控制變數之統計分配均符合台灣上市櫃製造業之一般財務常態：公司規模（\text{Size}）對數平均數為 15.8500，資產密集度（\text{AI}）平均值為 1.1250，員工密集度（\text{EI}）平均值為 0.0840（人/百萬元營收），資產報酬率（\text{ROA}）平均值為 5.85\%，負債比率（\text{Lev}）平均值為 42.50\%，連兩年營收下降（\text{Decrease}）比率為 12.30\%。所有連續變數均經前後 1\% Winsorization 處理。
+控制變數之統計分配均符合台灣上市櫃製造業之一般財務常態：公司規模（SIZE）對數平均數為 15.8500，資產密集度（AI）平均值為 1.1250，員工密集度（EI）平均值為 0.0840（人/百萬元營收），資產報酬率（ROA）平均值為 5.85\%，負債比率（LEV）平均值為 42.50\%，連兩年營收下降（SUCC\_DEC）比率為 12.30\%。所有連續變數均經前後 1\% Winsorization 處理。
 
 \subsection{相關係數矩陣與診斷}
 
@@ -667,7 +670,7 @@ __CORR_TABLE__
 
 表 \ref{tab:corr_matrix} 展示了主要變數之 Pearson 相關係數矩陣：
 
-由相關係數矩陣可見：$\Delta\text{LNSGA}$ 與 $\Delta\text{LNREV}$ 呈高度顯著正相關（$r = 0.534, p < 0.01$），符合營收增加帶動費用成長之基本財務規律。核心自變數 \texttt{Water\_Intensity} 與 \texttt{Waste\_Intensity} 之間相關係數為 0.074 ($p < 0.01$)，顯示兩者雖同屬環境資源密集度，但分別代表水資源與實體固體廢棄物之不同營運構面，適合分別進行模型估計。此外，所有自變數與控制變數之間的相關係數均低於 0.60，多重共線性診斷（Variance Inflation Factor, VIF）顯示所有變數之 VIF 值均小於 3.5，遠低於臨界值 10，證實主迴歸模型不存在嚴重之多重共線性問題。
+由相關係數矩陣可見：$\Delta LNSGA$ 與 $\Delta LNREV$ 呈高度顯著正相關（$r = 0.534, p < 0.01$），符合營收增加帶動費用成長之基本財務規律。核心自變數 \texttt{Water\_Intensity} 與 \texttt{Waste\_Intensity} 之間相關係數為 0.074 ($p < 0.01$)，顯示兩者雖同屬環境資源密集度，但分別代表水資源與實體固體廢棄物之不同營運構面，適合分別進行模型估計。此外，所有自變數與控制變數之間的相關係數均低於 0.60，多重共線性診斷（Variance Inflation Factor, VIF）顯示所有變數之 VIF 值均小於 3.5，遠低於臨界值 10，證實主迴歸模型不存在嚴重之多重共線性問題。
 
 \subsection{成本黏性主迴歸結果與詳細解析}
 
@@ -675,11 +678,11 @@ __REG_TABLE__
 
 表 \ref{tab:main_reg} 呈現了基準 ABJ (2003) 成本僵固性模型及納入各項環境自變數後之實證迴歸結果。全樣本共包含 18,137 個公司—年觀測值，代表性極佳。
 
-首先，檢視模型 1（基準 ABJ 模型）：營收變動項 $\Delta\text{LNREV}$ 之係數 $\beta_1 = 0.5824$（$p < 0.01$），顯示當營收上升 1\% 時，銷管費用平均增加 0.5824\%。而營收下降交乘項 $D \times \Delta\text{LNREV}$ 之係數 $\beta_2 = -0.1845$（$p < 0.01$），呈高度統計顯著性。這意味著當銷貨收入下降 1\% 時，銷管費用僅相應減少 0.3979\%（$= 0.5824 - 0.1845$），顯著小於營收上升時的增加幅度。這一結果在 1\% 顯著水準下完美驗證了台灣上市櫃製造業存在普遍且顯著之成本黏性，完全符合 ABJ (2003) 理論預期。
+首先，檢視模型 1（基準 ABJ 模型）：營收變動項 $\Delta LNREV$ 之係數 $\beta_1 = 0.5824$（$p < 0.01$），顯示當營收上升 1\% 時，銷管費用平均增加 0.5824\%。而營收下降交乘項 $DEC_{i,t} \times \Delta LNREV_{i,t}$ 之係數 $\beta_2 = -0.1845$（$p < 0.01$），呈高度統計顯著性。這意味著當銷貨收入下降 1\% 時，銷管費用僅相應減少 0.3979\%（$= 0.5824 - 0.1845$），顯著小於營收上升時的增加幅度。這一結果在 1\% 顯著水準下完美驗證了台灣上市櫃製造業存在普遍且顯著之成本黏性，完全符合 ABJ (2003) 理論預期。
 
-其次，檢視模型 6（核心用水密集度模型）：當納入用水密集度及其三重交乘項 $\text{Water\_Intensity} \times D \times \Delta\text{LNREV}$ 時，三重交乘項係數 $\beta_3 = -0.0914$（$p = 0.0346 < 0.05$）呈顯著負向。這一實證結果強烈支持了核心假說 H1a！在經濟意涵上，當企業之用水密集度每增加一個標準差時，銷貨收入下滑引致之費用減少幅度將再額外縮減 0.0914 個百分點。這證明了高耗水企業因興建超純水處理廠、零排放設施與高功率冷卻水塔所形成之專用資產與固定營運開銷，確實構成了巨大的向下費用調整阻力。
+其次，檢視模型 6（核心用水密集度模型）：當納入用水密集度及其三重交乘項 $WATER\_INTENSITY \times D \times \Delta\text{LNREV}$ 時，三重交乘項係數 $\beta_3 = -0.0914$（$p = 0.0346 < 0.05$）呈顯著負向。這一實證結果強烈支持了核心假說 H1a！在經濟意涵上，當企業之用水密集度每增加一個標準差時，銷貨收入下滑引致之費用減少幅度將再額外縮減 0.0914 個百分點。這證明了高耗水企業因興建超純水處理廠、零排放設施與高功率冷卻水塔所形成之專用資產與固定營運開銷，確實構成了巨大的向下費用調整阻力。
 
-在控制變數方面，資產密集度交乘項（$\text{AI} \times D \times \Delta\text{LNREV}$）與員工密集度交乘項（$\text{EI} \times D \times \Delta\text{LNREV}$）均顯著為負，符合傳統 ABJ 文獻中固定資產與人力資本加劇成本黏性之發現。公司規模（\text{Size}）與資產報酬率（\text{ROA}）則展現出穩定之控制效果。
+在控制變數方面，資產密集度交乘項（$AI_{i,t} \times DEC_{i,t} \times \Delta LNREV_{i,t}$）與員工密集度交乘項（$EI_{i,t} \times DEC_{i,t} \times \Delta LNREV_{i,t}$）均顯著為負，符合傳統 ABJ 文獻中固定資產與人力資本加劇成本黏性之發現。公司規模（SIZE）與資產報酬率（ROA）則展現出穩定之控制效果。
 
 \subsection{時間落差效應深層機制解析 (當期 $t$ vs. 遞延期 $t-1, t-2$)}
 
@@ -848,21 +851,21 @@ __HETERO_TABLE__
 \toprule
 變數代碼 & 變數定義與運算公式 & 資料來源 \\
 \midrule
-$\Delta\text{LNSGA}$ & $\ln(\text{SGA}_{i,t}) - \ln(\text{SGA}_{i,t-1})$，營業費用對數變動率 & TEJ IFRS 財務資料庫 \\
-$\Delta\text{LNREV}$ & $\ln(\text{REV}_{i,t}) - \ln(\text{REV}_{i,t-1})$，營業收入對數變動率 & TEJ IFRS 財務資料庫 \\
-$D$ & 營收下降虛擬變數（$\text{REV}_{i,t} < \text{REV}_{i,t-1}$ 為 1，否則 0） & TEJ IFRS 財務資料庫 \\
-\text{Water\_Intensity} & 總用水量（千公噸）/ 營業收入淨額（千元），核心自變數 H1a & TESG 企業用水量 \\
-\text{Waste\_Intensity} & 每百萬營收之事業廢棄物產生重量（公噸），核心自變數 H1b & TESG 廢棄物揭露 \\
-\text{Water\_Rate} & 製程水回收率\%（補充：實質投入） & TESG 企業用水量 \\
+$\Delta LNSGA$ & $\ln(\text{SGA}_{i,t}) - \ln(\text{SGA}_{i,t-1})$，營業費用對數變動率 & TEJ IFRS 財務資料庫 \\
+$\Delta LNREV$ & $\ln(\text{REV}_{i,t}) - \ln(\text{REV}_{i,t-1})$，營業收入對數變動率 & TEJ IFRS 財務資料庫 \\
+$DEC$ & 營收下降虛擬變數（$\text{REV}_{i,t} < \text{REV}_{i,t-1}$ 為 1，否則 0） & TEJ IFRS 財務資料庫 \\
+WATER\_INTENSITY & 總用水量（千公噸）/ 營業收入淨額（千元），核心自變數 H1a & TESG 企業用水量 \\
+WASTE\_INTENSITY & 每百萬營收之事業廢棄物產生重量（公噸），核心自變數 H1b & TESG 廢棄物揭露 \\
+WATER\_RATE & 製程水回收率\%（補充：實質投入） & TESG 企業用水量 \\
 \text{Water\_Disc} & 當年有水資料紀錄設為 1，否則 0（補充：形式揭露） & TESG 企業用水量 \\
-\text{Waste\_Disc} & GRI 廢棄物管理揭露度評分（補充：形式揭露） & TESG 廢棄物揭露 \\
-\text{Waste\_Fine} & 事業廢棄物違規裁罰總金額（千元）/ 資產總額 & TESG 污染源裁處明細 \\
-\text{Size} & $\ln(\text{資產總額})$ & TEJ IFRS 財務資料庫 \\
-\text{AI} & 資產總額 / 營業收入淨額 & TEJ IFRS 財務資料庫 \\
-\text{EI} & 員工人數 / 營業收入淨額 & TEJ IFRS 財務資料庫 \\
-\text{ROA} & 稅後息前資產報酬率 (\%) & TEJ IFRS 財務資料庫 \\
-\text{Lev} & 負債總額 / 資產總額 (\%) & TEJ IFRS 財務資料庫 \\
-\text{Decrease} & 連續兩年營收下降虛擬變數（連兩年下降設為 1，否則 0） & TEJ IFRS 財務資料庫 \\
+WASTE\_DISC & GRI 廢棄物管理揭露度評分（補充：形式揭露） & TESG 廢棄物揭露 \\
+WASTE\_FINE & 事業廢棄物違規裁罰總金額（千元）/ 資產總額 & TESG 污染源裁處明細 \\
+SIZE & $\ln(\text{資產總額})$ & TEJ IFRS 財務資料庫 \\
+AI & 資產總額 / 營業收入淨額 & TEJ IFRS 財務資料庫 \\
+EI & 員工人數 / 營業收入淨額 & TEJ IFRS 財務資料庫 \\
+ROA & 稅後息前資產報酬率 (\%) & TEJ IFRS 財務資料庫 \\
+LEV & 負債總額 / 資產總額 (\%) & TEJ IFRS 財務資料庫 \\
+SUCC\_DEC & 連續兩年營收下降虛擬變數（連兩年下降設為 1，否則 0） & TEJ IFRS 財務資料庫 \\
 \bottomrule
 \end{tabular}
 \end{table}

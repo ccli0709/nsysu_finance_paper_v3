@@ -25,14 +25,14 @@ OUTPUT_MAP = "data/processed/04_var_mapping.csv"
 # 模型欄位（優先取縮尾 _w 版本）
 Y_COL = "dLNSGA_w"          # 應變數 ΔLNSGA
 DREV_COL = "dLNREV_w"       # ΔLNREV
-WATER_RATE_COL = "Water_Rate_w"  # 主分析水管理績效
+WATER_RATE_COL = "WATER_RATE_w"  # 主分析水管理績效
 CONTROL_COLS = {            # 安全名 -> 來源欄
-    "Size": "Size_w",
+    "SIZE": "SIZE_w",
     "AI": "AI_w",
     "EI": "EI_w",
     "ROA": "ROA_w",
-    "Lev": "Lev_w",
-    "Decrease": "Decrease",  # 虛擬變數不縮尾
+    "LEV": "LEV_w",
+    "SUCC_DEC": "SUCC_DEC",  # 虛擬變數不縮尾
 }
 
 
@@ -49,54 +49,54 @@ def main():
     # 基本項
     out["Y_dLNSGA"] = pd.to_numeric(df[Y_COL], errors="coerce")
     out["dLNREV"] = pd.to_numeric(df[DREV_COL], errors="coerce")
-    out["D"] = pd.to_numeric(df["D"], errors="coerce")
-    out["Water_Rate"] = pd.to_numeric(df[WATER_RATE_COL], errors="coerce")
-    out["Water_Disc"] = pd.to_numeric(df["Water_Disc"], errors="coerce")
-    out["Water_Disc_GRI"] = pd.to_numeric(df["Water_Disc_GRI"], errors="coerce")
+    out["DEC"] = pd.to_numeric(df["DEC"], errors="coerce")
+    out["WATER_RATE"] = pd.to_numeric(df[WATER_RATE_COL], errors="coerce")
+    out["WATER_DISC"] = pd.to_numeric(df["WATER_DISC"], errors="coerce")
+    out["WASTE_DISC_GRI"] = pd.to_numeric(df["WASTE_DISC_GRI"], errors="coerce")
     # 廢棄物管理指標（延伸主題）
-    out["Waste_Intensity"] = pd.to_numeric(df["Waste_Intensity_w"], errors="coerce")
-    out["Waste_Disc"] = pd.to_numeric(df["Waste_Disc"], errors="coerce")
+    out["WASTE_INTENSITY"] = pd.to_numeric(df["WASTE_INTENSITY_w"], errors="coerce")
+    out["WASTE_DISC"] = pd.to_numeric(df["WASTE_DISC"], errors="coerce")
     # H5 改用「廢棄物裁罰金額佔資產」(連續、縮尾)取代罰鍰次數，解決 366 離群與離散問題
-    out["Waste_Fine"] = pd.to_numeric(df["Waste_FineInt_w"], errors="coerce")
+    out["WASTE_FINE"] = pd.to_numeric(df["WASTE_FINE_INT_w"], errors="coerce")
     # 新增：用水密集度（總用水量/營收，縮尾），擴大水構面樣本
-    out["Water_Intensity"] = pd.to_numeric(df["Water_Intensity_w"], errors="coerce")
+    out["WATER_INTENSITY"] = pd.to_numeric(df["WATER_INTENSITY_w"], errors="coerce")
 
     # 控制變數（主效果）
     for safe, src in CONTROL_COLS.items():
         out[safe] = pd.to_numeric(df[src], errors="coerce")
 
     # 核心交乘
-    out["D_x_dREV"] = out["D"] * out["dLNREV"]                       # β2：成本黏性
-    out["WaterRate_D_dREV"] = out["Water_Rate"] * out["D_x_dREV"]   # β3：水績效×黏性
-    out["WaterDisc_D_dREV"] = out["Water_Disc"] * out["D_x_dREV"]   # β3：水揭露×黏性
-    out["WaterDiscGRI_D_dREV"] = out["Water_Disc_GRI"] * out["D_x_dREV"]  # 穩健性
+    out["DEC_x_dREV"] = out["DEC"] * out["dLNREV"]                       # β2：成本黏性
+    out["WATER_RATE_D_dREV"] = out["WATER_RATE"] * out["DEC_x_dREV"]   # β3：水績效×黏性
+    out["WATER_DISC_D_dREV"] = out["WATER_DISC"] * out["DEC_x_dREV"]   # β3：水揭露×黏性
+    out["WATER_DISCGRI_D_dREV"] = out["WASTE_DISC_GRI"] * out["DEC_x_dREV"]  # 穩健性
     # 廢棄物三重交乘（β3）
-    out["WasteInt_D_dREV"] = out["Waste_Intensity"] * out["D_x_dREV"]   # 主分析(實質投入)
-    out["WasteDisc_D_dREV"] = out["Waste_Disc"] * out["D_x_dREV"]       # 次分析(揭露品質)
-    out["WasteFine_D_dREV"] = out["Waste_Fine"] * out["D_x_dREV"]       # 穩健(違規裁罰金額)
-    out["WaterInt_D_dREV"] = out["Water_Intensity"] * out["D_x_dREV"]   # 用水密集度
+    out["WasteInt_D_dREV"] = out["WASTE_INTENSITY"] * out["DEC_x_dREV"]   # 主分析(實質投入)
+    out["WasteDisc_D_dREV"] = out["WASTE_DISC"] * out["DEC_x_dREV"]       # 次分析(揭露品質)
+    out["WasteFine_D_dREV"] = out["WASTE_FINE"] * out["DEC_x_dREV"]       # 穩健(違規裁罰金額)
+    out["WaterInt_D_dREV"] = out["WATER_INTENSITY"] * out["DEC_x_dREV"]   # 用水密集度
 
     # 控制變數 × (D×ΔLNREV)（ABJ 慣例）
     for safe in CONTROL_COLS:
-        out[f"{safe}_D_dREV"] = out[safe] * out["D_x_dREV"]
+        out[f"{safe}_D_dREV"] = out[safe] * out["DEC_x_dREV"]
 
     # ---- 方向四：遞延期水管理主效果與三重交乘（t-1、t-2）----
     LAG_MAP = {
-        "WaterRate": "Water_Rate_w",       # 水回收率%（縮尾）
-        "WaterDisc": "Water_Disc",         # 水揭露做法A
-        "WaterDiscGRI": "Water_Disc_GRI",  # 水揭露做法B
-        "WaterRateProc": "製程水回收率%_w", # 製程水回收率%（縮尾）
-        "WasteInt": "Waste_Intensity_w",   # 每百萬營收廢棄物（縮尾）
-        "WasteDisc": "Waste_Disc",         # 廢棄物揭露品質
-        "WasteFine": "Waste_FineInt_w",    # 廢棄物裁罰金額佔資產（縮尾，取代次數）
-        "WaterInt": "Water_Intensity_w",   # 用水密集度（縮尾）
+        "WATER_RATE": "WATER_RATE_w",       # 水回收率%（縮尾）
+        "WATER_DISC": "WATER_DISC",         # 水揭露做法A
+        "WATER_DISCGRI": "WASTE_DISC_GRI",  # 水揭露做法B
+        "WATER_RATEProc": "製程水回收率%_w", # 製程水回收率%（縮尾）
+        "WasteInt": "WASTE_INTENSITY_w",   # 每百萬營收廢棄物（縮尾）
+        "WasteDisc": "WASTE_DISC",         # 廢棄物揭露品質
+        "WasteFine": "WASTE_FINE_INT_w",    # 廢棄物裁罰金額佔資產（縮尾，取代次數）
+        "WaterInt": "WATER_INTENSITY_w",   # 用水密集度（縮尾）
     }
     for base, src in LAG_MAP.items():
         for k in (1, 2):
             col = f"{src}_l{k}"
             if col in df.columns:
                 out[f"{base}_l{k}"] = pd.to_numeric(df[col], errors="coerce")
-                out[f"{base}_D_dREV_l{k}"] = out[f"{base}_l{k}"] * out["D_x_dREV"]
+                out[f"{base}_D_dREV_l{k}"] = out[f"{base}_l{k}"] * out["DEC_x_dREV"]
 
     # ---- 方向五：高/低耗水產業分類（依 TEJ Company DB 之 TSE 產業別，精準定義）----
     # 依水資源相關文獻與台灣製造業實務，界定高耗水（用水密集）產業之 TSE 代碼。
@@ -125,7 +125,7 @@ def main():
                .groupby(["TSE代碼", "TSE產業"])
                .agg(觀測數=("證券代碼", "size"),
                     公司數=("證券代碼", "nunique"),
-                    有水資料=("Water_Rate", lambda s: int(s.notna().sum())))
+                    有水資料=("WATER_RATE", lambda s: int(s.notna().sum())))
                .reset_index())
     dens_df["耗水分組"] = np.where(dens_df["TSE代碼"].isin(HIGH_WATER_TSE), "高耗水", "低耗水")
     dens_df = dens_df.sort_values(["耗水分組", "觀測數"], ascending=[True, False])
@@ -134,36 +134,36 @@ def main():
     mapping = [
         ("Y_dLNSGA", "ΔLNSGA = LN(營業費用_t) − LN(營業費用_t-1)（縮尾）", "應變數"),
         ("dLNREV", "ΔLNREV = LN(營收_t) − LN(營收_t-1)（縮尾）", "自變數"),
-        ("D", "收入下降虛擬（營收_t < 營收_t-1 = 1）", "自變數"),
-        ("D_x_dREV", "D × ΔLNREV（β2：整體成本黏性，預期負）", "核心交乘"),
-        ("Water_Rate", "水回收率%（縮尾，主分析水績效）", "自變數"),
-        ("Water_Disc", "水揭露虛擬-做法A（有水量紀錄=1）", "自變數"),
-        ("Water_Disc_GRI", "水揭露虛擬-做法B（GRI揭露度>0=1）", "自變數(穩健)"),
-        ("WaterRate_D_dREV", "Water_Rate × D × ΔLNREV（β3：H1）", "三重交乘"),
-        ("WaterDisc_D_dREV", "Water_Disc × D × ΔLNREV（β3：H2）", "三重交乘"),
-        ("WaterDiscGRI_D_dREV", "Water_Disc_GRI × D × ΔLNREV（穩健）", "三重交乘"),
-        ("Waste_Intensity", "每百萬營收廢棄物（縮尾，廢棄物主分析）", "自變數"),
-        ("Waste_Disc", "GRI廢棄物管理揭露度（連續，揭露品質）", "自變數"),
-        ("Waste_Fine", "事業廢棄物罰鍰次數（違規風險）", "自變數(穩健)"),
-        ("WasteInt_D_dREV", "Waste_Intensity × D × ΔLNREV（β3：H3）", "三重交乘"),
-        ("WasteDisc_D_dREV", "Waste_Disc × D × ΔLNREV（β3：H4）", "三重交乘"),
-        ("WasteFine_D_dREV", "Waste_Fine × D × ΔLNREV（β3：H5穩健）", "三重交乘"),
-        ("Size", "LN(資產總額)（縮尾）", "控制"),
+        ("DEC", "收入下降虛擬（營收_t < 營收_t-1 = 1）", "自變數"),
+        ("DEC_x_dREV", "D × ΔLNREV（β2：整體成本黏性，預期負）", "核心交乘"),
+        ("WATER_RATE", "水回收率%（縮尾，主分析水績效）", "自變數"),
+        ("WATER_DISC", "水揭露虛擬-做法A（有水量紀錄=1）", "自變數"),
+        ("WASTE_DISC_GRI", "水揭露虛擬-做法B（GRI揭露度>0=1）", "自變數(穩健)"),
+        ("WATER_RATE_D_dREV", "WATER_RATE × D × ΔLNREV（β3：H1）", "三重交乘"),
+        ("WATER_DISC_D_dREV", "WATER_DISC × D × ΔLNREV（β3：H2）", "三重交乘"),
+        ("WATER_DISCGRI_D_dREV", "WASTE_DISC_GRI × D × ΔLNREV（穩健）", "三重交乘"),
+        ("WASTE_INTENSITY", "每百萬營收廢棄物（縮尾，廢棄物主分析）", "自變數"),
+        ("WASTE_DISC", "GRI廢棄物管理揭露度（連續，揭露品質）", "自變數"),
+        ("WASTE_FINE", "事業廢棄物罰鍰次數（違規風險）", "自變數(穩健)"),
+        ("WasteInt_D_dREV", "WASTE_INTENSITY × D × ΔLNREV（β3：H3）", "三重交乘"),
+        ("WasteDisc_D_dREV", "WASTE_DISC × D × ΔLNREV（β3：H4）", "三重交乘"),
+        ("WasteFine_D_dREV", "WASTE_FINE × D × ΔLNREV（β3：H5穩健）", "三重交乘"),
+        ("SIZE", "LN(資產總額)（縮尾）", "控制"),
         ("AI", "資產密集度=資產總額/營收（縮尾）", "控制"),
         ("EI", "員工密集度=員工人數/營收（縮尾）", "控制"),
         ("ROA", "資產報酬率 ROA(A)稅後息前（縮尾）", "控制"),
-        ("Lev", "財務槓桿=負債比率（縮尾）", "控制"),
-        ("Decrease", "連續兩年營收下降虛擬", "控制"),
-        ("Size_D_dREV", "Size × D × ΔLNREV", "控制交乘"),
+        ("LEV", "財務槓桿=負債比率（縮尾）", "控制"),
+        ("SUCC_DEC", "連續兩年營收下降虛擬", "控制"),
+        ("SIZE_D_dREV", "SIZE × D × ΔLNREV", "控制交乘"),
         ("AI_D_dREV", "AI × D × ΔLNREV", "控制交乘"),
         ("EI_D_dREV", "EI × D × ΔLNREV", "控制交乘"),
         ("ROA_D_dREV", "ROA × D × ΔLNREV", "控制交乘"),
-        ("Lev_D_dREV", "Lev × D × ΔLNREV", "控制交乘"),
-        ("Decrease_D_dREV", "Decrease × D × ΔLNREV", "控制交乘"),
-        ("WaterRate_D_dREV_l1", "Water_Rate(t-1) × D × ΔLNREV（遞延一期，方向四）", "遞延交乘"),
-        ("WaterRate_D_dREV_l2", "Water_Rate(t-2) × D × ΔLNREV（遞延兩期，方向四）", "遞延交乘"),
-        ("WaterDisc_D_dREV_l1", "Water_Disc(t-1) × D × ΔLNREV（遞延一期）", "遞延交乘"),
-        ("WaterDisc_D_dREV_l2", "Water_Disc(t-2) × D × ΔLNREV（遞延兩期）", "遞延交乘"),
+        ("LEV_D_dREV", "LEV × D × ΔLNREV", "控制交乘"),
+        ("SUCC_DEC_D_dREV", "SUCC_DEC × D × ΔLNREV", "控制交乘"),
+        ("WATER_RATE_D_dREV_l1", "WATER_RATE(t-1) × D × ΔLNREV（遞延一期，方向四）", "遞延交乘"),
+        ("WATER_RATE_D_dREV_l2", "WATER_RATE(t-2) × D × ΔLNREV（遞延兩期，方向四）", "遞延交乘"),
+        ("WATER_DISC_D_dREV_l1", "WATER_DISC(t-1) × D × ΔLNREV（遞延一期）", "遞延交乘"),
+        ("WATER_DISC_D_dREV_l2", "WATER_DISC(t-2) × D × ΔLNREV（遞延兩期）", "遞延交乘"),
         ("WaterUse", "耗水分組（高/低耗水產業，方向五）", "分組"),
         ("Industry", "SASB主產業（產業固定效果）", "固定效果"),
         ("Year", "西元年份（年份固定效果）", "固定效果"),
@@ -176,15 +176,15 @@ def main():
     print("===== 建模變數摘要 =====")
     print(f"輸出：{OUTPUT_CSV}（{len(out):,} 列，{out['證券代碼'].nunique():,} 家）")
     print(f"輸出：{OUTPUT_MAP}（{len(mapping)} 個變數對照）")
-    base = ["Y_dLNSGA", "dLNREV", "D", "D_x_dREV"] + list(CONTROL_COLS)
+    base = ["Y_dLNSGA", "dLNREV", "DEC", "DEC_x_dREV"] + list(CONTROL_COLS)
     m1_ok = out[base].notna().all(axis=1)
-    print(f"\n模型1(主分析 Water_Rate) 可用列："
-          f"{(m1_ok & out['WaterRate_D_dREV'].notna()).sum():,}")
-    print(f"模型2(次分析 Water_Disc) 可用列：{(m1_ok & out['WaterDisc_D_dREV'].notna()).sum():,}")
+    print(f"\n模型1(主分析 WATER_RATE) 可用列："
+          f"{(m1_ok & out['WATER_RATE_D_dREV'].notna()).sum():,}")
+    print(f"模型2(次分析 WATER_DISC) 可用列：{(m1_ok & out['WATER_DISC_D_dREV'].notna()).sum():,}")
     print(f"產業數：{out['Industry'].nunique()}；年份：{out['Year'].min()}-{out['Year'].max()}")
     print("\n遞延期可用列（核心+控制皆非空）：")
-    for c in ["WaterRate_D_dREV", "WaterRate_D_dREV_l1", "WaterRate_D_dREV_l2",
-              "WaterDisc_D_dREV", "WaterDisc_D_dREV_l1", "WaterDisc_D_dREV_l2"]:
+    for c in ["WATER_RATE_D_dREV", "WATER_RATE_D_dREV_l1", "WATER_RATE_D_dREV_l2",
+              "WATER_DISC_D_dREV", "WATER_DISC_D_dREV_l1", "WATER_DISC_D_dREV_l2"]:
         if c in out.columns:
             print(f"  {c:<22}: {(m1_ok & out[c].notna()).sum():,}")
     print("\n高/低耗水產業分組：")

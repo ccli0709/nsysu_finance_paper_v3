@@ -9,8 +9,8 @@
            + β4·Water_Var(t-k) + Σ Controls×(D×ΔLNREV) + Σ Industry + Σ Year + ε
 
 - 水管理變數不新增，只做期數平移：k=0（當期）、1（t-1）、2（t-2）。
-- 模型1（主分析）：Water_Var = 水回收率%（Water_Rate）
-- 模型2（次分析）：Water_Var = 水揭露虛擬（Water_Disc）
+- 模型1（主分析）：Water_Var = 水回收率%（WATER_RATE）
+- 模型2（次分析）：Water_Var = 水揭露虛擬（WATER_DISC）
 - 方法：OLS + 產業/年份固定效果 + 公司叢集穩健標準誤。
 
 理論預期：水管理投資效益需時間發酵，遞延項（L1/L2）之 β3 可能較當期顯著。
@@ -26,8 +26,8 @@ INPUT_CSV = "data/processed/04_model_data.csv"
 OUT_TXT = "results/05_regression_results.txt"
 OUT_COEF = "results/05_regression_coef.csv"
 
-CONTROL_INT = ["Size_D_dREV", "AI_D_dREV", "EI_D_dREV",
-               "ROA_D_dREV", "Lev_D_dREV", "Decrease_D_dREV"]
+CONTROL_INT = ["SIZE_D_dREV", "AI_D_dREV", "EI_D_dREV",
+               "ROA_D_dREV", "LEV_D_dREV", "SUCC_DEC_D_dREV"]
 
 
 def stars(p):
@@ -52,7 +52,7 @@ def interp_b3(kind, b3, p3):
 
 
 def run_model(df, water_main, water_triple, label, kind, lag, txt_lines, coef_rows):
-    reg_vars = ["dLNREV", "D_x_dREV", water_triple, water_main] + CONTROL_INT
+    reg_vars = ["dLNREV", "DEC_x_dREV", water_triple, water_main] + CONTROL_INT
     d = df.dropna(subset=reg_vars + ["Y_dLNSGA", "西元年份", "證券代碼"]).copy()
     d = d[d["Industry"].notna() & (d["Industry"].astype(str).str.strip() != "")]
     if d["證券代碼"].nunique() < 5 or len(d) < 30:
@@ -76,7 +76,7 @@ def run_model(df, water_main, water_triple, label, kind, lag, txt_lines, coef_ro
     txt_lines.append(f"樣本 N = {n:,}；公司數 = {k:,}；調整後 R² = {res.rsquared_adj:.4f}")
     txt_lines.append("-" * 78)
     txt_lines.append(f"{'變數':<24}{'係數':>14}{'穩健SE':>12}{'t':>9}{'p':>9}  顯著")
-    for v in ["dLNREV", "D_x_dREV", water_triple, water_main] + CONTROL_INT:
+    for v in ["dLNREV", "DEC_x_dREV", water_triple, water_main] + CONTROL_INT:
         b, se, t, p = res.params[v], res.bse[v], res.tvalues[v], res.pvalues[v]
         txt_lines.append(f"{v:<24}{b:>14.4f}{se:>12.4f}{t:>9.2f}{p:>9.4f}  {stars(p)}")
         coef_rows.append({"模型": label, "類型": kind, "遞延期": lag,
@@ -84,7 +84,7 @@ def run_model(df, water_main, water_triple, label, kind, lag, txt_lines, coef_ro
                           "係數": b, "穩健SE": se, "t值": t, "p值": p,
                           "顯著性": stars(p), "N": n, "公司數": k,
                           "adj_R2": res.rsquared_adj})
-    b2, p2 = res.params["D_x_dREV"], res.pvalues["D_x_dREV"]
+    b2, p2 = res.params["DEC_x_dREV"], res.pvalues["DEC_x_dREV"]
     b3, p3 = res.params[water_triple], res.pvalues[water_triple]
     txt_lines.append("-" * 78)
     txt_lines.append(f"β2 (D×ΔLNREV) = {b2:.4f} ({stars(p2) or 'n.s.'})："
@@ -98,7 +98,7 @@ def role_of(v, triple, main):
         return "β3(三重交乘)"
     if v == main:
         return "β4(水主效果)"
-    if v == "D_x_dREV":
+    if v == "DEC_x_dREV":
         return "β2(黏性)"
     if v == "dLNREV":
         return "β1"
@@ -111,24 +111,24 @@ def main():
 
     specs = [
         # ---- 水管理（原主題）----
-        ("模型1 水回收率% L0(當期)", "Water_Rate", "WaterRate_D_dREV", "主分析", 0),
-        ("模型1 水回收率% L1(t-1)", "WaterRate_l1", "WaterRate_D_dREV_l1", "主分析", 1),
-        ("模型1 水回收率% L2(t-2)", "WaterRate_l2", "WaterRate_D_dREV_l2", "主分析", 2),
-        ("模型2 水揭露 L0(當期)", "Water_Disc", "WaterDisc_D_dREV", "次分析", 0),
-        ("模型2 水揭露 L1(t-1)", "WaterDisc_l1", "WaterDisc_D_dREV_l1", "次分析", 1),
-        ("模型2 水揭露 L2(t-2)", "WaterDisc_l2", "WaterDisc_D_dREV_l2", "次分析", 2),
+        ("模型1 水回收率% L0(當期)", "WATER_RATE", "WATER_RATE_D_dREV", "主分析", 0),
+        ("模型1 水回收率% L1(t-1)", "WATER_RATE_l1", "WATER_RATE_D_dREV_l1", "主分析", 1),
+        ("模型1 水回收率% L2(t-2)", "WATER_RATE_l2", "WATER_RATE_D_dREV_l2", "主分析", 2),
+        ("模型2 水揭露 L0(當期)", "WATER_DISC", "WATER_DISC_D_dREV", "次分析", 0),
+        ("模型2 水揭露 L1(t-1)", "WATER_DISC_l1", "WATER_DISC_D_dREV_l1", "次分析", 1),
+        ("模型2 水揭露 L2(t-2)", "WATER_DISC_l2", "WATER_DISC_D_dREV_l2", "次分析", 2),
         # ---- 廢棄物管理（延伸主題）----
-        ("模型3 廢棄物密集度 L0(當期)", "Waste_Intensity", "WasteInt_D_dREV", "廢棄物主分析", 0),
+        ("模型3 廢棄物密集度 L0(當期)", "WASTE_INTENSITY", "WasteInt_D_dREV", "廢棄物主分析", 0),
         ("模型3 廢棄物密集度 L1(t-1)", "WasteInt_l1", "WasteInt_D_dREV_l1", "廢棄物主分析", 1),
         ("模型3 廢棄物密集度 L2(t-2)", "WasteInt_l2", "WasteInt_D_dREV_l2", "廢棄物主分析", 2),
-        ("模型4 廢棄物揭露 L0(當期)", "Waste_Disc", "WasteDisc_D_dREV", "廢棄物次分析", 0),
+        ("模型4 廢棄物揭露 L0(當期)", "WASTE_DISC", "WasteDisc_D_dREV", "廢棄物次分析", 0),
         ("模型4 廢棄物揭露 L1(t-1)", "WasteDisc_l1", "WasteDisc_D_dREV_l1", "廢棄物次分析", 1),
         ("模型4 廢棄物揭露 L2(t-2)", "WasteDisc_l2", "WasteDisc_D_dREV_l2", "廢棄物次分析", 2),
-        ("模型5 廢棄物裁罰金額 L0(當期)", "Waste_Fine", "WasteFine_D_dREV", "廢棄物穩健", 0),
+        ("模型5 廢棄物裁罰金額 L0(當期)", "WASTE_FINE", "WasteFine_D_dREV", "廢棄物穩健", 0),
         ("模型5 廢棄物裁罰金額 L1(t-1)", "WasteFine_l1", "WasteFine_D_dREV_l1", "廢棄物穩健", 1),
         ("模型5 廢棄物裁罰金額 L2(t-2)", "WasteFine_l2", "WasteFine_D_dREV_l2", "廢棄物穩健", 2),
         # ---- 用水密集度（升為主模型，使用密集度核心）----
-        ("模型6 用水密集度 L0(當期)", "Water_Intensity", "WaterInt_D_dREV", "用水密集度", 0),
+        ("模型6 用水密集度 L0(當期)", "WATER_INTENSITY", "WaterInt_D_dREV", "用水密集度", 0),
         ("模型6 用水密集度 L1(t-1)", "WaterInt_l1", "WaterInt_D_dREV_l1", "用水密集度", 1),
         ("模型6 用水密集度 L2(t-2)", "WaterInt_l2", "WaterInt_D_dREV_l2", "用水密集度", 2),
     ]

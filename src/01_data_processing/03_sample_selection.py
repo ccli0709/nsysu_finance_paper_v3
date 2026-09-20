@@ -26,8 +26,8 @@ START_YEAR = 2014
 END_YEAR = 2024
 EXCLUDE_INDUSTRY_KEYWORD = "金融"     # SASB主產業 含此字串者排除
 DROP_MISSING_INDUSTRY = True          # 剔除無產業別者
-CORE_COLS = ["dLNSGA", "dLNREV", "D"]
-CONTROL_COLS = ["Size", "AI", "EI", "ROA", "Lev", "Decrease"]
+CORE_COLS = ["dLNSGA", "dLNREV", "DEC"]
+CONTROL_COLS = ["SIZE", "AI", "EI", "ROA", "LEV", "SUCC_DEC"]
 
 
 def main():
@@ -60,9 +60,9 @@ def main():
     reg_ok = df[CORE_COLS + CONTROL_COLS].notna().all(axis=1)
     tmp = df.copy()
     tmp["_reg_ok"] = reg_ok.astype(int)
-    tmp["_has_water"] = tmp["Water_Rate"].notna().astype(int)
-    tmp["_disc"] = (tmp["Water_Disc"] == 1).astype(int)
-    tmp["_reg_water"] = (reg_ok & tmp["Water_Rate"].notna()).astype(int)
+    tmp["_has_water"] = tmp["WATER_RATE"].notna().astype(int)
+    tmp["_disc"] = (tmp["WATER_DISC"] == 1).astype(int)
+    tmp["_reg_water"] = (reg_ok & tmp["WATER_RATE"].notna()).astype(int)
 
     stats = tmp.groupby("SASB主產業").agg(
         公司數=("證券代碼", "nunique"),
@@ -83,8 +83,8 @@ def main():
     print(f"核心變數皆非空後  : {n4:,}  ← 輸出樣本")
     print(f"\n輸出：{OUTPUT_SAMPLE}（{len(df):,} 列，{df['證券代碼'].nunique():,} 家）")
     print(f"      迴歸可用(核心+控制皆非空)：{reg_ok.sum():,} 列")
-    print(f"      其中有 Water_Rate：{(reg_ok & df['Water_Rate'].notna()).sum():,} 列")
-    print(f"      有揭露(Water_Disc=1)：{(df['Water_Disc']==1).sum():,} 列")
+    print(f"      其中有 WATER_RATE：{(reg_ok & df['WATER_RATE'].notna()).sum():,} 列")
+    print(f"      有揭露(WATER_DISC=1)：{(df['WATER_DISC']==1).sum():,} 列")
     print(f"\n輸出：{OUTPUT_STATS}（前 10 大產業）")
     with pd.option_context("display.unicode.east_asian_width", True,
                            "display.max_columns", None, "display.width", 200):
