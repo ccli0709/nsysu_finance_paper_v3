@@ -4,7 +4,7 @@
     {
       "label": "預覽 main.tex (啟動網頁預覽伺服器)",
       "type": "shell",
-      "command": "python src/03_paper_generation/preview_server.py",
+      "command": "python \"09-LaTeX論文產出與編譯/preview_server.py\"",
       "problemMatcher": [],
       "group": {
         "kind": "build",
@@ -18,14 +18,14 @@
     {
       "label": "生成 main.pdf (產出高畫質PDF文件)",
       "type": "shell",
-      "command": "python src/03_paper_generation/generate_pdf.py",
+      "command": "python \"09-LaTeX論文產出與編譯/generate_pdf.py\"",
       "problemMatcher": [],
       "group": "build"
     },
     {
       "label": "重新生成 main.tex",
       "type": "shell",
-      "command": "python src/03_paper_generation/09_generate_latex.py",
+      "command": "python \"09-LaTeX論文產出與編譯/09_generate_latex.py\"",
       "problemMatcher": [],
       "group": "build"
     }

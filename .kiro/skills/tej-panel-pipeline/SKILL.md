@@ -40,17 +40,17 @@ description: >
 ## 執行順序
 
 ```
-python 01_merge_tej_data.py          # 合併原始 zip/CSV → 01_merged_tej_data.csv
-python 02_feature_engineering.py     # 變數建構        → 02_features_data.csv
-python 03_sample_selection.py        # 樣本篩選+產業統計→ 03_sample_data.csv, 03_industry_stats.csv
-python 04_build_model_variables.py   # 交乘項+遞延+分組 → 04_model_data.csv, 04_var_mapping.csv, 04_industry_wateruse.csv
-python 05_run_regressions.py         # 主模型+時間落差   → 05_regression_results.txt, 05_regression_coef.csv
-python 06_robustness_checks.py       # 產業異質性×遞延   → 06_robustness_results.txt, 06_robustness_coef.csv, 06_robustness_summary.csv
-python 07_generate_paper.py          # 生成 Word 論文    → 水與廢棄物管理與成本黏性_論文.docx
-python 08_generate_thesis_template.py # 生成中山格式論文  → 水與廢棄物管理與成本黏性_論文_中山格式.docx
-python append_desc_table.py          # 於中山格式文末附加樣版格式「表4-3 敘述統計」
-python 09_generate_latex.py          # 生成 LaTeX 論文   → main.tex (並自動觸發編譯 main.pdf 與 main.docx)
-python compile_main.py               # 獨立編譯工具       → 手動隨時編譯 main.tex 為 main.pdf 與 main.docx
+python "01-資料拆解與合併/01_merge_tej_data.py"          # 合併原始 zip/CSV → 01-資料拆解與合併/01_merged_tej_data.csv
+python "02-特徵工程與變數建構/02_feature_engineering.py"     # 變數建構        → 02-特徵工程與變數建構/02_features_data.csv
+python "03-樣本篩選與產業統計/03_sample_selection.py"        # 樣本篩選+產業統計→ 03-樣本篩選與產業統計/03_sample_data.csv, 03_industry_stats.csv
+python "04-模型變數與交乘項建構/04_build_model_variables.py"   # 交乘項+遞延+分組 → 04-模型變數與交乘項建構/04_model_data.csv, 04_var_mapping.csv, 04_industry_wateruse.csv
+python "05-實證迴歸模型分析/05_run_regressions.py"         # 主模型+時間落差   → 05-實證迴歸模型分析/05_regression_results.txt, 05_regression_coef.csv
+python "06-穩健性檢定與分析/06_robustness_checks.py"       # 產業異質性×遞延   → 06-穩健性檢定與分析/06_robustness_results.txt, 06_robustness_coef.csv, 06_robustness_summary.csv
+python "07-標準論文生成/07_generate_paper.py"          # 生成 Word 論文    → 07-標準論文生成/水與廢棄物管理與成本黏性_論文.docx
+python "08-中山格式論文生成/08_generate_thesis_template.py" # 生成中山格式論文  → 08-中山格式論文生成/水與廢棄物管理與成本黏性_論文_中山格式.docx
+python "08-中山格式論文生成/append_desc_table.py"          # 於中山格式文末附加樣版格式「表4-3 敘述統計」
+python "09-LaTeX論文產出與編譯/09_generate_latex.py"          # 生成 LaTeX 論文   → 09-LaTeX論文產出與編譯/main.tex (並自動觸發編譯 main.pdf 與 main.docx)
+python "09-LaTeX論文產出與編譯/compile_main.py"               # 獨立編譯工具       → 手動隨時編譯 main.tex 為 main.pdf 與 main.docx
 ```
 
 需額外套件：`statsmodels`（OLS + 產業/年份固定效果 + 叢集穩健標準誤）、
