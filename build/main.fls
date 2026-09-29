@@ -1,6 +1,6 @@
-PWD d:\Repositories\nsysu_finance_paper_v3
+PWD d:\Repositories\nsysu_finance_paper_v3\build
 INPUT C:\Users\170134\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT d:\Repositories\nsysu_finance_paper_v3\main.tex
+INPUT d:\Repositories\nsysu_finance_paper_v3\build\main.tex
 OUTPUT main.log
 INPUT C:\Users\170134\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
 INPUT C:\Users\170134\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls

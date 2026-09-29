@@ -170,7 +170,7 @@ def main():
     ]
     pd.DataFrame(mapping, columns=["安全欄名", "定義", "角色"]).to_csv(
         OUTPUT_MAP, index=False, encoding="utf-8-sig")
-    dens_df.to_csv("04_industry_wateruse.csv", index=False, encoding="utf-8-sig")
+    dens_df.to_csv("data/processed/04_industry_wateruse.csv", index=False, encoding="utf-8-sig")
 
     # 摘要
     print("===== 建模變數摘要 =====")
