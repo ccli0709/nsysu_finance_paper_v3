@@ -22,6 +22,8 @@ import preview_server
 TEX_FILE = os.path.join(DIR_PATH, "main.tex")
 HTML_FILE = os.path.join(DIR_PATH, "preview_output.html")
 PDF_FILE = os.path.join(DIR_PATH, "main.pdf")
+import time
+
 DOCX_FILE = os.path.join(DIR_PATH, "main.docx")
 
 def compile_pdf(html_abs=None, pdf_abs=None):
@@ -48,14 +50,57 @@ def compile_pdf(html_abs=None, pdf_abs=None):
         return False
         
     url = f"file:///{html_abs.replace('\\', '/')}"
-    ps_command = f'Start-Process -FilePath "{browser_exe}" -ArgumentList "--headless=new --disable-gpu --print-to-pdf=\\"{pdf_abs}\\" \\"{url}\\"" -Wait'
     
-    res = subprocess.run(["powershell", "-Command", ps_command], capture_output=True, text=True, errors="replace")
+    # 檢查目標 main.pdf 是否被外部 PDF 閱讀器鎖定
+    target_locked = False
+    if os.path.exists(pdf_abs):
+        try:
+            with open(pdf_abs, 'r+b') as f:
+                pass
+            os.remove(pdf_abs)
+        except Exception:
+            target_locked = True
+
+    # 先輸出到獨立暫存檔 main_latest.pdf，保證不受檔案鎖定干擾
+    latest_pdf = os.path.join(DIR_PATH, "main_latest.pdf")
+    if os.path.exists(latest_pdf):
+        try:
+            os.remove(latest_pdf)
+        except Exception:
+            pass
+
+    cmd = [
+        browser_exe,
+        "--headless=new",
+        "--disable-gpu",
+        "--no-pdf-header-footer",
+        f"--print-to-pdf={latest_pdf}",
+        url
+    ]
     
-    if os.path.exists(pdf_abs) and os.path.getsize(pdf_abs) > 0:
-        size_mb = os.path.getsize(pdf_abs) / (1024 * 1024)
-        print(f"  [SUCCESS] PDF 生成成功: {pdf_abs} ({size_mb:.2f} MB)")
-        return True
+    try:
+        res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
+    except Exception as e:
+        print(f"  [ERROR] 調用瀏覽器異常: {e}")
+        return False
+    
+    if os.path.exists(latest_pdf) and os.path.getsize(latest_pdf) > 0:
+        size_mb = os.path.getsize(latest_pdf) / (1024 * 1024)
+        if not target_locked:
+            try:
+                import shutil
+                shutil.copy2(latest_pdf, pdf_abs)
+                print(f"  [SUCCESS] PDF 生成成功: {pdf_abs} ({size_mb:.2f} MB)")
+                print(f"  [SUCCESS] 同步備份最新 PDF: {latest_pdf}")
+                return True
+            except Exception as e:
+                target_locked = True
+        
+        if target_locked:
+            print(f"  [WARNING] 偵測到 {os.path.basename(pdf_abs)} 目前正被外部 PDF 閱讀器（如 PDF-XChange Editor）開啟並鎖定中，無法直接覆寫！")
+            print(f"  [SUCCESS] 最新已編譯之完整 PDF 已另存為: {latest_pdf} ({size_mb:.2f} MB)")
+            print(f"  [NOTE] 請關閉 PDF 閱讀器中的 {os.path.basename(pdf_abs)} 標籤頁以允許覆寫，或直接開啟 main_latest.pdf 檢視最新論文成果。")
+            return True
     else:
         print(f"  [ERROR] PDF 編譯失敗。錯誤訊息：{res.stderr}")
         return False

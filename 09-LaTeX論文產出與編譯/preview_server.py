@@ -68,8 +68,8 @@ def parse_latex_to_html(tex_content):
     body = re.sub(r'\\begin\{quote\}(.*?)\\end\{quote\}', r'<blockquote class="p-4 my-4 bg-blue-50 border-l-4 border-blue-500 text-gray-700 italic rounded-r">\1</blockquote>', body, flags=re.DOTALL)
     
     # 列表轉換
-    body = re.sub(r'\\begin\{enumerate\}(.*?)\\end\{enumerate\}', r'<ol class="list-decimal list-inside space-y-1 my-3 pl-2">\1</ol>', body, flags=re.DOTALL)
-    body = re.sub(r'\\begin\{itemize\}(.*?)\\end\{itemize\}', r'<ul class="list-disc list-inside space-y-1 my-3 pl-2">\1</ul>', body, flags=re.DOTALL)
+    body = re.sub(r'\\begin\{enumerate\}(?:\[.*?\])?(.*?)\\end\{enumerate\}', r'<ol class="list-decimal list-inside space-y-1 my-3 pl-2">\1</ol>', body, flags=re.DOTALL)
+    body = re.sub(r'\\begin\{itemize\}(?:\[.*?\])?(.*?)\\end\{itemize\}', r'<ul class="list-disc list-inside space-y-1 my-3 pl-2">\1</ul>', body, flags=re.DOTALL)
     body = re.sub(r'\\item\s+(.*?)(?=\\item|\n\n|</ol>|</ul>|\Z)', r'<li class="text-gray-800">\1</li>', body, flags=re.DOTALL)
     
     # 關鍵詞與粗體斜體
@@ -87,7 +87,7 @@ def parse_latex_to_html(tex_content):
         lbl = re.search(r'\\label\{(.*?)\}', table_content)
         label_id = lbl.group(1) if lbl else ""
         
-        tabular_match = re.search(r'\\begin\{tabular\}\{.*?\}(.*?)\\end\{tabular\}', table_content, re.DOTALL)
+        tabular_match = re.search(r'\\begin\{tabular\}\{(?:[^{}]|\{[^{}]*\})*\}(.*?)\\end\{tabular\}', table_content, re.DOTALL)
         if not tabular_match:
             return table_content
         
@@ -133,7 +133,7 @@ def parse_latex_to_html(tex_content):
         '''
         return html_tbl
         
-    body = re.sub(r'\\begin\{table\}[^]]*?(.*?)\\end\{table\}', table_repl, body, flags=re.DOTALL)
+    body = re.sub(r'\\begin\{table\}(?:\[.*?\])?\s*(.*?)\\end\{table\}', table_repl, body, flags=re.DOTALL)
     
     # 數式環境與對應
     body = re.sub(r'\\begin\{equation\}(.*?)\\end\{equation\}', r'<div class="my-4 p-3 bg-gray-50 rounded border border-gray-200 text-center print:bg-transparent print:border-none">\[\1\]</div>', body, flags=re.DOTALL)
@@ -257,17 +257,24 @@ def parse_latex_to_html(tex_content):
 
             <h3 class="font-bold text-slate-900 mb-3 pb-2 border-b border-slate-200">章節快速導覽</h3>
             <nav class="space-y-1" id="nav-list">
-                <a href="#sec-1" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">摘要 / Abstract</a>
-                <a href="#sec-1" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">第一章 緒論</a>
-                <a href="#sec-2" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">第二章 文獻探討與假說</a>
-                <a href="#sec-3" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">第三章 資料描述與方法</a>
-                <a href="#sec-4" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">第四章 實證結果與討論</a>
-                <a href="#sec-5" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">第五章 結論與建議</a>
-                <a href="#tab:desc_stats" class="block px-2.5 py-1.5 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 4-1 敘述統計</a>
-                <a href="#tab:corr_matrix" class="block px-2.5 py-1.5 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 4-2 相關矩陣</a>
-                <a href="#tab:reg_main" class="block px-2.5 py-1.5 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 4-3 主迴歸結果</a>
-                <a href="#tab:lag_effect" class="block px-2.5 py-1.5 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 4-4 時間落差效應</a>
-                <a href="#tab:hetero_results" class="block px-2.5 py-1.5 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 4-5 產業異質性</a>
+                <a href="#sec-1" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">摘要 (中文)</a>
+                <a href="#sec-2" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">Abstract (English)</a>
+                <a href="#sec-3" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">1. 緒論</a>
+                <a href="#sec-4" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">2. 文獻探討及研究假說</a>
+                <a href="#sec-5" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">3. 研究設計</a>
+                <a href="#sec-6" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">4. 實證結果</a>
+                <a href="#sec-7" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">5. 結論</a>
+                <a href="#sec-8" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">參考文獻</a>
+                <a href="#sec-9" class="block px-2.5 py-1.5 rounded text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition">附錄</a>
+                <div class="pt-2 border-t border-slate-200 mt-2 text-xs text-slate-500 font-bold px-2">重點圖表快速索引</div>
+                <a href="#tab:var_def_detail" class="block px-2.5 py-1 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 1 變數定義表</a>
+                <a href="#tab:sample_filter" class="block px-2.5 py-1 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 2 樣本篩選流程</a>
+                <a href="#tab:industry_class" class="block px-2.5 py-1 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 3 產業分類表</a>
+                <a href="#tab:desc_stats" class="block px-2.5 py-1 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 4 敘述統計</a>
+                <a href="#tab:corr_matrix" class="block px-2.5 py-1 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 5 相關矩陣</a>
+                <a href="#tab:reg_main" class="block px-2.5 py-1 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 6 主迴歸結果</a>
+                <a href="#tab:lag_effect" class="block px-2.5 py-1 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 7 時間落差效應</a>
+                <a href="#tab:hetero_results" class="block px-2.5 py-1 rounded text-slate-600 hover:bg-slate-100 transition pl-4">📊 表 8 產業異質性</a>
             </nav>
         </aside>
 
