@@ -19,6 +19,7 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
 from docx.oxml import parse_xml, OxmlElement
 from docx.oxml.ns import nsdecls, qn
+from equations_xml import EQUATIONS_TBL_XML
 
 BASE_DIR = r"d:\Repositories\nsysu_finance_paper_v3"
 DATA_DIR = os.path.join(BASE_DIR, "資料分析結果")
@@ -101,6 +102,11 @@ def add_callout_para(doc, text, bold_title=None):
     run = p.add_run(text)
     set_run_font(run, size_pt=12, bold=True)
     return p
+
+def add_equation_table(doc, eq_key):
+    xml_str = EQUATIONS_TBL_XML[eq_key]
+    tbl_element = parse_xml(xml_str)
+    doc._body._element._insert_tbl(tbl_element)
 
 def add_table_title(doc, text):
     p = doc.add_paragraph()
@@ -244,9 +250,9 @@ def build_table_3_3(doc):
     add_table_title(doc, "表 3-3　主要變數定義與衡量說明表")
     headers = ["變數名稱", "英文代號", "變數角色", "操作型定義與計算公式", "資料來源", "預期符號"]
     data = [
-        ["銷管費用變動率", "ΔLNSGA", "被解釋變數", "ln(SGA_t) - ln(SGA_{t-1})，營業費用對數變動率，經 1% 雙向縮尾處理", "TEJ 財務資料庫", "—"],
-        ["營業收入變動率", "ΔLNREV", "核心自變數", "ln(REV_t) - ln(REV_{t-1})，營業收入對數變動率，經 1% 雙向縮尾處理", "TEJ 財務資料庫", "+"],
-        ["營收衰退虛擬", "DEC (D)", "門檻調節", "若第 t 年營業收入小於第 t-1 年則設定為 1，否則為 0", "TEJ 財務資料庫", "-"],
+        ["銷管費用變動率", "ΔlnSGA", "被解釋變數", "ln(SGA_{i,t}) - ln(SGA_{i,t-1})，營業費用對數變動率，經 1% 雙向縮尾處理", "TEJ 財務資料庫", "—"],
+        ["營業收入變動率", "ΔlnREV", "核心自變數", "ln(REV_{i,t}) - ln(REV_{i,t-1})，營業收入對數變動率，經 1% 雙向縮尾處理", "TEJ 財務資料庫", "+"],
+        ["營收衰退虛擬", "DEC_{i,t} (D)", "門檻調節", "若第 t 年營業收入小於第 t-1 年則設定為 1，否則為 0", "TEJ 財務資料庫", "-"],
         ["用水密集度", "WATER_INTENSITY", "實質使用 (核心)", "年度總用水量（千公噸）/ 營業收入淨額（千元），經 1% 縮尾處理", "TESG 企業用水量", "-"],
         ["廢棄物密集度", "WASTE_INTENSITY", "實質產出 (核心)", "廢棄物產生總重量（公噸）/ 營業收入淨額（百萬元），經 1% 縮尾處理", "TESG 廢棄物揭露", "-"],
         ["水回收率%", "WATER_RATE", "實質專用投入", "企業揭露之製程水循環回收再利用比例（%）", "TESG 企業用水量", "-"],
@@ -273,9 +279,9 @@ def build_table_3_3(doc):
 def build_table_4_1(doc, df):
     add_table_title(doc, "表 4-1　全樣本主要變數敘述性統計表")
     desc_vars = [
-        ("Y_dLNSGA", "ΔLNSGA (費用變動率)"),
-        ("dLNREV", "ΔLNREV (營收變動率)"),
-        ("DEC", "DEC (營收下降虛擬)"),
+        ("Y_dLNSGA", "ΔlnSGA (費用變動率)"),
+        ("dLNREV", "ΔlnREV (營收變動率)"),
+        ("DEC", "DEC_{i,t} (營收下降虛擬)"),
         ("WATER_INTENSITY", "WATER_INTENSITY (用水密集度)"),
         ("WASTE_INTENSITY", "WASTE_INTENSITY (廢棄物密集度)"),
         ("WATER_RATE", "WATER_RATE (水回收率%)"),
@@ -319,8 +325,8 @@ def build_table_4_1(doc, df):
 def build_table_4_2(doc, df):
     add_table_title(doc, "表 4-2　主要變數 Pearson 相關係數矩陣")
     corr_cols = [
-        ("Y_dLNSGA", "ΔLNSGA"),
-        ("dLNREV", "ΔLNREV"),
+        ("Y_dLNSGA", "ΔlnSGA"),
+        ("dLNREV", "ΔlnREV"),
         ("WATER_INTENSITY", "水密集度"),
         ("WASTE_INTENSITY", "廢棄物密集度"),
         ("WATER_RATE", "水回收率%"),
@@ -367,16 +373,16 @@ def build_table_4_3(doc, coef_df):
         ("模型6 用水密集度 L0(當期)", "模型 (6)\n用水密集度")
     ]
     role_rows = [
-        ("ΔLNREV (β1)", "β1", None),
-        ("DEC × ΔLNREV (β2 基準黏性)", "β2(黏性)", None),
-        ("Env × DEC × ΔLNREV (β3 三重交乘)", "β3(三重交乘)", None),
+        ("ΔlnREV (β1)", "β1", None),
+        ("DEC_{i,t} × ΔlnREV (β2 基準黏性)", "β2(黏性)", None),
+        ("Env × DEC_{i,t} × ΔlnREV (β3 三重交乘)", "β3(三重交乘)", None),
         ("Env 主效果 (β4)", "β4(水主效果)", None),
-        ("SIZE × DEC × ΔLNREV", None, "SIZE_D_dREV"),
-        ("AI × DEC × ΔLNREV", None, "AI_D_dREV"),
-        ("EI × DEC × ΔLNREV", None, "EI_D_dREV"),
-        ("ROA × DEC × ΔLNREV", None, "ROA_D_dREV"),
-        ("LEV × DEC × ΔLNREV", None, "LEV_D_dREV"),
-        ("SUCC_DEC × DEC × ΔLNREV", None, "SUCC_DEC_D_dREV")
+        ("SIZE × DEC_{i,t} × ΔlnREV", None, "SIZE_D_dREV"),
+        ("AI × DEC_{i,t} × ΔlnREV", None, "AI_D_dREV"),
+        ("EI × DEC_{i,t} × ΔlnREV", None, "EI_D_dREV"),
+        ("ROA × DEC_{i,t} × ΔlnREV", None, "ROA_D_dREV"),
+        ("LEV × DEC_{i,t} × ΔlnREV", None, "LEV_D_dREV"),
+        ("SUCC_DEC × DEC_{i,t} × ΔlnREV", None, "SUCC_DEC_D_dREV")
     ]
     headers = ["變數名稱"] + [lab for _, lab in l0_models]
     total_data_rows = len(role_rows) * 2 + 4
@@ -434,7 +440,7 @@ def build_table_4_3(doc, coef_df):
         r2_val = f"{sub['adj_R2'].iloc[0]:.4f}" if not sub.empty else "—"
         style_cell(t.cell(cur_row, j), r2_val, size_pt=9, bold=True, align=WD_ALIGN_PARAGRAPH.CENTER)
     
-    add_table_note(doc, "註：括號內數值為基於公司層級（Firm-level）叢集穩健標準誤計算之 t 統計量。*** p < 0.01, ** p < 0.05, * p < 0.10。所有模型均納入 SASB 主產業與年份雙向固定效果。各控制變數均與 DEC × ΔLNREV 進行交乘，以充分控管公司異質性。")
+    add_table_note(doc, "註：括號內數值為基於公司層級（Firm-level）叢集穩健標準誤計算之 t 統計量。*** p < 0.01, ** p < 0.05, * p < 0.10。所有模型均納入 SASB 主產業與年份雙向固定效果。各控制變數均與 DEC_{i,t} × ΔlnREV_{i,t} 進行交乘，以充分控管公司異質性。")
 
 def build_table_4_4(doc, coef_df):
     add_table_title(doc, "表 4-4　動態時間落差效應分析表（各遞延期三重交乘項 β3 對照）")
@@ -528,9 +534,9 @@ def build_table_app_a(doc):
     add_table_title(doc, "附錄 A　實證變數定義與 TEJ 資料庫來源對照總表")
     headers = ["變數名稱", "英文代號", "變數類型", "TEJ 資料庫來源模組", "細部欄位名稱 / 運算公式"]
     data = [
-        ["銷管費用變動率", "ΔLNSGA", "應變數", "IFRS 以合併為主財務（單季）", "營業費用：ln(SGA_t) - ln(SGA_{t-1})"],
-        ["營業收入變動率", "ΔLNREV", "自變數", "IFRS 以合併為主財務（單季）", "營業收入淨額：ln(REV_t) - ln(REV_{t-1})"],
-        ["營收下降虛擬", "DEC", "調節變數", "自建變數", "若 REV_t < REV_{t-1} 則為 1，否則為 0"],
+        ["銷管費用變動率", "ΔlnSGA", "應變數", "IFRS 以合併為主財務（單季）", "營業費用：ln(SGA_{i,t}) - ln(SGA_{i,t-1})"],
+        ["營業收入變動率", "ΔlnREV", "自變數", "IFRS 以合併為主財務（單季）", "營業收入淨額：ln(REV_{i,t}) - ln(REV_{i,t-1})"],
+        ["營收下降虛擬", "DEC_{i,t}", "調節變數", "自建變數", "若 REV_{i,t} < REV_{i,t-1} 則為 1，否則為 0"],
         ["用水密集度", "WATER_INTENSITY", "自變數 (核心)", "TESG 企業用水量", "總用水量（千公噸）/ 營業收入淨額（千元）"],
         ["廢棄物密集度", "WASTE_INTENSITY", "自變數 (核心)", "TESG 廢棄物揭露", "廢棄物總重量（公噸）/ 營業收入淨額（百萬元）"],
         ["水回收率%", "WATER_RATE", "自變數", "TESG 企業用水量", "回收利用水量 / 總用水量 × 100%"],
@@ -872,13 +878,15 @@ def build_chapter_3(doc, ind_df):
     add_body_para(doc, "本研究實證模型所採用之所有變數，依其在計量模型中扮演之角色劃分為四大類別：被解釋變數、核心解釋變數、環境調節測試變數與控制變數。詳細定義與衡量說明如下：")
     
     add_subsection_heading(doc, "一、被解釋變數：成本僵固性（銷管費用變動率）")
-    add_body_para(doc, "本研究依循 Anderson, Banker, and Janakiraman (2003) 之標準文獻設定，選取企業之「銷售、一般及管理費用」（Selling, General, and Administrative Costs, 簡稱 SG&A 或營業費用）對數變動率作為成本行為之衡量指標，記為 ΔLNSGA。其操作型運算公式如下：")
-    add_callout_para(doc, "ΔLNSGA[i,t] = ln(SGA[i,t]) - ln(SGA[i,t-1])", bold_title="式 (3-1)：")
-    add_body_para(doc, "其中 SGA[i,t] 為公司 i 於第 t 年度申報之全年度營業費用總額。選用銷管費用作為成本僵固性之被解釋標的，核心理由在於銷管費用包含大量由管理階層高度自由裁量之專用性資源（例如研發廠務管理費用、行銷通路合約、管理團隊薪酬與環保法遵專責人員薪資），最能敏銳地反映當市場銷售收入衰退時，管理者在保留或削減專用資源之間的決策權衡過程。")
+    add_body_para(doc, "本研究依循 Anderson, Banker, and Janakiraman (2003) 之標準文獻設定，選取企業之「銷售、一般及管理費用」（Selling, General, and Administrative Costs, 簡稱 SG&A 或營業費用）對數變動率作為成本行為之衡量指標，記為 ΔlnSGA_{i,t}。其操作型運算公式如式 (3-1) 所示：")
+    add_equation_table(doc, "eq_3_1")
+    add_body_para(doc, "其中 SGA_{i,t} 為公司 i 於第 t 年度申報之全年度營業費用總額。選用銷管費用作為成本僵固性之被解釋標的，核心理由在於銷管費用包含大量由管理階層高度自由裁量之專用性資源（例如研發廠務管理費用、行銷通路合約、管理團隊薪酬與環保法遵專責人員薪資），最能敏銳地反映當市場銷售收入衰退時，管理者在保留或削減專用資源之間的決策權衡過程。")
     
     add_subsection_heading(doc, "二、核心自變數與門檻調節變數")
-    add_body_para(doc, "1. 營業收入對數變動率（ΔLNREV）：公司 i 於第 t 年度營業收入淨額之自然對數與第 t-1 年之差額，即 ΔLNREV[i,t] = ln(REV[i,t]) - ln(REV[i,t-1])。用以衡量企業業務活動量之增減幅度。")
-    add_body_para(doc, "2. 營業收入衰退虛擬變數（DEC 或 D）：門檻調節變數。當公司 i 於第 t 年之營業收入小於第 t-1 年之營業收入時，設定 DEC[i,t] = 1；若當期營收大於或等於前期營收時，則設定 DEC[i,t] = 0。此虛擬變數用以捕捉營收變動方向（上升 vs. 下降）對費用調整產生之非對稱結構。")
+    add_body_para(doc, "1. 營業收入對數變動率（ΔlnREV_{i,t}）：公司 i 於第 t 年度營業收入淨額之自然對數與第 t-1 年之差額，計算公式如式 (3-2) 所示：")
+    add_equation_table(doc, "eq_3_2")
+    add_body_para(doc, "其中 REV_{i,t} 為公司 i 於第 t 年度申報之營業收入淨額。此變數用以衡量企業業務活動量之增減幅度。")
+    add_body_para(doc, "2. 營業收入衰退虛擬變數（DEC_{i,t} 或 D）：門檻調節變數。當公司 i 於第 t 年之營業收入小於第 t-1 年之營業收入時，設定 DEC_{i,t} = 1；若當期營收大於或等於前期營收時，則設定 DEC_{i,t} = 0。此虛擬變數用以捕捉營收變動方向（上升 vs. 下降）對費用調整產生之非對稱結構。")
     
     add_subsection_heading(doc, "三、主要環境測試變數（Env_Var）")
     add_body_para(doc, "本研究依據研究假說，將環境管理行為細分為「實質資源使用密集度」（核心）與「資訊揭露治理與法遵風險」（輔助對照）兩大範疇：")
@@ -890,7 +898,7 @@ def build_chapter_3(doc, ind_df):
     add_body_para(doc, "6. 廢棄物裁罰金額比率（WASTE_FINE，法遵風險）：企業當年因違反環境法規遭主管機關裁處之廢棄物行政罰鍰總金額（千元）除以資產總額（千元）並乘上 1,000。本研究特別改採連續型「裁罰金額佔總資產比率」，而非過去文獻常見之離散「裁罰次數」，旨在客觀校正單一極端值之偽顯著干擾。")
     
     add_subsection_heading(doc, "四、公司層級控制變數")
-    add_body_para(doc, "為排除其他同時影響成本調整彈性之公司異質性財務特徵，本研究參考經典成本僵固性文獻（Anderson et al., 2003; Chen et al., 2012），納入以下六項關鍵控制變數，並將所有控制變數均與 DEC[i,t] × ΔLNREV[i,t] 進行交乘，以確保嚴格控管各特徵對成本僵固性之交互影響：")
+    add_body_para(doc, "為排除其他同時影響成本調整彈性之公司異質性財務特徵，本研究參考經典成本僵固性文獻（Anderson et al., 2003; Chen et al., 2012），納入以下六項關鍵控制變數，並將所有控制變數均與 DEC_{i,t} × ΔlnREV_{i,t} 進行交乘，以確保嚴格控管各特徵對成本僵固性之交互影響：")
     add_body_para(doc, "（1）企業規模（SIZE）：期末資產總額之自然對數 ln(Total Assets)；\n"
                   "（2）資產密集度（AI）：期末資產總額除以全年營業收入（Total Assets / Revenue），資產密集度越高代表固定資產折舊負擔越沉重；\n"
                   "（3）員工密集度（EI）：期末員工人數除以全年營業收入（Employees / Revenue），員工密集度越高代表勞動資遣與再招募成本越高；\n"
@@ -903,20 +911,22 @@ def build_chapter_3(doc, ind_df):
     build_table_3_3(doc)
     
     add_section_heading(doc, "第三節 實證計量模型設定")
-    add_body_para(doc, "本研究以 Anderson, Banker, and Janakiraman (2003) 創立之對數-對數（Log-Log）非對稱成本實證模型為基底。首先設定基準成本僵固性模型：")
-    add_callout_para(doc, "ΔLNSGA[i,t] = β0 + β1·ΔLNREV[i,t] + β2·(DEC[i,t] × ΔLNREV[i,t]) + Σ Controls[k,i,t] × (DEC[i,t] × ΔLNREV[i,t]) + α[ind] + γ[yr] + ε[i,t]", bold_title="式 (3-2)：基準成本僵固性實證方程式")
-    add_body_para(doc, "在式 (3-2) 中，下標 i 代表公司，t 代表年份。係數 β1 衡量當銷售收入增加 1% 時，營業費用平均隨之擴張的百分比（成本向上調整彈性）。係數 β2 捕捉基準成本僵固性：當營業收入下滑時（DEC = 1），營業費用之變動彈性為 (β1 + β2)；若 β2 估計值顯著小於零（β2 < 0），則證實當營收下降 1% 時費用削減之百分比顯著小於營收上升 1% 時增加之百分比，即台灣製造業存在顯著之成本僵固性。")
-    add_body_para(doc, "為檢驗各項環境管理行為對成本僵固性之調節效果，本研究進一步於模型中引入環境測試變數 Env_Var 與 (DEC × ΔLNREV) 之三重交乘項（Triple Interaction Term），建構主要實證迴歸模型：")
-    add_callout_para(doc, "ΔLNSGA[i,t] = β0 + β1·ΔLNREV[i,t] + β2·(DEC[i,t] × ΔLNREV[i,t]) + β3·(Env_Var[i,t-k] × DEC[i,t] × ΔLNREV[i,t]) + β4·Env_Var[i,t-k] + Σ Controls[k,i,t] × (DEC[i,t] × ΔLNREV[i,t]) + α[ind] + γ[yr] + ε[i,t]", bold_title="式 (3-3)：環境調節成本僵固性實證方程式")
-    add_body_para(doc, "在式 (3-3) 中，下標 k 代表時間落差期數（k = 0, 1, 2）。各實證模型分別代入六項環境指標 Env_Var：模型 (1) 代入水回收率（WATER_RATE）；模型 (2) 代入水揭露虛擬（WATER_DISC）；模型 (3) 代入廢棄物密集度（WASTE_INTENSITY）；模型 (4) 代入廢棄物揭露品質（WASTE_DISC）；模型 (5) 代入廢棄物裁罰比率（WASTE_FINE）；模型 (6) 代入用水密集度（WATER_INTENSITY）。")
+    add_body_para(doc, "本研究以 Anderson, Banker, and Janakiraman (2003) 創立之對數-對數（Log-Log）非對稱成本實證模型為基底。首先設定基準成本僵固性實證模型：")
+    add_equation_table(doc, "eq_3_3")
+    add_body_para(doc, "在式 (3-3) 中，下標 i 代表公司，t 代表年份，k 代表各項公司特徵控制變數。係數 β1 衡量當銷售收入增加 1% 時，營業費用平均隨之擴張的百分比（成本向上調整彈性）。係數 β2 捕捉基準成本僵固性：當營業收入下滑時（DEC_{i,t} = 1），營業費用之變動彈性為 (β1 + β2)；若 β2 估計值顯著小於零（β2 < 0），則證實當營收下降 1% 時費用削減之百分比顯著小於營收上升 1% 時增加之百分比，即台灣製造業存在顯著之成本僵固性。")
+    add_body_para(doc, "為檢驗各項環境管理行為對成本僵固性之調節效果，本研究進一步於模型中引入當期環境測試變數 Env_Var_{i,t} 與 (DEC_{i,t} × ΔlnREV_{i,t}) 之三重交乘項（Triple Interaction Term），建構當期環境調節實證迴歸模型：")
+    add_equation_table(doc, "eq_3_4")
+    add_body_para(doc, "在式 (3-4) 中，各實證模型分別代入六項環境指標 Env_Var_{i,t}：模型 (1) 代入水回收率（WATER_RATE）；模型 (2) 代入水揭露虛擬（WATER_DISC）；模型 (3) 代入廢棄物密集度（WASTE_INTENSITY）；模型 (4) 代入廢棄物揭露品質（WASTE_DISC）；模型 (5) 代入廢棄物裁罰比率（WASTE_FINE）；模型 (6) 代入用水密集度（WATER_INTENSITY）。")
     add_body_para(doc, "模型中核心關注參數為三重交乘項係數 β3：\n"
                   "（1）若 β3 估計值顯著為負（β3 < 0），代表該環境管理特徵會進一步擴大費用在營收下滑時的向下調整阻力，加劇成本僵固性，支持實質調整成本路徑；\n"
                   "（2）反之，若 β3 估計值顯著為正（β3 > 0），代表該環境特徵能協助企業更靈活地縮減費用，發揮緩解成本僵固性之功效，支持資訊透明度治理路徑。")
-    add_body_para(doc, "在計量估計技術上，為嚴格排除不隨時間變動之產業結構固定特質（如資本密集度、產業生命週期），以及不隨公司改變之總體年度經濟景氣波動與全台性環保法規變更，本研究所有實證模型一律控制「SASB 主產業固定效果」（α[ind]）與「年份固定效果」（γ[yr]），達成雙向固定效果（Two-way Fixed Effects）之嚴格控管。此外，考量同一公司在 11 年面板樣本中可能存在未知之序列相關（Serial Correlation）與異變異數（Heteroskedasticity），本研究所有實證模型均採用公司層級（Firm-level）的叢集穩健標準誤（Clustered Robust Standard Errors）進行統計 t 值檢定與顯著性判斷。")
+    add_body_para(doc, "在計量估計技術上，為嚴格排除不隨時間變動之產業結構固定特質（如資本密集度、產業生命週期），以及不隨公司改變之總體年度經濟景氣波動與全台性環保法規變更，本研究所有實證模型一律控制「SASB 主產業固定效果」（α_{ind}）與「年份固定效果」（γ_{yr}），達成雙向固定效果（Two-way Fixed Effects）之嚴格控管。此外，考量同一公司在 11 年面板樣本中可能存在未知之序列相關（Serial Correlation）與異變異數（Heteroskedasticity），本研究所有實證模型均採用公司層級（Firm-level）的叢集穩健標準誤（Clustered Robust Standard Errors）進行統計 t 值檢定與顯著性判斷。")
     
     add_section_heading(doc, "第四節 延伸檢定設計（時間落差與產業分組）")
     add_body_para(doc, "為深化因果機制詮釋並檢驗結論在不同情境下之敏感度，本研究進一步設計兩項關鍵之延伸實證檢定：")
-    add_body_para(doc, "一、動態時間落差效應檢定（Time Lag Effect）。考量重型水循環系統建置折舊、水質前處理改裝工程，以及事業廢棄物長期委外清運合約之簽訂，其費用支出在企業內部具備跨年度發酵與遞延沉澱之特質，當期（t-0）之環境投入未必能即刻完全反映在當年度之銷管費用彈性上。為此，本研究將核心環境變數 Env_Var 分別落後一期（k = 1，記為 t-1）與落後兩期（k = 2，記為 t-2）代入式 (3-3) 重新估計，追蹤三重交乘項係數 β3 在跨時間維度上之動態演化軌跡。")
+    add_body_para(doc, "一、動態時間落差效應檢定（Time Lag Effect）。考量重型水循環系統建置折舊、水質前處理改裝工程，以及事業廢棄物長期委外清運合約之簽訂，其費用支出在企業內部具備跨年度發酵與遞延沉澱之特質，當期（t-0）之環境投入未必能即刻完全反映在當年度之銷管費用彈性上。為此，本研究將核心環境變數 Env_Var 分別落後一期（m = 1，記為 t-1）與落後兩期（m = 2，記為 t-2），建構動態時間落差模型重新估計：")
+    add_equation_table(doc, "eq_3_5")
+    add_body_para(doc, "在式 (3-5) 中，下標 m 代表落後階數（m = 1, 2），核心關注落後三重交乘項係數 β_{3,lag} 與落後主效果 β_{4,lag} 在跨時間維度上之動態演化軌跡。")
     add_body_para(doc, "二、高耗水/高污染製造業之產業異質性檢定（Industry Heterogeneity）。台灣製造業內部次產業之物理製程差異懸殊：電子組裝業多屬物理組裝，用水量與有害廢棄物極低；相對地，半導體晶圓製造、光電面板、化學工業、鋼鐵冶煉、造紙與紡織染整等產業，則對水資源與廢棄物清運具備致命之剛性依賴。依據假說 H1a，實質資源使用密集度之加劇效果應高度集中於環境專屬資產密集之產業。本研究參考 TEJ TSE 產業分類，將製造業劃分為 13 類「高耗水與高污染製造業」子樣本與 21 類「低耗水製造業」子樣本，分別進行分組迴歸估計，以嚴格檢視理論之產業適用邊界（產業分類明細請參見附錄 B）。")
 
 print("第三章研究方法與資料設計宣告完成。")
@@ -931,7 +941,7 @@ def build_chapter_4(doc, df, coef_df, rob_df):
     
     add_section_heading(doc, "第一節 敘述性統計分析")
     add_body_para(doc, "表 4-1 展示本研究全樣本（共計 18,137 筆公司-年度觀測值）主要連續變數之敘述性統計結果，包含觀測值個數（N）、平均值（Mean）、標準差（Std. Dev.）、最小值（Min）、第 25 百分位數（P25）、中位數（Median）、第 75 百分位數（P75）以及最大值（Max）。")
-    add_body_para(doc, "首先，檢視被解釋變數與核心自變數之分佈特徵：全樣本銷管費用對數變動率（ΔLNSGA）之平均值為 0.0315（中位數為 0.0299，標準差為 0.1943），營業收入對數變動率（ΔLNREV）之平均值為 0.0137（中位數為 0.0208，標準差為 0.3233）。銷管費用之平均成長率略高於營收成長率，且兩者皆呈現合理適度之分散度。特別值得注意的是，營收衰退虛擬變數（DEC）之樣本平均值為 0.4489，代表在 2014 至 2024 年之實證觀察期內，約有 44.89% 的公司-年度觀測值經歷了營業收入之衰退，提供了極為充裕的樣本觀察點以供檢驗營收下滑時費用向下縮減之非對稱彈性。")
+    add_body_para(doc, "首先，檢視被解釋變數與核心自變數之分佈特徵：全樣本銷管費用對數變動率（ΔlnSGA）之平均值為 0.0315（中位數為 0.0299，標準差為 0.1943），營業收入對數變動率（ΔlnREV）之平均值為 0.0137（中位數為 0.0208，標準差為 0.3233）。銷管費用之平均成長率略高於營收成長率，且兩者皆呈現合理適度之分散度。特別值得注意的是，營收衰退虛擬變數（DEC_{i,t}）之樣本平均值為 0.4489，代表在 2014 至 2024 年之實證觀察期內，約有 44.89% 的公司-年度觀測值經歷了營業收入之衰退，提供了極為充裕的樣本觀察點以供檢驗營收下滑時費用向下縮減之非對稱彈性。")
     add_body_para(doc, "其次，檢視各項環境管理指標之統計分佈：\n"
                   "1. 用水密集度（WATER_INTENSITY）：全樣本中共有 9,033 筆有效觀測值（進入主要模型 6 估計之淨樣本為 8,484 筆），平均值為 0.0993（千公噸/千元營收），中位數為 0.0085，第 75 百分位數為 0.0413，縮尾後最大值達 3.3382。數據展現明顯之右偏分佈特徵，顯示多數製造業公司用水量偏低，但半導體晶圓、化學與造紙等高耗水產業之用水密集度極高，展現顯著之產業間變異性。\n"
                   "2. 廢棄物密集度（WASTE_INTENSITY）：有效觀測值為 3,591 筆（進入模型 3 淨樣本為 3,273 筆），平均值為 0.4486（公噸/百萬營收），標準差為 1.1477，中位數為 0.1215，最大值為 8.1388，同樣呈現高度之橫斷面分散性。\n"
@@ -944,7 +954,7 @@ def build_chapter_4(doc, df, coef_df, rob_df):
     
     add_section_heading(doc, "第二節 相關係數分析")
     add_body_para(doc, "表 4-2 展示主要連續變數之 Pearson 相關係數矩陣。對角線下方數字代表變數間之相關係數，粗體字表示達到 5% 統計顯著水準（|t| ≥ 1.96）。")
-    add_body_para(doc, "分析相關係數矩陣之經濟意涵：首先，銷管費用對數變動率（ΔLNSGA）與營收對數變動率（ΔLNREV）呈現高度統計顯著之正相關（r = 0.354, p < 0.05），完全符合營業費用隨營運規模成長而擴增之基本商業邏輯。其次，核心環境自變數方面，用水密集度（WATER_INTENSITY）與廢棄物密集度（WASTE_INTENSITY）呈顯著正相關（r = 0.187, p < 0.05），顯示生產活動高度依賴大量水資源之製造業，通常亦伴隨著較沉重之事業廢棄物處置負荷，證實將水與廢棄物兩大構面並列檢視在實體經濟層面具備高度一致性與互補性。")
+    add_body_para(doc, "分析相關係數矩陣之經濟意涵：首先，銷管費用對數變動率（ΔlnSGA）與營收對數變動率（ΔlnREV）呈現高度統計顯著之正相關（r = 0.354, p < 0.05），完全符合營業費用隨營運規模成長而擴增之基本商業邏輯。其次，核心環境自變數方面，用水密集度（WATER_INTENSITY）與廢棄物密集度（WASTE_INTENSITY）呈顯著正相關（r = 0.187, p < 0.05），顯示生產活動高度依賴大量水資源之製造業，通常亦伴隨著較沉重之事業廢棄物處置負荷，證實將水與廢棄物兩大構面並列檢視在實體經濟層面具備高度一致性與互補性。")
     add_body_para(doc, "更重要的是，在多重共線性檢驗層面，檢視所有解釋變數與控制變數之間之相關係數，其絕對值最高者為企業規模（SIZE）與負債比率（LEV）之 0.380，遠低於統計學上判斷嚴重共線性之 0.70 臨界門檻。此外，經進一步計算各迴歸模型之變異數膨脹因子（Variance Inflation Factor, VIF），所有自變數之 VIF 值均小於 3.5，顯著低於 10 之警戒值。此一結果證實，本研究之實證迴歸模型設定未面臨嚴重之多元共線性威脅，OLS 估計係數之標準誤不會因變數間共線性而發生扭曲。")
     
     # 插入表 4-2
@@ -954,8 +964,8 @@ def build_chapter_4(doc, df, coef_df, rob_df):
     add_body_para(doc, "表 4-3 列示全樣本在當期（L0，即 t-0 期）下，六個實證模型之 OLS 迴歸估計結果（模型 1 至模型 6）。各模型均納入 SASB 主產業固定效果與年份固定效果，係數下方括號內數值為基於公司層級（Firm-level）叢集穩健標準誤計算之 t 統計量。")
     add_body_para(doc, "首先，檢驗整體樣本之基準成本僵固性（β1 與 β2 係數）：\n"
                   "在表 4-3 之所有模型中，營業收入變動率之基準敏感度係數 β1 均在 1% 統計水準下極顯著為正。在全樣本模型 6（用水密集度模型，N = 8,484）中，β1 = 0.3688 (t = 19.34, p < 0.01)；在模型 1（水回收率模型，N = 996）中，β1 = 0.3208 (t = 5.99, p < 0.01)；在模型 3（廢棄物密集度模型，N = 3,273）中，β1 = 0.3905 (t = 11.60, p < 0.01)。此結果表明，當營收增加 1% 時，台灣製造業之營業費用平均顯著增加約 0.32%~0.39%。")
-    add_body_para(doc, "進一步檢視營收衰退交乘項 β2（DEC × ΔLNREV）：在樣本涵蓋度最高且特定聚焦之模型中，β2 均呈現顯著負值。在模型 1 中，β2 = -1.2681 (t = -2.69, p < 0.01)；在模型 3 中，β2 = -0.6394 (t = -3.17, p < 0.01)；在模型 6 當期雖為 -0.0627 (t = -0.44)，但在後續遞延期估計中顯著為負（t-2 期 β2 = -0.3569, t = -2.27, p < 0.05）。實證結果強烈證實：台灣上市櫃製造業普遍存在顯著之成本僵固性（成本黏性）——當營業收入下滑時，營業費用縮減之幅度顯著小於營收擴張時增加之幅度，完全印證了 Anderson, Banker, and Janakiraman (2003) 之開創性假說。")
-    add_body_para(doc, "其次，檢驗當期全樣本下環境三重交乘項 β3（Env × DEC × ΔLNREV）之調節效果：\n"
+    add_body_para(doc, "進一步檢視營收衰退交乘項 β2（DEC_{i,t} × ΔlnREV_{i,t}）：在樣本涵蓋度最高且特定聚焦之模型中，β2 均呈現顯著負值。在模型 1 中，β2 = -1.2681 (t = -2.69, p < 0.01)；在模型 3 中，β2 = -0.6394 (t = -3.17, p < 0.01)；在模型 6 當期雖為 -0.0627 (t = -0.44)，但在後續遞延期估計中顯著為負（t-2 期 β2 = -0.3569, t = -2.27, p < 0.05）。實證結果強烈證實：台灣上市櫃製造業普遍存在顯著之成本僵固性（成本黏性）——當營業收入下滑時，營業費用縮減之幅度顯著小於營收擴張時增加之幅度，完全印證了 Anderson, Banker, and Janakiraman (2003) 之開創性假說。")
+    add_body_para(doc, "其次，檢驗當期全樣本下環境三重交乘項 β3（Env × DEC_{i,t} × ΔlnREV_{i,t}）之調節效果：\n"
                   "由表 4-3 之估計結果可見，在全樣本當期（t-0）設定下，模型 1（水回收率 β3 = 0.0004, t = 0.22）、模型 2（水揭露 β3 = 0.0354, t = 0.89）、模型 3（廢棄物密集度 β3 = 0.0086, t = 0.55）、模型 4（廢棄物揭露 β3 = 0.0043, t = 0.42）、模型 5（裁罰比率 β3 = -0.0013, t = -1.25）以及模型 6（用水密集度 β3 = -0.0305, t = -0.75）之三重交乘項係數，均未達到 10% 之統計顯著水準。")
     add_body_para(doc, "深入剖析全樣本當期交乘項未達顯著水準之經濟成因：如表 3-2 之產業統計所示，全樣本資料庫涵蓋了大量低耗水、低污染之輕工業與電子組裝業（如電腦週邊、電子通路、其他電子），該類企業之生產模式多屬物理組裝，廠務用水極少且幾乎不產出有害事業廢棄物，因此水與廢棄物支出在其營業成本與費用中佔比微乎其微。將大量低耗水企業納入全樣本混合估計，無疑會產生嚴重的「稀釋效應」（Dilution Effect），掩蓋高資源依賴產業之真實衝擊；此外，水循環系統資本化折舊與廢棄物委外處理長約之履約調整具備跨期滯後性，當期（t-0）未必能即刻完全顯現。因此，唯有進一步透過「動態時間落差」與「產業異質性分組」深入檢驗，方能精確捕捉環境管理對成本僵固性之微觀機制。")
     
